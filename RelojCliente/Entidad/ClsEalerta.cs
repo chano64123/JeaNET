@@ -15,6 +15,7 @@ namespace RelojCliente.Entidad
         private string hora;
         private int turno;
         private string estado;
+        public int ROBY;
 
         public string Dni { get => dni; set => dni = value; }
         public string Latitud { get => latitud; set => latitud = value; }
