@@ -12,7 +12,6 @@ using System.IO;
 using System.Device.Location;//
 using RelojCliente.Negocios;
 using RelojCliente.Entidad;
-using Microsoft.Speech.Recognition;
 using System.Speech.Synthesis;
 using System.Globalization;
 using System.Media;
@@ -33,110 +32,15 @@ namespace RelojCliente
             this.TTmensaje.SetToolTip(this.btn_Configuraciones, "Configuraciones");
             this.TTmensaje.SetToolTip(this.btnNotificaciones, "Notificaciones");
         }
-
-        SoundPlayer Enlinea;
-        SoundPlayer Siempre;
-        static CultureInfo ci = new CultureInfo("es-ES");
-        static SpeechRecognitionEngine reconocedor;
+      
         SpeechSynthesizer respuesta = new SpeechSynthesizer();
 
-        public void Gramatica()
-        {
-            try
-            {
-                reconocedor = new SpeechRecognitionEngine(ci);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al integrar el idioma elegido: " + ex.Message);
-
-            }
-
-
-            var gramaticaa = new Choices();
-            gramaticaa.Add(listaPalabras);
-
-            var globalizacion = new GrammarBuilder();
-            globalizacion.Append(gramaticaa);
-
-            try
-            {
-                var gra = new Grammar(globalizacion);
-
-                try
-                {
-                    reconocedor.RequestRecognizerUpdate();
-                    reconocedor.LoadGrammarAsync(gra);
-                    reconocedor.SpeechRecognized += Sre_Reconocimiento;
-                    reconocedor.SetInputToDefaultAudioDevice();
-                    respuesta.SetOutputToDefaultAudioDevice();
-                    reconocedor.RecognizeAsync(RecognizeMode.Multiple);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al crear el reconocedor: " + ex.Message);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al crear la gramática del lenguaje: " + ex.Message);
-            }
-        }
-
+       
         public void Inicio()
         {
             respuesta.Volume = 100;
-            respuesta.Rate = 2;
-            Gramatica();
+            respuesta.Rate = 2;            
         }
-        void Sre_Reconocimiento(object sender, SpeechRecognizedEventArgs e)
-        {
-
-            if (FormCliente_Menu_UsuarioCliente.usuario.Rows.Count == 1)
-            {
-                string frase = e.Result.Text;
-                if (frase.Equals("Activar Protocolo"))
-                {
-                    //respuesta.SpeakAsync("Activando protocolo");
-                    try
-                    {
-                        Enlinea = new SoundPlayer(Application.StartupPath + @"\Sonido\Activado.wav");
-                        Enlinea.Play();
-
-                        a = 0;
-                        cont = 11;
-                        timerRegresiva.Stop();
-                        label2.Enabled = false;
-                        label1.Enabled = false;
-                        GeoCoordinateWatcher watcher = new GeoCoordinateWatcher();
-                        watcher.PositionChanged += watcher_PositionChanged;
-                        watcher.Start();
-                        band = false;
-                    }
-
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error: " + ex);
-                    }
-                }
-
-                if (frase.Equals("Desactivar Protocolo"))
-                {
-                    try
-                    {
-                        Siempre = new SoundPlayer(Application.StartupPath + @"\Sonido\Desactivado.wav");
-                        Siempre.Play();
-
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error: " + ex);
-                    }
-                }
-            }
-        }
-
-
 
         public string[] listaPalabras = { "Activar Protocolo", "Desactivar Protocolo" };
 
@@ -174,15 +78,9 @@ namespace RelojCliente
                 so.SendEvent("userLocation", latitud.ToString().Replace('.', ',') + "/" + longitud.ToString().Replace('.', ',') + "/" + FormCliente_Menu_UsuarioCliente.usuario.Rows[0][0].ToString() + "/" + FormCliente_Menu_UsuarioCliente.usuario.Rows[0][1] + "/" + FormCliente_Menu_UsuarioCliente.usuario.Rows[0][2]);
 
                 //guardar alerta en basa de datos
-                ClsEalerta E = new ClsEalerta();
-                ClsNalerta N = new ClsNalerta();
-                E.Dni = FormCliente_Menu_UsuarioCliente.usuario.Rows[0][0].ToString();
-                E.Latitud = latitud.Replace('.', ',');
-                E.Longitud = longitud.Replace('.', ',');
-                E.Fecha = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-                E.Hora = DateTime.Now.ToLongTimeString();
-                E.Turno = MtdObtenerTurno();
-                E.Estado = "0";
+                
+                ClsNalerta N = new ClsNalerta();               
+                ClsEalerta E = ClsEalerta.crear(FormCliente_Menu_UsuarioCliente.usuario.Rows[0][0].ToString(), latitud.Replace('.', ','), longitud.Replace('.', ','), Convert.ToDateTime(DateTime.Now.ToShortDateString()), DateTime.Now.ToLongTimeString(), MtdObtenerTurno(),"0");
                 N.MtdAgregarAlerta(E);
                 MessageBox.Show(string.Format("Datos enviados, JeanNET", "JeaNet - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information));
             }

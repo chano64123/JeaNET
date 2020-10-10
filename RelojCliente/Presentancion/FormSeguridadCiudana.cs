@@ -105,11 +105,9 @@ namespace RelojCliente
             Ne.MtdMandarMensaje(En);
 
             //enviado mensaje al correo
-            ClsEcorreo E = new ClsEcorreo();
-            ClsNcorreo N = new ClsNcorreo();
-            E.Asunto = "CIERRE DE SESION";
-            E.Destinatario = data.Rows[0][4].ToString();
-            E.Mensaje = "Usted acaba de cerrar sesion a las " + DateTime.Now.ToLongTimeString() + ". \n Su sesion estuvo abierta durante: " + Horas + " horas, " + Minutos + " minutos y " + Segundos + " segundos.";
+            
+            ClsNcorreo N = new ClsNcorreo();            
+            ClsEcorreo E = ClsEcorreo.crear(data.Rows[0][4].ToString(), "CIERRE DE SESION", "Usted acaba de cerrar sesion a las " + DateTime.Now.ToLongTimeString() + ". \n Su sesion estuvo abierta durante: " + Horas + " horas, " + Minutos + " minutos y " + Segundos + " segundos.");
             N.MtdEnviarEmail(E);
             this.Close();
         }
@@ -160,12 +158,8 @@ namespace RelojCliente
 
         public static void MtdAuditoria(string dni, string desc)
         {
-            ClsEauditoria objEauditoria = new ClsEauditoria();
-            ClsNauditoria objNauditoria = new ClsNauditoria();
-            objEauditoria.Dniemp = dni;
-            objEauditoria.Desc = desc;
-            objEauditoria.Fecha = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-            objEauditoria.Hora = DateTime.Now.ToLongTimeString();
+            ClsEauditoria objEauditoria = ClsEauditoria.crear(dni,desc,Convert.ToDateTime(DateTime.Now.ToShortDateString()),DateTime.Now.ToLongTimeString());
+            ClsNauditoria objNauditoria = new ClsNauditoria();           
             objNauditoria.MtdAgregarHistorial(objEauditoria);
         }
 

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RelojCliente.Entidad;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace RelojCliente.Negocios
@@ -25,9 +24,7 @@ namespace RelojCliente.Negocios
                 command.Parameters.Add(new SqlParameter("lotser", SqlDbType.VarChar));
                 for (int i = 0; i < en.Cantidad; i++)
                 {
-                    ClsEclientedispositivo En = new ClsEclientedispositivo();
-                    En.Serie_dispositivo = ddisponibles.Rows[i][0].ToString();
-                    En.Dni_cliente = dni;
+                    ClsEclientedispositivo En = ClsEclientedispositivo.crear(dni, ddisponibles.Rows[i][0].ToString());
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters["dcli"].Value = En.Dni_cliente;
                     command.Parameters["lotser"].Value = En.Serie_dispositivo;

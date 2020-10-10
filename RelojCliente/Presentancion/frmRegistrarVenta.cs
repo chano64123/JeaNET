@@ -171,24 +171,19 @@ namespace RelojCliente
             if (MessageBox.Show("¿Seguro que desea concluir la venta?", "JeaNET - Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 //para la venta
-                ClsEcomprobante E = new ClsEcomprobante();
+                string cliente;                
                 ClsNcomprobante N = new ClsNcomprobante();
-                E.Serie = lblSerie.Text;
-                E.Numero = lblNumero.Text;
-                E.Empleado = lblDNI.Text;
-                E.Fecha = DateTime.Now.ToShortDateString();
+                
                 if (lblCliente.Text.Length == 8)
                 {
-                    E.Cliente = lblCliente.Text;
+                    cliente = lblCliente.Text;
                 }
                 else
                 {
-                    E.Cliente = txtCliente.Text;
+                    cliente = txtCliente.Text;
                 }
-                E.Subtotal = lblSubtotal.Text;
-                E.Igv = lblIGV.Text;
-                E.Total = lblTotal.Text;
-                E.Estado = "1";
+                
+                ClsEcomprobante E = ClsEcomprobante.crear(lblSerie.Text, lblNumero.Text,lblDNI.Text,DateTime.Now.ToShortDateString(),cliente,lblSubtotal.Text,lblIGV.Text,lblTotal.Text,"1");
                 N.MtdGuardarComprobante(E);
                 
                 //para el detalle

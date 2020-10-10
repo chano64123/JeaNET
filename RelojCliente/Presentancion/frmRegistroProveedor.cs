@@ -149,7 +149,7 @@ namespace RelojCliente.Presentancion
                         //txtTelefono.Text = datos[2].ToString();
                     }
                 }
-                catch (Exception exception)
+                catch 
                 {
                     MessageBox.Show("Verifique el RUC.", "JeaNET - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     //MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

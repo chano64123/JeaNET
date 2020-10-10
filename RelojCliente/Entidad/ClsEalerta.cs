@@ -8,21 +8,29 @@ namespace RelojCliente.Entidad
 {
     class ClsEalerta
     {
-        private string dni;
-        private string latitud;
-        private string longitud;
-        private DateTime fecha;
-        private string hora;
-        private int turno;
-        private string estado;
-        public int ROBY;
 
-        public string Dni { get => dni; set => dni = value; }
-        public string Latitud { get => latitud; set => latitud = value; }
-        public string Longitud { get => longitud; set => longitud = value; }
-        public DateTime Fecha { get => fecha; set => fecha = value; }
-        public string Hora { get => hora; set => hora = value; }
-        public int Turno { get => turno; set => turno = value; }
-        public string Estado { get => estado; set => estado = value; }
+
+        public string Dni { get; private set; }
+        public string Latitud { get; private set; }
+        public string Longitud { get; private set; }
+        public DateTime Fecha { get; private set; }
+        public string Hora { get; private set; }
+        public int Turno { get; private set; }
+        public string Estado { get; private set; }
+
+
+        public static ClsEalerta crear(string _dni, string _latitud, string _longitud, DateTime _fecha, string _hora, int _turno, string _estado)
+        {
+            return new ClsEalerta()
+            {
+                Dni = _dni,
+                Latitud = _latitud,
+                Longitud = _longitud,
+                Fecha = _fecha,
+                Hora = _hora,
+                Turno = _turno,
+                Estado = _estado
+            };
+        }       
     }
 }

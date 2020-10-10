@@ -8,10 +8,16 @@ namespace RelojCliente.Entidad
 {
     class ClsElogin
     {
-        private string usuario;
-        private string clave;
-
-        public string Usuario { get => usuario; set => usuario = value; }
-        public string Clave { get => clave; set => clave = value; }
+        public string Usuario { get; private set; }
+        public string Clave { get; private set; }
+        
+        public static ClsElogin crear ( string _usuario , string _clave)
+        {
+            return new ClsElogin()
+            {
+                Usuario = _usuario,
+                Clave = _clave
+            };
+        }
     }
 }

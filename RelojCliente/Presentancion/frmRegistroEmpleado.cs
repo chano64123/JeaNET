@@ -79,7 +79,7 @@ namespace RelojCliente
                         txtApellidos.Text = datos[2].ToString() + " " + datos[3].ToString();
                     }
                 }
-                catch (Exception exception)
+                catch
                 {
                     MessageBox.Show("Verifique el DNI.", "JeaNET - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     //MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -8,10 +8,21 @@ namespace RelojCliente.Entidad
 {
     class ClsEclientedispositivo
     {
-        private string dni_cliente;
-        private string serie_dispositivo;
+        
+        public string Dni_cliente { get ; private set; }
+        public string Serie_dispositivo { get; private set; }
 
-        public string Dni_cliente { get => dni_cliente; set => dni_cliente = value; }
-        public string Serie_dispositivo { get => serie_dispositivo; set => serie_dispositivo = value; }
+        public static ClsEclientedispositivo crear(string _dni_cliente, string _serie_dispositivo)
+        {
+
+            return new ClsEclientedispositivo()
+            {
+                Dni_cliente = _dni_cliente,
+                Serie_dispositivo = _serie_dispositivo
+            };
+            
+        }
+
+        
     }
 }

@@ -8,14 +8,20 @@ namespace RelojCliente.Entidad
 {
     class ClsEauditoria
     {
-        private string dniemp;
-        private string desc;
-        private DateTime fecha;
-        private string hora;
+        public string Dniemp { get; private set ; }
+        public string Desc { get; private set ; }
+        public DateTime Fecha { get; private set; }
+        public string Hora { get; private set; }
 
-        public string Dniemp { get => dniemp; set => dniemp = value; }
-        public string Desc { get => desc; set => desc = value; }
-        public DateTime Fecha { get => fecha; set => fecha = value; }
-        public string Hora { get => hora; set => hora = value; }
+        public static ClsEauditoria crear(string _dniemp,string _desc,DateTime _fecha,string _hora)
+        {
+            return new ClsEauditoria()
+            {
+                Dniemp = _dniemp,
+                Desc = _desc,
+                Fecha = _fecha,
+                Hora = _hora
+            };
+        }
     }
 }

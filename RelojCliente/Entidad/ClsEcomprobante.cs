@@ -8,24 +8,30 @@ namespace RelojCliente.Entidad
 {
     class ClsEcomprobante
     {
-        private string serie;
-        private string numero;
-        private string fecha;
-        private string empleado;
-        private string cliente;
-        private string subtotal;
-        private string igv;
-        private string total;
-        private string estado;
+        public string Serie { get; private set; }
+        public string Numero { get; private set; }
+        public string Empleado { get; private set; }
+        public string Fecha { get; private set; }
+        public string Cliente { get; private set; }
+        public string Subtotal { get; private set; }
+        public string Igv { get; private set; }
+        public string Total { get; private set; }
+        public string Estado { get; private set; }
 
-        public string Serie { get => serie; set => serie = value; }
-        public string Numero { get => numero; set => numero = value; }
-        public string Empleado { get => empleado; set => empleado = value; }
-        public string Fecha { get => fecha; set => fecha = value; }
-        public string Cliente { get => cliente; set => cliente = value; }
-        public string Subtotal { get => subtotal; set => subtotal = value; }
-        public string Igv { get => igv; set => igv = value; }
-        public string Total { get => total; set => total = value; }
-        public string Estado { get => estado; set => estado = value; }
+        public static ClsEcomprobante crear ( string _serie, string _numero, string _empleado, string _fecha, string _cliente , string _subtotal, string _igv, string _total, string _estado)
+        {
+            return new ClsEcomprobante()
+            {
+                Serie = _serie,
+                Numero = _numero,
+                Empleado = _empleado,
+                Fecha = _fecha,
+                Cliente = _cliente,
+                Subtotal = _subtotal,
+                Igv = _igv,
+                Total = _total,
+                Estado = _estado
+            };
+        }
     }
 }

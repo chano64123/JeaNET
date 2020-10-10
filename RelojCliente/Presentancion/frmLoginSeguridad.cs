@@ -208,10 +208,9 @@ namespace RelojCliente
         {
             if (MtdValidarCampos() == 0)
             {
-                ClsElogin E = new ClsElogin();
+                ClsElogin E = ClsElogin.crear(txtUsuario.Text, txtClave.Text);
                 ClsNlogin N = new ClsNlogin();
-                E.Usuario = txtUsuario.Text;
-                E.Clave = txtClave.Text;
+               
                 DataTable data = N.MtdValidarLogin(E);
                 if (data.Rows.Count == 1)
                 {

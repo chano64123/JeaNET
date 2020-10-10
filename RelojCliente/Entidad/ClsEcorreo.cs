@@ -3,17 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace RelojCliente.Entidad
 {
     class ClsEcorreo
     {
-        private string destinatario;
-        private string asunto;
-        private string mensaje;
+       
 
-        public string Destinatario { get => destinatario; set => destinatario = value; }
-        public string Asunto { get => asunto; set => asunto = value; }
-        public string Mensaje { get => mensaje; set => mensaje = value; }
+        public string Destinatario { get ; private set; }
+        public string Asunto { get; private set; }
+        public string Mensaje { get; private set; }
+
+
+        public static ClsEcorreo crear(string _destinatario,string _asunto,string _mensaje)
+        {
+            return new ClsEcorreo()
+            {
+                Destinatario = _destinatario,
+                Asunto = _asunto,
+                Mensaje = _mensaje
+            };
+        }
     }
 }

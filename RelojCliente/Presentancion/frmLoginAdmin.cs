@@ -199,10 +199,8 @@ namespace RelojCliente
         {
             if (MtdValidarCampos() == 0)
             {
-                ClsElogin E = new ClsElogin();
-                ClsNlogin N = new ClsNlogin();
-                E.Usuario = txtUsuario.Text;
-                E.Clave = txtClave.Text;
+                ClsElogin E = ClsElogin.crear(txtUsuario.Text, txtClave.Text);
+                ClsNlogin N = new ClsNlogin();                
                 
                 DataTable data = N.MtdValidarLogin(E);
                 if (data.Rows.Count == 1)
@@ -240,11 +238,8 @@ namespace RelojCliente
                             Es.Mensaje = "El usuario " + data.Rows[0][1].ToString() + " " + data.Rows[0][2].ToString() + " acaba de iniciar sesion a las " + DateTime.Now.ToLongTimeString() + ".";
                             //Ns.MtdMandarMensaje(Es);
                             //correo
-                            ClsEcorreo Ec = new ClsEcorreo();
-                            ClsNcorreo Nc = new ClsNcorreo();
-                            Ec.Asunto = "INICIO DE SESION";
-                            Ec.Destinatario = data.Rows[0][4].ToString();
-                            Ec.Mensaje = "Usted acaba de iniciar sesion a las " + DateTime.Now.ToLongTimeString() + ".";
+                            ClsEcorreo Ec = ClsEcorreo.crear(data.Rows[0][4].ToString(),"CIERRE DE SESION", "Usted acaba de iniciar sesion a las " + DateTime.Now.ToLongTimeString() + ".");
+                            ClsNcorreo Nc = new ClsNcorreo();                            
                             //Nc.MtdEnviarEmail(Ec);
                             //agregar sesion
                             N.MtdGuardarSesion(data.Rows[0][9].ToString());
@@ -267,12 +262,8 @@ namespace RelojCliente
 
         public static void MtdAuditoria(string dni, string desc)
         {
-            ClsEauditoria objEauditoria = new ClsEauditoria();
-            ClsNauditoria objNauditoria = new ClsNauditoria();
-            objEauditoria.Dniemp = dni;
-            objEauditoria.Desc = desc;
-            objEauditoria.Fecha = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-            objEauditoria.Hora = DateTime.Now.ToLongTimeString();
+            ClsEauditoria objEauditoria = ClsEauditoria.crear(dni, desc, Convert.ToDateTime(DateTime.Now.ToShortDateString()), DateTime.Now.ToLongTimeString());
+            ClsNauditoria objNauditoria = new ClsNauditoria();            
             objNauditoria.MtdAgregarHistorial(objEauditoria);
         }
 
