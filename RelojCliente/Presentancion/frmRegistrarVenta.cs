@@ -195,14 +195,7 @@ namespace RelojCliente
                 foreach (DataGridViewRow item in dgvVenta.Rows)
                 {
                     //para guardar detalle
-                    ClsEdetallecomprobante Ed = new ClsEdetallecomprobante();
-                    Ed.Serie = lblSerie.Text;
-                    Ed.Numero = lblNumero.Text;
-                    Ed.Codigo = item.Cells[0].Value.ToString();
-                    Ed.Descripcion = item.Cells[1].Value.ToString();
-                    Ed.Cantidad = Convert.ToInt32(item.Cells[2].Value);
-                    Ed.Precio_unitario = Convert.ToDecimal(item.Cells[3].Value);
-                    Ed.Importe = Convert.ToDecimal(item.Cells[4].Value);
+                    ClsEdetallecomprobante Ed = ClsEdetallecomprobante.crear(lblSerie.Text,lblNumero.Text,item.Cells[0].Value.ToString(),item.Cells[1].Value.ToString(),Convert.ToInt32(item.Cells[2].Value),Convert.ToDecimal(item.Cells[3].Value),Convert.ToDecimal(item.Cells[4].Value));
                     N.MtdGuardarDetalleComprobante(Ed);
                     //listar dispositivos disponibles
                     ClsNdispositivo Ne = new ClsNdispositivo();
@@ -211,15 +204,7 @@ namespace RelojCliente
                     ClsNclientedispositivo Neg = new ClsNclientedispositivo();
                     Neg.MtdGuardarClienteDispositivo(E.Cliente, Ed, Ddisponibles);
                     //para guardar kardex
-                    ClsEkardex objEKardex = new ClsEkardex();
-                    objEKardex.Codlote = item.Cells[0].Value.ToString();
-                    objEKardex.DniEmpleado = lblDNI.Text;
-                    objEKardex.Descripcion = "SALIDA";
-                    objEKardex.Cantidad = Convert.ToInt32(item.Cells[2].Value);
-                    objEKardex.PrecioUnitario = Convert.ToDouble(item.Cells[3].Value);
-                    objEKardex.Estado = "1";
-                    objEKardex.Hora = DateTime.Now.ToShortTimeString();
-                    objEKardex.Fecha = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+                    ClsEkardex objEKardex = ClsEkardex.crear(item.Cells[0].Value.ToString(),lblDNI.Text,"SALIDA",Convert.ToInt32(item.Cells[2].Value),Convert.ToDouble(item.Cells[3].Value),"1",DateTime.Now.ToShortTimeString(),Convert.ToDateTime(DateTime.Now.ToShortDateString()));
                     N.MtdAgregarKardex(objEKardex, "SALIDA");
                     //para cambiar el estado de cada dispositivo
                     Ne.MtdDesactivarDispositivos(Ddisponibles, Ed);
@@ -228,9 +213,7 @@ namespace RelojCliente
                 int cantidad = 0;
                 foreach (DataGridViewRow fila in dgvVenta.Rows)
                 {
-                    ClsElote En = new ClsElote();
                     ClsNlote Neg = new ClsNlote();
-                    En.Codigo = fila.Cells[0].Value.ToString();
                     foreach (DataRow filas in Neg.MtdListarLotes().Rows)
                     {
                         if (filas[0].ToString() == fila.Cells[0].Value.ToString())
@@ -239,7 +222,7 @@ namespace RelojCliente
                             break;
                         }
                     }
-                    En.Cantidad = cantidad - Convert.ToInt32(fila.Cells[2].Value.ToString());
+                    ClsElote En = ClsElote.decrementar(fila.Cells[0].Value.ToString(),cantidad - Convert.ToInt32(fila.Cells[2].Value.ToString()));
                     Neg.MtdDecrementarLote(En);
                 }
                 MtdReiniciar();

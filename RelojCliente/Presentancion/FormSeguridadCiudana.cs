@@ -98,10 +98,8 @@ namespace RelojCliente
             ClsNlogin Neg = new ClsNlogin();
             Neg.MtdCerrarSesion(data.Rows[0][9].ToString());
             //enviando sms
-            ClsEsms En = new ClsEsms();
+            ClsEsms En = ClsEsms.crear("+51" + data.Rows[0][5].ToString(),"El usuario " + data.Rows[0][1].ToString() + " " + data.Rows[0][2].ToString() + " acaba de cerrar sesion a las " + DateTime.Now.ToLongTimeString() + ". \n La sesion estuvo abierta durante: " + Horas + " horas, " + Minutos + " minutos y " + Segundos + " segundos.");
             ClsNsms Ne = new ClsNsms();
-            En.Destinatario = "+51" + data.Rows[0][5].ToString();
-            En.Mensaje = "El usuario " + data.Rows[0][1].ToString() + " " + data.Rows[0][2].ToString() + " acaba de cerrar sesion a las " + DateTime.Now.ToLongTimeString() + ". \n La sesion estuvo abierta durante: " + Horas + " horas, " + Minutos + " minutos y " + Segundos + " segundos.";
             Ne.MtdMandarMensaje(En);
 
             //enviado mensaje al correo

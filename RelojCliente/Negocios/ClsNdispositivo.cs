@@ -45,10 +45,7 @@ namespace RelojCliente.Negocios
                 command.Parameters.Add(new SqlParameter("est", SqlDbType.VarChar));
                 for (int i = 1; i <= en.Cantidad; i++)
                 {
-                    ClsEdispositivo En = new ClsEdispositivo();
-                    En.Serie = MtdCalcularSerieDispositivo(en.Codigo, i);
-                    En.Lote = en.Codigo;
-                    En.Estado = "1";
+                    ClsEdispositivo En = ClsEdispositivo.crear(MtdCalcularSerieDispositivo(en.Codigo, i),en.Codigo,"1");
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters["lotser"].Value = En.Serie;
                     command.Parameters["lot"].Value = En.Lote;

@@ -12,7 +12,6 @@ using RelojCliente.Negocios;
 using System.IO;
 using System.Windows.Forms;
 using RelojCliente.Presentancion;
-using System.IO;
 using System.Diagnostics;
 using Microsoft.Win32;
 

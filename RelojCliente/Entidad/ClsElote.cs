@@ -6,28 +6,43 @@ using System.Threading.Tasks;
 
 namespace RelojCliente.Entidad
 {
-    class ClsElote
+    public class ClsElote
     {
-        private string codigo;
-        private string nombre;
-        private string color;
-        private string proveedor;
-        private string sistemaOperativo;
-        private int cantidad;
-        private double precio_unitario;
-        private string forma;
-        private string memoria;
-        private double peso;
+        public string Codigo { get; private set; }
+        public string Nombre { get; private set; }
+        public string Color { get; private set; }
+        public string Proveedor { get; private set; }
+        public string SistemaOperativo { get; private set; }
+        public int Cantidad { get; private set; }
+        public double Precio_unitario { get; private set; }
+        public string Forma { get; private set; }
+        public string Memoria { get; private set; }
+        public double Peso { get; private set; }
 
-        public string Codigo { get => codigo; set => codigo = value; }
-        public string Nombre { get => nombre; set => nombre = value; }
-        public string Color { get => color; set => color = value; }
-        public string Proveedor { get => proveedor; set => proveedor = value; }
-        public string SistemaOperativo { get => sistemaOperativo; set => sistemaOperativo = value; }
-        public int Cantidad { get => cantidad; set => cantidad = value; }
-        public double Precio_unitario { get => precio_unitario; set => precio_unitario = value; }
-        public string Forma { get => forma; set => forma = value; }
-        public string Memoria { get => memoria; set => memoria = value; }
-        public double Peso { get => peso; set => peso = value; }
+        public static ClsElote crear(string _codigo, string _nombre, string _color, string _proveedor, string _sistemaOperativo, int _cantidad, double _precio_unitario, string _forma, string _memoria, double _peso)
+        {
+            return new ClsElote()
+            {
+                Codigo = _codigo,
+                Nombre = _nombre,
+                Color = _color,
+                Proveedor = _proveedor,
+                SistemaOperativo = _sistemaOperativo,
+                Cantidad = _cantidad,
+                Precio_unitario = _precio_unitario,
+                Forma = _forma,
+                Memoria = _memoria,
+                Peso = _peso
+            };
+        }
+
+        public static ClsElote decrementar(string _codigo, int _cantidad)
+        {
+            return new ClsElote()
+            {
+                Codigo = _codigo,
+                Cantidad = _cantidad
+            };
+        }
     }
 }

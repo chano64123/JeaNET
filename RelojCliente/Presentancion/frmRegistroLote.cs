@@ -31,21 +31,21 @@ namespace RelojCliente
             txtCodigo.Text = N.MtdGeneraraCodigo();
         }
 
-        public frmRegistroLote(string codigo, string nombre, string color, string proveedor, string sistema, int cantidad, double precio, string forma, string memoria, double peso)
+        public frmRegistroLote(ClsElote E)
         {
             InitializeComponent();
             //cargar proveedores
             MtdCargarProveedores();
-            txtCodigo.Text = codigo;
-            txtNombre.Text = nombre;
-            txtColor.Text = color;
-            cmbProveedor.Text = proveedor;
-            txtSistemaOperativo.Text = sistema;
-            txtCantidad.Text = cantidad.ToString();
-            txtPrecio.Text = precio.ToString();
-            txtForma.Text = forma;
-            txtMemoriaInterna.Text = memoria;
-            txtPeso.Text = peso.ToString();
+            txtCodigo.Text = E.Codigo;
+            txtNombre.Text = E.Nombre;
+            txtColor.Text = E.Color;
+            cmbProveedor.Text = E.Proveedor;
+            txtSistemaOperativo.Text = E.SistemaOperativo;
+            txtCantidad.Text = E.Cantidad.ToString();
+            txtPrecio.Text = E.Precio_unitario.ToString();
+            txtForma.Text = E.Forma;
+            txtMemoriaInterna.Text = E.Memoria;
+            txtPeso.Text = E.Peso.ToString();
             txtCodigo.Enabled = false;
             btnGuardar.Enabled = false;
         }
@@ -54,35 +54,16 @@ namespace RelojCliente
         {
             if (MtdValidarCampos() == 0)
             {
-                ClsElote E = new ClsElote();
+                ClsElote E = ClsElote.crear(txtCodigo.Text,txtNombre.Text,txtColor.Text,lblProveedor.Text,txtSistemaOperativo.Text,Convert.ToInt32(txtCantidad.Text),Convert.ToDouble(txtPrecio.Text),txtForma.Text,txtMemoriaInterna.Text,Convert.ToDouble(txtPeso.Text));
                 ClsNlote N = new ClsNlote();
-                E.Codigo = txtCodigo.Text;
-                E.Nombre = txtNombre.Text;
-                E.Color = txtColor.Text;
-                E.Proveedor = lblProveedor.Text;
-                E.SistemaOperativo = txtSistemaOperativo.Text;
-                E.Cantidad = Convert.ToInt32(txtCantidad.Text);
-                E.Precio_unitario = Convert.ToDouble(txtPrecio.Text);
-                E.Forma = txtForma.Text;
-                E.Memoria = txtMemoriaInterna.Text;
-                E.Peso = Convert.ToDouble(txtPeso.Text);
                 if (N.MtdAgregarLote(E))
                 {
                     ClsNdispositivo Ne = new ClsNdispositivo();
                     Ne.MtdGuardarDispositivo(E);
                     //para guardar kardex
-                    ClsEkardex objEKardex = new ClsEkardex();
-                    objEKardex.Codlote = txtCodigo.Text;
-                    objEKardex.DniEmpleado = frmAdministrador.data.Rows[0][0].ToString();
-                    objEKardex.Descripcion = "ENTRADA";
-                    objEKardex.Cantidad = Convert.ToInt32(txtCantidad.Text);
-                    objEKardex.PrecioUnitario = Convert.ToDouble(txtPrecio.Text);
-                    objEKardex.Estado = "1";
-                    objEKardex.Hora = DateTime.Now.ToShortTimeString();
-                    objEKardex.Fecha = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+                    ClsEkardex objEKardex = ClsEkardex.crear(txtCodigo.Text,frmAdministrador.data.Rows[0][0].ToString(),"ENTRADA",Convert.ToInt32(txtCantidad.Text),Convert.ToDouble(txtPrecio.Text),"1",DateTime.Now.ToShortTimeString(),Convert.ToDateTime(DateTime.Now.ToShortDateString()));
                     ClsNcomprobante objN = new ClsNcomprobante();
                     objN.MtdAgregarKardex(objEKardex, "ENTRADA");
-
 
                     if (MessageBox.Show("Lote registrado correctamente, ¿Desea registrar otro lote?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
@@ -124,18 +105,8 @@ namespace RelojCliente
         {
             if (MtdValidarCampos() == 0)
             {
-                ClsElote E = new ClsElote();
+                ClsElote E = ClsElote.crear(txtCodigo.Text, txtNombre.Text, txtColor.Text, lblProveedor.Text, txtSistemaOperativo.Text, Convert.ToInt32(txtCantidad.Text), Convert.ToDouble(txtPrecio.Text), txtForma.Text, txtMemoriaInterna.Text, Convert.ToDouble(txtPeso.Text));
                 ClsNlote N = new ClsNlote();
-                E.Codigo = txtCodigo.Text;
-                E.Nombre = txtNombre.Text;
-                E.Color = txtColor.Text;
-                E.Proveedor = lblProveedor.Text;
-                E.SistemaOperativo = txtSistemaOperativo.Text;
-                E.Cantidad = Convert.ToInt32(txtCantidad.Text);
-                E.Precio_unitario = Convert.ToDouble(txtPrecio.Text);
-                E.Forma = txtForma.Text;
-                E.Memoria = txtMemoriaInterna.Text;
-                E.Peso = Convert.ToDouble(txtPeso.Text);
                 if (N.MtdModificarLote(E))
                 {
                     if (MessageBox.Show("Lote modificado correctamente, ¿Desea continuar en el formulario de registro de lotes?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)

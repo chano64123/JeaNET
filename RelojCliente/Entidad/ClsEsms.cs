@@ -8,10 +8,16 @@ namespace RelojCliente.Entidad
 {
     class ClsEsms
     {
-        private string destinatario;
-        private string mensaje;
+        public string Destinatario { get; private set; }
+        public string Mensaje { get; private set; }
 
-        public string Destinatario { get => destinatario; set => destinatario = value; }
-        public string Mensaje { get => mensaje; set => mensaje = value; }
+        public static ClsEsms crear(string _destinatario, string _mensaje)
+        {
+            return new ClsEsms()
+            {
+                Destinatario = _destinatario,
+                Mensaje = _mensaje
+            };
+        }
     }
 }

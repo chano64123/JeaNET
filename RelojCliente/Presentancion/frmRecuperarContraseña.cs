@@ -36,10 +36,8 @@ namespace RelojCliente.Presentancion
                     if (N.MtdCambiarContraseña(nc,data.Rows[0][0].ToString()))
                     {
                         //sms
-                        ClsEsms Es = new ClsEsms();
+                        ClsEsms Es = ClsEsms.crear("+51" + data.Rows[0][5].ToString(),"El usuario " + data.Rows[0][1].ToString() + " " + data.Rows[0][2].ToString() + " acaba pedir cambio de contraseña a las " + DateTime.Now.ToLongTimeString() + ".");
                         ClsNsms Ns = new ClsNsms();
-                        Es.Destinatario = "+51" + data.Rows[0][5].ToString();
-                        Es.Mensaje = "El usuario " + data.Rows[0][1].ToString() + " " + data.Rows[0][2].ToString() + " acaba pedir cambio de contraseña a las " + DateTime.Now.ToLongTimeString() + ".";
                         Ns.MtdMandarMensaje(Es);
                         //correo
                         ClsEcorreo Ec = new ClsEcorreo();
