@@ -21,11 +21,11 @@ namespace RelojCliente.Presentancion
             MtdObtenerCodigoCargo();
 
         }
-        public frmRegistroCargo( string codigo, string descripcion)
+        public frmRegistroCargo(ClsEcargo E)
         {
             InitializeComponent();
-            txtCodigo.Text = codigo;
-            txtDescripcion.Text = descripcion;
+            txtCodigo.Text = E.Idcargo;
+            txtDescripcion.Text = E.Descripcion;
             txtCodigo.Enabled = false;
             btnGuardar.Enabled = false;
         }
@@ -45,10 +45,8 @@ namespace RelojCliente.Presentancion
         {
             if (MtdValidarCampos() == 0)
             {
-                ClsEcargo E = new ClsEcargo();
+                ClsEcargo E = ClsEcargo.crear(txtCodigo.Text,txtDescripcion.Text);
                 ClsNcargo N = new ClsNcargo();
-                E.Idcargo = txtCodigo.Text;
-                E.Descripcion = txtDescripcion.Text;
                 if (N.MtdModificarCargo(E))
                 {
                     if (MessageBox.Show("Cargo modificado correctamente, ¿Desea continuar en el formulario de registro de empleados?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -79,10 +77,8 @@ namespace RelojCliente.Presentancion
         {
             if (MtdValidarCampos() == 0)
             {
-                ClsEcargo E = new ClsEcargo();
+                ClsEcargo E = ClsEcargo.crear(txtCodigo.Text, txtDescripcion.Text);
                 ClsNcargo N = new ClsNcargo();
-                E.Idcargo = txtCodigo.Text;
-                E.Descripcion = txtDescripcion.Text;
                 if (N.MtdGuardarCargo(E))
                 {
                     if (MessageBox.Show("Cargo registrado correctamente, ¿Desea continuar en el formulario de registro de cargos?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)

@@ -25,22 +25,22 @@ namespace RelojCliente
             btnModificar.Enabled = false;
         }
         //constructor
-        public frmRegistroEmpleado(string dni, string nombres, string apellidos, string direccion, string correo, string telefono, string cargo, string turno, string estado, string usuario, string contraseña)
+        public frmRegistroEmpleado(ClsEempleado E)
         {
             InitializeComponent();
             //cargar cargos
             MtdCargarCargos();
-            txtDni.Text = dni;
-            txtNombres.Text = nombres;
-            txtApellidos.Text = apellidos;
-            txtDireccion.Text = direccion;
-            txtCorreo.Text = correo;
-            txtTelefono.Text = telefono;
-            cmbCargo.Text = cargo;
-            cmbTurno.Text = turno;
-            cmbEstado.Text = estado;
-            txtUsuario.Text = usuario;
-            txtContraseña.Text = contraseña;
+            txtDni.Text = E.Dni;
+            txtNombres.Text = E.Nombres;
+            txtApellidos.Text = E.Apellidos;
+            txtDireccion.Text = E.Direccion;
+            txtCorreo.Text = E.Correo;
+            txtTelefono.Text = E.Telefono;
+            cmbCargo.Text = E.Cargo;
+            cmbTurno.Text = E.Turno;
+            cmbEstado.Text = E.Estado;
+            txtUsuario.Text = E.Usuario;
+            txtContraseña.Text = E.Contraseña;
             txtDni.Enabled = false;
             btnGuardar.Enabled = false;
         }
@@ -97,19 +97,8 @@ namespace RelojCliente
             ga = 0;
             if (MtdValidarCampos() == 0)
             {
-                ClsEempleado E = new ClsEempleado();
+                ClsEempleado E = ClsEempleado.crear(txtDni.Text, txtNombres.Text, txtApellidos.Text, txtDireccion.Text, txtCorreo.Text, txtTelefono.Text, lblTurno.Text, lblCargo.Text, lblEstado.Text, txtUsuario.Text, txtContraseña.Text);
                 ClsNempleado N = new ClsNempleado();
-                E.Dni = txtDni.Text;
-                E.Nombres = txtNombres.Text;
-                E.Apellidos = txtApellidos.Text;
-                E.Direccion = txtDireccion.Text;
-                E.Correo = txtCorreo.Text;
-                E.Telefono = txtTelefono.Text;
-                E.Cargo = lblCargo.Text;
-                E.Turno = lblTurno.Text;
-                E.Estado = lblEstado.Text;
-                E.Usuario = txtUsuario.Text;
-                E.Contraseña = txtContraseña.Text;
                 if (N.MtdGuardarEmpleado(E))
                 {
                     if (MessageBox.Show("Empleado guardado correctamente, ¿Desea continuar en el formulario de registro de empleados?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -154,19 +143,8 @@ namespace RelojCliente
             ga = 1;
             if (MtdValidarCampos() == 0)
             {
-                ClsEempleado E = new ClsEempleado();
+                ClsEempleado E = ClsEempleado.crear(txtDni.Text,txtNombres.Text,txtApellidos.Text,txtDireccion.Text,txtCorreo.Text,txtTelefono.Text,lblTurno.Text,lblCargo.Text,lblEstado.Text,txtUsuario.Text,txtContraseña.Text);
                 ClsNempleado N = new ClsNempleado();
-                E.Dni = txtDni.Text;
-                E.Nombres = txtNombres.Text;
-                E.Apellidos = txtApellidos.Text;
-                E.Direccion = txtDireccion.Text;
-                E.Correo = txtCorreo.Text;
-                E.Telefono = txtTelefono.Text;
-                E.Cargo = lblCargo.Text;
-                E.Turno = lblTurno.Text;
-                E.Estado = lblEstado.Text;
-                E.Usuario = txtUsuario.Text;
-                E.Contraseña = txtContraseña.Text;
                 if (N.MtdModificarEmpleado(E))
                 {
                     if (MessageBox.Show("Empleado modificado correctamente, ¿Desea continuar en el formulario de registro de empleados?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)

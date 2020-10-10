@@ -40,12 +40,10 @@ namespace RelojCliente
         private void dgvCargos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Hizo doble clic para modificar un cargo");
-            ClsEcargo E = new ClsEcargo();
             ClsNcargo N = new ClsNcargo();
             DataTable data = N.MtdBusquedaCargo(dgvCargos.CurrentRow.Cells[0].Value.ToString());
-            E.Idcargo = data.Rows[0][0].ToString();
-            E.Descripcion = data.Rows[0][1].ToString();
-            frmRegistroCargo f = new frmRegistroCargo(E.Idcargo, E.Descripcion);
+            ClsEcargo E = ClsEcargo.crear(data.Rows[0][0].ToString(),data.Rows[0][1].ToString());
+            frmRegistroCargo f = new frmRegistroCargo(E);
             f.ShowDialog();
             dgvCargos.DataSource = N.MtdListarCargos();
         }

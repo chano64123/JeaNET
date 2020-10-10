@@ -23,15 +23,15 @@ namespace RelojCliente
             btnModificar.Enabled = false;
         }
 
-        public frmRegistroCliente(string dni, string nombre, string apellido, string correo, string telefono, string estado)
+        public frmRegistroCliente(ClsEcliente E)
         {
             InitializeComponent();
-            txtDni.Text = dni;
-            txtNombres.Text = nombre;
-            txtApellidos.Text = apellido;
-            txtCorreo.Text = correo;
-            txtTelefono.Text = telefono;
-            cmbEstado.Text = estado;
+            txtDni.Text = E.Dni;
+            txtNombres.Text = E.Nombres;
+            txtApellidos.Text =E.Apellidos;
+            txtCorreo.Text = E.Correo;
+            txtTelefono.Text = E.Telefono;
+            cmbEstado.Text = E.Estado;
             txtDni.Enabled = false;
             btnGuardar.Enabled = false;
         }
@@ -40,14 +40,8 @@ namespace RelojCliente
         {
             if (MtdValidarCampos() == 0)
             {
-                ClsEcliente E = new ClsEcliente();
+                ClsEcliente E = ClsEcliente.crear(txtDni.Text,txtNombres.Text,txtApellidos.Text,txtCorreo.Text,txtTelefono.Text,lblEstado.Text);
                 ClsNcliente N = new ClsNcliente();
-                E.Dni = txtDni.Text;
-                E.Nombres = txtNombres.Text;
-                E.Apellidos = txtApellidos.Text;
-                E.Correo = txtCorreo.Text;
-                E.Telefono = txtTelefono.Text;
-                E.Estado = lblEstado.Text;
                 //E.IdDispositivo = "";
                 if (N.MtdModificarCliente(E))
                 {
@@ -76,14 +70,8 @@ namespace RelojCliente
         {
             if (MtdValidarCampos() == 0)
             {
-                ClsEcliente E = new ClsEcliente();
+                ClsEcliente E = ClsEcliente.crear(txtDni.Text, txtNombres.Text, txtApellidos.Text, txtCorreo.Text, txtTelefono.Text, lblEstado.Text);
                 ClsNcliente N = new ClsNcliente();
-                E.Dni = txtDni.Text;
-                E.Nombres = txtNombres.Text;
-                E.Apellidos = txtApellidos.Text;
-                E.Correo = txtCorreo.Text;
-                E.Telefono = txtTelefono.Text;
-                E.Estado = lblEstado.Text;
                 //E.IdDispositivo = "";
                 if (N.MtdGuardarCliente(E))
                 {

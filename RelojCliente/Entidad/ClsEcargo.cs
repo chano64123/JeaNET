@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace RelojCliente.Entidad
 {
-    class ClsEcargo
+    public class ClsEcargo
     {
-        private string idcargo;
-        private string descripcion;
+        public string Idcargo { get; private set; }
+        public string Descripcion { get; private set; }
 
-        public string Idcargo { get => idcargo; set => idcargo = value; }
-        public string Descripcion { get => descripcion; set => descripcion = value; }
+        public static ClsEcargo crear(string _idCargo, string _descripcion)
+        {
+            return new ClsEcargo()
+            {
+                Idcargo = _idCargo,
+                Descripcion = _descripcion
+            };
+        }
     }
 }

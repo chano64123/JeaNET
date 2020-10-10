@@ -6,21 +6,26 @@ using System.Threading.Tasks;
 
 namespace RelojCliente.Entidad
 {
-    class ClsEcliente
+    public class ClsEcliente
     {
-        private string dni;
-        private string nombres;
-        private string apellidos;
-        private string correo;
-        private string telefono;
-        private string estado;
+        public string Dni { get; private set; }
+        public string Nombres { get; private set; }
+        public string Apellidos { get; private set; }
+        public string Correo { get; private set; }
+        public string Telefono { get; private set; }
+        public string Estado { get; private set; }
 
-
-        public string Dni { get => dni; set => dni = value; }
-        public string Nombres { get => nombres; set => nombres = value; }
-        public string Apellidos { get => apellidos; set => apellidos = value; }
-        public string Correo { get => correo; set => correo = value; }
-        public string Telefono { get => telefono; set => telefono = value; }
-        public string Estado { get => estado; set => estado = value; }
+        public static ClsEcliente crear(string _dni, string _nombres, string _apellidos, string _correo, string _telefono, string _estado)
+        {
+            return new ClsEcliente()
+            {
+                Dni = _dni,
+                Nombres = _nombres,
+                Apellidos = _apellidos,
+                Correo = _correo,
+                Telefono = _telefono,
+                Estado = _estado
+            };
+        }
     }
 }

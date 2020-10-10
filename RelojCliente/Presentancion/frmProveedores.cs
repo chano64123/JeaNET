@@ -38,33 +38,20 @@ namespace RelojCliente.Presentancion
 
         private void dgvProveedores_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            string estado = "";
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Hizo doble clic para modificar proveedor");
-
-            ClsEproveedor E = new ClsEproveedor();
             ClsNproveedor N = new ClsNproveedor();
             DataTable data = N.MtdBusquedaProveedor(dgvProveedores.CurrentRow.Cells[0].Value.ToString());
-            E.Ruc = data.Rows[0][0].ToString();
-            E.Nombre = data.Rows[0][1].ToString();
-            E.Direccion = data.Rows[0][2].ToString();
-            E.Telefono = data.Rows[0][3].ToString();
-            E.Correo = data.Rows[0][4].ToString();
             //para estado
-            if (data.Rows[0][5].ToString() == "1")
-            {
-                E.Estado = "Activo";
-            }
-            else if (data.Rows[0][5].ToString() == "0")
-            {
-                E.Estado = "Inactivo";
-            }
-            frmRegistroProveedor f = new frmRegistroProveedor(E.Ruc, E.Nombre, E.Direccion, E.Correo, E.Telefono, E.Estado);
+            estado = (data.Rows[0][5].ToString() == "1")?"Activo":"Inactivo";
+            ClsEproveedor E = ClsEproveedor.crear(data.Rows[0][0].ToString(),data.Rows[0][1].ToString(),data.Rows[0][2].ToString(),data.Rows[0][3].ToString(),data.Rows[0][4].ToString(),estado);
+            frmRegistroProveedor f = new frmRegistroProveedor(E);
             f.ShowDialog();
             dgvProveedores.DataSource = N.MtdListarProveedores();
         }
 
         private void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
-
             ClsNproveedor N = new ClsNproveedor();
             dgvProveedores.DataSource = N.MtdFiltrarProveedores(txtBusqueda.Text);
         }
