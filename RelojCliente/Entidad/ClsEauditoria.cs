@@ -13,6 +13,7 @@ namespace RelojCliente.Entidad
         public DateTime Fecha { get; private set; }
         public string Hora { get; private set; }
 
+        public string Robyaqui;
         public static ClsEauditoria crear(string _dniemp,string _desc,DateTime _fecha,string _hora)
         {
             return new ClsEauditoria()
