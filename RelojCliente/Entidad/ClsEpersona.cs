@@ -8,16 +8,22 @@ namespace RelojCliente.Entidad
 {
     public class ClsEpersona
     {
-        private string dni;
-        private string nombres;
-        private string apellidoPaterno;
-        private string apellidoMaterno;
-        private string codVerifica;
+        public string Dni { get; private set; }
+        public string Nombres { get; private set; }
+        public string ApellidoPaterno { get; private set; }
+        public string ApellidoMaterno { get; private set; }
+        public string CodVerifica { get; private set; }
 
-        public string Dni { get => dni; set => dni = value; }
-        public string Nombres { get => nombres; set => nombres = value; }
-        public string ApellidoPaterno { get => apellidoPaterno; set => apellidoPaterno = value; }
-        public string ApellidoMaterno { get => apellidoMaterno; set => apellidoMaterno = value; }
-        public string CodVerifica { get => codVerifica; set => codVerifica = value; }
+        public static ClsEpersona crear(string _dni, string _nombres, string _apellidoPaterno, string _apellidoMaterno, string _codVerifica)
+        {
+            return new ClsEpersona()
+            {
+                Dni = _dni,
+                Nombres = _nombres,
+                ApellidoPaterno = _apellidoPaterno,
+                ApellidoMaterno = _apellidoMaterno,
+                CodVerifica = _codVerifica
+            };
+        }
     }
 }

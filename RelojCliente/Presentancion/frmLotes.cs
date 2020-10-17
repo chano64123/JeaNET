@@ -31,31 +31,22 @@ namespace RelojCliente
 
         private void dgvDispositivos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            string proveedor = "";
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(),"Hizo doble clic para modificar dispositivo ");
-
-            ClsElote E = new ClsElote();
             ClsNlote N = new ClsNlote();
             ClsNproveedor Np = new ClsNproveedor();
             DataTable data = N.MtdBusquedaLote(dgvLotes.CurrentRow.Cells[0].Value.ToString());
-            E.Codigo = data.Rows[0][0].ToString();
-            E.Nombre = data.Rows[0][1].ToString();
-            E.Color = data.Rows[0][2].ToString();
             //para proveedor
             foreach (DataRow item in Np.MtdListarProveedores().Rows)
             {
                 if (data.Rows[0][3].ToString() == item[0].ToString())
                 {
-                    E.Proveedor = item[1].ToString();
+                    proveedor = item[1].ToString();
                     break;
                 }
             }
-            E.SistemaOperativo = data.Rows[0][4].ToString();
-            E.Cantidad = Convert.ToInt32(data.Rows[0][5].ToString());
-            E.Precio_unitario = Convert.ToDouble(data.Rows[0][6].ToString());
-            E.Forma = data.Rows[0][7].ToString();
-            E.Memoria = data.Rows[0][8].ToString();
-            E.Peso = Convert.ToDouble(data.Rows[0][9].ToString());
-            frmRegistroLote f = new frmRegistroLote(E.Codigo, E.Nombre, E.Color, E.Proveedor, E.SistemaOperativo, E.Cantidad, E.Precio_unitario, E.Forma, E.Memoria, E.Peso);
+            ClsElote E = ClsElote.crear(data.Rows[0][0].ToString(),data.Rows[0][1].ToString(),data.Rows[0][2].ToString(),proveedor,data.Rows[0][4].ToString(),Convert.ToInt32(data.Rows[0][5].ToString()),Convert.ToDouble(data.Rows[0][6].ToString()),data.Rows[0][7].ToString(),data.Rows[0][8].ToString(),Convert.ToDouble(data.Rows[0][9].ToString()));
+            frmRegistroLote f = new frmRegistroLote(E);
             f.ShowDialog();
             dgvLotes.DataSource = N.MtdListarLotes();
         }

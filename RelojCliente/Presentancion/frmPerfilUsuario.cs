@@ -263,19 +263,8 @@ namespace RelojCliente.Presentancion
             {
                 if (MtdValidarCampos() == 0)
                 {
-                    ClsEempleado E = new ClsEempleado();
+                    ClsEempleado E = ClsEempleado.crear(lblDNI.Text,lblNombre.Text,lblApellido.Text,txtDireccion.Text,txtCorreo.Text,txtTelefono.Text,datos.Rows[0][7].ToString(),datos.Rows[0][6].ToString(),datos.Rows[0][8].ToString(),txtUsuario.Text,txtClaveRepe.Text);
                     ClsNempleado N = new ClsNempleado();
-                    E.Dni = lblDNI.Text;
-                    E.Nombres = lblNombre.Text;
-                    E.Apellidos = lblApellido.Text;
-                    E.Direccion = txtDireccion.Text;
-                    E.Correo = txtCorreo.Text;
-                    E.Telefono = txtTelefono.Text;
-                    E.Cargo = datos.Rows[0][6].ToString();
-                    E.Turno = datos.Rows[0][7].ToString();
-                    E.Estado = datos.Rows[0][8].ToString();
-                    E.Usuario = txtUsuario.Text;
-                    E.Contraseña = txtClaveRepe.Text;
                     if (N.MtdModificarEmpleado(E))
                     {
                         MessageBox.Show("Datos modificados correctamente", "JeaNet - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -297,19 +286,8 @@ namespace RelojCliente.Presentancion
             }
             else if (MtdValidarCampos() == 0)
             {
-                ClsEempleado E = new ClsEempleado();
+                ClsEempleado E = ClsEempleado.crear(lblDNI.Text, lblNombre.Text, lblApellido.Text, txtDireccion.Text, txtCorreo.Text, txtTelefono.Text, datos.Rows[0][7].ToString(), datos.Rows[0][6].ToString(), datos.Rows[0][8].ToString(), txtUsuario.Text, txtClaveRepe.Text);
                 ClsNempleado N = new ClsNempleado();
-                E.Dni = lblDNI.Text;
-                E.Nombres = lblNombre.Text;
-                E.Apellidos = lblApellido.Text;
-                E.Direccion = txtDireccion.Text;
-                E.Correo = txtCorreo.Text;
-                E.Telefono = txtTelefono.Text;
-                E.Cargo = datos.Rows[0][6].ToString();
-                E.Turno = datos.Rows[0][7].ToString();
-                E.Estado = datos.Rows[0][8].ToString();
-                E.Usuario = txtUsuario.Text;
-                E.Contraseña = txtClave.Text;
                 if (N.MtdModificarEmpleado(E))
                 {
                     MessageBox.Show("Datos modificados correctamente", "JeaNet - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);

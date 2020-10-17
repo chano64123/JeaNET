@@ -38,9 +38,7 @@ namespace RelojCliente.Presentancion
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Hizo doble clic en " + dgvComprobantes.Name + " para Listar los detales del comprobante en el " + dgvDetalleComprobante.Name);
             //listar detalle comprobante
             ClsNcomprobante N = new ClsNcomprobante();
-            ClsEdetallecomprobante E = new ClsEdetallecomprobante();
-            E.Serie = dgvComprobantes.CurrentRow.Cells[0].Value.ToString(); 
-            E.Numero = dgvComprobantes.CurrentRow.Cells[1].Value.ToString();
+            ClsEdetallecomprobante E = ClsEdetallecomprobante.listar(dgvComprobantes.CurrentRow.Cells[0].Value.ToString(),dgvComprobantes.CurrentRow.Cells[1].Value.ToString());
             dgvDetalleComprobante.DataSource = N.MtdListarDetallesComprobante(E);
         }
 

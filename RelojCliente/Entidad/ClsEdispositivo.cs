@@ -8,12 +8,18 @@ namespace RelojCliente.Entidad
 {
     class ClsEdispositivo
     {
-        private string serie;
-        private string lote;
-        private string estado;
+        public string Serie { get; private set; }
+        public string Lote { get; private set; }
+        public string Estado { get; private set; }
 
-        public string Serie { get => serie; set => serie = value; }
-        public string Lote { get => lote; set => lote = value; }
-        public string Estado { get => estado; set => estado = value; }
+        public static ClsEdispositivo crear(string _serie, string _lote, string _estado)
+        {
+            return new ClsEdispositivo()
+            {
+                Serie = _serie,
+                Lote = _lote,
+                Estado = _estado
+            };
+        }
     }
 }

@@ -6,30 +6,36 @@ using System.Threading.Tasks;
 
 namespace RelojCliente.Entidad
 {
-    class ClsEempleado
+    public class ClsEempleado
     {
-        private string dni;
-        private string nombres;
-        private string apellidos;
-        private string direccion;
-        private string correo;
-        private string telefono;
-        private string cargo;
-        private string turno;
-        private string estado;
-        private string usuario;
-        private string contraseña;
+        public string Dni { get; private set; }
+        public string Nombres { get; private set; }
+        public string Apellidos { get; private set; }
+        public string Direccion { get; private set; }
+        public string Correo { get; private set; }
+        public string Telefono { get; private set; }
+        public string Turno { get; private set; }
+        public string Cargo { get; private set; }
+        public string Estado { get; private set; }
+        public string Usuario { get; private set; }
+        public string Contraseña { get; private set; }
 
-        public string Dni { get => dni; set => dni = value; }
-        public string Nombres { get => nombres; set => nombres = value; }
-        public string Apellidos { get => apellidos; set => apellidos = value; }
-        public string Direccion { get => direccion; set => direccion = value; }
-        public string Correo { get => correo; set => correo = value; }
-        public string Telefono { get => telefono; set => telefono = value; }
-        public string Turno { get => turno; set => turno = value; }
-        public string Cargo { get => cargo; set => cargo = value; }
-        public string Estado { get => estado; set => estado = value; }
-        public string Usuario { get => usuario; set => usuario = value; }
-        public string Contraseña { get => contraseña; set => contraseña = value; }
+        public static ClsEempleado crear(string _dni, string _nombres, string _apellidos, string _direccion, string _correo, string _telefono, string _turno, string _cargo, string _estado, string _usuario, string _contraseña)
+        {
+            return new ClsEempleado()
+            {
+                Dni = _dni,
+                Nombres = _nombres,
+                Apellidos = _apellidos,
+                Direccion = _direccion,
+                Correo = _correo,
+                Telefono = _telefono,
+                Turno = _turno,
+                Cargo = _cargo,
+                Estado = _estado,
+                Usuario = _usuario,
+                Contraseña = _contraseña
+            };
+        }
     }
 }

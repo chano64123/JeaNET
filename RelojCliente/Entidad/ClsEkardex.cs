@@ -8,22 +8,28 @@ namespace RelojCliente.Entidad
 {
     class ClsEkardex
     {
-        private string codlote;
-        private string dniEmpleado;
-        private string descripcion;
-        private int cantidad;
-        private double precioUnitario;
-        private string estado;
-        private string hora;
-        private DateTime fecha;
+        public string Codlote { get; private set; }
+        public string DniEmpleado { get; private set; }
+        public string Descripcion { get; private set; }
+        public int Cantidad { get; private set; }
+        public double PrecioUnitario { get; private set; }
+        public string Estado { get; private set; }
+        public string Hora { get; private set; }
+        public DateTime Fecha { get; private set; }
 
-        public string Codlote { get => codlote; set => codlote = value; }
-        public string DniEmpleado { get => dniEmpleado; set => dniEmpleado = value; }
-        public string Descripcion { get => descripcion; set => descripcion = value; }
-        public int Cantidad { get => cantidad; set => cantidad = value; }
-        public double PrecioUnitario { get => precioUnitario; set => precioUnitario = value; }
-        public string Estado { get => estado; set => estado = value; }
-        public string Hora { get => hora; set => hora = value; }
-        public DateTime Fecha { get => fecha; set => fecha = value; }
+        public static ClsEkardex crear(string _codlote, string _dniEmpleado, string _descripcion, int _cantidad, double _precioUnitario, string _estado, string _hora, DateTime _fecha)
+        {
+            return new ClsEkardex()
+            {
+                Codlote = _codlote,
+                DniEmpleado = _dniEmpleado,
+                Descripcion = _descripcion,
+                Cantidad = _cantidad,
+                PrecioUnitario = _precioUnitario,
+                Estado = _estado,
+                Hora = _hora,
+                Fecha = _fecha
+            };
+        }
     }
 }

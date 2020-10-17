@@ -50,7 +50,6 @@ namespace RelojCliente.Presentancion
 
         private float[] mtdPintar()
         {
-            int i = 0;
             float[] puntos = new float[3];
             puntos[0] = float.Parse(dgvVenta.Rows[0].Cells[0].Value.ToString());
             puntos[1] = float.Parse(dgvVenta.Rows[0].Cells[1].Value.ToString());

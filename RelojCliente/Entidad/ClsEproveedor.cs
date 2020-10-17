@@ -6,20 +6,27 @@ using System.Threading.Tasks;
 
 namespace RelojCliente.Entidad
 {
-    class ClsEproveedor
+    public class ClsEproveedor
     {
-        private string ruc;
-        private string nombre;
-        private string direccion;
-        private string telefono;
-        private string correo;
-        private string estado;
+        public string Ruc { get; private set; }
+        public string Nombre { get; private set; }
+        public string Direccion { get; private set; }
+        public string Telefono { get; private set; }
+        public string Correo { get; private set; }
+        public string Estado { get; private set; }
 
-        public string Ruc { get => ruc; set => ruc = value; }
-        public string Nombre { get => nombre; set => nombre = value; }
-        public string Direccion { get => direccion; set => direccion = value; }
-        public string Telefono { get => telefono; set => telefono = value; }
-        public string Correo { get => correo; set => correo = value; }
-        public string Estado { get => estado; set => estado = value; }
+        public static ClsEproveedor crear(string _ruc, string _nombre, string _direccion, string _telefono, string _correo, string _estado)
+        {
+            return new ClsEproveedor()
+            {
+                Ruc = _ruc,
+                Nombre = _nombre,
+                Direccion = _direccion,
+                Telefono = _telefono,
+                Correo = _correo,
+                Estado = _estado
+            };
+
+        }
     }
 }

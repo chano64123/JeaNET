@@ -28,52 +28,26 @@ namespace RelojCliente
 
         private void dgvEmpleados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            string cargo="";
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "hizo doble click mara modificar empleado");
-
-            ClsEempleado E = new ClsEempleado();
             ClsNempleado N = new ClsNempleado();
             ClsNcargo Nc = new ClsNcargo();
             DataTable data = N.MtdBusquedaEmpleado(dgvEmpleados.CurrentRow.Cells[0].Value.ToString());
-            E.Dni = data.Rows[0][0].ToString();
-            E.Nombres = data.Rows[0][1].ToString();
-            E.Apellidos = data.Rows[0][2].ToString();
-            E.Direccion = data.Rows[0][3].ToString();
-            E.Correo = data.Rows[0][4].ToString();
-            E.Telefono = data.Rows[0][5].ToString();
             //para cargo
             foreach (DataRow item in Nc.MtdListarCargos().Rows)
             {
                 if(data.Rows[0][6].ToString() == item[0].ToString())
                 {
-                    E.Cargo = item[1].ToString();
+                    cargo = item[1].ToString();
                     break;
                 }
             }
             //para turno
-            if(data.Rows[0][7].ToString() == "1")
-            {
-                E.Turno = "Mañana";
-            }
-            else if (data.Rows[0][7].ToString() == "2")
-            {
-                E.Turno = "Tarde";
-            }
-            else if (data.Rows[0][7].ToString() == "3")
-            {
-                E.Turno = "Noche";
-            }
+            string turno = (data.Rows[0][7].ToString() == "1")?"Mañana":(data.Rows[0][7].ToString() == "2")?"Tarde":"Noche";
             //para estado
-            if (data.Rows[0][8].ToString() == "1")
-            {
-                E.Estado = "Activo";
-            }
-            else if (data.Rows[0][8].ToString() == "0")
-            {
-                E.Estado = "Inactivo";
-            }
-            E.Usuario = data.Rows[0][9].ToString();
-            E.Contraseña = data.Rows[0][10].ToString();
-            frmRegistroEmpleado f = new frmRegistroEmpleado(E.Dni,E.Nombres,E.Apellidos,E.Direccion,E.Correo,E.Telefono,E.Cargo,E.Turno,E.Estado,E.Usuario,E.Contraseña);
+            string estado = (data.Rows[0][8].ToString() == "1")?"Activo":"Inactivo";
+            ClsEempleado E = ClsEempleado.crear(data.Rows[0][0].ToString(),data.Rows[0][1].ToString(),data.Rows[0][2].ToString(),data.Rows[0][3].ToString(),data.Rows[0][4].ToString(),data.Rows[0][5].ToString(),turno,cargo,estado,data.Rows[0][9].ToString(),data.Rows[0][10].ToString());
+            frmRegistroEmpleado f = new frmRegistroEmpleado(E);
             f.ShowDialog();
             dgvEmpleados.DataSource = N.MtdListarEmpleados();
         }

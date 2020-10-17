@@ -24,15 +24,15 @@ namespace RelojCliente.Presentancion
 
         }
 
-        public frmRegistroProveedor(string ruc, string nombre, string direccion, string correo, string telefono, string estado)
+        public frmRegistroProveedor(ClsEproveedor E)
         {
             InitializeComponent();
-            txtRuc.Text = ruc;
-            txtNombre.Text = nombre;
-            txtDireccion.Text = direccion;
-            txtCorreo.Text = correo;
-            txtTelefono.Text = telefono;
-            cmbEstado.Text = estado;
+            txtRuc.Text =E.Ruc;
+            txtNombre.Text = E.Nombre;
+            txtDireccion.Text = E.Direccion;
+            txtCorreo.Text = E.Correo;
+            txtTelefono.Text = E.Telefono;
+            cmbEstado.Text = E.Estado;
             txtRuc.Enabled = false;
             btnGuardar.Enabled = false;
         }
@@ -41,14 +41,8 @@ namespace RelojCliente.Presentancion
         {
             if (MtdValidarCampos() == 0)
             {
-                ClsEproveedor E = new ClsEproveedor();
+                ClsEproveedor E = ClsEproveedor.crear(txtRuc.Text, txtNombre.Text, txtDireccion.Text, txtTelefono.Text, txtCorreo.Text, lblEstado.Text);
                 ClsNproveedor N = new ClsNproveedor();
-                E.Ruc = txtRuc.Text;
-                E.Nombre = txtNombre.Text;
-                E.Direccion = txtDireccion.Text;
-                E.Telefono = txtTelefono.Text;
-                E.Correo = txtCorreo.Text;
-                E.Estado = lblEstado.Text;
                 if (N.MtdGuardarProveedor(E))
                 {
                     if (MessageBox.Show("Proveedor registrado correctamente, ¿Desea continuar en el formulario de registro de proveedores?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -87,14 +81,8 @@ namespace RelojCliente.Presentancion
         {
             if (MtdValidarCampos() == 0)
             {
-                ClsEproveedor E = new ClsEproveedor();
+                ClsEproveedor E = ClsEproveedor.crear(txtRuc.Text,txtNombre.Text,txtDireccion.Text,txtTelefono.Text,txtCorreo.Text,lblEstado.Text);
                 ClsNproveedor N = new ClsNproveedor();
-                E.Ruc = txtRuc.Text;
-                E.Nombre = txtNombre.Text;
-                E.Direccion = txtDireccion.Text;
-                E.Telefono = txtTelefono.Text;
-                E.Correo = txtCorreo.Text;
-                E.Estado = lblEstado.Text;
                 if (N.MtdModificarProveedor(E))
                 {
                     if (MessageBox.Show("Proveedor modificado correctamente, ¿Desea continuar en el formulario de registro de proveedores?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
