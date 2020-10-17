@@ -38,6 +38,7 @@
             this.btnIngresar = new Bunifu.Framework.UI.BunifuFlatButton();
             this.label6 = new System.Windows.Forms.Label();
             this.error1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnNuevo)).BeginInit();
@@ -54,6 +55,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(21)))), ((int)(((byte)(33)))));
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnCerrar);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.btnNuevo);
@@ -143,13 +145,24 @@
             this.label6.ForeColor = System.Drawing.Color.Black;
             this.label6.Location = new System.Drawing.Point(47, 112);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(192, 20);
+            this.label6.Size = new System.Drawing.Size(277, 20);
             this.label6.TabIndex = 64;
-            this.label6.Text = "Ingrese Usuario o Correo";
+            this.label6.Text = "Ingrese nombre de Usuario o Correo";
             // 
             // error1
             // 
             this.error1.ContainerControl = this;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 24F);
+            this.label1.ForeColor = System.Drawing.Color.Aqua;
+            this.label1.Location = new System.Drawing.Point(23, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(375, 39);
+            this.label1.TabIndex = 65;
+            this.label1.Text = "Recuperar Contraseña";
             // 
             // frmRecuperarContraseña
             // 
@@ -184,5 +197,6 @@
         private Bunifu.Framework.UI.BunifuFlatButton btnIngresar;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ErrorProvider error1;
+        private System.Windows.Forms.Label label1;
     }
 }

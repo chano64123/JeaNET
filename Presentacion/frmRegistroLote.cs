@@ -46,7 +46,7 @@ namespace Presentacion
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (MtdValidarCampos() == 0)
+            if (MtdValidarCampos())
             {
                 ClsElote E = ClsElote.crear(txtCodigo.Text,txtNombre.Text,txtColor.Text,lblProveedor.Text,txtSistemaOperativo.Text,Convert.ToInt32(txtCantidad.Text),Convert.ToDouble(txtPrecio.Text),txtForma.Text,txtMemoriaInterna.Text,Convert.ToDouble(txtPeso.Text));
                 ClsNlote N = new ClsNlote();
@@ -97,7 +97,7 @@ namespace Presentacion
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (MtdValidarCampos() == 0)
+            if (MtdValidarCampos())
             {
                 ClsElote E = ClsElote.crear(txtCodigo.Text, txtNombre.Text, txtColor.Text, lblProveedor.Text, txtSistemaOperativo.Text, Convert.ToInt32(txtCantidad.Text), Convert.ToDouble(txtPrecio.Text), txtForma.Text, txtMemoriaInterna.Text, Convert.ToDouble(txtPeso.Text));
                 ClsNlote N = new ClsNlote();
@@ -152,124 +152,127 @@ namespace Presentacion
 
             this.Close();
         }
-        private int MtdValidarCampos()
+        private bool MtdValidarCampos()
         {
-            int validar_campos = 9;
-            if (txtNombre.Text.Equals(""))      //para el nombre
-            {
-                error1.SetError(txtNombre, "Ingrese un Nombre del dispositivo");
-                txtNombre.Focus();
-            }
-            else if (txtNombre.TextLength < 5)
-            {
-                error1.SetError(txtNombre, "Ingrese un Nombre valido");
-                txtNombre.Focus();
-            }
-            else
-            {
-                error1.SetError(txtNombre, "");
-                validar_campos--;
-            }
-            if (txtColor.Text.Equals(""))      //para el color
-            {
-                error1.SetError(txtColor, "Ingrese Color del dispositivo");
-                txtColor.Focus();
-            }
-            else if (txtColor.TextLength < 4)
-            {
-                error1.SetError(txtColor, "Ingrese un Color valido");
-                txtColor.Focus();
-            }
-            else
-            {
-                error1.SetError(txtColor, "");
-                validar_campos--;
-            }
-            if (cmbProveedor.SelectedIndex == -1)        //para el proveedor
-            {
-                error1.SetError(cmbProveedor, "Seleccione un Proveedor");
-            }
-            else
-            {
-                error1.SetError(cmbProveedor, "");
-                validar_campos--;
-            }
-            if (txtSistemaOperativo.Text.Equals(""))      //para el sistema operativo
-            {
-                error1.SetError(txtSistemaOperativo, "Ingrese un Sistema Operativo del dispositivo");
-                txtSistemaOperativo.Focus();
-            }
-            else if (txtSistemaOperativo.TextLength < 3)
-            {
-                error1.SetError(txtSistemaOperativo, "Ingrese un Sistema Operativo valido");
-                txtSistemaOperativo.Focus();
-            }
-            else
-            {
-                error1.SetError(txtSistemaOperativo, "");
-                validar_campos--;
-            }
-            if (txtCantidad.Text.Equals(""))      //para la cantidad
-            {
-                error1.SetError(txtCantidad, "Ingrese Cantidad");
-                txtCantidad.Focus();
-            }
-            else
-            {
-                error1.SetError(txtCantidad, "");
-                validar_campos--;
-            }
-            if (txtPrecio.Text.Equals(""))      //para el precio unitario
-            {
-                error1.SetError(txtPrecio, "Ingrese Precio Unitario del dispositivo");
-                txtPrecio.Focus();
-            }
-            else if (Convert.ToDouble(txtPrecio.Text) < 50)
-            {
-                error1.SetError(txtPrecio, "Ingrese un Precio correcto");
-                txtPrecio.Focus();
-            }
-            else
-            {
-                error1.SetError(txtPrecio, "");
-                validar_campos--;
-            }
-            if (txtForma.Text.Equals(""))      //para la forma
-            {
-                error1.SetError(txtForma, "Ingrese Forma del dispositivo");
-                txtForma.Focus();
-            }
-            else if (txtForma.TextLength < 4)
-            {
-                error1.SetError(txtForma, "Ingrese una Forma valida");
-                txtForma.Focus();
-            }
-            else
-            {
-                error1.SetError(txtForma, "");
-                validar_campos--;
-            }
-            if (txtMemoriaInterna.Text.Equals(""))      //para la memoria
-            {
-                error1.SetError(txtMemoriaInterna, "Ingrese Memoria Interna del dispositivo");
-                txtMemoriaInterna.Focus();
-            }
-            else
-            {
-                error1.SetError(txtMemoriaInterna, "");
-                validar_campos--;
-            }
-            if (txtPeso.Text.Equals(""))      //para el peso
-            {
-                error1.SetError(txtPeso, "Ingrese Peso del dispositivo");
-                txtPeso.Focus();
-            }
-            else
-            {
-                error1.SetError(txtPeso, "");
-                validar_campos--;
-            }
-            return validar_campos;
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            return !validacion.validarVacio(error1, this);
+
+            //int validar_campos = 9;
+            //if (txtNombre.Text.Equals(""))      //para el nombre
+            //{
+            //    error1.SetError(txtNombre, "Ingrese un Nombre del dispositivo");
+            //    txtNombre.Focus();
+            //}
+            //else if (txtNombre.TextLength < 5)
+            //{
+            //    error1.SetError(txtNombre, "Ingrese un Nombre valido");
+            //    txtNombre.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtNombre, "");
+            //    validar_campos--;
+            //}
+            //if (txtColor.Text.Equals(""))      //para el color
+            //{
+            //    error1.SetError(txtColor, "Ingrese Color del dispositivo");
+            //    txtColor.Focus();
+            //}
+            //else if (txtColor.TextLength < 4)
+            //{
+            //    error1.SetError(txtColor, "Ingrese un Color valido");
+            //    txtColor.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtColor, "");
+            //    validar_campos--;
+            //}
+            //if (cmbProveedor.SelectedIndex == -1)        //para el proveedor
+            //{
+            //    error1.SetError(cmbProveedor, "Seleccione un Proveedor");
+            //}
+            //else
+            //{
+            //    error1.SetError(cmbProveedor, "");
+            //    validar_campos--;
+            //}
+            //if (txtSistemaOperativo.Text.Equals(""))      //para el sistema operativo
+            //{
+            //    error1.SetError(txtSistemaOperativo, "Ingrese un Sistema Operativo del dispositivo");
+            //    txtSistemaOperativo.Focus();
+            //}
+            //else if (txtSistemaOperativo.TextLength < 3)
+            //{
+            //    error1.SetError(txtSistemaOperativo, "Ingrese un Sistema Operativo valido");
+            //    txtSistemaOperativo.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtSistemaOperativo, "");
+            //    validar_campos--;
+            //}
+            //if (txtCantidad.Text.Equals(""))      //para la cantidad
+            //{
+            //    error1.SetError(txtCantidad, "Ingrese Cantidad");
+            //    txtCantidad.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtCantidad, "");
+            //    validar_campos--;
+            //}
+            //if (txtPrecio.Text.Equals(""))      //para el precio unitario
+            //{
+            //    error1.SetError(txtPrecio, "Ingrese Precio Unitario del dispositivo");
+            //    txtPrecio.Focus();
+            //}
+            //else if (Convert.ToDouble(txtPrecio.Text) < 50)
+            //{
+            //    error1.SetError(txtPrecio, "Ingrese un Precio correcto");
+            //    txtPrecio.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtPrecio, "");
+            //    validar_campos--;
+            //}
+            //if (txtForma.Text.Equals(""))      //para la forma
+            //{
+            //    error1.SetError(txtForma, "Ingrese Forma del dispositivo");
+            //    txtForma.Focus();
+            //}
+            //else if (txtForma.TextLength < 4)
+            //{
+            //    error1.SetError(txtForma, "Ingrese una Forma valida");
+            //    txtForma.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtForma, "");
+            //    validar_campos--;
+            //}
+            //if (txtMemoriaInterna.Text.Equals(""))      //para la memoria
+            //{
+            //    error1.SetError(txtMemoriaInterna, "Ingrese Memoria Interna del dispositivo");
+            //    txtMemoriaInterna.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtMemoriaInterna, "");
+            //    validar_campos--;
+            //}
+            //if (txtPeso.Text.Equals(""))      //para el peso
+            //{
+            //    error1.SetError(txtPeso, "Ingrese Peso del dispositivo");
+            //    txtPeso.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtPeso, "");
+            //    validar_campos--;
+            //}
+            //return validar_campos;
         }
         private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -341,7 +344,7 @@ namespace Presentacion
             {
                 e.Handled = false;
             }//para un punto
-            else if ((e.KeyChar == '.') && (!txtMemoriaInterna.Text.Contains('.')))
+            else if ((e.KeyChar == '.') && (!txtPrecio.Text.Contains('.')))
             {
                 e.Handled = false;
             }
@@ -395,7 +398,7 @@ namespace Presentacion
             {
                 e.Handled = false;
             }//para un punto
-            else if ((e.KeyChar == '.') && (!txtMemoriaInterna.Text.Contains('.')))
+            else if ((e.KeyChar == '.') && (!txtCodigo.Text.Contains('.')))
             {
                 e.Handled = false;
             }

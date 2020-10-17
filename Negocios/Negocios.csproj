@@ -97,6 +97,7 @@
     <Compile Include="ClsNreportesIngresos.cs" />
     <Compile Include="ClsNsms.cs" />
     <Compile Include="ClsNsocket.cs" />
+    <Compile Include="ClsNValidacion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

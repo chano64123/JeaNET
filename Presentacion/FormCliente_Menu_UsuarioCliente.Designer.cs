@@ -35,7 +35,6 @@
             this.lblLogin = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.btnCerrar = new Bunifu.Framework.UI.BunifuImageButton();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.txtNombres = new System.Windows.Forms.TextBox();
             this.txtApellidos = new System.Windows.Forms.TextBox();
@@ -45,11 +44,11 @@
             this.lblApellidos = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.lblNombres = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.lblDNI = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnSalirLogin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).BeginInit();
             this.panel2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // bunifuElipse1
@@ -112,32 +111,21 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.panel2.Controls.Add(this.groupBox1);
+            this.panel2.Controls.Add(this.bunifuCustomLabel1);
+            this.panel2.Controls.Add(this.txtTelefono);
+            this.panel2.Controls.Add(this.txtNombres);
+            this.panel2.Controls.Add(this.txtApellidos);
+            this.panel2.Controls.Add(this.txtDNI);
+            this.panel2.Controls.Add(this.btnGuardar);
+            this.panel2.Controls.Add(this.lblTelefono);
+            this.panel2.Controls.Add(this.lblApellidos);
+            this.panel2.Controls.Add(this.lblNombres);
+            this.panel2.Controls.Add(this.lblDNI);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 45);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(350, 303);
             this.panel2.TabIndex = 1;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtTelefono);
-            this.groupBox1.Controls.Add(this.txtNombres);
-            this.groupBox1.Controls.Add(this.txtApellidos);
-            this.groupBox1.Controls.Add(this.txtDNI);
-            this.groupBox1.Controls.Add(this.btnGuardar);
-            this.groupBox1.Controls.Add(this.lblTelefono);
-            this.groupBox1.Controls.Add(this.lblApellidos);
-            this.groupBox1.Controls.Add(this.lblNombres);
-            this.groupBox1.Controls.Add(this.lblDNI);
-            this.groupBox1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.ForeColor = System.Drawing.Color.Aqua;
-            this.groupBox1.Location = new System.Drawing.Point(15, 28);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(323, 251);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Datos de Usuario";
             // 
             // txtTelefono
             // 
@@ -145,10 +133,10 @@
             this.txtTelefono.Enabled = false;
             this.txtTelefono.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTelefono.ForeColor = System.Drawing.SystemColors.Menu;
-            this.txtTelefono.Location = new System.Drawing.Point(116, 125);
+            this.txtTelefono.Location = new System.Drawing.Point(152, 156);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(157, 22);
-            this.txtTelefono.TabIndex = 32;
+            this.txtTelefono.TabIndex = 41;
             // 
             // txtNombres
             // 
@@ -156,10 +144,10 @@
             this.txtNombres.Enabled = false;
             this.txtNombres.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombres.ForeColor = System.Drawing.SystemColors.Menu;
-            this.txtNombres.Location = new System.Drawing.Point(116, 65);
+            this.txtNombres.Location = new System.Drawing.Point(152, 96);
             this.txtNombres.Name = "txtNombres";
             this.txtNombres.Size = new System.Drawing.Size(157, 22);
-            this.txtNombres.TabIndex = 31;
+            this.txtNombres.TabIndex = 39;
             // 
             // txtApellidos
             // 
@@ -167,24 +155,21 @@
             this.txtApellidos.Enabled = false;
             this.txtApellidos.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtApellidos.ForeColor = System.Drawing.SystemColors.Menu;
-            this.txtApellidos.Location = new System.Drawing.Point(116, 95);
+            this.txtApellidos.Location = new System.Drawing.Point(152, 126);
             this.txtApellidos.Name = "txtApellidos";
             this.txtApellidos.Size = new System.Drawing.Size(157, 22);
-            this.txtApellidos.TabIndex = 31;
+            this.txtApellidos.TabIndex = 40;
             // 
             // txtDNI
             // 
             this.txtDNI.BackColor = System.Drawing.SystemColors.InfoText;
             this.txtDNI.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDNI.ForeColor = System.Drawing.SystemColors.Menu;
-            this.txtDNI.Location = new System.Drawing.Point(116, 36);
+            this.txtDNI.Location = new System.Drawing.Point(152, 67);
             this.txtDNI.MaxLength = 8;
             this.txtDNI.Name = "txtDNI";
             this.txtDNI.Size = new System.Drawing.Size(157, 22);
-            this.txtDNI.TabIndex = 30;
-            this.txtDNI.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtDNI_MouseClick);
-            this.txtDNI.TextChanged += new System.EventHandler(this.txtDNI_TextChanged);
-            this.txtDNI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDNI_KeyPress_1);
+            this.txtDNI.TabIndex = 38;
             // 
             // btnGuardar
             // 
@@ -207,7 +192,7 @@
             this.btnGuardar.IconVisible = true;
             this.btnGuardar.IconZoom = 90D;
             this.btnGuardar.IsTab = false;
-            this.btnGuardar.Location = new System.Drawing.Point(101, 173);
+            this.btnGuardar.Location = new System.Drawing.Point(111, 216);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(5);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(41)))), ((int)(((byte)(64)))));
@@ -215,12 +200,11 @@
             this.btnGuardar.OnHoverTextColor = System.Drawing.Color.White;
             this.btnGuardar.selected = false;
             this.btnGuardar.Size = new System.Drawing.Size(125, 32);
-            this.btnGuardar.TabIndex = 29;
+            this.btnGuardar.TabIndex = 37;
             this.btnGuardar.Text = "Agregar";
             this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnGuardar.Textcolor = System.Drawing.Color.White;
             this.btnGuardar.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // lblTelefono
             // 
@@ -228,10 +212,10 @@
             this.lblTelefono.BackColor = System.Drawing.Color.Black;
             this.lblTelefono.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTelefono.ForeColor = System.Drawing.Color.Aqua;
-            this.lblTelefono.Location = new System.Drawing.Point(6, 125);
+            this.lblTelefono.Location = new System.Drawing.Point(42, 156);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(71, 20);
-            this.lblTelefono.TabIndex = 23;
+            this.lblTelefono.TabIndex = 36;
             this.lblTelefono.Text = "Telefono";
             // 
             // lblApellidos
@@ -240,10 +224,10 @@
             this.lblApellidos.BackColor = System.Drawing.Color.Black;
             this.lblApellidos.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblApellidos.ForeColor = System.Drawing.Color.Aqua;
-            this.lblApellidos.Location = new System.Drawing.Point(6, 95);
+            this.lblApellidos.Location = new System.Drawing.Point(42, 126);
             this.lblApellidos.Name = "lblApellidos";
             this.lblApellidos.Size = new System.Drawing.Size(75, 20);
-            this.lblApellidos.TabIndex = 21;
+            this.lblApellidos.TabIndex = 35;
             this.lblApellidos.Text = "Apellidos";
             // 
             // lblNombres
@@ -252,10 +236,10 @@
             this.lblNombres.BackColor = System.Drawing.Color.Black;
             this.lblNombres.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombres.ForeColor = System.Drawing.Color.Aqua;
-            this.lblNombres.Location = new System.Drawing.Point(6, 65);
+            this.lblNombres.Location = new System.Drawing.Point(42, 96);
             this.lblNombres.Name = "lblNombres";
             this.lblNombres.Size = new System.Drawing.Size(74, 20);
-            this.lblNombres.TabIndex = 20;
+            this.lblNombres.TabIndex = 34;
             this.lblNombres.Text = "Nombres";
             // 
             // lblDNI
@@ -264,11 +248,23 @@
             this.lblDNI.BackColor = System.Drawing.Color.Black;
             this.lblDNI.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDNI.ForeColor = System.Drawing.Color.Aqua;
-            this.lblDNI.Location = new System.Drawing.Point(6, 36);
+            this.lblDNI.Location = new System.Drawing.Point(42, 67);
             this.lblDNI.Name = "lblDNI";
             this.lblDNI.Size = new System.Drawing.Size(36, 20);
-            this.lblDNI.TabIndex = 19;
+            this.lblDNI.TabIndex = 33;
             this.lblDNI.Text = "DNI";
+            // 
+            // bunifuCustomLabel1
+            // 
+            this.bunifuCustomLabel1.AutoSize = true;
+            this.bunifuCustomLabel1.BackColor = System.Drawing.Color.Black;
+            this.bunifuCustomLabel1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel1.ForeColor = System.Drawing.Color.Aqua;
+            this.bunifuCustomLabel1.Location = new System.Drawing.Point(42, 25);
+            this.bunifuCustomLabel1.Name = "bunifuCustomLabel1";
+            this.bunifuCustomLabel1.Size = new System.Drawing.Size(144, 21);
+            this.bunifuCustomLabel1.TabIndex = 23;
+            this.bunifuCustomLabel1.Text = "Datos del Usuario";
             // 
             // FormCliente_Menu_UsuarioCliente
             // 
@@ -287,8 +283,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnSalirLogin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).EndInit();
             this.panel2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -300,16 +295,16 @@
         private System.Windows.Forms.Panel panel2;
         private Bunifu.Framework.UI.BunifuImageButton btnCerrar;
         private Bunifu.Framework.UI.BunifuCustomLabel lblLogin;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private Bunifu.Framework.UI.BunifuCustomLabel lblDNI;
-        private Bunifu.Framework.UI.BunifuCustomLabel lblTelefono;
-        private Bunifu.Framework.UI.BunifuCustomLabel lblApellidos;
-        private Bunifu.Framework.UI.BunifuCustomLabel lblNombres;
         private Bunifu.Framework.UI.BunifuImageButton btnSalirLogin;
-        private Bunifu.Framework.UI.BunifuFlatButton btnGuardar;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel1;
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.TextBox txtNombres;
         private System.Windows.Forms.TextBox txtApellidos;
         private System.Windows.Forms.TextBox txtDNI;
+        private Bunifu.Framework.UI.BunifuFlatButton btnGuardar;
+        private Bunifu.Framework.UI.BunifuCustomLabel lblTelefono;
+        private Bunifu.Framework.UI.BunifuCustomLabel lblApellidos;
+        private Bunifu.Framework.UI.BunifuCustomLabel lblNombres;
+        private Bunifu.Framework.UI.BunifuCustomLabel lblDNI;
     }
 }
