@@ -53,7 +53,7 @@ namespace Presentacion
             }
         }
 
-        private void TxtDniEmpleado_TextChanged(object sender, EventArgs e)
+        private void TxtDni_TextChanged(object sender, EventArgs e)
         {
             if (txtDni.TextLength == 8)
             {
@@ -88,7 +88,7 @@ namespace Presentacion
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             ga = 0;
-            if (MtdValidarCampos() == 0)
+            if (MtdValidarCampos())
             {
                 ClsEempleado E = ClsEempleado.crear(txtDni.Text, txtNombres.Text, txtApellidos.Text, txtDireccion.Text, txtCorreo.Text, txtTelefono.Text, lblTurno.Text, lblCargo.Text, lblEstado.Text, txtUsuario.Text, txtContraseña.Text);
                 ClsNempleado N = new ClsNempleado();
@@ -134,7 +134,7 @@ namespace Presentacion
         private void btnModificar_Click(object sender, EventArgs e)
         {
             ga = 1;
-            if (MtdValidarCampos() == 0)
+            if (MtdValidarCampos())
             {
                 ClsEempleado E = ClsEempleado.crear(txtDni.Text,txtNombres.Text,txtApellidos.Text,txtDireccion.Text,txtCorreo.Text,txtTelefono.Text,lblTurno.Text,lblCargo.Text,lblEstado.Text,txtUsuario.Text,txtContraseña.Text);
                 ClsNempleado N = new ClsNempleado();
@@ -164,136 +164,138 @@ namespace Presentacion
 
         int ga = 0;
 
-        private int MtdValidarCampos()
+        private bool MtdValidarCampos()
         {
-            int validar_campos = 9;
-            if (txtDni.Text.Equals(""))      //para el DNI
-            {
-                error1.SetError(txtDni, "Ingrese DNI");
-                txtDni.Focus();
-            }
-            else if (txtDni.TextLength != 8 || txtNombres.Text.Equals("") || txtApellidos.Text.Equals(""))
-            {
-                error1.SetError(txtDni, "Ingrese un DNI valido");
-                txtDni.Focus();
-            }
-            else
-            {
-                error1.SetError(txtDni, "");
-                validar_campos--;
-            }
-            if (txtDireccion.Text.Equals(""))      //para la direccion
-            {
-                error1.SetError(txtDireccion, "Ingrese Direccion");
-                txtDireccion.Focus();
-            }
-            else
-            {
-                error1.SetError(txtDireccion, "");
-                validar_campos--;
-            }
-            if (txtCorreo.Text.Equals(""))      //para el correo
-            {
-                error1.SetError(txtCorreo, "Ingrese Correo");
-                txtCorreo.Focus();
-            }
-            else if (!MtdValidarEmail(txtCorreo.Text))
-            {
-                error1.SetError(txtCorreo, "Ingrese un correo valido");
-                txtCorreo.Focus();
-            }
-            else
-            {
-                error1.SetError(txtCorreo, "");
-                validar_campos--;
-            }
-            if (txtTelefono.Text.Equals(""))      //para el telefono
-            {
-                error1.SetError(txtTelefono, "Ingrese Telefono");
-                txtTelefono.Focus();
-            }
-            else if (txtTelefono.TextLength != 9)
-            {
-                error1.SetError(txtTelefono, "Ingrese Telefono Valido");
-                txtTelefono.Focus();
-            }
-            else
-            {
-                error1.SetError(txtTelefono, "");
-                validar_campos--;
-            }
-            if (cmbTurno.SelectedIndex == -1)        //para el turno
-            {
-                error1.SetError(cmbTurno, "Seleccione un Turno");
-            }
-            else
-            {
-                error1.SetError(cmbTurno, "");
-                validar_campos--;
-            }
-            if (cmbCargo.SelectedIndex == -1)        //para el cargo
-            {
-                error1.SetError(cmbCargo, "Seleccione un Cargo");
-            }
-            else
-            {
-                error1.SetError(cmbCargo, "");
-                validar_campos--;
-            }
-            if (cmbEstado.SelectedIndex == -1)        //para el estado
-            {
-                error1.SetError(cmbEstado, "Seleccione un Estado");
-            }
-            else
-            {
-                error1.SetError(cmbEstado, "");
-                validar_campos--;
-            }
-            if (txtUsuario.Text.Equals(""))      //para el usuario
-            {
-                error1.SetError(txtUsuario, "Ingrese Usuario");
-                txtUsuario.Focus();
-            }
-            else
-            {
-                bool verificar_existencia = false;
-                ClsNempleado N = new ClsNempleado();
-                foreach (DataRow item in N.MtdListarEmpleados().Rows)
-                {
-                    if (txtUsuario.Text == item[9].ToString())
-                    {
-                        verificar_existencia = true;
-                        break;
-                    }
-                }
-                if (verificar_existencia is true && ga==0)
-                {
-                    error1.SetError(txtUsuario, "El nombre usuario ya esta en uso.");
-                    txtUsuario.Focus();
-                    return 4;
-                }
-                else
-                {
-                    error1.SetError(txtUsuario, "");
-                    validar_campos--;
-                }
-            }
-            if (txtContraseña.Text.Equals(""))      //para la clave
-            {
-                error1.SetError(txtContraseña, "Ingrese Contraseña");
-                txtContraseña.Focus();
-            }
-            else if (txtContraseña.TextLength != 6)
-            {
-                error1.SetError(txtTelefono, "La contraseña tiene que tener 6 numeros");
-                txtContraseña.Focus();
-            }
-            else
-            {
-                error1.SetError(txtContraseña, "");
-                validar_campos--;
-            }
-            return validar_campos;
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            return !validacion.validarVacio(error1, this) && !validacion.validarNombreUsuario(error1, this, ga);
+            //int validar_campos = 9;
+            //if (txtDni.Text.Equals(""))      //para el DNI
+            //{
+            //    error1.SetError(txtDni, "Ingrese DNI");
+            //    txtDni.Focus();
+            //}
+            //else if (txtDni.TextLength != 8 || txtNombres.Text.Equals("") || txtApellidos.Text.Equals(""))
+            //{
+            //    error1.SetError(txtDni, "Ingrese un DNI valido");
+            //    txtDni.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtDni, "");
+            //    validar_campos--;
+            //}
+            //if (txtDireccion.Text.Equals(""))      //para la direccion
+            //{
+            //    error1.SetError(txtDireccion, "Ingrese Direccion");
+            //    txtDireccion.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtDireccion, "");
+            //    validar_campos--;
+            //}
+            //if (txtCorreo.Text.Equals(""))      //para el correo
+            //{
+            //    error1.SetError(txtCorreo, "Ingrese Correo");
+            //    txtCorreo.Focus();
+            //}
+            //else if (!MtdValidarEmail(txtCorreo.Text))
+            //{
+            //    error1.SetError(txtCorreo, "Ingrese un correo valido");
+            //    txtCorreo.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtCorreo, "");
+            //    validar_campos--;
+            //}
+            //if (txtTelefono.Text.Equals(""))      //para el telefono
+            //{
+            //    error1.SetError(txtTelefono, "Ingrese Telefono");
+            //    txtTelefono.Focus();
+            //}
+            //else if (txtTelefono.TextLength != 9)
+            //{
+            //    error1.SetError(txtTelefono, "Ingrese Telefono Valido");
+            //    txtTelefono.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtTelefono, "");
+            //    validar_campos--;
+            //}
+            //if (cmbTurno.SelectedIndex == -1)        //para el turno
+            //{
+            //    error1.SetError(cmbTurno, "Seleccione un Turno");
+            //}
+            //else
+            //{
+            //    error1.SetError(cmbTurno, "");
+            //    validar_campos--;
+            //}
+            //if (cmbCargo.SelectedIndex == -1)        //para el cargo
+            //{
+            //    error1.SetError(cmbCargo, "Seleccione un Cargo");
+            //}
+            //else
+            //{
+            //    error1.SetError(cmbCargo, "");
+            //    validar_campos--;
+            //}
+            //if (cmbEstado.SelectedIndex == -1)        //para el estado
+            //{
+            //    error1.SetError(cmbEstado, "Seleccione un Estado");
+            //}
+            //else
+            //{
+            //    error1.SetError(cmbEstado, "");
+            //    validar_campos--;
+            //}
+            //if (txtUsuario.Text.Equals(""))      //para el usuario
+            //{
+            //    error1.SetError(txtUsuario, "Ingrese Usuario");
+            //    txtUsuario.Focus();
+            //}
+            //else
+            //{
+            //    bool verificar_existencia = false;
+            //    ClsNempleado N = new ClsNempleado();
+            //    foreach (DataRow item in N.MtdListarEmpleados().Rows)
+            //    {
+            //        if (txtUsuario.Text == item[9].ToString())
+            //        {
+            //            verificar_existencia = true;
+            //            break;
+            //        }
+            //    }
+            //    if (verificar_existencia is true && ga == 0)
+            //    {
+            //        error1.SetError(txtUsuario, "El nombre usuario ya esta en uso.");
+            //        txtUsuario.Focus();
+            //        return 4;
+            //    }
+            //    else
+            //    {
+            //        error1.SetError(txtUsuario, "");
+            //        validar_campos--;
+            //    }
+            //}
+            //if (txtContraseña.Text.Equals(""))      //para la clave
+            //{
+            //    error1.SetError(txtContraseña, "Ingrese Contraseña");
+            //    txtContraseña.Focus();
+            //}
+            //else if (txtContraseña.TextLength != 6)
+            //{
+            //    error1.SetError(txtTelefono, "La contraseña tiene que tener 6 numeros");
+            //    txtContraseña.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtContraseña, "");
+            //    validar_campos--;
+            //}
+            //return validar_campos;
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -320,25 +322,25 @@ namespace Presentacion
             }
         }
 
-        public static bool MtdValidarEmail(string email)
-        {
-            string expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
-            if (Regex.IsMatch(email, expresion))
-            {
-                if (Regex.Replace(email, expresion, String.Empty).Length == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //public static bool MtdValidarEmail(string email)
+        //{
+        //    string expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+        //    if (Regex.IsMatch(email, expresion))
+        //    {
+        //        if (Regex.Replace(email, expresion, String.Empty).Length == 0)
+        //        {
+        //            return true;
+        //        }
+        //        else
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
 
         private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -376,18 +378,7 @@ namespace Presentacion
 
         private void cmbTurno_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbTurno.SelectedIndex == 0)
-            {
-                lblTurno.Text = "1";
-            }
-            else if (cmbTurno.SelectedIndex == 1)
-            {
-                lblTurno.Text = "2";
-            }
-            else if (cmbTurno.SelectedIndex == 2)
-            {
-                lblTurno.Text = "3";
-            }
+            lblTurno.Text = (cmbTurno.SelectedIndex == 0) ? "1" : (cmbTurno.SelectedIndex == 1) ? "2" : (cmbTurno.SelectedIndex == 2) ? "3" : "";
         }
 
         private void cmbCargo_SelectedIndexChanged(object sender, EventArgs e)
@@ -404,14 +395,12 @@ namespace Presentacion
 
         private void cmbEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbEstado.SelectedIndex == 0)
-            {
-                lblEstado.Text = "1";
-            }
-            else if (cmbEstado.SelectedIndex == 1)
-            {
-                lblEstado.Text = "0";
-            }
+            lblEstado.Text = (cmbEstado.SelectedIndex == 0) ? "1" : (cmbEstado.SelectedIndex == 1) ? "2" : "";
+        }
+
+        private void txtDni_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -74,6 +74,9 @@ namespace Presentacion
 
         private int MtdValidarCampos()
         {
+            //ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            //return validacion.validarVacio(error1, this) && validacion.validarNombreUsuario(error1, this,lblUsuario.Text,txtUsuario.Text);
+
             int validar_campos = 5;
             if (txtDireccion.Text.Equals(""))      //para la direccion
             {
@@ -184,7 +187,10 @@ namespace Presentacion
                     validar_campos--;
                 }
             }
-            if(cambiar is true)
+
+            //hasta aca ya esta arriba
+
+            if (cambiar is true)
             {
                 validar_campos += 3;
                 if (txtClaveNueva.Text.Equals(""))      //para la clave nueva

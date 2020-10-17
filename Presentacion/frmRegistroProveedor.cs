@@ -31,7 +31,7 @@ namespace Presentacion
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (MtdValidarCampos() == 0)
+            if (MtdValidarCampos())
             {
                 ClsEproveedor E = ClsEproveedor.crear(txtRuc.Text, txtNombre.Text, txtDireccion.Text, txtTelefono.Text, txtCorreo.Text, lblEstado.Text);
                 ClsNproveedor N = new ClsNproveedor();
@@ -71,7 +71,7 @@ namespace Presentacion
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (MtdValidarCampos() == 0)
+            if (MtdValidarCampos())
             {
                 ClsEproveedor E = ClsEproveedor.crear(txtRuc.Text,txtNombre.Text,txtDireccion.Text,txtTelefono.Text,txtCorreo.Text,lblEstado.Text);
                 ClsNproveedor N = new ClsNproveedor();
@@ -160,84 +160,87 @@ namespace Presentacion
                 lblEstado.Text = "0";
             }
         }
-        private int MtdValidarCampos()
+        private bool MtdValidarCampos()
         {
-            int validar_campos = 4;
-            if (txtRuc.Text.Equals(""))      //para el RUC
-            {
-                error1.SetError(txtRuc, "Ingrese RUC");
-                txtRuc.Focus();
-            }
-            else if (txtRuc.TextLength != 11 || txtNombre.Text.Equals("") || txtDireccion.Text.Equals(""))
-            {
-                error1.SetError(txtRuc, "Ingrese un RUC valido");
-                txtRuc.Focus();
-            }
-            else
-            {
-                error1.SetError(txtRuc, "");
-                validar_campos--;
-            }
-            if (txtCorreo.Text.Equals(""))      //para el correo
-            {
-                error1.SetError(txtCorreo, "Ingrese Correo");
-                txtCorreo.Focus();
-            }
-            else if (!MtdValidarEmail(txtCorreo.Text))
-            {
-                error1.SetError(txtCorreo, "Ingrese un correo valido");
-                txtCorreo.Focus();
-            }
-            else
-            {
-                error1.SetError(txtCorreo, "");
-                validar_campos--;
-            }
-            if (txtTelefono.Text.Equals(""))      //para el telefono
-            {
-                error1.SetError(txtTelefono, "Ingrese Telefono");
-                txtTelefono.Focus();
-            }
-            else if (txtTelefono.TextLength != 9)
-            {
-                error1.SetError(txtTelefono, "Ingrese Telefono Valido");
-                txtTelefono.Focus();
-            }
-            else
-            {
-                error1.SetError(txtTelefono, "");
-                validar_campos--;
-            }
-            if (cmbEstado.SelectedIndex == -1)        //para el estado
-            {
-                error1.SetError(cmbEstado, "Seleccione un Estado");
-            }
-            else
-            {
-                error1.SetError(cmbEstado, "");
-                validar_campos--;
-            }
-            return validar_campos;
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            return !validacion.validarVacio(error1, this);
+
+            //int validar_campos = 4;
+            //if (txtRuc.Text.Equals(""))      //para el RUC
+            //{
+            //    error1.SetError(txtRuc, "Ingrese RUC");
+            //    txtRuc.Focus();
+            //}
+            //else if (txtRuc.TextLength != 11 || txtNombre.Text.Equals("") || txtDireccion.Text.Equals(""))
+            //{
+            //    error1.SetError(txtRuc, "Ingrese un RUC valido");
+            //    txtRuc.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtRuc, "");
+            //    validar_campos--;
+            //}
+            //if (txtCorreo.Text.Equals(""))      //para el correo
+            //{
+            //    error1.SetError(txtCorreo, "Ingrese Correo");
+            //    txtCorreo.Focus();
+            //}
+            //else if (!MtdValidarEmail(txtCorreo.Text))
+            //{
+            //    error1.SetError(txtCorreo, "Ingrese un correo valido");
+            //    txtCorreo.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtCorreo, "");
+            //    validar_campos--;
+            //}
+            //if (txtTelefono.Text.Equals(""))      //para el telefono
+            //{
+            //    error1.SetError(txtTelefono, "Ingrese Telefono");
+            //    txtTelefono.Focus();
+            //}
+            //else if (txtTelefono.TextLength != 9)
+            //{
+            //    error1.SetError(txtTelefono, "Ingrese Telefono Valido");
+            //    txtTelefono.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtTelefono, "");
+            //    validar_campos--;
+            //}
+            //if (cmbEstado.SelectedIndex == -1)        //para el estado
+            //{
+            //    error1.SetError(cmbEstado, "Seleccione un Estado");
+            //}
+            //else
+            //{
+            //    error1.SetError(cmbEstado, "");
+            //    validar_campos--;
+            //}
+            //return validar_campos;
         }
-        public static bool MtdValidarEmail(string email)
-        {
-            string expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
-            if (Regex.IsMatch(email, expresion))
-            {
-                if (Regex.Replace(email, expresion, String.Empty).Length == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //public static bool MtdValidarEmail(string email)
+        //{
+        //    string expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+        //    if (Regex.IsMatch(email, expresion))
+        //    {
+        //        if (Regex.Replace(email, expresion, String.Empty).Length == 0)
+        //        {
+        //            return true;
+        //        }
+        //        else
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
         private void txtRuc_KeyPress(object sender, KeyPressEventArgs e)
         {
             //solo numeros

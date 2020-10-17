@@ -20,7 +20,7 @@ namespace Presentacion
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            if (MtdValidarCampos() == 0)
+            if (MtdValidarCampos())
             {
                 ClsNlogin N = new ClsNlogin();
                 DataTable data = N.MtdVerificarExistencia(txtRecuperacion.Text);
@@ -53,20 +53,22 @@ namespace Presentacion
             this.Close();
         }
 
-        private int MtdValidarCampos()
+        private bool MtdValidarCampos()
         {
-            int validar_campos = 1;
-            if (txtRecuperacion.Text.Equals(""))      //para el usuario o correo
-            {
-                error1.SetError(txtRecuperacion, "Ingrese usuario o correo");
-                txtRecuperacion.Focus();
-            }
-            else
-            {
-                error1.SetError(txtRecuperacion, "");
-                validar_campos--;
-            }
-            return validar_campos;
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            return !validacion.validarVacio(error1, this);
+            //int validar_campos = 1;
+            //if (txtRecuperacion.Text.Equals(""))      //para el usuario o correo
+            //{
+            //    error1.SetError(txtRecuperacion, "Ingrese usuario o correo");
+            //    txtRecuperacion.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtRecuperacion, "");
+            //    validar_campos--;
+            //}
+            //return validar_campos;
         }
     }
 }

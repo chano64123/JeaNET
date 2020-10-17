@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using Negocios;
 using Entidad;
 using System.Collections;
-using System.Text.RegularExpressions;
 
 namespace Presentacion
 {
@@ -30,7 +29,7 @@ namespace Presentacion
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (MtdValidarCampos() == 0)
+            if (MtdValidarCampos())
             {
                 ClsEcliente E = ClsEcliente.crear(txtDni.Text,txtNombres.Text,txtApellidos.Text,txtCorreo.Text,txtTelefono.Text,lblEstado.Text);
                 ClsNcliente N = new ClsNcliente();
@@ -60,7 +59,7 @@ namespace Presentacion
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (MtdValidarCampos() == 0)
+            if (MtdValidarCampos())
             {
                 ClsEcliente E = ClsEcliente.crear(txtDni.Text, txtNombres.Text, txtApellidos.Text, txtCorreo.Text, txtTelefono.Text, lblEstado.Text);
                 ClsNcliente N = new ClsNcliente();
@@ -86,64 +85,66 @@ namespace Presentacion
             }
         }
 
-        private int MtdValidarCampos()
+        private bool MtdValidarCampos()
         {
-            int validar_campos = 4;
-            if (txtDni.Text.Equals(""))      //para el DNI
-            {
-                error1.SetError(txtDni, "Ingrese DNI");
-                txtDni.Focus();
-            }
-            else if (txtDni.TextLength != 8 || txtNombres.Text.Equals("") || txtApellidos.Text.Equals(""))
-            {
-                error1.SetError(txtDni, "Ingrese un DNI valido");
-                txtDni.Focus();
-            }
-            else
-            {
-                error1.SetError(txtDni, "");
-                validar_campos--;
-            }
-            if (txtCorreo.Text.Equals(""))      //para el correo
-            {
-                error1.SetError(txtCorreo, "Ingrese Correo");
-                txtCorreo.Focus();
-            }
-            else if (!MtdValidarEmail(txtCorreo.Text))
-            {
-                error1.SetError(txtCorreo, "Ingrese un correo valido");
-                txtCorreo.Focus();
-            }
-            else
-            {
-                error1.SetError(txtCorreo, "");
-                validar_campos--;
-            }
-            if (txtTelefono.Text.Equals(""))      //para el telefono
-            {
-                error1.SetError(txtTelefono, "Ingrese Telefono");
-                txtTelefono.Focus();
-            }
-            else if (txtTelefono.TextLength != 9)
-            {
-                error1.SetError(txtTelefono, "Ingrese Telefono Valido");
-                txtTelefono.Focus();
-            }
-            else
-            {
-                error1.SetError(txtTelefono, "");
-                validar_campos--;
-            }
-            if (cmbEstado.SelectedIndex == -1)        //para el estado
-            {
-                error1.SetError(cmbEstado, "Seleccione un Estado");
-            }
-            else
-            {
-                error1.SetError(cmbEstado, "");
-                validar_campos--;
-            }
-            return validar_campos;
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            return !validacion.validarVacio(error1, this);
+            //int validar_campos = 4;
+            //if (txtDni.Text.Equals(""))      //para el DNI
+            //{
+            //    error1.SetError(txtDni, "Ingrese DNI");
+            //    txtDni.Focus();
+            //}
+            //else if (txtDni.TextLength != 8 || txtNombres.Text.Equals("") || txtApellidos.Text.Equals(""))
+            //{
+            //    error1.SetError(txtDni, "Ingrese un DNI valido");
+            //    txtDni.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtDni, "");
+            //    validar_campos--;
+            //}
+            //if (txtCorreo.Text.Equals(""))      //para el correo
+            //{
+            //    error1.SetError(txtCorreo, "Ingrese Correo");
+            //    txtCorreo.Focus();
+            //}
+            //else if (!MtdValidarEmail(txtCorreo.Text))
+            //{
+            //    error1.SetError(txtCorreo, "Ingrese un correo valido");
+            //    txtCorreo.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtCorreo, "");
+            //    validar_campos--;
+            //}
+            //if (txtTelefono.Text.Equals(""))      //para el telefono
+            //{
+            //    error1.SetError(txtTelefono, "Ingrese Telefono");
+            //    txtTelefono.Focus();
+            //}
+            //else if (txtTelefono.TextLength != 9)
+            //{
+            //    error1.SetError(txtTelefono, "Ingrese Telefono Valido");
+            //    txtTelefono.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtTelefono, "");
+            //    validar_campos--;
+            //}
+            //if (cmbEstado.SelectedIndex == -1)        //para el estado
+            //{
+            //    error1.SetError(cmbEstado, "Seleccione un Estado");
+            //}
+            //else
+            //{
+            //    error1.SetError(cmbEstado, "");
+            //    validar_campos--;
+            //}
+            //return validar_campos;
         }
 
         private void MtdLimpiar()
@@ -163,25 +164,25 @@ namespace Presentacion
 
             this.Close();
         }
-        public static bool MtdValidarEmail(string email)
-        {
-            string expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
-            if (Regex.IsMatch(email, expresion))
-            {
-                if (Regex.Replace(email, expresion, String.Empty).Length == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //public static bool MtdValidarEmail(string email)
+        //{
+        //    string expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+        //    if (Regex.IsMatch(email, expresion))
+        //    {
+        //        if (Regex.Replace(email, expresion, String.Empty).Length == 0)
+        //        {
+        //            return true;
+        //        }
+        //        else
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
         private void txtDni_KeyPress(object sender, KeyPressEventArgs e)
         {
             //solo numeros
@@ -250,14 +251,7 @@ namespace Presentacion
 
         private void cmbEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbEstado.SelectedIndex == 0)
-            {
-                lblEstado.Text = "1";
-            }
-            else if (cmbEstado.SelectedIndex == 1)
-            {
-                lblEstado.Text = "0";
-            }
+            lblEstado.Text = (cmbEstado.SelectedIndex == 0) ?"1":(cmbEstado.SelectedIndex == 1)?"0":"";
         }
     }
 }

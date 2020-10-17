@@ -36,7 +36,7 @@ namespace Presentacion
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (MtdValidarCampos() == 0)
+            if (MtdValidarCampos())
             {
                 ClsEcargo E = ClsEcargo.crear(txtCodigo.Text,txtDescripcion.Text);
                 ClsNcargo N = new ClsNcargo();
@@ -68,7 +68,7 @@ namespace Presentacion
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (MtdValidarCampos() == 0)
+            if (MtdValidarCampos())
             {
                 ClsEcargo E = ClsEcargo.crear(txtCodigo.Text, txtDescripcion.Text);
                 ClsNcargo N = new ClsNcargo();
@@ -95,20 +95,23 @@ namespace Presentacion
             }
         }
 
-        private int MtdValidarCampos()
+        private bool MtdValidarCampos()
         {
-            int validar_campos = 1;
-            if (txtDescripcion.Text.Equals(""))      //para la descripcion
-            {
-                error1.SetError(txtDescripcion, "Ingrese descripcion");
-                txtDescripcion.Focus();
-            }
-            else
-            {
-                error1.SetError(txtDescripcion, "");
-                validar_campos--;
-            }
-            return validar_campos;
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            return !validacion.validarVacio(error1, this);
+
+            //int validar_campos = 1;
+            //if (txtDescripcion.Text.Equals(""))      //para la descripcion
+            //{
+            //    error1.SetError(txtDescripcion, "Ingrese descripcion");
+            //    txtDescripcion.Focus();
+            //}
+            //else
+            //{
+            //    error1.SetError(txtDescripcion, "");
+            //    validar_campos--;
+            //}
+            //return validacion.validarVacio(error1,this);
         }
 
         public void MtdLimpiar()
