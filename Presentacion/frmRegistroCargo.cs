@@ -99,19 +99,6 @@ namespace Presentacion
         {
             ClsNValidacion validacion = ClsNValidacion.getValidacion();
             return !validacion.validarVacio(error1, this);
-
-            //int validar_campos = 1;
-            //if (txtDescripcion.Text.Equals(""))      //para la descripcion
-            //{
-            //    error1.SetError(txtDescripcion, "Ingrese descripcion");
-            //    txtDescripcion.Focus();
-            //}
-            //else
-            //{
-            //    error1.SetError(txtDescripcion, "");
-            //    validar_campos--;
-            //}
-            //return validacion.validarVacio(error1,this);
         }
 
         public void MtdLimpiar()
