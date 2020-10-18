@@ -89,62 +89,6 @@ namespace Presentacion
         {
             ClsNValidacion validacion = ClsNValidacion.getValidacion();
             return !validacion.validarVacio(error1, this);
-            //int validar_campos = 4;
-            //if (txtDni.Text.Equals(""))      //para el DNI
-            //{
-            //    error1.SetError(txtDni, "Ingrese DNI");
-            //    txtDni.Focus();
-            //}
-            //else if (txtDni.TextLength != 8 || txtNombres.Text.Equals("") || txtApellidos.Text.Equals(""))
-            //{
-            //    error1.SetError(txtDni, "Ingrese un DNI valido");
-            //    txtDni.Focus();
-            //}
-            //else
-            //{
-            //    error1.SetError(txtDni, "");
-            //    validar_campos--;
-            //}
-            //if (txtCorreo.Text.Equals(""))      //para el correo
-            //{
-            //    error1.SetError(txtCorreo, "Ingrese Correo");
-            //    txtCorreo.Focus();
-            //}
-            //else if (!MtdValidarEmail(txtCorreo.Text))
-            //{
-            //    error1.SetError(txtCorreo, "Ingrese un correo valido");
-            //    txtCorreo.Focus();
-            //}
-            //else
-            //{
-            //    error1.SetError(txtCorreo, "");
-            //    validar_campos--;
-            //}
-            //if (txtTelefono.Text.Equals(""))      //para el telefono
-            //{
-            //    error1.SetError(txtTelefono, "Ingrese Telefono");
-            //    txtTelefono.Focus();
-            //}
-            //else if (txtTelefono.TextLength != 9)
-            //{
-            //    error1.SetError(txtTelefono, "Ingrese Telefono Valido");
-            //    txtTelefono.Focus();
-            //}
-            //else
-            //{
-            //    error1.SetError(txtTelefono, "");
-            //    validar_campos--;
-            //}
-            //if (cmbEstado.SelectedIndex == -1)        //para el estado
-            //{
-            //    error1.SetError(cmbEstado, "Seleccione un Estado");
-            //}
-            //else
-            //{
-            //    error1.SetError(cmbEstado, "");
-            //    validar_campos--;
-            //}
-            //return validar_campos;
         }
 
         private void MtdLimpiar()
