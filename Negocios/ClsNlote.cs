@@ -1,14 +1,11 @@
-﻿using System;
+﻿using Entidad;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using Entidad;
 
-namespace Negocios
-{
-    public class ClsNlote
-    {
-        public DataTable MtdListarLotes()
-        {
+namespace Negocios {
+    public class ClsNlote {
+        public DataTable MtdListarLotes() {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -24,10 +21,8 @@ namespace Negocios
             return result;
         }
 
-        public Boolean MtdAgregarLote(ClsElote e)
-        {
-            try
-            {
+        public Boolean MtdAgregarLote(ClsElote e) {
+            try {
                 ClsConexionSQL objConexion = new ClsConexionSQL();
                 SqlCommand command = new SqlCommand();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -58,16 +53,13 @@ namespace Negocios
                 command.Connection = objConexion.Desconectar();
 
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return false;
                 throw ex;
             }
         }
 
-        public DataTable MtdBusquedaLote(string codigo)
-        {
+        public DataTable MtdBusquedaLote(string codigo) {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -85,8 +77,7 @@ namespace Negocios
             return result;
         }
 
-        public object MtdFiltrarLotes(string filtro)
-        {
+        public object MtdFiltrarLotes(string filtro) {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -104,10 +95,8 @@ namespace Negocios
             return result;
         }
 
-        public bool MtdModificarLote(ClsElote e)
-        {
-            try
-            {
+        public bool MtdModificarLote(ClsElote e) {
+            try {
                 ClsConexionSQL objConexion = new ClsConexionSQL();
                 SqlCommand command = new SqlCommand();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -138,44 +127,33 @@ namespace Negocios
                 command.Connection = objConexion.Desconectar();
 
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return false;
                 throw ex;
             }
         }
 
-        public string MtdGeneraraCodigo()
-        {
+        public string MtdGeneraraCodigo() {
             string numero = "0";
             int cant = MtdListarLotes().Rows.Count;
             cant++;
-            if (cant < 10)
-            {
-                
+            if (cant < 10) {
+
                 numero = "000" + cant.ToString();
-            }
-            else if (cant < 100)
-            {
+            } else if (cant < 100) {
 
                 numero = "00" + cant.ToString();
-            }
-            else if (cant < 1000)
-            {
-                
+            } else if (cant < 1000) {
+
                 numero = "0" + cant.ToString();
-            }
-            else if (cant < 10000)
-            {
-               
+            } else if (cant < 10000) {
+
                 numero = cant.ToString();
             }
             return numero;
         }
 
-        public void MtdDecrementarLote(ClsElote en)
-        {
+        public void MtdDecrementarLote(ClsElote en) {
             ClsConexionSQL objConexion = new ClsConexionSQL();
             SqlCommand objComando = new SqlCommand();
             objComando.Connection = objConexion.Conectar();

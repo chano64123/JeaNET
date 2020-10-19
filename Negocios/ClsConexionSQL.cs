@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Data.SqlClient;
 
-namespace Negocios
-{
-    class ClsConexionSQL
-    {
+namespace Negocios {
+    class ClsConexionSQL {
 
         private SqlConnection conn = null;
         static String user = "";
@@ -12,29 +10,22 @@ namespace Negocios
         static String servidor = @"localhost"; //(localhost) (host) .;
         static String basedatos = "bdJeaNet";
 
-        public SqlConnection Conectar()
-        {
-            try
-            {
+        public SqlConnection Conectar() {
+            try {
                 conn = new SqlConnection();
                 conn.ConnectionString = "server=" + servidor + ";" + "database=" + basedatos + ";uid=" + user + ";" + "pwd=" + password + ";integrated security = true";
                 conn.Open();
-            }
-            catch (SqlException ex)
-            {
+            } catch (SqlException ex) {
                 throw ex;
             }
             return conn;
         }
 
-        public SqlConnection Desconectar()
-        {
-            try
-            {
+        public SqlConnection Desconectar() {
+            try {
                 conn = new SqlConnection();
                 conn.Close();
-            }
-            catch (SqlException ex) { throw ex; }
+            } catch (SqlException ex) { throw ex; }
             return conn;
         }
     }

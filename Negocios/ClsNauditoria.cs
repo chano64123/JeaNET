@@ -1,13 +1,10 @@
-﻿using System.Data;
+﻿using Entidad;
+using System.Data;
 using System.Data.SqlClient;
-using Entidad;
 
-namespace Negocios
-{
-    public class ClsNauditoria
-    {
-        public object MtdListarAuditoria()
-        {
+namespace Negocios {
+    public class ClsNauditoria {
+        public object MtdListarAuditoria() {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -22,8 +19,7 @@ namespace Negocios
             return result;
         }
 
-        public object MtdFiltrarAuditoria(string filtro)
-        {
+        public object MtdFiltrarAuditoria(string filtro) {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -40,8 +36,7 @@ namespace Negocios
             return result;
         }
 
-        public void MtdAgregarHistorial(ClsEauditoria objE)
-        {
+        public void MtdAgregarHistorial(ClsEauditoria objE) {
             ClsConexionSQL objConexion = new ClsConexionSQL();
             SqlCommand objComando = new SqlCommand();
             SqlDataAdapter adapter = new SqlDataAdapter();

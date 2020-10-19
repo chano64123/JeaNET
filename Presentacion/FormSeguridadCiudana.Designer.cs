@@ -367,7 +367,6 @@
             this.Name = "FormSeguridadCiudana";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormSeguridadCiudana";
-            this.Load += new System.EventHandler(this.FormSeguridadCiudana_Load);
             this.panel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();

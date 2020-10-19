@@ -1,7 +1,5 @@
-﻿namespace Entidad
-{
-    public class ClsEcomprobante
-    {
+﻿namespace Entidad {
+    public class ClsEcomprobante {
         public string Serie { get; private set; }
         public string Numero { get; private set; }
         public string Empleado { get; private set; }
@@ -12,10 +10,8 @@
         public string Total { get; private set; }
         public string Estado { get; private set; }
 
-        public static ClsEcomprobante crear(string _serie, string _numero, string _empleado, string _fecha, string _cliente, string _subtotal, string _igv, string _total, string _estado)
-        {
-            return new ClsEcomprobante()
-            {
+        public static ClsEcomprobante crear(string _serie, string _numero, string _empleado, string _fecha, string _cliente, string _subtotal, string _igv, string _total, string _estado) {
+            return new ClsEcomprobante() {
                 Serie = _serie,
                 Numero = _numero,
                 Empleado = _empleado,

@@ -183,7 +183,6 @@
             this.Name = "FormReportesProductosMasVendidos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormReportesProductosMasVendidos";
-            this.Load += new System.EventHandler(this.FormReportesProductosMasVendidos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.barras)).EndInit();

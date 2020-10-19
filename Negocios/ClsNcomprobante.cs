@@ -1,34 +1,26 @@
-﻿using System;
+﻿using Entidad;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using Entidad;
 
-namespace Negocios
-{
-    public class ClsNcomprobante
-    {
-        public string MtdConvertirALetras(string monto)
-        {
+namespace Negocios {
+    public class ClsNcomprobante {
+        public string MtdConvertirALetras(string monto) {
             string res, dec = "";
             Int64 entero;
             int decimales;
             double nro;
 
-            try
-            {
+            try {
                 nro = Convert.ToDouble(monto);
-            }
-
-            catch
-            {
+            } catch {
                 return "";
             }
 
             entero = Convert.ToInt64(Math.Truncate(nro));
             decimales = Convert.ToInt32(Math.Round((nro - entero) * 100, 2));
 
-            if (decimales > 0)
-            {
+            if (decimales > 0) {
                 dec = " CON " + decimales.ToString() + "/ 100 CENTIMOS";
             }
 
@@ -37,30 +29,22 @@ namespace Negocios
             return res;
         }
 
-        public string MtdCalcularSerie(int cantidad)
-        {
+        public string MtdCalcularSerie(int cantidad) {
             int i = 0;
-            do
-            {
+            do {
                 i++;
                 cantidad -= 999999;
             } while (cantidad > 0);
-            if (i.ToString().Length == 1)
-            {
+            if (i.ToString().Length == 1) {
                 return "00" + i.ToString();
-            }
-            else if (i.ToString().Length == 2)
-            {
+            } else if (i.ToString().Length == 2) {
                 return "0" + i.ToString();
-            }
-            else
-            {
+            } else {
                 return i.ToString();
             }
         }
 
-        public object MtdListarDetallesComprobante(ClsEdetallecomprobante e)
-        {
+        public object MtdListarDetallesComprobante(ClsEdetallecomprobante e) {
             DataTable data = new DataTable();
             ClsConexionSQL objConexion = new ClsConexionSQL();
             SqlCommand objComando = new SqlCommand();
@@ -81,8 +65,7 @@ namespace Negocios
             return data;
         }
 
-        public object MtdFiltrarComprobantes(string filtro)
-        {
+        public object MtdFiltrarComprobantes(string filtro) {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -100,37 +83,24 @@ namespace Negocios
             return result;
         }
 
-        public string MtdCalcularNumero(int cantidad)
-        {
+        public string MtdCalcularNumero(int cantidad) {
             cantidad++;
-            if (cantidad.ToString().Length == 1)
-            {
+            if (cantidad.ToString().Length == 1) {
                 return "00000" + cantidad.ToString();
-            }
-            else if (cantidad.ToString().Length == 2)
-            {
+            } else if (cantidad.ToString().Length == 2) {
                 return "0000" + cantidad.ToString();
-            }
-            else if (cantidad.ToString().Length == 3)
-            {
+            } else if (cantidad.ToString().Length == 3) {
                 return "000" + cantidad.ToString();
-            }
-            else if (cantidad.ToString().Length == 4)
-            {
+            } else if (cantidad.ToString().Length == 4) {
                 return "00" + cantidad.ToString();
-            }
-            else if (cantidad.ToString().Length == 5)
-            {
+            } else if (cantidad.ToString().Length == 5) {
                 return "0" + cantidad.ToString();
-            }
-            else
-            {
+            } else {
                 return cantidad.ToString();
             }
         }
 
-        public DataTable MtdListarComprobantes()
-        {
+        public DataTable MtdListarComprobantes() {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -146,8 +116,7 @@ namespace Negocios
             return result;
         }
 
-        private string toText(double value)
-        {
+        private string toText(double value) {
             string Num2Text = "";
             value = Math.Truncate(value);
             if (value == 0) Num2Text = "CERO";
@@ -186,32 +155,25 @@ namespace Negocios
             else if (value < 1000) Num2Text = toText(Math.Truncate(value / 100) * 100) + " " + toText(value % 100);
             else if (value == 1000) Num2Text = "MIL";
             else if (value < 2000) Num2Text = "MIL " + toText(value % 1000);
-            else if (value < 1000000)
-            {
+            else if (value < 1000000) {
                 Num2Text = toText(Math.Truncate(value / 1000)) + " MIL";
                 if ((value % 1000) > 0) Num2Text = Num2Text + " " + toText(value % 1000);
-            }
-            else if (value == 1000000) Num2Text = "UN MILLON";
+            } else if (value == 1000000) Num2Text = "UN MILLON";
             else if (value < 2000000) Num2Text = "UN MILLON " + toText(value % 1000000);
-            else if (value < 1000000000000)
-            {
+            else if (value < 1000000000000) {
                 Num2Text = toText(Math.Truncate(value / 1000000)) + " MILLONES ";
                 if ((value - Math.Truncate(value / 1000000) * 1000000) > 0) Num2Text = Num2Text + " " + toText(value - Math.Truncate(value / 1000000) * 1000000);
-            }
-            else if (value == 1000000000000) Num2Text = "UN BILLON";
+            } else if (value == 1000000000000) Num2Text = "UN BILLON";
             else if (value < 2000000000000) Num2Text = "UN BILLON " + toText(value - Math.Truncate(value / 1000000000000) * 1000000000000);
-            else
-            {
+            else {
                 Num2Text = toText(Math.Truncate(value / 1000000000000)) + " BILLONES";
                 if ((value - Math.Truncate(value / 1000000000000) * 1000000000000) > 0) Num2Text = Num2Text + " " + toText(value - Math.Truncate(value / 1000000000000) * 1000000000000);
             }
             return Num2Text;
         }
 
-        public Boolean MtdGuardarDetalleComprobante(ClsEdetallecomprobante ed)
-        {
-            try
-            {
+        public Boolean MtdGuardarDetalleComprobante(ClsEdetallecomprobante ed) {
+            try {
                 ClsConexionSQL objConexion = new ClsConexionSQL();
                 SqlCommand command = new SqlCommand();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -236,18 +198,14 @@ namespace Negocios
                 command.Connection = objConexion.Desconectar();
 
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return false;
                 throw ex;
             }
         }
 
-        public Boolean MtdGuardarComprobante(ClsEcomprobante e)
-        {
-            try
-            {
+        public Boolean MtdGuardarComprobante(ClsEcomprobante e) {
+            try {
                 ClsConexionSQL objConexion = new ClsConexionSQL();
                 SqlCommand command = new SqlCommand();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -276,16 +234,13 @@ namespace Negocios
                 command.Connection = objConexion.Desconectar();
 
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return false;
                 throw ex;
             }
         }
 
-        public void MtdAgregarKardex(ClsEkardex objEKardex, string descripcion)
-        {
+        public void MtdAgregarKardex(ClsEkardex objEKardex, string descripcion) {
             ClsConexionSQL objConexion = new ClsConexionSQL();
             SqlCommand command = new SqlCommand();
             SqlDataAdapter adapter = new SqlDataAdapter();

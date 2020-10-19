@@ -177,7 +177,6 @@
             this.Name = "FormCliente_Notificaciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_Notificaciones";
-            this.Load += new System.EventHandler(this.FormCliente_Notificaciones_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_ImageMenuUsuario)).EndInit();

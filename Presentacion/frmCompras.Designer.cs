@@ -31,6 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCompras));
             this.btnQuitar = new System.Windows.Forms.PictureBox();
             this.dgvVenta = new System.Windows.Forms.DataGridView();
+            this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrecioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colImporte = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblFecha = new System.Windows.Forms.Label();
             this.lblMonto = new System.Windows.Forms.Label();
@@ -63,11 +68,6 @@
             this.btnCerrar = new Bunifu.Framework.UI.BunifuImageButton();
             this.label15 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrecioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colImporte = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.btnQuitar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVenta)).BeginInit();
             this.panel2.SuspendLayout();
@@ -106,6 +106,42 @@
             this.dgvVenta.RowHeadersVisible = false;
             this.dgvVenta.Size = new System.Drawing.Size(788, 195);
             this.dgvVenta.TabIndex = 286;
+            // 
+            // colCodigo
+            // 
+            this.colCodigo.FillWeight = 39.38107F;
+            this.colCodigo.HeaderText = "Cprod";
+            this.colCodigo.Name = "colCodigo";
+            this.colCodigo.ReadOnly = true;
+            // 
+            // colDescripcion
+            // 
+            this.colDescripcion.FillWeight = 120.9023F;
+            this.colDescripcion.HeaderText = "Descripcion";
+            this.colDescripcion.Name = "colDescripcion";
+            this.colDescripcion.ReadOnly = true;
+            // 
+            // colCantidad
+            // 
+            this.colCantidad.FillWeight = 80.96851F;
+            this.colCantidad.HeaderText = "Cantidad";
+            this.colCantidad.Name = "colCantidad";
+            this.colCantidad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // colPrecioUnitario
+            // 
+            this.colPrecioUnitario.FillWeight = 104.0609F;
+            this.colPrecioUnitario.HeaderText = "PrecioUnitario";
+            this.colPrecioUnitario.MinimumWidth = 2;
+            this.colPrecioUnitario.Name = "colPrecioUnitario";
+            this.colPrecioUnitario.ReadOnly = true;
+            // 
+            // colImporte
+            // 
+            this.colImporte.FillWeight = 64.68726F;
+            this.colImporte.HeaderText = "Importe";
+            this.colImporte.Name = "colImporte";
+            this.colImporte.ReadOnly = true;
             // 
             // panel3
             // 
@@ -465,42 +501,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 49;
             this.pictureBox1.TabStop = false;
-            // 
-            // colCodigo
-            // 
-            this.colCodigo.FillWeight = 39.38107F;
-            this.colCodigo.HeaderText = "Cprod";
-            this.colCodigo.Name = "colCodigo";
-            this.colCodigo.ReadOnly = true;
-            // 
-            // colDescripcion
-            // 
-            this.colDescripcion.FillWeight = 120.9023F;
-            this.colDescripcion.HeaderText = "Descripcion";
-            this.colDescripcion.Name = "colDescripcion";
-            this.colDescripcion.ReadOnly = true;
-            // 
-            // colCantidad
-            // 
-            this.colCantidad.FillWeight = 80.96851F;
-            this.colCantidad.HeaderText = "Cantidad";
-            this.colCantidad.Name = "colCantidad";
-            this.colCantidad.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // colPrecioUnitario
-            // 
-            this.colPrecioUnitario.FillWeight = 104.0609F;
-            this.colPrecioUnitario.HeaderText = "PrecioUnitario";
-            this.colPrecioUnitario.MinimumWidth = 2;
-            this.colPrecioUnitario.Name = "colPrecioUnitario";
-            this.colPrecioUnitario.ReadOnly = true;
-            // 
-            // colImporte
-            // 
-            this.colImporte.FillWeight = 64.68726F;
-            this.colImporte.HeaderText = "Importe";
-            this.colImporte.Name = "colImporte";
-            this.colImporte.ReadOnly = true;
             // 
             // frmCompras
             // 

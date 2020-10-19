@@ -20,7 +20,6 @@
                 Correo = _correo,
                 Estado = _estado
             };
-
         }
     }
 }

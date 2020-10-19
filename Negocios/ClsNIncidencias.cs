@@ -1,14 +1,10 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-using Entidad;
 
-namespace Negocios
-{
-    public class ClsNIncidencias
-    {
+namespace Negocios {
+    public class ClsNIncidencias {
 
-        public DataTable MtdListarIncidencias()
-        {
+        public DataTable MtdListarIncidencias() {
             ClsConexionSQLRemota conn = new ClsConexionSQLRemota();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();

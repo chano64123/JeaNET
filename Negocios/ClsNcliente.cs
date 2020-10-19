@@ -1,14 +1,11 @@
-﻿using System;
+﻿using Entidad;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using Entidad;
 
-namespace Negocios
-{
-    public class ClsNcliente
-    {
-        public DataTable MtdListarClientes()
-        {
+namespace Negocios {
+    public class ClsNcliente {
+        public DataTable MtdListarClientes() {
             ClsConexionSQLRemota conn = new ClsConexionSQLRemota();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -24,8 +21,7 @@ namespace Negocios
             return result;
         }
 
-        public DataTable MtdFiltrarCliente(string filtro)
-        {
+        public DataTable MtdFiltrarCliente(string filtro) {
             ClsConexionSQLRemota conn = new ClsConexionSQLRemota();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -43,8 +39,7 @@ namespace Negocios
             return result;
         }
 
-        public DataTable MtdBusquedaCliente(string dni)
-        {
+        public DataTable MtdBusquedaCliente(string dni) {
             ClsConexionSQLRemota conn = new ClsConexionSQLRemota();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -62,10 +57,8 @@ namespace Negocios
             return result;
         }
 
-        public bool MtdGuardarCliente(ClsEcliente e)
-        {
-            try
-            {
+        public bool MtdGuardarCliente(ClsEcliente e) {
+            try {
                 ClsConexionSQLRemota objConexion = new ClsConexionSQLRemota();
                 SqlCommand command = new SqlCommand();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -90,18 +83,14 @@ namespace Negocios
                 command.Connection = objConexion.Desconectar();
 
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return false;
                 throw ex;
             }
         }
 
-        public bool MtdModificarCliente(ClsEcliente e)
-        {
-            try
-            {
+        public bool MtdModificarCliente(ClsEcliente e) {
+            try {
                 ClsConexionSQLRemota objConexion = new ClsConexionSQLRemota();
                 SqlCommand command = new SqlCommand();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -126,9 +115,7 @@ namespace Negocios
                 command.Connection = objConexion.Desconectar();
 
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return false;
                 throw ex;
             }

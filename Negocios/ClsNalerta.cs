@@ -1,14 +1,11 @@
-﻿using System;
+﻿using Entidad;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using Entidad;
 
-namespace Negocios
-{
-    public class ClsNalerta
-    {
-        public object MtdListarMisAlertas(string dni)
-        {
+namespace Negocios {
+    public class ClsNalerta {
+        public object MtdListarMisAlertas(string dni) {
             ClsConexionSQLRemota conn = new ClsConexionSQLRemota();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -25,10 +22,8 @@ namespace Negocios
             return result;
         }
 
-        public bool MtdAgregarAlerta(ClsEalerta e)
-        {
-            try
-            {
+        public bool MtdAgregarAlerta(ClsEalerta e) {
+            try {
                 ClsConexionSQLRemota objConexion = new ClsConexionSQLRemota();
                 SqlCommand command = new SqlCommand();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -43,7 +38,7 @@ namespace Negocios
                 command.Parameters.Add(new SqlParameter("turn", SqlDbType.Int));
                 command.Parameters.Add(new SqlParameter("est", SqlDbType.VarChar));
                 command.Parameters["dni"].Value = e.Dni;
-                command.Parameters["lat"].Value = e.Latitud ;
+                command.Parameters["lat"].Value = e.Latitud;
                 command.Parameters["lon"].Value = e.Longitud;
                 command.Parameters["fec"].Value = e.Fecha;
                 command.Parameters["hor"].Value = e.Hora;
@@ -52,9 +47,7 @@ namespace Negocios
                 command.ExecuteNonQuery();
                 command.Connection = objConexion.Desconectar();
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return false;
                 throw ex;
             }

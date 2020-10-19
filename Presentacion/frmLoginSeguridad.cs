@@ -1,19 +1,16 @@
-﻿using System;
-using System.Data;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using Entidad;
-using Negocios;
-using System.Diagnostics;
+﻿using Entidad;
 using Microsoft.Win32;
+using Negocios;
+using System;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
-namespace Presentacion
-{
-    public partial class frmLoginSeguridad : Form
-    {
-        public frmLoginSeguridad()
-        {
+namespace Presentacion {
+    public partial class frmLoginSeguridad : Form {
+        public frmLoginSeguridad() {
             InitializeComponent();
         }
 
@@ -23,149 +20,123 @@ namespace Presentacion
         private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
 
 
-        private void txtuserSegCiudadana_Enter(object sender, EventArgs e)
-        {
-            if (txtUsuario.Text == "Usuario")
-            {
+        private void txtuserSegCiudadana_Enter(object sender, EventArgs e) {
+            if (txtUsuario.Text == "Usuario") {
                 txtUsuario.Text = "";
                 txtUsuario.ForeColor = Color.DarkBlue;
             }
         }
 
-        private void txtuserSegCiudadana_Leave(object sender, EventArgs e)
-        {
-            if (txtUsuario.Text == "")
-            {
+        private void txtuserSegCiudadana_Leave(object sender, EventArgs e) {
+            if (txtUsuario.Text == "") {
                 txtUsuario.Text = "Usuario";
                 txtUsuario.ForeColor = Color.Black;
             }
         }
 
-        private void txtpassSegCiudadana_Enter(object sender, EventArgs e)
-        {
-            if (txtClave.Text == "Contraseña")
-            {
+        private void txtpassSegCiudadana_Enter(object sender, EventArgs e) {
+            if (txtClave.Text == "Contraseña") {
                 txtClave.Text = "";
                 txtClave.ForeColor = Color.DarkBlue;
                 txtClave.UseSystemPasswordChar = true;
             }
         }
 
-        private void txtpassSegCiudadana_Leave(object sender, EventArgs e)
-        {
-            if (txtClave.Text == "")
-            {
+        private void txtpassSegCiudadana_Leave(object sender, EventArgs e) {
+            if (txtClave.Text == "") {
                 txtClave.Text = "Contraseña";
                 txtClave.ForeColor = Color.Black;
                 txtClave.UseSystemPasswordChar = false;
             }
         }
 
-        private void btnminimizar_Click(object sender, EventArgs e)
-        {
+        private void btnminimizar_Click(object sender, EventArgs e) {
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void btncerrar_Click(object sender, EventArgs e)
-        {
+        private void btncerrar_Click(object sender, EventArgs e) {
             Application.Exit();
         }
 
-        private void Form_LoginSeguridadCiudana_MouseDown(object sender, MouseEventArgs e)
-        {
+        private void Form_LoginSeguridadCiudana_MouseDown(object sender, MouseEventArgs e) {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void panel_LoginSeguCiudana_MouseDown(object sender, MouseEventArgs e)
-        {
+        private void panel_LoginSeguCiudana_MouseDown(object sender, MouseEventArgs e) {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void ZonaDeAccesosTostripMenu_Click(object sender, EventArgs e)
-        {
+        private void ZonaDeAccesosTostripMenu_Click(object sender, EventArgs e) {
             frmLoginAdmin.MtdAuditoria(txtUsuario.Text, "Clic en zona de acceso");
             frmZonaDeAcceso frm = new frmZonaDeAcceso();
             frm.Show();
             this.Hide();
         }
 
-        private void SalirTostripMenu_Click(object sender, EventArgs e)
-        {
+        private void SalirTostripMenu_Click(object sender, EventArgs e) {
             frmLoginAdmin.MtdAuditoria(txtUsuario.Text, "Clic en cerrar aplicacion");
             Application.Exit();
         }
         public string contra = "";
 
-        private void btn0_Click(object sender, EventArgs e)
-        {
+        private void btn0_Click(object sender, EventArgs e) {
             contra = contra + btn0.Text;
             txtClave.Text = contra;
         }
 
-        private void btn1_Click(object sender, EventArgs e)
-        {
+        private void btn1_Click(object sender, EventArgs e) {
             contra = contra + btn1.Text;
             txtClave.Text = contra;
         }
 
-        private void btn2_Click(object sender, EventArgs e)
-        {
+        private void btn2_Click(object sender, EventArgs e) {
             contra = contra + btn2.Text;
             txtClave.Text = contra;
         }
 
-        private void btn3_Click(object sender, EventArgs e)
-        {
+        private void btn3_Click(object sender, EventArgs e) {
             contra = contra + btn3.Text;
             txtClave.Text = contra;
 
         }
 
-        private void btn4_Click(object sender, EventArgs e)
-        {
+        private void btn4_Click(object sender, EventArgs e) {
             contra = contra + btn4.Text;
             txtClave.Text = contra;
         }
 
-        private void btn5_Click(object sender, EventArgs e)
-        {
+        private void btn5_Click(object sender, EventArgs e) {
             contra = contra + btn5.Text;
             txtClave.Text = contra;
         }
 
-        private void btn6_Click(object sender, EventArgs e)
-        {
+        private void btn6_Click(object sender, EventArgs e) {
             contra = contra + btn6.Text;
             txtClave.Text = contra;
         }
 
-        private void btn7_Click(object sender, EventArgs e)
-        {
+        private void btn7_Click(object sender, EventArgs e) {
             contra = contra + btn7.Text;
             txtClave.Text = contra;
         }
 
-        private void btn8_Click(object sender, EventArgs e)
-        {
+        private void btn8_Click(object sender, EventArgs e) {
             contra = contra + btn8.Text;
             txtClave.Text = contra;
         }
 
-        private void btn9_Click(object sender, EventArgs e)
-        {
+        private void btn9_Click(object sender, EventArgs e) {
             contra = contra + btn9.Text;
             txtClave.Text = contra;
         }
 
-        private void btnBorrar_Click(object sender, EventArgs e)
-        {
+        private void btnBorrar_Click(object sender, EventArgs e) {
             MtdHabilitar();
         }
 
-        private void MtdHabilitar()
-        {
+        private void MtdHabilitar() {
             contra = "";
             txtClave.Clear();
             btn0.Enabled = true;
@@ -180,8 +151,7 @@ namespace Presentacion
             btn9.Enabled = true;
         }
 
-        private void frmLoginSeguridad_Load(object sender, EventArgs e)
-        {
+        private void frmLoginSeguridad_Load(object sender, EventArgs e) {
             ClsNlogin N = new ClsNlogin();
             int[] numeros = N.GenerarNumeros();
             btn0.Text = numeros[0].ToString();
@@ -196,17 +166,13 @@ namespace Presentacion
             btn9.Text = numeros[9].ToString();
         }
 
-        private void BtnAccederSegCiudadana_Click(object sender, EventArgs e)
-        {
-            if (MtdValidarCampos() == 0)
-            {
-                ClsElogin E = ClsElogin.crear(txtUsuario.Text,txtClave.Text);
+        private void BtnAccederSegCiudadana_Click(object sender, EventArgs e) {
+            if (MtdValidarCampos()) {
+                ClsElogin E = ClsElogin.crear(txtUsuario.Text, txtClave.Text);
                 ClsNlogin N = new ClsNlogin();
                 DataTable data = N.MtdValidarLogin(E);
-                if (data.Rows.Count == 1)
-                {
-                    switch (N.MtdVerificarCuenta(data, E, 0))
-                    {
+                if (data.Rows.Count == 1) {
+                    switch (N.MtdVerificarCuenta(data, E, 0)) {
                         case 0:
                             MessageBox.Show("Error desconocido, comuniquese con soporte.", "JeaNET - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
@@ -232,11 +198,11 @@ namespace Presentacion
                             break;
                         case 6:
                             //sms
-                            ClsEsms Es = ClsEsms.crear("+51" + data.Rows[0][5].ToString(),"El usuario " + data.Rows[0][1].ToString() + " " + data.Rows[0][2].ToString() + " acaba de iniciar sesion a las " + DateTime.Now.ToLongTimeString() + ".");
+                            ClsEsms Es = ClsEsms.crear("+51" + data.Rows[0][5].ToString(), "El usuario " + data.Rows[0][1].ToString() + " " + data.Rows[0][2].ToString() + " acaba de iniciar sesion a las " + DateTime.Now.ToLongTimeString() + ".");
                             ClsNsms Ns = new ClsNsms();
                             //Ns.MtdMandarMensaje(Es);
                             //correo
-                            ClsEcorreo Ec = ClsEcorreo.crear("INICIO DE SESION",data.Rows[0][4].ToString(),"Usted acaba de iniciar sesion a las " + DateTime.Now.ToLongTimeString() + ".");
+                            ClsEcorreo Ec = ClsEcorreo.crear("INICIO DE SESION", data.Rows[0][4].ToString(), "Usted acaba de iniciar sesion a las " + DateTime.Now.ToLongTimeString() + ".");
                             ClsNcorreo Nc = new ClsNcorreo();
                             //Nc.MtdEnviarEmail(Ec);
                             //agregar sesion
@@ -247,71 +213,54 @@ namespace Presentacion
                             frmLoginAdmin.MtdAuditoria(data.Rows[0][1].ToString(), "Ingreso al sistema");
                             this.Hide();
                             f.ShowDialog();
-                            this.Show();                   
+                            this.Show();
                             break;
                     }
-                }
-                else
-                {
+                } else {
                     MessageBox.Show("No existe el usuario", "JeaNet - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
-        private int MtdValidarCampos()
-        {
-            int validar_campos = 2;
-            if (txtUsuario.Text.Equals(""))      //para el usuario
-            {
-                error1.SetError(txtUsuario, "Ingrese Usuario");
-                txtUsuario.Focus();
+        private bool MtdValidarCampos() {
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            //validando que campos no esten vacios o null
+            bool result = !existenVacios(validacion);
+            if (result) {
+                //validando cantidad de caracteres
+                result = rangoCaracteresCorrecto(validacion) && result;
             }
-            else
-            {
-                error1.SetError(txtUsuario, "");
-                validar_campos--;
-            }
-            if (txtClave.Text.Equals(""))      //para la clave
-            {
-                error1.SetError(txtClave, "Ingrese Clave");
-                txtClave.Focus();
-            }
-            else if (txtClave.TextLength != 6)
-            {
-                error1.SetError(txtClave, "La contraseña contiene 6 numeros");
-                txtClave.Focus();
-            }
-            else
-            {
-                error1.SetError(txtClave, "");
-                validar_campos--;
-            }
-            return validar_campos;
+            return result;
         }
 
-        private void linkpass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
+        private bool rangoCaracteresCorrecto(ClsNValidacion validacion) {
+            bool result = validacion.tieneRangoCaracteres(error1, txtClave, 6, 6, "La clave tiene que tener 6 numeros");
+            return result;
+        }
+
+        private bool existenVacios(ClsNValidacion validacion) {
+            bool result = validacion.estaVacioONull(error1, txtUsuario, "Tiene que ingresar su Usario");
+            result = validacion.estaVacioONull(error1, txtClave, "Tiene que ingresar su Clave") || result;
+            return result;
+        }
+
+        private void linkpass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             frmLoginAdmin.MtdAuditoria(txtUsuario.Text, "Clic en recuparar contraseña");
             frmRecuperarContraseña f = new frmRecuperarContraseña();
             f.Show();
         }
 
-        private void TxtUsuario_TextChanged(object sender, EventArgs e)
-        {
-         
-        }
-
-        private void TxtUsuario_ChangeUICues(object sender, UICuesEventArgs e)
-        {
+        private void TxtUsuario_TextChanged(object sender, EventArgs e) {
 
         }
 
-        private void TxtUsuario_MouseClick(object sender, MouseEventArgs e)
-        {
-            foreach (Process proceso in Process.GetProcesses())
-            {
-                if (proceso.ProcessName == "TabTip")
-                {
+        private void TxtUsuario_ChangeUICues(object sender, UICuesEventArgs e) {
+
+        }
+
+        private void TxtUsuario_MouseClick(object sender, MouseEventArgs e) {
+            foreach (Process proceso in Process.GetProcesses()) {
+                if (proceso.ProcessName == "TabTip") {
                     proceso.Kill();
                 }
             }

@@ -204,7 +204,7 @@
             this.cmbProveedor.Location = new System.Drawing.Point(148, 351);
             this.cmbProveedor.Name = "cmbProveedor";
             this.cmbProveedor.Size = new System.Drawing.Size(132, 25);
-            this.cmbProveedor.TabIndex = 66;
+            this.cmbProveedor.TabIndex = 3;
             this.cmbProveedor.SelectedIndexChanged += new System.EventHandler(this.cmbProveedor_SelectedIndexChanged);
             // 
             // label1
@@ -226,7 +226,7 @@
             this.txtPrecio.MaxLength = 8;
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(133, 23);
-            this.txtPrecio.TabIndex = 69;
+            this.txtPrecio.TabIndex = 7;
             this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             // 
             // label4
@@ -248,7 +248,7 @@
             this.txtCantidad.MaxLength = 3;
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(133, 23);
-            this.txtCantidad.TabIndex = 68;
+            this.txtCantidad.TabIndex = 6;
             this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
             // 
             // label3
@@ -271,7 +271,7 @@
             this.txtCodigo.MaxLength = 4;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(134, 23);
-            this.txtCodigo.TabIndex = 63;
+            this.txtCodigo.TabIndex = 0;
             this.txtCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigo_KeyPress);
             // 
             // txtNombre
@@ -282,7 +282,7 @@
             this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(133, 23);
-            this.txtNombre.TabIndex = 64;
+            this.txtNombre.TabIndex = 1;
             // 
             // txtColor
             // 
@@ -292,7 +292,7 @@
             this.txtColor.MaxLength = 20;
             this.txtColor.Name = "txtColor";
             this.txtColor.Size = new System.Drawing.Size(133, 23);
-            this.txtColor.TabIndex = 65;
+            this.txtColor.TabIndex = 2;
             this.txtColor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtColor_KeyPress);
             // 
             // txtPeso
@@ -303,7 +303,7 @@
             this.txtPeso.MaxLength = 7;
             this.txtPeso.Name = "txtPeso";
             this.txtPeso.Size = new System.Drawing.Size(99, 23);
-            this.txtPeso.TabIndex = 74;
+            this.txtPeso.TabIndex = 4;
             this.txtPeso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPeso_KeyPress);
             // 
             // txtForma
@@ -314,7 +314,7 @@
             this.txtForma.MaxLength = 50;
             this.txtForma.Name = "txtForma";
             this.txtForma.Size = new System.Drawing.Size(133, 23);
-            this.txtForma.TabIndex = 70;
+            this.txtForma.TabIndex = 8;
             // 
             // txtSistemaOperativo
             // 
@@ -324,7 +324,7 @@
             this.txtSistemaOperativo.MaxLength = 20;
             this.txtSistemaOperativo.Name = "txtSistemaOperativo";
             this.txtSistemaOperativo.Size = new System.Drawing.Size(133, 23);
-            this.txtSistemaOperativo.TabIndex = 67;
+            this.txtSistemaOperativo.TabIndex = 5;
             // 
             // txtMemoriaInterna
             // 
@@ -334,7 +334,7 @@
             this.txtMemoriaInterna.MaxLength = 10;
             this.txtMemoriaInterna.Name = "txtMemoriaInterna";
             this.txtMemoriaInterna.Size = new System.Drawing.Size(133, 23);
-            this.txtMemoriaInterna.TabIndex = 72;
+            this.txtMemoriaInterna.TabIndex = 9;
             this.txtMemoriaInterna.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMemoriaInterna_KeyPress);
             // 
             // label11
@@ -486,7 +486,6 @@
             this.Name = "frmRegistroLote";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormPanelAdmin_RegistroDispositivos";
-            this.Load += new System.EventHandler(this.frmRegistroDispositivos_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).EndInit();

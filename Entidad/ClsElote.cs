@@ -1,8 +1,5 @@
-﻿
-namespace Entidad
-{
-    public class ClsElote
-    {
+﻿namespace Entidad {
+    public class ClsElote {
         public string Codigo { get; private set; }
         public string Nombre { get; private set; }
         public string Color { get; private set; }
@@ -14,10 +11,8 @@ namespace Entidad
         public string Memoria { get; private set; }
         public double Peso { get; private set; }
 
-        public static ClsElote crear(string _codigo, string _nombre, string _color, string _proveedor, string _sistemaOperativo, int _cantidad, double _precio_unitario, string _forma, string _memoria, double _peso)
-        {
-            return new ClsElote()
-            {
+        public static ClsElote crear(string _codigo, string _nombre, string _color, string _proveedor, string _sistemaOperativo, int _cantidad, double _precio_unitario, string _forma, string _memoria, double _peso) {
+            return new ClsElote() {
                 Codigo = _codigo,
                 Nombre = _nombre,
                 Color = _color,
@@ -31,10 +26,8 @@ namespace Entidad
             };
         }
 
-        public static ClsElote decrementar(string _codigo, int _cantidad)
-        {
-            return new ClsElote()
-            {
+        public static ClsElote decrementar(string _codigo, int _cantidad) {
+            return new ClsElote() {
                 Codigo = _codigo,
                 Cantidad = _cantidad
             };

@@ -201,10 +201,10 @@
             this.txtTelefono.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTelefono.ForeColor = System.Drawing.Color.Black;
             this.txtTelefono.Location = new System.Drawing.Point(107, 321);
-            this.txtTelefono.MaxLength = 9;
+            this.txtTelefono.MaxLength = 12;
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(145, 23);
-            this.txtTelefono.TabIndex = 269;
+            this.txtTelefono.TabIndex = 4;
             this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             // 
             // cmbEstado
@@ -219,7 +219,7 @@
             this.cmbEstado.Location = new System.Drawing.Point(355, 320);
             this.cmbEstado.Name = "cmbEstado";
             this.cmbEstado.Size = new System.Drawing.Size(145, 25);
-            this.cmbEstado.TabIndex = 271;
+            this.cmbEstado.TabIndex = 5;
             this.cmbEstado.SelectedIndexChanged += new System.EventHandler(this.cmbEstado_SelectedIndexChanged);
             // 
             // lblEstado
@@ -253,7 +253,7 @@
             this.txtRuc.MaxLength = 11;
             this.txtRuc.Name = "txtRuc";
             this.txtRuc.Size = new System.Drawing.Size(135, 23);
-            this.txtRuc.TabIndex = 266;
+            this.txtRuc.TabIndex = 0;
             this.txtRuc.TextChanged += new System.EventHandler(this.txtRuc_TextChanged);
             this.txtRuc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRuc_KeyPress);
             // 
@@ -309,18 +309,17 @@
             this.txtCorreo.MaxLength = 50;
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(481, 23);
-            this.txtCorreo.TabIndex = 270;
+            this.txtCorreo.TabIndex = 3;
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Enabled = false;
             this.txtDireccion.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDireccion.ForeColor = System.Drawing.Color.Black;
             this.txtDireccion.Location = new System.Drawing.Point(115, 242);
             this.txtDireccion.MaxLength = 100;
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(466, 23);
-            this.txtDireccion.TabIndex = 268;
+            this.txtDireccion.TabIndex = 2;
             // 
             // txtNombre
             // 
@@ -331,7 +330,7 @@
             this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(267, 23);
-            this.txtNombre.TabIndex = 267;
+            this.txtNombre.TabIndex = 1;
             // 
             // frmRegistroProveedor
             // 
@@ -360,7 +359,6 @@
             this.Name = "frmRegistroProveedor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmRegistrarProveedor";
-            this.Load += new System.EventHandler(this.frmRegistroProveedor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnModificar)).EndInit();
             this.panel1.ResumeLayout(false);

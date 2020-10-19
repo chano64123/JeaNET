@@ -1,13 +1,9 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-using Entidad;
 
-namespace Negocios
-{
-    public class ClsNkardex
-    {
-        public DataTable MtdListarTablaKardex()
-        {
+namespace Negocios {
+    public class ClsNkardex {
+        public DataTable MtdListarTablaKardex() {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();

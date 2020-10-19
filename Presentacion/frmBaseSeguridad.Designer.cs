@@ -119,7 +119,6 @@
             this.Name = "frmBaseSeguridad";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormPanelAdmi_BasesSeguridad";
-            this.Load += new System.EventHandler(this.frmBaseSeguridad_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackZoomLeguia)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

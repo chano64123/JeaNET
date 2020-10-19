@@ -96,7 +96,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmVenta";
             this.Text = "frmVenta";
-            this.Load += new System.EventHandler(this.FrmVenta_Load);
             ((System.ComponentModel.ISupportInitialize)(this.btnRegistroVentas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnVerVentas)).EndInit();
             this.ResumeLayout(false);

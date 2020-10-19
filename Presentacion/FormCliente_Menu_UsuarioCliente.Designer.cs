@@ -35,6 +35,7 @@
             this.lblLogin = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.btnCerrar = new Bunifu.Framework.UI.BunifuImageButton();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.txtNombres = new System.Windows.Forms.TextBox();
             this.txtApellidos = new System.Windows.Forms.TextBox();
@@ -44,7 +45,6 @@
             this.lblApellidos = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.lblNombres = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.lblDNI = new Bunifu.Framework.UI.BunifuCustomLabel();
-            this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnSalirLogin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).BeginInit();
@@ -127,6 +127,18 @@
             this.panel2.Size = new System.Drawing.Size(350, 303);
             this.panel2.TabIndex = 1;
             // 
+            // bunifuCustomLabel1
+            // 
+            this.bunifuCustomLabel1.AutoSize = true;
+            this.bunifuCustomLabel1.BackColor = System.Drawing.Color.Black;
+            this.bunifuCustomLabel1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel1.ForeColor = System.Drawing.Color.Aqua;
+            this.bunifuCustomLabel1.Location = new System.Drawing.Point(42, 25);
+            this.bunifuCustomLabel1.Name = "bunifuCustomLabel1";
+            this.bunifuCustomLabel1.Size = new System.Drawing.Size(144, 21);
+            this.bunifuCustomLabel1.TabIndex = 23;
+            this.bunifuCustomLabel1.Text = "Datos del Usuario";
+            // 
             // txtTelefono
             // 
             this.txtTelefono.BackColor = System.Drawing.SystemColors.InfoText;
@@ -170,6 +182,9 @@
             this.txtDNI.Name = "txtDNI";
             this.txtDNI.Size = new System.Drawing.Size(157, 22);
             this.txtDNI.TabIndex = 38;
+            this.txtDNI.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtDNI_MouseClick);
+            this.txtDNI.TextChanged += new System.EventHandler(this.txtDNI_TextChanged);
+            this.txtDNI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDNI_KeyPress);
             // 
             // btnGuardar
             // 
@@ -205,6 +220,7 @@
             this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnGuardar.Textcolor = System.Drawing.Color.White;
             this.btnGuardar.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // lblTelefono
             // 
@@ -253,18 +269,6 @@
             this.lblDNI.Size = new System.Drawing.Size(36, 20);
             this.lblDNI.TabIndex = 33;
             this.lblDNI.Text = "DNI";
-            // 
-            // bunifuCustomLabel1
-            // 
-            this.bunifuCustomLabel1.AutoSize = true;
-            this.bunifuCustomLabel1.BackColor = System.Drawing.Color.Black;
-            this.bunifuCustomLabel1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel1.ForeColor = System.Drawing.Color.Aqua;
-            this.bunifuCustomLabel1.Location = new System.Drawing.Point(42, 25);
-            this.bunifuCustomLabel1.Name = "bunifuCustomLabel1";
-            this.bunifuCustomLabel1.Size = new System.Drawing.Size(144, 21);
-            this.bunifuCustomLabel1.TabIndex = 23;
-            this.bunifuCustomLabel1.Text = "Datos del Usuario";
             // 
             // FormCliente_Menu_UsuarioCliente
             // 

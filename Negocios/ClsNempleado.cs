@@ -1,16 +1,12 @@
-﻿using System;
+﻿using Entidad;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using Entidad;
 
-namespace Negocios
-{
-    public class ClsNempleado
-    {
-        public Boolean MtdGuardarEmpleado(ClsEempleado e)
-        {
-            try
-            {
+namespace Negocios {
+    public class ClsNempleado {
+        public Boolean MtdGuardarEmpleado(ClsEempleado e) {
+            try {
                 ClsConexionSQL objConexion = new ClsConexionSQL();
                 SqlCommand command = new SqlCommand();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -43,16 +39,13 @@ namespace Negocios
                 command.Connection = objConexion.Desconectar();
 
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return false;
                 throw ex;
             }
         }
 
-        public DataTable MtdBusquedaEmpleado(string dni)
-        {
+        public DataTable MtdBusquedaEmpleado(string dni) {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -70,8 +63,7 @@ namespace Negocios
             return result;
         }
 
-        public object MtdFiltrarEmpleados(string filtro)
-        {
+        public object MtdFiltrarEmpleados(string filtro) {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -89,8 +81,7 @@ namespace Negocios
             return result;
         }
 
-        public DataTable MtdListarEmpleados()
-        {
+        public DataTable MtdListarEmpleados() {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -106,10 +97,8 @@ namespace Negocios
             return result;
         }
 
-        public bool MtdModificarEmpleado(ClsEempleado e)
-        {
-            try
-            {
+        public bool MtdModificarEmpleado(ClsEempleado e) {
+            try {
                 ClsConexionSQL objConexion = new ClsConexionSQL();
                 SqlCommand command = new SqlCommand();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -142,9 +131,7 @@ namespace Negocios
                 command.Connection = objConexion.Desconectar();
 
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
 
                 return false;
                 throw ex;

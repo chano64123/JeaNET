@@ -1,8 +1,5 @@
-﻿
-namespace Entidad
-{
-    public class ClsEdetallecomprobante
-    {
+﻿namespace Entidad {
+    public class ClsEdetallecomprobante {
         public string Serie { get; private set; }
         public string Numero { get; private set; }
         public string Codigo { get; private set; }
@@ -11,10 +8,8 @@ namespace Entidad
         public decimal Precio_unitario { get; private set; }
         public decimal Importe { get; private set; }
 
-        public static ClsEdetallecomprobante crear(string _serie, string _numero, string _codigo, string _descripcion, int _cantidad, decimal _precio_unitario, decimal _importe)
-        {
-            return new ClsEdetallecomprobante()
-            {
+        public static ClsEdetallecomprobante crear(string _serie, string _numero, string _codigo, string _descripcion, int _cantidad, decimal _precio_unitario, decimal _importe) {
+            return new ClsEdetallecomprobante() {
                 Serie = _serie,
                 Numero = _numero,
                 Codigo = _codigo,
@@ -25,10 +20,8 @@ namespace Entidad
             };
         }
 
-        public static ClsEdetallecomprobante listar(string _serie, string _numero)
-        {
-            return new ClsEdetallecomprobante()
-            {
+        public static ClsEdetallecomprobante listar(string _serie, string _numero) {
+            return new ClsEdetallecomprobante() {
                 Serie = _serie,
                 Numero = _numero
             };
