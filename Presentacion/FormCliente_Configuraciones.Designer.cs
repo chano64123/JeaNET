@@ -148,7 +148,6 @@
             this.btnConfDatosConectividad.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnConfDatosConectividad.Textcolor = System.Drawing.Color.White;
             this.btnConfDatosConectividad.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfDatosConectividad.Click += new System.EventHandler(this.btnConfDatosConectividad_Click);
             // 
             // btnConfSmarth
             // 
@@ -218,7 +217,6 @@
             this.btnConfConectividad.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnConfConectividad.Textcolor = System.Drawing.Color.White;
             this.btnConfConectividad.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfConectividad.Click += new System.EventHandler(this.btnConfConectividad_Click);
             // 
             // FormCliente_Configuraciones
             // 

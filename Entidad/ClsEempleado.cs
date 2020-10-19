@@ -1,8 +1,5 @@
-﻿
-namespace Entidad
-{
-    public class ClsEempleado
-    {
+﻿namespace Entidad {
+    public class ClsEempleado {
         public string Dni { get; private set; }
         public string Nombres { get; private set; }
         public string Apellidos { get; private set; }
@@ -15,10 +12,8 @@ namespace Entidad
         public string Usuario { get; private set; }
         public string Contraseña { get; private set; }
 
-        public static ClsEempleado crear(string _dni, string _nombres, string _apellidos, string _direccion, string _correo, string _telefono, string _turno, string _cargo, string _estado, string _usuario, string _contraseña)
-        {
-            return new ClsEempleado()
-            {
+        public static ClsEempleado crear(string _dni, string _nombres, string _apellidos, string _direccion, string _correo, string _telefono, string _turno, string _cargo, string _estado, string _usuario, string _contraseña) {
+            return new ClsEempleado() {
                 Dni = _dni,
                 Nombres = _nombres,
                 Apellidos = _apellidos,

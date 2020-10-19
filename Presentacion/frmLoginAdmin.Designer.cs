@@ -549,7 +549,6 @@
             this.txtUsuario.TabIndex = 1;
             this.txtUsuario.Text = "Usuario";
             this.txtUsuario.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TxtUsuario_MouseClick);
-            this.txtUsuario.TextChanged += new System.EventHandler(this.TxtUsuario_TextChanged);
             this.txtUsuario.Enter += new System.EventHandler(this.txtuser_Enter);
             this.txtUsuario.Leave += new System.EventHandler(this.txtuser_Leave);
             // 

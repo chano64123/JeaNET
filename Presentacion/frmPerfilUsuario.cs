@@ -1,23 +1,23 @@
-﻿using System;
+﻿using Entidad;
+using Negocios;
+using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
-using Entidad;
-using Negocios;
-using System.Text.RegularExpressions;
 
-namespace Presentacion
-{
-    public partial class frmPerfilUsuario : Form
-    {
+namespace Presentacion {
+    public partial class frmPerfilUsuario : Form {
         public static DataTable datos = new DataTable();
-        public frmPerfilUsuario(DataTable data)
-        {
+        public frmPerfilUsuario(DataTable data) {
             InitializeComponent();
+            llenarCamposPerfilUsuario(data);
+        }
+
+        private void llenarCamposPerfilUsuario(DataTable data) {
             datos = data;
             ClsNempleado N = new ClsNempleado();
             data = N.MtdBusquedaEmpleado(data.Rows[0][0].ToString());
-            ClsEempleado E = new ClsEempleado();       
+            ClsEempleado E = new ClsEempleado();
             ClsNcargo Nc = new ClsNcargo();
             lblDNI.Text = data.Rows[0][0].ToString();
             lblNombre.Text = data.Rows[0][1].ToString();
@@ -26,37 +26,19 @@ namespace Presentacion
             lblCorreo.Text = data.Rows[0][4].ToString();
             txtCorreo.Text = data.Rows[0][4].ToString();
             txtTelefono.Text = data.Rows[0][5].ToString();
-            //para cargo
-            foreach (DataRow item in Nc.MtdListarCargos().Rows)
-            {
-                if (data.Rows[0][6].ToString() == item[0].ToString())
-                {
+            foreach (DataRow item in Nc.MtdListarCargos().Rows) {
+                if (data.Rows[0][6].ToString() == item[0].ToString()) {
                     lblcargo.Text = item[1].ToString();
                     break;
                 }
             }
-            //para turno
-            if (data.Rows[0][7].ToString() == "1")
-            {
-                lblturno.Text = "Mañana";
-            }
-            else if (data.Rows[0][7].ToString() == "2")
-            {
-                lblturno.Text = "Tarde";
-            }
-            else if (data.Rows[0][7].ToString() == "3")
-            {
-                lblturno.Text = "Noche";
-            }
+            lblturno.Text = (data.Rows[0][7].ToString() == "1") ? "Mañana" : (data.Rows[0][7].ToString() == "2") ? "Tarde" : (data.Rows[0][7].ToString() == "3") ? "Noche" : "";
             lblUsuario.Text = data.Rows[0][9].ToString();
             txtUsuario.Text = data.Rows[0][9].ToString();
-            //txtClave.Text = data.Rows[0][10].ToString();
-
         }
 
         public static bool cambiar = false;
-        private void linkeditarContraseña_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
+        private void linkeditarContraseña_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             cambiar = true;
             lblContraseñanueva.Visible = true;
             lblRepitaContraseña.Visible = true;
@@ -66,215 +48,81 @@ namespace Presentacion
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Hizo clic en Cambiar Contraseña para cambiar su contraseña");
         }
 
-        private void FrmPerfilUsuario_Load(object sender, EventArgs e)
-        {
+        private void FrmPerfilUsuario_Load(object sender, EventArgs e) {
             this.Size = new Size(475, 558);
             panel1.Visible = false;
         }
 
-        private int MtdValidarCampos()
-        {
-            //ClsNValidacion validacion = ClsNValidacion.getValidacion();
-            //return validacion.validarVacio(error1, this) && validacion.validarNombreUsuario(error1, this,lblUsuario.Text,txtUsuario.Text);
-
-            int validar_campos = 5;
-            if (txtDireccion.Text.Equals(""))      //para la direccion
-            {
-                error1.SetError(txtDireccion, "Ingrese Direccion");
-                txtDireccion.Focus();
-            }
-            else
-            {
-                error1.SetError(txtDireccion, "");
-                validar_campos--;
-            }
-            if (txtCorreo.Text.Equals(""))      //para el correo
-            {
-                error1.SetError(txtCorreo, "Ingrese Correo");
-                txtCorreo.Focus();
-            }
-            else if (!MtdValidarEmail(txtCorreo.Text))
-            {
-                error1.SetError(txtCorreo, "Ingrese un correo valido");
-                txtCorreo.Focus();
-            }
-            else
-            {
-                error1.SetError(txtCorreo, "");
-                validar_campos--;
-            }
-            if (txtTelefono.Text.Equals(""))      //para el telefono
-            {
-                error1.SetError(txtTelefono, "Ingrese Telefono");
-                txtTelefono.Focus();
-            }
-            else if (txtTelefono.TextLength != 9)
-            {
-                error1.SetError(txtTelefono, "Ingrese Telefono Valido");
-                txtTelefono.Focus();
-            }
-            else
-            {
-                error1.SetError(txtTelefono, "");
-                validar_campos--;
-            }
-            if (txtUsuario.Text.Equals(""))      //para el usuario
-            {
-                error1.SetError(txtUsuario, "Ingrese Usuario");
-                txtUsuario.Focus();
-            }
-            else
-            {
-                bool verificar_existencia = false;
-                ClsNempleado N = new ClsNempleado();
-                foreach (DataRow item in N.MtdListarEmpleados().Rows)
-                {
-                    if (txtUsuario.Text == item[9].ToString())
-                    {
-                        verificar_existencia = true;
-                        break;
-                    }
+        private bool MtdValidarCampos() {
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            //validando que campos no esten vacios o null
+            bool result = !existenVacios(validacion);
+            if (result) {
+                //validando cantidad de caracteres
+                result = rangoCaracteresCorrecto(validacion) && result;
+                //validando formato de correo
+                result = formatoCorreoCorrecto(validacion) && result;
+                if (lblUsuario.Text != txtUsuario.Text) {
+                    result = verificarUsuario(validacion) && result;
                 }
-                if (verificar_existencia is true)
-                {
-                    if (lblUsuario.Text != txtUsuario.Text)
-                    {
-                        error1.SetError(txtUsuario, "El nombre usuario ya esta en uso.");
-                        txtUsuario.Focus();
-                    }
-                    else
-                    {
-                        error1.SetError(txtUsuario, "");
-                        validar_campos--;
-                    }
-                }
-                else
-                {
-                    error1.SetError(txtUsuario, "");
-                    validar_campos--;
-                }
+                //comprobar contraseñas
+                result = comprobarContraseña(validacion) && result;
             }
-            if (txtClave.Text.Equals(""))      //para la clave
-            {
-                error1.SetError(txtClave, "Tiene que ingresar su contraseña par poder guardar los cambiosIngrese Contraseña");
-                txtClave.Focus();
-            }
-            else if (txtClave.TextLength != 6)
-            {
-                error1.SetError(txtClave, "La contraseña tiene que tener 6 numeros");
-                txtClave.Focus();
-            }
-            else
-            {
-                bool verificar_existencia = false;
-                ClsNempleado N = new ClsNempleado();
-                foreach (DataRow item in N.MtdListarEmpleados().Rows)
-                {
-                    if (txtClave.Text == item[10].ToString() && lblDNI.Text == item[0].ToString())
-                    {
-                        verificar_existencia = true;
-                        break;
-                    }
-                }
-                if (verificar_existencia is false)
-                {
-                    error1.SetError(txtClave, "La contraseña ingresada no coincide con la actual.");
-                    txtClave.Focus();
-                }
-                else
-                {
-                    error1.SetError(txtClave, "");
-                    validar_campos--;
-                }
-            }
-
-            //hasta aca ya esta arriba
-
-            if (cambiar is true)
-            {
-                validar_campos += 3;
-                if (txtClaveNueva.Text.Equals(""))      //para la clave nueva
-                {
-                    error1.SetError(txtClaveNueva, "Tiene que ingresar su contraseña nueva");
-                    txtClaveNueva.Focus();
-                }
-                else if (txtClaveNueva.TextLength != 6)
-                {
-                    error1.SetError(txtClaveNueva, "La contraseña tiene que tener 6 numeros");
-                    txtClaveNueva.Focus();
-                }
-                else
-                {
-                    error1.SetError(txtClaveNueva, "");
-                    validar_campos--;
-                }
-                if (txtClaveRepe.Text.Equals(""))      //para la clave repetida
-                {
-                    error1.SetError(txtClaveRepe, "Tiene que repetir su nueva clave");
-                    txtClaveRepe.Focus();
-                }
-                else if (txtClaveRepe.TextLength != 6)
-                {
-                    error1.SetError(txtClaveRepe, "La contraseña tiene que tener 6 numeros");
-                    txtClaveRepe.Focus();
-                }
-                else
-                {
-                    error1.SetError(txtClaveRepe, "");
-                    validar_campos--;
-                }
-                if (txtClaveRepe.Text != txtClaveNueva.Text)     //para las claves iguales
-                {
-                    error1.SetError(txtClaveRepe, "La claves no coinciden");
-                    error1.SetError(txtClaveNueva, "La claves no coinciden");
-                }
-                else
-                {
-                    error1.SetError(txtClaveRepe, "");
-                    error1.SetError(txtClaveNueva, "");
-                    validar_campos--;
-                }
-            }
-            return validar_campos;
+            return result;
         }
 
-        public static bool MtdValidarEmail(string email)
-        {
-            string expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
-            if (Regex.IsMatch(email, expresion))
-            {
-                if (Regex.Replace(email, expresion, String.Empty).Length == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
+        private bool verificarUsuario(ClsNValidacion validacion) {
+            bool result = validacion.existeUsuario(error1, txtUsuario, "Nombre de usuario en uso");
+            return !result;
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            if (cambiar == true)
-            {
-                if (MtdValidarCampos() == 0)
-                {
-                    ClsEempleado E = ClsEempleado.crear(lblDNI.Text,lblNombre.Text,lblApellido.Text,txtDireccion.Text,txtCorreo.Text,txtTelefono.Text,datos.Rows[0][7].ToString(),datos.Rows[0][6].ToString(),datos.Rows[0][8].ToString(),txtUsuario.Text,txtClaveRepe.Text);
+        private bool comprobarContraseña(ClsNValidacion validacion) {
+            bool result = validacion.contraseñaCorrecta(error1, lblUsuario, txtClave, "La contraseña ingresada no coincide con la actual");
+            if (cambiar) {
+                result = validacion.compararContraseñaNueva(error1, txtClaveNueva, txtClaveRepe, "Las constraseñas no coinciden") && result;
+            }
+            return result;
+        }
+
+        private bool rangoCaracteresCorrecto(ClsNValidacion validacion) {
+            bool result = validacion.tieneRangoCaracteres(error1, txtTelefono, 6, 12, "El numero de Telefono tiene como minimo 6 y maximo 12 caracteres");
+            result = validacion.tieneRangoCaracteres(error1, txtClave, 6, 6, "La contraseña tiene que tener 6 digitos") && result;
+            if (cambiar) {
+                result = validacion.tieneRangoCaracteres(error1, txtClaveNueva, 6, 6, "La contraseña tiene que tener 6 digitos") && result;
+                result = validacion.tieneRangoCaracteres(error1, txtClaveRepe, 6, 6, "La contraseña tiene que tener 6 digitos") && result;
+            }
+            return result;
+        }
+
+        private bool formatoCorreoCorrecto(ClsNValidacion validacion) {
+            bool result = validacion.tieneFormatoCorreo(error1, txtCorreo, "Ingrese un correo valido");
+            return result;
+        }
+
+        private bool existenVacios(ClsNValidacion validacion) {
+            bool result = validacion.estaVacioONull(error1, txtUsuario, "Tiene que ingresar su Nombre de Usuario");
+            result = validacion.estaVacioONull(error1, txtDireccion, "Tiene que ingresar una Direccion") || result;
+            result = validacion.estaVacioONull(error1, txtCorreo, "Tiene que ingresar un Correo") || result;
+            result = validacion.estaVacioONull(error1, txtTelefono, "Tiene que ingresar un Numero de Telefono") || result;
+            result = validacion.estaVacioONull(error1, txtClave, "Tiene que ingresar su contraseña actual para poder guardar los cambios") || result;
+            if (cambiar) {
+                result = validacion.estaVacioONull(error1, txtClaveNueva, "Tiene que ingresar su contraseña nueva") || result;
+                result = validacion.estaVacioONull(error1, txtClaveRepe, "Tiene que repetir su contraseña nueva") || result;
+            }
+            return result;
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e) {
+            if (cambiar == true) {
+                if (MtdValidarCampos()) {
+                    ClsEempleado E = ClsEempleado.crear(lblDNI.Text, lblNombre.Text, lblApellido.Text, txtDireccion.Text, txtCorreo.Text, txtTelefono.Text, datos.Rows[0][7].ToString(), datos.Rows[0][6].ToString(), datos.Rows[0][8].ToString(), txtUsuario.Text, txtClaveRepe.Text);
                     ClsNempleado N = new ClsNempleado();
-                    if (N.MtdModificarEmpleado(E))
-                    {
+                    if (N.MtdModificarEmpleado(E)) {
                         MessageBox.Show("Datos modificados correctamente", "JeaNet - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Presiono " + btnGuardar.Name + " para modificar perfil " + frmAdministrador.data.Rows[0][0].ToString());
                         lblUsuario.Text = txtUsuario.Text;
                         lblCorreo.Text = txtDireccion.Text;
-                    }
-                    else
-                    {
+                    } else {
                         MessageBox.Show("No se pudo modificar el empleado, intente de nuevo o comuniquese con soporte.", "JeaNet - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Presiono " + btnGuardar.Name + ", no se pudo modificar perfil " + frmAdministrador.data.Rows[0][0].ToString());
                     }
@@ -284,20 +132,15 @@ namespace Presentacion
                     panel1.Visible = false;
                     this.Close();
                 }
-            }
-            else if (MtdValidarCampos() == 0)
-            {
+            } else if (MtdValidarCampos()) {
                 ClsEempleado E = ClsEempleado.crear(lblDNI.Text, lblNombre.Text, lblApellido.Text, txtDireccion.Text, txtCorreo.Text, txtTelefono.Text, datos.Rows[0][7].ToString(), datos.Rows[0][6].ToString(), datos.Rows[0][8].ToString(), txtUsuario.Text, txtClaveRepe.Text);
                 ClsNempleado N = new ClsNempleado();
-                if (N.MtdModificarEmpleado(E))
-                {
+                if (N.MtdModificarEmpleado(E)) {
                     MessageBox.Show("Datos modificados correctamente", "JeaNet - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Presiono " + btnGuardar.Name + " para modificar perfil " + frmAdministrador.data.Rows[0][0].ToString());
                     lblUsuario.Text = txtUsuario.Text;
                     lblCorreo.Text = txtDireccion.Text;
-                }
-                else
-                {
+                } else {
                     MessageBox.Show("No se pudo modificar el empleado, intente de nuevo o comuniquese con soporte.", "JeaNet - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Presiono " + btnGuardar.Name + ", no se pudo modificar perfil " + frmAdministrador.data.Rows[0][0].ToString());
                 }
@@ -310,8 +153,7 @@ namespace Presentacion
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Hizo clic en Guardar Cambio de su perfil");
         }
 
-        private void MtdLimpiar()
-        {
+        private void MtdLimpiar() {
             txtUsuario.Clear();
             txtDireccion.Clear();
             txtCorreo.Clear();
@@ -322,8 +164,7 @@ namespace Presentacion
             txtUsuario.Focus();
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
+        private void btnCancelar_Click(object sender, EventArgs e) {
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Presiono boton " + btnCancelar.Name);
             MtdLimpiar();
             this.Size = new Size(475, 558);
@@ -331,99 +172,37 @@ namespace Presentacion
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Hizo clic en Cancelar Cambio de edicion de su perfil");
         }
 
-        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para borrar
-            else if (char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+        private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e) {
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            validacion.soloNumero(e);
         }
 
-        private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para borrar
-            else if (char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+        private void txtConfiContraseña_KeyPress(object sender, KeyPressEventArgs e) {
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            validacion.soloNumero(e);
         }
 
-        private void txtConfiContraseña_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para borrar
-            else if (char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+        private void txtActualContraseña_KeyPress(object sender, KeyPressEventArgs e) {
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            validacion.soloNumero(e);
         }
 
-        private void txtActualContraseña_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para borrar
-            else if (char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e) {
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            validacion.numeroConCaracter(txtTelefono, e, '+');
         }
 
-        private void txtTelefono_KeyPress_1(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para borrar
-            else if (char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void linkEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            txtDireccion.Text = datos.Rows[0][3].ToString();         
+        private void linkEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            txtDireccion.Text = datos.Rows[0][3].ToString();
             txtCorreo.Text = datos.Rows[0][4].ToString();
-            txtTelefono.Text = datos.Rows[0][5].ToString();  
+            txtTelefono.Text = datos.Rows[0][5].ToString();
             txtUsuario.Text = datos.Rows[0][9].ToString();
             this.Size = new Size(817, 558);
             panel1.Visible = true;
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Hizo clic en Editar Perfil para cambiar su perfil");
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             cambiar = false;
             lblContraseñanueva.Visible = false;
             lblRepitaContraseña.Visible = false;
@@ -432,13 +211,11 @@ namespace Presentacion
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Hizo clic en Cancelar Cambio de contraseña");
         }
 
-        private void frmPerfilUsuario_Leave(object sender, EventArgs e)
-        {
+        private void frmPerfilUsuario_Leave(object sender, EventArgs e) {
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Salio del Editar Perfil");
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
+        private void btnCerrar_Click(object sender, EventArgs e) {
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Hizo clic en Cerrar Formulario Editar perfil");
             MtdLimpiar();
             this.Size = new Size(475, 558);

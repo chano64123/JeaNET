@@ -1,35 +1,30 @@
-﻿using System;
-using System.Data;
-using System.Linq;
-using System.Windows.Forms;
-using Entidad;
+﻿using Entidad;
 using Negocios;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
-namespace Presentacion
-{
-    public partial class frmRegistroLote : Form
-    {
-        public frmRegistroLote()
-        {
+namespace Presentacion {
+    public partial class frmRegistroLote : Form {
+        public frmRegistroLote() {
             InitializeComponent();
-            //cargar proveedores
             MtdCargarProveedores();
             btnModificar.Enabled = false;
-            //generar codigo
             MtdObtenerCodigo();
         }
 
-        private void MtdObtenerCodigo()
-        {
+        private void MtdObtenerCodigo() {
             ClsNlote N = new ClsNlote();
             txtCodigo.Text = N.MtdGeneraraCodigo();
         }
 
-        public frmRegistroLote(ClsElote E)
-        {
+        public frmRegistroLote(ClsElote E) {
             InitializeComponent();
-            //cargar proveedores
             MtdCargarProveedores();
+            llenarCamposRegistroLote(E);
+        }
+
+        private void llenarCamposRegistroLote(ClsElote E) {
             txtCodigo.Text = E.Codigo;
             txtNombre.Text = E.Nombre;
             txtColor.Text = E.Color;
@@ -44,44 +39,34 @@ namespace Presentacion
             btnGuardar.Enabled = false;
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            if (MtdValidarCampos())
-            {
-                ClsElote E = ClsElote.crear(txtCodigo.Text,txtNombre.Text,txtColor.Text,lblProveedor.Text,txtSistemaOperativo.Text,Convert.ToInt32(txtCantidad.Text),Convert.ToDouble(txtPrecio.Text),txtForma.Text,txtMemoriaInterna.Text,Convert.ToDouble(txtPeso.Text));
+        private void btnGuardar_Click(object sender, EventArgs e) {
+            if (MtdValidarCampos()) {
+                ClsElote E = ClsElote.crear(txtCodigo.Text, txtNombre.Text, txtColor.Text, lblProveedor.Text, txtSistemaOperativo.Text, Convert.ToInt32(txtCantidad.Text), Convert.ToDouble(txtPrecio.Text), txtForma.Text, txtMemoriaInterna.Text, Convert.ToDouble(txtPeso.Text));
                 ClsNlote N = new ClsNlote();
-                if (N.MtdAgregarLote(E))
-                {
+                if (N.MtdAgregarLote(E)) {
                     ClsNdispositivo Ne = new ClsNdispositivo();
                     Ne.MtdGuardarDispositivo(E);
                     //para guardar kardex
-                    ClsEkardex objEKardex = ClsEkardex.crear(txtCodigo.Text,frmAdministrador.data.Rows[0][0].ToString(),"ENTRADA",Convert.ToInt32(txtCantidad.Text),Convert.ToDouble(txtPrecio.Text),"1",DateTime.Now.ToShortTimeString(),Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                    ClsEkardex objEKardex = ClsEkardex.crear(txtCodigo.Text, frmAdministrador.data.Rows[0][0].ToString(), "ENTRADA", Convert.ToInt32(txtCantidad.Text), Convert.ToDouble(txtPrecio.Text), "1", DateTime.Now.ToShortTimeString(), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
                     ClsNcomprobante objN = new ClsNcomprobante();
                     objN.MtdAgregarKardex(objEKardex, "ENTRADA");
 
-                    if (MessageBox.Show("Lote registrado correctamente, ¿Desea registrar otro lote?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Lote agregado satisfactoriamente "+btnGuardar.Name);
+                    if (MessageBox.Show("Lote registrado correctamente, ¿Desea registrar otro lote?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                        frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Lote agregado satisfactoriamente " + btnGuardar.Name);
                         //generar codigo
                         MtdLimpiar();
                         MtdObtenerCodigo();
                         btnModificar.Enabled = false;
-                    }
-                    else
-                    {
+                    } else {
                         this.Close();
                     }
-                }
-                else
-                {
+                } else {
                     MessageBox.Show("No se pudo registrar el lote, intente de nuevo o comuniquese con soporte.", "JeaNet - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            
         }
 
-        private void MtdLimpiar()
-        {
+        private void MtdLimpiar() {
             txtCodigo.Clear();
             txtCodigo.Clear();
             txtNombre.Clear();
@@ -95,16 +80,12 @@ namespace Presentacion
             txtMemoriaInterna.Clear();
         }
 
-        private void btnModificar_Click(object sender, EventArgs e)
-        {
-            if (MtdValidarCampos())
-            {
+        private void btnModificar_Click(object sender, EventArgs e) {
+            if (MtdValidarCampos()) {
                 ClsElote E = ClsElote.crear(txtCodigo.Text, txtNombre.Text, txtColor.Text, lblProveedor.Text, txtSistemaOperativo.Text, Convert.ToInt32(txtCantidad.Text), Convert.ToDouble(txtPrecio.Text), txtForma.Text, txtMemoriaInterna.Text, Convert.ToDouble(txtPeso.Text));
                 ClsNlote N = new ClsNlote();
-                if (N.MtdModificarLote(E))
-                {
-                    if (MessageBox.Show("Lote modificado correctamente, ¿Desea continuar en el formulario de registro de lotes?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                    {
+                if (N.MtdModificarLote(E)) {
+                    if (MessageBox.Show("Lote modificado correctamente, ¿Desea continuar en el formulario de registro de lotes?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) {
                         //generar codigo
                         ClsNlote Ne = new ClsNlote();
                         //generar codigo
@@ -113,183 +94,96 @@ namespace Presentacion
                         btnModificar.Enabled = false;
                         MtdLimpiar();
                         MtdObtenerCodigo();
-                    }
-                    else
-                    {
+                    } else {
                         this.Close();
                     }
-                }
-                else
-                {
+                } else {
                     MessageBox.Show("No se pudo modificar el lote, intente de nuevo o comuniquese con soporte.", "JeaNet - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Error al modificar dispositivo " + btnModificar.Name);
                 }
             }
         }
 
-        private void frmRegistroDispositivos_Load(object sender, EventArgs e)
-        {
-            
-
-        }
         DataTable proveedores = new DataTable();
-        private void MtdCargarProveedores()
-        {
+        private void MtdCargarProveedores() {
             ClsNproveedor N = new ClsNproveedor();
             proveedores = N.MtdListarProveedores();
-            foreach (DataRow item in proveedores.Rows)
-            {
-                if(item[5].ToString() == "1")
-                {
+            foreach (DataRow item in proveedores.Rows) {
+                if (item[5].ToString() == "1") {
                     cmbProveedor.Items.Add(item[1]);
                 }
             }
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
+        private void btnCerrar_Click(object sender, EventArgs e) {
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "salio del formulario Registrar Dispositivos");
-
             this.Close();
         }
-        private bool MtdValidarCampos()
-        {
+
+        private bool MtdValidarCampos() {
             ClsNValidacion validacion = ClsNValidacion.getValidacion();
-            return !validacion.validarVacio(error1, this);
+            //validando que campos no esten vacios o null
+            bool result = existenVacios(validacion);
+            //validando que se seleccione un opcion en el combobox
+            result = cmbOpcionSeleccionada(validacion) && !result;
+            return result;
         }
 
-        private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //solo numeros
-            if (char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para borrar
-            else if (char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+        private bool existenVacios(ClsNValidacion validacion) {
+            bool result = validacion.estaVacioONull(error1, txtCodigo, "Tiene que ingresar Codigo");
+            result = validacion.estaVacioONull(error1, txtNombre, "Tiene que ingresar un Nombre") || result;
+            result = validacion.estaVacioONull(error1, txtColor, "Tiene que ingresar una Color") || result;
+            result = validacion.estaVacioONull(error1, txtPeso, "Tiene que ingresar el Peso") || result;
+            result = validacion.estaVacioONull(error1, txtSistemaOperativo, "Tiene que ingresar un Sistema Operativo") || result;
+            result = validacion.estaVacioONull(error1, txtCantidad, "Tiene que ingresar la Cantidad") || result;
+            result = validacion.estaVacioONull(error1, txtPrecio, "Tiene que ingresar el Precio") || result;
+            result = validacion.estaVacioONull(error1, txtForma, "Tiene que ingresar la Forma") || result;
+            result = validacion.estaVacioONull(error1, txtMemoriaInterna, "Tiene que ingresar la Memoria Interna") || result;
+            return result;
         }
 
-        private void txtPeso_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //solo numeros
-            if (char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para borrar
-            else if (char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para un punto
-            else if ((e.KeyChar == '.') && (!txtPeso.Text.Contains('.')))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+        private bool cmbOpcionSeleccionada(ClsNValidacion validacion) {
+            bool result = validacion.tieneSeleccionCmb(error1, cmbProveedor, "Seleccione un Proveedor");
+            return result;
         }
 
-        private void txtMemoriaInterna_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //solo numeros
-            if (char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para borrar
-            else if (char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para un punto
-            else if((e.KeyChar == '.') && (!txtMemoriaInterna.Text.Contains('.')))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+        private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e) {
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            validacion.soloNumero(e);
         }
 
-        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //solo numeros
-            if (char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para borrar
-            else if (char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para un punto
-            else if ((e.KeyChar == '.') && (!txtPrecio.Text.Contains('.')))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+        private void txtPeso_KeyPress(object sender, KeyPressEventArgs e) {
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            validacion.numeroConCaracter(txtPeso, e, '.');
         }
 
-        private void txtColor_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //solo texto
-            if (char.IsLetter(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para borrar
-            else if (char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para espacios
-            else if (char.IsSeparator(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+        private void txtMemoriaInterna_KeyPress(object sender, KeyPressEventArgs e) {
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            validacion.numeroConCaracter(txtMemoriaInterna, e, '.');
         }
 
-        private void cmbProveedor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            foreach (DataRow item in proveedores.Rows)
-            {
-                if (cmbProveedor.Text == item[1].ToString())
-                {
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e) {
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            validacion.numeroConCaracter(txtPrecio, e, '.');
+        }
+
+        private void txtColor_KeyPress(object sender, KeyPressEventArgs e) {
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            validacion.textoConEspacio(e);
+        }
+
+        private void cmbProveedor_SelectedIndexChanged(object sender, EventArgs e) {
+            foreach (DataRow item in proveedores.Rows) {
+                if (cmbProveedor.Text == item[1].ToString()) {
                     lblProveedor.Text = item[0].ToString();
                     break;
                 }
             }
         }
 
-        private void txtCodigo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //solo numeros
-            if (char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para borrar
-            else if (char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para un punto
-            else if ((e.KeyChar == '.') && (!txtCodigo.Text.Contains('.')))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+        private void txtCodigo_KeyPress(object sender, KeyPressEventArgs e) {
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            validacion.numeroConCaracter(txtCodigo, e, '.');
         }
     }
 }

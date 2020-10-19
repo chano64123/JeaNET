@@ -248,11 +248,11 @@
             // txtTelefono
             // 
             this.txtTelefono.Location = new System.Drawing.Point(40, 285);
-            this.txtTelefono.MaxLength = 9;
+            this.txtTelefono.MaxLength = 12;
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(261, 20);
             this.txtTelefono.TabIndex = 3;
-            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress_1);
+            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             // 
             // label7
             // 
@@ -271,7 +271,6 @@
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(261, 20);
             this.txtCorreo.TabIndex = 2;
-            this.txtCorreo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             // 
             // panel4
             // 

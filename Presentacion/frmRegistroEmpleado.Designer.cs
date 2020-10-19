@@ -248,7 +248,7 @@
             this.cmbTurno.Location = new System.Drawing.Point(123, 424);
             this.cmbTurno.Name = "cmbTurno";
             this.cmbTurno.Size = new System.Drawing.Size(147, 25);
-            this.cmbTurno.TabIndex = 288;
+            this.cmbTurno.TabIndex = 7;
             this.cmbTurno.SelectedIndexChanged += new System.EventHandler(this.cmbTurno_SelectedIndexChanged);
             // 
             // label11
@@ -278,10 +278,10 @@
             this.txtTelefono.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTelefono.ForeColor = System.Drawing.Color.Black;
             this.txtTelefono.Location = new System.Drawing.Point(125, 352);
-            this.txtTelefono.MaxLength = 9;
+            this.txtTelefono.MaxLength = 12;
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(145, 23);
-            this.txtTelefono.TabIndex = 271;
+            this.txtTelefono.TabIndex = 5;
             this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             // 
             // cmbEstado
@@ -296,7 +296,7 @@
             this.cmbEstado.Location = new System.Drawing.Point(123, 460);
             this.cmbEstado.Name = "cmbEstado";
             this.cmbEstado.Size = new System.Drawing.Size(147, 25);
-            this.cmbEstado.TabIndex = 273;
+            this.cmbEstado.TabIndex = 8;
             this.cmbEstado.SelectedIndexChanged += new System.EventHandler(this.cmbEstado_SelectedIndexChanged);
             // 
             // label6
@@ -319,7 +319,7 @@
             this.cmbCargo.Location = new System.Drawing.Point(125, 388);
             this.cmbCargo.Name = "cmbCargo";
             this.cmbCargo.Size = new System.Drawing.Size(147, 25);
-            this.cmbCargo.TabIndex = 272;
+            this.cmbCargo.TabIndex = 6;
             this.cmbCargo.SelectedIndexChanged += new System.EventHandler(this.cmbCargo_SelectedIndexChanged);
             // 
             // label13
@@ -341,7 +341,7 @@
             this.txtDni.MaxLength = 8;
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(135, 23);
-            this.txtDni.TabIndex = 266;
+            this.txtDni.TabIndex = 0;
             this.txtDni.TextChanged += new System.EventHandler(this.TxtDni_TextChanged);
             this.txtDni.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDni_KeyPress);
             // 
@@ -364,7 +364,7 @@
             this.txtContraseña.MaxLength = 6;
             this.txtContraseña.Name = "txtContraseña";
             this.txtContraseña.Size = new System.Drawing.Size(147, 23);
-            this.txtContraseña.TabIndex = 274;
+            this.txtContraseña.TabIndex = 10;
             this.txtContraseña.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContraseña_KeyPress);
             // 
             // txtUsuario
@@ -374,7 +374,7 @@
             this.txtUsuario.Location = new System.Drawing.Point(521, 375);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(147, 23);
-            this.txtUsuario.TabIndex = 275;
+            this.txtUsuario.TabIndex = 9;
             // 
             // label21
             // 
@@ -460,7 +460,7 @@
             this.txtCorreo.MaxLength = 100;
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(219, 23);
-            this.txtCorreo.TabIndex = 270;
+            this.txtCorreo.TabIndex = 4;
             // 
             // txtDireccion
             // 
@@ -470,7 +470,7 @@
             this.txtDireccion.MaxLength = 100;
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(219, 23);
-            this.txtDireccion.TabIndex = 269;
+            this.txtDireccion.TabIndex = 3;
             // 
             // txtApellidos
             // 
@@ -481,7 +481,7 @@
             this.txtApellidos.MaxLength = 50;
             this.txtApellidos.Name = "txtApellidos";
             this.txtApellidos.Size = new System.Drawing.Size(219, 23);
-            this.txtApellidos.TabIndex = 268;
+            this.txtApellidos.TabIndex = 2;
             // 
             // txtNombres
             // 
@@ -492,7 +492,7 @@
             this.txtNombres.MaxLength = 50;
             this.txtNombres.Name = "txtNombres";
             this.txtNombres.Size = new System.Drawing.Size(219, 23);
-            this.txtNombres.TabIndex = 267;
+            this.txtNombres.TabIndex = 1;
             // 
             // frmRegistroEmpleado
             // 
@@ -534,7 +534,6 @@
             this.Name = "frmRegistroEmpleado";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormPanelAdmi_RegistroEmpleados";
-            this.Load += new System.EventHandler(this.FormPanelAdmi_RegistroEmpleados_Load);
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnModificar)).EndInit();
             this.panel1.ResumeLayout(false);

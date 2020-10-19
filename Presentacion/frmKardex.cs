@@ -1,27 +1,22 @@
-﻿using System;
+﻿using Negocios;
+using System;
 using System.Data;
 using System.Windows.Forms;
-using Negocios;
 
-namespace Presentacion
-{
-    public partial class frmKardex : Form
-    {
-        public frmKardex()
-        {
+namespace Presentacion {
+    public partial class frmKardex : Form {
+        public frmKardex() {
             InitializeComponent();
         }
 
-        private void frmKardex_Load(object sender, EventArgs e)
-        {
+        private void frmKardex_Load(object sender, EventArgs e) {
             ClsNkardex N = new ClsNkardex();
             DataTable kardex = N.MtdListarTablaKardex();
             dgvVenta.DataSource = null;
             dgvVenta.DataSource = kardex;
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
+        private void btnCerrar_Click(object sender, EventArgs e) {
             this.Close();
         }
     }

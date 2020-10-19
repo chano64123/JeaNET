@@ -1,28 +1,22 @@
-﻿using System.Windows.Forms;
-using System.Data;
+﻿using System.Data;
+using System.Windows.Forms;
 
-namespace Negocios
-{
-    public class ClsNautocompletar
-    {
-        public AutoCompleteStringCollection MtdCargarClientes()
-        {
+namespace Negocios {
+    public class ClsNautocompletar {
+        public AutoCompleteStringCollection MtdCargarClientes() {
             ClsNcliente N = new ClsNcliente();
             AutoCompleteStringCollection datoauto = new AutoCompleteStringCollection();
-            foreach (DataRow item in N.MtdListarClientes().Rows)
-            {
-                datoauto.Add(item[1].ToString() + " " + item[2].ToString()) ;
+            foreach (DataRow item in N.MtdListarClientes().Rows) {
+                datoauto.Add(item[1].ToString() + " " + item[2].ToString());
                 datoauto.Add(item[0].ToString());
             }
             return datoauto;
         }
 
-        public AutoCompleteStringCollection MtdCargarProductos()
-        {
+        public AutoCompleteStringCollection MtdCargarProductos() {
             ClsNlote N = new ClsNlote();
             AutoCompleteStringCollection datoauto = new AutoCompleteStringCollection();
-            foreach (DataRow item in N.MtdListarLotes().Rows)
-            {
+            foreach (DataRow item in N.MtdListarLotes().Rows) {
                 datoauto.Add(item[0].ToString());
                 datoauto.Add(item[1].ToString());
             }

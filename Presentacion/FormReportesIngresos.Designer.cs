@@ -184,7 +184,6 @@
             this.Name = "FormReportesIngresos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormIngresos";
-            this.Load += new System.EventHandler(this.FormIngresos_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();

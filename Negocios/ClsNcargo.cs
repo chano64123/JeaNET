@@ -1,14 +1,11 @@
-﻿using System;
+﻿using Entidad;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using Entidad;
 
-namespace Negocios
-{
-    public class ClsNcargo
-    {
-        public DataTable MtdListarCargos()
-        {
+namespace Negocios {
+    public class ClsNcargo {
+        public DataTable MtdListarCargos() {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -23,10 +20,8 @@ namespace Negocios
             return result;
         }
 
-        public bool MtdModificarCargo(ClsEcargo e)
-        {
-            try
-            {
+        public bool MtdModificarCargo(ClsEcargo e) {
+            try {
                 ClsConexionSQL objConexion = new ClsConexionSQL();
                 SqlCommand command = new SqlCommand();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -40,16 +35,13 @@ namespace Negocios
                 command.ExecuteNonQuery();
                 command.Connection = objConexion.Desconectar();
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return false;
                 throw ex;
             }
         }
 
-        public DataTable MtdBusquedaCargo(string cargo)
-        {
+        public DataTable MtdBusquedaCargo(string cargo) {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -66,30 +58,23 @@ namespace Negocios
             return result;
         }
 
-        public string MtdObtenerCodigoCargo()
-        {
+        public string MtdObtenerCodigoCargo() {
             string numero = "0";
             int cant = MtdListarCargos().Rows.Count;
-            if (cant < 10)
-            {
+            if (cant < 10) {
                 cant++;
                 numero = "00" + cant.ToString();
-            }
-            else if (cant < 100)
-            {
+            } else if (cant < 100) {
                 cant++;
                 numero = "0" + cant.ToString();
-            }
-            else if (cant < 1000)
-            {
+            } else if (cant < 1000) {
                 cant++;
                 numero = cant.ToString();
             }
             return numero;
         }
 
-        public object MtdFiltrarCargos(string filtro)
-        {
+        public object MtdFiltrarCargos(string filtro) {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -106,10 +91,8 @@ namespace Negocios
             return result;
         }
 
-        public bool MtdGuardarCargo(ClsEcargo e)
-        {
-            try
-            {
+        public bool MtdGuardarCargo(ClsEcargo e) {
+            try {
                 ClsConexionSQL objConexion = new ClsConexionSQL();
                 SqlCommand command = new SqlCommand();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -123,9 +106,7 @@ namespace Negocios
                 command.ExecuteNonQuery();
                 command.Connection = objConexion.Desconectar();
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return false;
                 throw ex;
             }

@@ -212,7 +212,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(505, 30);
             this.menuStrip1.TabIndex = 17;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // SalirTostripMenu
             // 
@@ -293,7 +292,6 @@
             // 
             this.TTmensaje.BackColor = System.Drawing.Color.Black;
             this.TTmensaje.ForeColor = System.Drawing.Color.Cyan;
-            this.TTmensaje.Popup += new System.Windows.Forms.PopupEventHandler(this.TTmensaje_Popup);
             // 
             // FormCliente_RelojSmart
             // 

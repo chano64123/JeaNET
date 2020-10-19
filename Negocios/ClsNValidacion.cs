@@ -3,189 +3,226 @@ using System.Data;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Negocios
-{
-    public class ClsNValidacion
-    {
+namespace Negocios {
+    public class ClsNValidacion {
         private static ClsNValidacion val = null;
-        private ClsNValidacion()
-        {
+        private ClsNValidacion() {
 
         }
 
-        public static ClsNValidacion getValidacion()
-        {
-            if (val == null)
-            {
+        public static ClsNValidacion getValidacion() {
+            if (val == null) {
                 val = new ClsNValidacion();
             }
             return val;
         }
 
-        public bool validarVacio(ErrorProvider err, Control Item)
-        {
-            bool error = false;
-            bool controler = false;
-            foreach (Control control in Item.Controls)
-            {
-                if (control is TextBox)
-                {
-                    TextBox txt = (TextBox)control;
-
-                    if (string.IsNullOrEmpty(txt.Text.Trim()))
-                    {
-                        err.SetError(txt, "Este campo no puede estar vacio");
-                        error = true;
-                    }
-                    else if (txt.Name == "txtCorreo" && !validarEmail(txt))
-                    {
-                        err.SetError(txt, "Ingrese un correo valido");
-                        error = true;
-                    }
-                    else if (txt.Name == "txtTelefono" && txt.TextLength != 9)
-                    {
-                        err.SetError(txt, "Ingrese Telefono Valido");
-                        error = true;
-                    }
-                    else if (txt.Name == "txtRuc" && txt.TextLength != 11)
-                    {
-                        err.SetError(txt, "Ingrese RUC Valido");
-                        error = true;
-                    }
-                    else if (txt.Name == "txtDni" && txt.TextLength != 8)
-                    {
-                        err.SetError(txt, "Ingrese DNI Valido");
-                        error = true;
-                    }
-                    else if (txt.Name == "txtContraseña" && txt.TextLength != 6)
-                    {
-                        err.SetError(txt, "La contraseña tiene que tener 6 numeros");
-                        error = true;
-                    }
-                    else
-                    {
-                        err.SetError(txt, "");
-                        error = false;
-                    }
-                }
-                else if (control is ComboBox)
-                {
-                    ComboBox cmb = (ComboBox)control;
-
-                    if (cmb.SelectedIndex == -1)
-                    {
-                        err.SetError(cmb, "Tiene que seleccionar una opcion");
-                        error = true;
-                    }
-                    else
-                    {
-                        err.SetError(cmb, "");
-                        error = false;
-                    }
-                }
-                
-                if (!controler)
-                {
-                    controler = error;
-                }
+        public bool estaVacioONull(ErrorProvider err, TextBox txt, string mensaje) {
+            bool vacio;
+            if (string.IsNullOrEmpty(txt.Text.Trim())) {
+                err.SetError(txt, mensaje);
+                vacio = true;
+            } else {
+                err.SetError(txt, "");
+                vacio = false;
             }
-            return controler;
+            return vacio;
         }
 
-        public bool validarClave(ErrorProvider err, Control Item)
-        {
-            bool error = false;
-            bool controler = false;
-            foreach (Control control in Item.Controls)
-            {
-                if (control is TextBox)
-                {
-                    TextBox txt = (TextBox)control;
-
-                    if (string.IsNullOrEmpty(txt.Text.Trim()))
-                    {
-                        err.SetError(txt, "Este campo no puede estar vacio");
-                        error = true;
-                    }
-
-                    else
-                    {
-                        err.SetError(txt, "");
-                        error = false;
-                    }
-                }
-
-                if (!controler)
-                {
-                    controler = error;
-                }
+        public bool tieneRangoCaracteres(ErrorProvider err, TextBox txt, int min, int max, string mensaje) {
+            bool rango;
+            if (txt.TextLength < min || txt.TextLength > max) {
+                err.SetError(txt, mensaje);
+                rango = false;
+            } else {
+                err.SetError(txt, "");
+                rango = true;
             }
-            return controler;
+            return rango;
         }
 
-        public bool validarNombreUsuario(ErrorProvider err, Control Item, int operacion)
-        {
-            bool error = false;
-            bool controler = false;
-            foreach (TextBox control in Item.Controls)
-            {
-                if (control.Name == "txtUsuario" && string.IsNullOrEmpty(control.Text.Trim()))
-                {
-                    err.SetError(control, "Este campo no puede estar vacio");
-                    error = true;
-                }
-                else if (comprobarUsuario(control) && operacion == 0)
-                {
-                    err.SetError(control, "El nombre de usuario ya esta en uso");
-                    error = true;
-                }
-                else
-                {
-                    err.SetError(control, "");
-                    error = false;
-                }
+        public bool tieneFormatoCorreo(ErrorProvider err, TextBox txt, string mensaje) {
+            bool formato;
+            string expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+            if (Regex.IsMatch(txt.Text.Trim(), expresion) && Regex.Replace(txt.Text.Trim(), expresion, String.Empty).Length == 0) {
+                err.SetError(txt, "");
+                formato = true;
+            } else {
+                err.SetError(txt, mensaje);
+                formato = false;
             }
-
-            if (!controler)
-            {
-                controler = error;
-            }
-            
-            return controler;
+            return formato;
         }
 
-        private bool comprobarUsuario(TextBox txt)
-        {
-            bool verificar_existencia = false;
+        public bool tieneSeleccionCmb(ErrorProvider err, ComboBox cmb, string mensaje) {
+            bool seleccion;
+            if (cmb.SelectedIndex == -1) {
+                err.SetError(cmb, mensaje);
+                seleccion = false;
+            } else {
+                err.SetError(cmb, "");
+                seleccion = true;
+            }
+            return seleccion;
+        }
+
+        public bool existeUsuario(ErrorProvider err, TextBox txt, string mensaje) {
+            bool existe = false;
             ClsNempleado N = new ClsNempleado();
-            foreach (DataRow item in N.MtdListarEmpleados().Rows)
-            {
-                if (txt.Text == item[9].ToString())
-                {
-                    verificar_existencia = true;
+            foreach (DataRow item in N.MtdListarEmpleados().Rows) {
+                if (txt.Text == item[9].ToString()) {
+                    existe = true;
                     break;
                 }
             }
-            return verificar_existencia;
+            if (existe) {
+                err.SetError(txt, mensaje);
+            } else {
+                err.SetError(txt, "");
+            }
+            return existe;
         }
 
-        private bool validarEmail(TextBox txt)
-        {
-            string expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
-            if (Regex.IsMatch(txt.Text.Trim(), expresion))
-            {
-                if (Regex.Replace(txt.Text.Trim(), expresion, String.Empty).Length == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
+        public bool existeCliente(ErrorProvider err, TextBox txt, string mensaje) {
+            bool existe = false;
+            ClsNcliente N = new ClsNcliente();
+            foreach (DataRow item in N.MtdListarClientes().Rows) {
+                if (txt.Text == item[1].ToString() + " " + item[2].ToString() || txt.Text == item[0].ToString()) {
+                    existe = true;
+                    break;
                 }
             }
-            else
-            {
-                return false;
+            if (existe) {
+                err.SetError(txt, "");
+            } else {
+                err.SetError(txt, mensaje);
+            }
+            return existe;
+        }
+
+        public bool existeCargo(ErrorProvider err, TextBox txt, string mensaje) {
+            bool existe = false;
+            ClsNcargo N = new ClsNcargo();
+            foreach (DataRow item in N.MtdListarCargos().Rows) {
+                if (txt.Text == item[1].ToString()) {
+                    existe = true;
+                    break;
+                }
+            }
+            if (existe) {
+                err.SetError(txt, mensaje);
+            } else {
+                err.SetError(txt, "");
+            }
+            return existe;
+        }
+
+        public bool existeProducto(ErrorProvider err, TextBox txt, string mensaje) {
+            bool existe = false;
+            ClsNlote N = new ClsNlote();
+            foreach (DataRow item in N.MtdListarLotes().Rows) {
+                if (txt.Text == item[1].ToString() || txt.Text == item[0].ToString()) {
+                    existe = true;
+                    break;
+                }
+            }
+            if (existe) {
+                err.SetError(txt, "");
+            } else {
+                err.SetError(txt, mensaje);
+            }
+            return existe;
+        }
+
+        public bool existeProductoEnDataGrid(ErrorProvider err, DataGridView dgv, TextBox txt, string mensaje) {
+            bool existe = false;
+            foreach (DataGridViewRow fila in dgv.Rows) {
+                if (txt.Text == fila.Cells[0].Value.ToString()) {
+                    existe = true;
+                    break;
+                }
+            }
+            if (existe) {
+                err.SetError(txt, mensaje);
+            } else {
+                err.SetError(txt, "");
+            }
+            return existe;
+        }
+
+        public bool contraseñaCorrecta(ErrorProvider err, Label lbl, TextBox txt, string mensaje) {
+            bool correcta = false;
+            ClsNempleado N = new ClsNempleado();
+            foreach (DataRow item in N.MtdListarEmpleados().Rows) {
+                if (txt.Text == item[10].ToString() && lbl.Text == item[0].ToString()) {
+                    correcta = true;
+                    break;
+                }
+            }
+            if (correcta) {
+                err.SetError(txt, "");
+            } else {
+                err.SetError(txt, mensaje);
+            }
+            return correcta;
+        }
+
+        public bool compararContraseñaNueva(ErrorProvider err, TextBox txtNueva, TextBox txtRepe, string mensaje) {
+            bool igual;
+            if (txtNueva.Text.Equals(txtRepe.Text)) {
+                err.SetError(txtNueva, "");
+                err.SetError(txtRepe, "");
+                igual = true;
+            } else {
+                err.SetError(txtNueva, mensaje);
+                err.SetError(txtRepe, mensaje);
+                igual = false;
+            }
+            return igual;
+        }
+
+        public void numeroConCaracter(TextBox txt, KeyPressEventArgs e, char st) {
+            if (char.IsDigit(e.KeyChar)) {
+                e.Handled = false;
+            } else if (char.IsControl(e.KeyChar)) {
+                e.Handled = false;
+            } else if ((e.KeyChar == st) && (!txt.Text.Contains(st.ToString()))) {
+                e.Handled = false;
+            } else {
+                e.Handled = true;
+            }
+        }
+
+        public void soloNumero(KeyPressEventArgs e) {
+            if (char.IsDigit(e.KeyChar)) {
+                e.Handled = false;
+            } else if (char.IsControl(e.KeyChar)) {
+                e.Handled = false;
+            } else {
+                e.Handled = true;
+            }
+        }
+
+        public void textoConEspacio(KeyPressEventArgs e) {
+            if (char.IsLetter(e.KeyChar)) {
+                e.Handled = false;
+            } else if (char.IsControl(e.KeyChar)) {
+                e.Handled = false;
+            } else if (char.IsSeparator(e.KeyChar)) {
+                e.Handled = false;
+            } else {
+                e.Handled = true;
+            }
+        }
+
+
+        public void soloTexto(KeyPressEventArgs e) {
+            if (char.IsLetter(e.KeyChar)) {
+                e.Handled = false;
+            } else if (char.IsControl(e.KeyChar)) {
+                e.Handled = false;
+            } else {
+                e.Handled = true;
             }
         }
     }

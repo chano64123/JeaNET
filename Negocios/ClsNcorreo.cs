@@ -1,18 +1,14 @@
-﻿using System;
-using System.Text;
+﻿using Entidad;
+using System;
 using System.Net;
 using System.Net.Mail;
+using System.Text;
 using System.Windows.Forms;
-using Entidad;
 
-namespace Negocios
-{
-    public class ClsNcorreo
-    {
-        public void MtdEnviarEmail(ClsEcorreo esendEmail)
-        {
-            try
-            {
+namespace Negocios {
+    public class ClsNcorreo {
+        public void MtdEnviarEmail(ClsEcorreo esendEmail) {
+            try {
                 SmtpClient cliente = new SmtpClient("smtp.gmail.com", 587);
                 cliente.EnableSsl = true;
                 cliente.Timeout = 10000;
@@ -29,9 +25,7 @@ namespace Negocios
                 msg.IsBodyHtml = true;
                 msg.From = new MailAddress("pruebaprogra2@gmail.com");
                 cliente.Send(msg);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
         }

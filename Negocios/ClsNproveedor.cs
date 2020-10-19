@@ -1,14 +1,11 @@
-﻿using System;
+﻿using Entidad;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using Entidad;
 
-namespace Negocios
-{
-    public class ClsNproveedor
-    {
-        public DataTable MtdListarProveedores()
-        {
+namespace Negocios {
+    public class ClsNproveedor {
+        public DataTable MtdListarProveedores() {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -24,10 +21,8 @@ namespace Negocios
             return result;
         }
 
-        public bool MtdGuardarProveedor(ClsEproveedor e)
-        {
-            try
-            {
+        public bool MtdGuardarProveedor(ClsEproveedor e) {
+            try {
                 ClsConexionSQL objConexion = new ClsConexionSQL();
                 SqlCommand command = new SqlCommand();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -50,16 +45,13 @@ namespace Negocios
                 command.Connection = objConexion.Desconectar();
 
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return false;
                 throw ex;
             }
         }
 
-        public DataTable MtdBusquedaProveedor(string ruc)
-        {
+        public DataTable MtdBusquedaProveedor(string ruc) {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -77,8 +69,7 @@ namespace Negocios
             return result;
         }
 
-        public object MtdFiltrarProveedores(string filtro)
-        {
+        public object MtdFiltrarProveedores(string filtro) {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -96,10 +87,8 @@ namespace Negocios
             return result;
         }
 
-        public bool MtdModificarProveedor(ClsEproveedor e)
-        {
-            try
-            {
+        public bool MtdModificarProveedor(ClsEproveedor e) {
+            try {
                 ClsConexionSQL objConexion = new ClsConexionSQL();
                 SqlCommand command = new SqlCommand();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -122,9 +111,7 @@ namespace Negocios
                 command.Connection = objConexion.Desconectar();
 
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return false;
                 throw ex;
             }

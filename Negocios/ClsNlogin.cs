@@ -1,41 +1,31 @@
-﻿using System;
+﻿using Entidad;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using Entidad;
 
-namespace Negocios
-{
-    public class ClsNlogin
-    {
-        public int[] GenerarNumeros()
-        {
+namespace Negocios {
+    public class ClsNlogin {
+        public int[] GenerarNumeros() {
             int j = 0;
             int x = 0;
             int[] temp = new int[10];
-            for (int i = 0; i < temp.Length; i++)
-            {
+            for (int i = 0; i < temp.Length; i++) {
                 temp[i] = 100;
             }
             bool ver = true;
             Random ran = new Random();
-            do
-            {
+            do {
                 ver = false;
                 x = ran.Next(0, 10);
-                for (int i = 0; i < temp.Length; i++)
-                {
-                    if (x == temp[i])
-                    {
+                for (int i = 0; i < temp.Length; i++) {
+                    if (x == temp[i]) {
                         ver = false;
                         break;
-                    }
-                    else
-                    {
+                    } else {
                         ver = true;
                     }
                 }
-                if (ver == true)
-                {
+                if (ver == true) {
                     temp[j] = x;
                     j++;
                 }
@@ -43,10 +33,8 @@ namespace Negocios
             return temp;
         }
 
-        public bool MtdCambiarContraseña(string clave, string dni)
-        {
-            try
-            {
+        public bool MtdCambiarContraseña(string clave, string dni) {
+            try {
                 ClsConexionSQLRemota objConexion = new ClsConexionSQLRemota();
                 SqlCommand command = new SqlCommand();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -61,16 +49,13 @@ namespace Negocios
                 command.Connection = objConexion.Desconectar();
 
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return false;
                 throw ex;
             }
         }
 
-        public DataTable MtdVerificarExistencia(string texto)
-        {
+        public DataTable MtdVerificarExistencia(string texto) {
             DataTable empleado = new DataTable();
             ClsConexionSQLRemota objConexion = new ClsConexionSQLRemota();
             SqlCommand objComando = new SqlCommand();
@@ -89,14 +74,12 @@ namespace Negocios
             return empleado;
         }
 
-        public string MtdGenerarNuevaClave()
-        {
+        public string MtdGenerarNuevaClave() {
             Random rnd = new Random();
-            return rnd.Next(100000,1000000).ToString();
+            return rnd.Next(100000, 1000000).ToString();
         }
 
-        public DataTable MtdValidarLogin(ClsElogin e)
-        {
+        public DataTable MtdValidarLogin(ClsElogin e) {
             DataTable empleado = new DataTable();
             ClsConexionSQLRemota objConexion = new ClsConexionSQLRemota();
             SqlCommand objComando = new SqlCommand();
@@ -117,8 +100,7 @@ namespace Negocios
             return empleado;
         }
 
-        public DataTable MtdBuscarSesion(string usuario)
-        {
+        public DataTable MtdBuscarSesion(string usuario) {
             DataTable empleado = new DataTable();
             ClsConexionSQLRemota objConexion = new ClsConexionSQLRemota();
             SqlCommand objComando = new SqlCommand();
@@ -137,8 +119,7 @@ namespace Negocios
             return empleado;
         }
 
-        public void MtdCerrarSesion(string usuario)
-        {
+        public void MtdCerrarSesion(string usuario) {
             ClsConexionSQLRemota objConexion = new ClsConexionSQLRemota();
             SqlCommand objComando = new SqlCommand();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -153,10 +134,8 @@ namespace Negocios
 
         }
 
-        public bool MtdGuardarSesion(string usuario)
-        {
-            try
-            {
+        public bool MtdGuardarSesion(string usuario) {
+            try {
                 ClsConexionSQLRemota objConexion = new ClsConexionSQLRemota();
                 SqlCommand command = new SqlCommand();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -169,86 +148,58 @@ namespace Negocios
                 command.Connection = objConexion.Desconectar();
 
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return false;
                 throw ex;
             }
         }
 
-        public int MtdVerificarCuenta(DataTable data, ClsElogin e, int solicita)
-        {
+        public int MtdVerificarCuenta(DataTable data, ClsElogin e, int solicita) {
             int hora = Convert.ToInt32(DateTime.Now.ToString("HHmmss"));
             int result = 0;
-            if (data.Rows[0][10].ToString() == e.Clave)
-            {
-                if (data.Rows[0][8].ToString() == "1")
-                {
-                    if (data.Rows[0][6].ToString() == "001" || data.Rows[0][6].ToString() == "002" || solicita == 0)
-                    {
+            if (data.Rows[0][10].ToString() == e.Clave) {
+                if (data.Rows[0][8].ToString() == "1") {
+                    if (data.Rows[0][6].ToString() == "001" || data.Rows[0][6].ToString() == "002" || solicita == 0) {
                         bool verif = false;
-                        switch (Convert.ToInt32(data.Rows[0][7]))
-                        {
+                        switch (Convert.ToInt32(data.Rows[0][7])) {
                             case 1:
-                                if (hora >= 000000 && hora < 080000)
-                                {
+                                if (hora >= 000000 && hora < 080000) {
                                     verif = true;
-                                }
-                                else
-                                {
+                                } else {
                                     verif = false;
                                 }
                                 break;
                             case 2:
-                                if (hora >= 080000 && hora < 160000)
-                                {
+                                if (hora >= 080000 && hora < 160000) {
                                     verif = true;
-                                }
-                                else
-                                {
+                                } else {
                                     verif = false;
                                 }
                                 break;
                             case 3:
-                                if (hora >= 160000 && hora < 240000)
-                                {
+                                if (hora >= 160000 && hora < 240000) {
                                     verif = true;
-                                }
-                                else
-                                {
+                                } else {
                                     verif = false;
                                 }
                                 break;
                         }
-                        if (verif is true)
-                        {
-                            if (MtdBuscarSesion(data.Rows[0][9].ToString()).Rows.Count == 0)
-                            {
+                        if (verif is true) {
+                            if (MtdBuscarSesion(data.Rows[0][9].ToString()).Rows.Count == 0) {
                                 result = 6;
-                            }
-                            else
-                            {
+                            } else {
                                 result = 5;
                             }
-                        }
-                        else
-                        {
+                        } else {
                             result = 4;
                         }
-                    }
-                    else
-                    {
+                    } else {
                         result = 3;
                     }
-                }
-                else
-                {
+                } else {
                     result = 2;
                 }
-            }
-            else
-            {
+            } else {
                 result = 1;
             }
             return result;

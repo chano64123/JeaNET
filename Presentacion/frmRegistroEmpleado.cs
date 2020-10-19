@@ -1,28 +1,26 @@
-﻿using System;
-using System.Data;
-using System.Collections;
-using System.Windows.Forms;
+﻿using Entidad;
 using Negocios;
-using Entidad;
-using System.Text.RegularExpressions;
+using System;
+using System.Collections;
+using System.Data;
+using System.Windows.Forms;
 
-namespace Presentacion
-{
-    public partial class frmRegistroEmpleado : Form
-    {
-        public frmRegistroEmpleado()
-        {
+namespace Presentacion {
+    public partial class frmRegistroEmpleado : Form {
+        int accion = 0;
+        public frmRegistroEmpleado() {
             InitializeComponent();
-            //cargar cargos
             MtdCargarCargos();
             btnModificar.Enabled = false;
         }
-        //constructor
-        public frmRegistroEmpleado(ClsEempleado E)
-        {
+
+        public frmRegistroEmpleado(ClsEempleado E) {
             InitializeComponent();
-            //cargar cargos
             MtdCargarCargos();
+            llenarCamposEmpleado(E);
+        }
+
+        private void llenarCamposEmpleado(ClsEempleado E) {
             txtDni.Text = E.Dni;
             txtNombres.Text = E.Nombres;
             txtApellidos.Text = E.Apellidos;
@@ -37,86 +35,58 @@ namespace Presentacion
             txtDni.Enabled = false;
             btnGuardar.Enabled = false;
         }
-        private void FormPanelAdmi_RegistroEmpleados_Load(object sender, EventArgs e)
-        {
-            
-        }
 
         DataTable cargos = new DataTable();
-        private void MtdCargarCargos()
-        {
+        private void MtdCargarCargos() {
             ClsNcargo N = new ClsNcargo();
             cargos = N.MtdListarCargos();
-            foreach (DataRow item in cargos.Rows)
-            {
+            foreach (DataRow item in cargos.Rows) {
                 cmbCargo.Items.Add(item[1]);
             }
         }
 
-        private void TxtDni_TextChanged(object sender, EventArgs e)
-        {
-            if (txtDni.TextLength == 8)
-            {
+        private void TxtDni_TextChanged(object sender, EventArgs e) {
+            if (txtDni.TextLength == 8) {
                 //busqueda reniec
-                try
-                {
+                try {
                     ClsNbusqueda N = new ClsNbusqueda();
                     ArrayList datos = N.MtdBuscarReniec(txtDni.Text);
-                    if (datos[0].ToString().Length == 0)
-                    {
+                    if (datos[0].ToString().Length == 0) {
                         MessageBox.Show("Verifique el DNI.", "JeaNET - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                    {
+                    } else {
                         txtNombres.Text = datos[1].ToString();
                         txtApellidos.Text = datos[2].ToString() + " " + datos[3].ToString();
                     }
-                }
-                catch (Exception exception)
-                {
+                } catch (Exception) {
                     MessageBox.Show("Verifique el DNI.", "JeaNET - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-            else
-            {
+            } else {
                 txtNombres.Clear();
                 txtApellidos.Clear();
             }
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            ga = 0;
-            if (MtdValidarCampos())
-            {
+        private void btnGuardar_Click(object sender, EventArgs e) {
+            accion = 0;
+            if (MtdValidarCampos()) {
                 ClsEempleado E = ClsEempleado.crear(txtDni.Text, txtNombres.Text, txtApellidos.Text, txtDireccion.Text, txtCorreo.Text, txtTelefono.Text, lblTurno.Text, lblCargo.Text, lblEstado.Text, txtUsuario.Text, txtContraseña.Text);
                 ClsNempleado N = new ClsNempleado();
-                if (N.MtdGuardarEmpleado(E))
-                {
-                    if (MessageBox.Show("Empleado guardado correctamente, ¿Desea continuar en el formulario de registro de empleados?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                    {
+                if (N.MtdGuardarEmpleado(E)) {
+                    if (MessageBox.Show("Empleado guardado correctamente, ¿Desea continuar en el formulario de registro de empleados?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) {
                         frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Presiono " + btnGuardar.Name + " para agregar nuevo empleado");
-
                         MtdLimpiar();
                         btnModificar.Enabled = false;
-                    }
-                    else
-                    {
+                    } else {
                         this.Close();
                     }
-                }
-                else
-                {
+                } else {
                     MessageBox.Show("No se pudo registrar el empleado, intente de nuevo, revise nombre de usuario o comuniquese con soporte", "JeaNet - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Presiono " + btnGuardar.Name + ". no se pudo agregar nuevo empleado");
                 }
             }
-            
         }
 
-        public void MtdLimpiar()
-        {
+        public void MtdLimpiar() {
             txtDni.Focus();
             txtDni.Clear();
             txtNombres.Clear();
@@ -131,148 +101,118 @@ namespace Presentacion
             txtContraseña.Clear();
         }
 
-        private void btnModificar_Click(object sender, EventArgs e)
-        {
-            ga = 1;
-            if (MtdValidarCampos())
-            {
-                ClsEempleado E = ClsEempleado.crear(txtDni.Text,txtNombres.Text,txtApellidos.Text,txtDireccion.Text,txtCorreo.Text,txtTelefono.Text,lblTurno.Text,lblCargo.Text,lblEstado.Text,txtUsuario.Text,txtContraseña.Text);
+        private void btnModificar_Click(object sender, EventArgs e) {
+            accion = 1;
+            if (MtdValidarCampos()) {
+                ClsEempleado E = ClsEempleado.crear(txtDni.Text, txtNombres.Text, txtApellidos.Text, txtDireccion.Text, txtCorreo.Text, txtTelefono.Text, lblTurno.Text, lblCargo.Text, lblEstado.Text, txtUsuario.Text, txtContraseña.Text);
                 ClsNempleado N = new ClsNempleado();
-                if (N.MtdModificarEmpleado(E))
-                {
-                    if (MessageBox.Show("Empleado modificado correctamente, ¿Desea continuar en el formulario de registro de empleados?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                    {
+                if (N.MtdModificarEmpleado(E)) {
+                    if (MessageBox.Show("Empleado modificado correctamente, ¿Desea continuar en el formulario de registro de empleados?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) {
                         frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Presiono " + btnModificar.Name + " para modificar empleado");
                         btnGuardar.Enabled = true;
                         btnModificar.Enabled = false;
                         txtDni.Enabled = true;
                         MtdLimpiar();
-                    }
-                    else
-                    {
+                    } else {
                         this.Close();
                     }
-                }
-                else
-                {
+                } else {
                     MessageBox.Show("No se pudo modificar el empleado, intente de nuevo o comuniquese con soporte.", "JeaNet - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Presiono " + btnModificar.Name + ", no se pudo modificar empleado");
-
                 }
-            } 
+            }
         }
 
-        int ga = 0;
-
-        private bool MtdValidarCampos()
-        {
+        private bool MtdValidarCampos() {
             ClsNValidacion validacion = ClsNValidacion.getValidacion();
-            return !validacion.validarVacio(error1, this) && !validacion.validarNombreUsuario(error1, this, ga);
+            //validando que campos no esten vacios o null
+            bool result = existenVacios(validacion);
+            //validando que se seleccione un opcion en el combobox
+            result = cmbOpcionSeleccionada(validacion) && !result;
+            if (result) {
+                //validando cantidad de caracteres
+                result = rangoCaracteresCorrecto(validacion) && result;
+                //validando formato de correo
+                result = formatoCorreoCorrecto(validacion) && result;
+                //validanso que usuario no exista
+                if (accion == 0) {
+                    result = verificarUsuario(validacion) && result;
+                }
+            }
+            return result;
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "salio del formulario EMPLEADOS");
+        private bool verificarUsuario(ClsNValidacion validacion) {
+            bool result = validacion.existeUsuario(error1, txtUsuario, "Nombre de usuario en uso");
+            return !result;
+        }
 
+        private bool existenVacios(ClsNValidacion validacion) {
+            bool result = validacion.estaVacioONull(error1, txtDni, "Tiene que ingresar DNI");
+            result = validacion.estaVacioONull(error1, txtNombres, "Tiene que ingresar Nombres") || result;
+            result = validacion.estaVacioONull(error1, txtApellidos, "Tiene que ingresar Apellidos") || result;
+            result = validacion.estaVacioONull(error1, txtDireccion, "Tiene que ingresar una Direccion") || result;
+            result = validacion.estaVacioONull(error1, txtCorreo, "Tiene que ingresar un Correo") || result;
+            result = validacion.estaVacioONull(error1, txtTelefono, "Tiene que ingresar un Numero de Tefono") || result;
+            result = validacion.estaVacioONull(error1, txtUsuario, "Tiene que ingresar un Nombre de Usuario") || result;
+            result = validacion.estaVacioONull(error1, txtContraseña, "Tiene que ingresar una Contraseña") || result;
+            return result;
+        }
+
+        private bool cmbOpcionSeleccionada(ClsNValidacion validacion) {
+            bool result = validacion.tieneSeleccionCmb(error1, cmbCargo, "Seleccione un Cargo");
+            result = validacion.tieneSeleccionCmb(error1, cmbTurno, "Seleccione un Turno") && result;
+            result = validacion.tieneSeleccionCmb(error1, cmbEstado, "Seleccione un Estado") && result;
+            return result;
+        }
+
+        private bool rangoCaracteresCorrecto(ClsNValidacion validacion) {
+            bool result = validacion.tieneRangoCaracteres(error1, txtTelefono, 6, 12, "El numero de Telefono tiene como minimo 6 y maximo 12 caracteres");
+            result = validacion.tieneRangoCaracteres(error1, txtDni, 8, 8, "El DNI tiene que tener 8 digitos") && result;
+            result = validacion.tieneRangoCaracteres(error1, txtContraseña, 6, 6, "La contraseña tiene que tener 6 digitos") && result;
+            return result;
+        }
+
+        private bool formatoCorreoCorrecto(ClsNValidacion validacion) {
+            bool result = validacion.tieneFormatoCorreo(error1, txtCorreo, "Ingrese un correo valido");
+            return result;
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e) {
+            frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "salio del formulario EMPLEADOS");
             this.Close();
         }
 
-        private void txtDni_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //solo numeros
-            if (char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para borrar
-            else if (char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+        private void txtDni_KeyPress(object sender, KeyPressEventArgs e) {
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            validacion.soloNumero(e);
         }
 
-        //public static bool MtdValidarEmail(string email)
-        //{
-        //    string expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
-        //    if (Regex.IsMatch(email, expresion))
-        //    {
-        //        if (Regex.Replace(email, expresion, String.Empty).Length == 0)
-        //        {
-        //            return true;
-        //        }
-        //        else
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-
-        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //solo numeros
-            if (char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para borrar
-            else if (char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e) {
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            validacion.numeroConCaracter(txtTelefono, e, '+');
         }
 
-        private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //solo numeros
-            if (char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }//para borrar
-            else if (char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+        private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e) {
+            ClsNValidacion validacion = ClsNValidacion.getValidacion();
+            validacion.soloNumero(e);
         }
 
-        private void cmbTurno_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void cmbTurno_SelectedIndexChanged(object sender, EventArgs e) {
             lblTurno.Text = (cmbTurno.SelectedIndex == 0) ? "1" : (cmbTurno.SelectedIndex == 1) ? "2" : (cmbTurno.SelectedIndex == 2) ? "3" : "";
         }
 
-        private void cmbCargo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            foreach (DataRow item in cargos.Rows)
-            {
-                if (cmbCargo.Text == item[1].ToString())
-                {
+        private void cmbCargo_SelectedIndexChanged(object sender, EventArgs e) {
+            foreach (DataRow item in cargos.Rows) {
+                if (cmbCargo.Text == item[1].ToString()) {
                     lblCargo.Text = item[0].ToString();
                     break;
                 }
             }
         }
 
-        private void cmbEstado_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void cmbEstado_SelectedIndexChanged(object sender, EventArgs e) {
             lblEstado.Text = (cmbEstado.SelectedIndex == 0) ? "1" : (cmbEstado.SelectedIndex == 1) ? "2" : "";
-        }
-
-        private void txtDni_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

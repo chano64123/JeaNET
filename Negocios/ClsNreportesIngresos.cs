@@ -1,12 +1,9 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 
-namespace Negocios
-{
-    public class ClsNreportesIngresos
-    {
-        public DataTable MtdListarReportesSemanaleS()
-        {
+namespace Negocios {
+    public class ClsNreportesIngresos {
+        public DataTable MtdListarReportesSemanaleS() {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -21,8 +18,7 @@ namespace Negocios
             return result;
         }
 
-        public DataTable MtdListarReportesMensual()
-        {
+        public DataTable MtdListarReportesMensual() {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -37,8 +33,7 @@ namespace Negocios
             return result;
         }
 
-        public DataTable MtdListarReportesSemestrales()
-        {
+        public DataTable MtdListarReportesSemestrales() {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -53,8 +48,7 @@ namespace Negocios
             return result;
         }
 
-        public DataTable MtdListarReportesAnual()
-        {
+        public DataTable MtdListarReportesAnual() {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -69,8 +63,7 @@ namespace Negocios
             return result;
         }
 
-        public DataTable MtdListarReportesTrimestre()
-        {
+        public DataTable MtdListarReportesTrimestre() {
             ClsConexionSQL conn = new ClsConexionSQL();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
