@@ -1,0 +1,1278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bdJeaNetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbAlertas">
+          <Key>
+            <PropertyRef Name="CodigoAlerta" />
+          </Key>
+          <Property Name="CodigoAlerta" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DniCli" Type="varchar" MaxLength="8" />
+          <Property Name="Latitud" Type="varchar" MaxLength="50" />
+          <Property Name="Longitud" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha" Type="date" />
+          <Property Name="Hora" Type="varchar" MaxLength="10" />
+          <Property Name="idTurno" Type="int" />
+          <Property Name="estado" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="tbAuditoria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DNI_Usuario" Type="varchar" MaxLength="8" />
+          <Property Name="descripcionAccion" Type="varchar" MaxLength="255" />
+          <Property Name="fecha" Type="date" />
+          <Property Name="hora" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tbCargos">
+          <Key>
+            <PropertyRef Name="Codigo_Cargo" />
+          </Key>
+          <Property Name="Codigo_Cargo" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbClienteDisposiivo">
+          <Key>
+            <PropertyRef Name="idClienteDispositivo" />
+          </Key>
+          <Property Name="idClienteDispositivo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DniCliente" Type="varchar" MaxLength="8" />
+          <Property Name="SerieDispositivo" Type="varchar" MaxLength="9" />
+        </EntityType>
+        <EntityType Name="tbClientes">
+          <Key>
+            <PropertyRef Name="DniCliente" />
+          </Key>
+          <Property Name="DniCliente" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbCompras">
+          <Key>
+            <PropertyRef Name="Serie" />
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="Serie" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Numero" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Fecha" Type="date" />
+          <Property Name="DniEmpleado" Type="varchar" MaxLength="8" />
+          <Property Name="RucProveedor" Type="varchar" MaxLength="11" />
+          <Property Name="Total" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Estado" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="tbComprobante">
+          <Key>
+            <PropertyRef Name="Serie" />
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="Serie" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Numero" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="DniEmpleado" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="DniCliente" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Subtotal" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Igv" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="tbCondicion">
+          <Key>
+            <PropertyRef Name="idCondicion" />
+          </Key>
+          <Property Name="idCondicion" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbDetalleCompras">
+          <Key>
+            <PropertyRef Name="idDetalleComprobante" />
+          </Key>
+          <Property Name="idDetalleComprobante" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Serie" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Numero" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="CodigoLote" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Importe" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbDetalleComprobante">
+          <Key>
+            <PropertyRef Name="idDetalleComprobante" />
+          </Key>
+          <Property Name="idDetalleComprobante" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Serie" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Numero" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="CodigoLote" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Importe" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbDispositivos">
+          <Key>
+            <PropertyRef Name="SerieDispositivo" />
+          </Key>
+          <Property Name="SerieDispositivo" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="CodLote" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbEmpleados">
+          <Key>
+            <PropertyRef Name="DniEmpleado" />
+          </Key>
+          <Property Name="DniEmpleado" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="Codigo_Cargo" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="idTurno" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbKardex">
+          <Key>
+            <PropertyRef Name="idKardex" />
+          </Key>
+          <Property Name="idKardex" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodLote" Type="varchar" MaxLength="4" />
+          <Property Name="DniEmpleado" Type="varchar" MaxLength="8" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="PrecioUnitario" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Estado" Type="varchar" MaxLength="1" />
+          <Property Name="Hora" Type="varchar" MaxLength="10" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="tbLotes">
+          <Key>
+            <PropertyRef Name="CodLote" />
+          </Key>
+          <Property Name="CodLote" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Color" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Ruc" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="Sistema_Operativo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Precio_Unitario" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Forma" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Memoria" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Peso" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbProveedores">
+          <Key>
+            <PropertyRef Name="Ruc" />
+          </Key>
+          <Property Name="Ruc" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'bdJeaNet.dbo.tbSesiones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="tbSesiones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'bdJeaNet.dbo.tbTemp' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="tbTemp">
+          <Property Name="dni" Type="varchar" MaxLength="8" />
+          <Property Name="dia" Type="int" />
+          <Property Name="valor" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>-->
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'bdJeaNet.dbo.tbTempProd' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="tbTempProd">
+          <Property Name="CodigoLote" Type="varchar" MaxLength="4" />
+          <Property Name="dia" Type="int" />
+          <Property Name="valor" Type="bigint" />
+        </EntityType>-->
+        <EntityType Name="tbTurnos">
+          <Key>
+            <PropertyRef Name="idTurno" />
+          </Key>
+          <Property Name="idTurno" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="entrada" Type="time" Precision="7" Nullable="false" />
+          <Property Name="salida" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_ClienteDispositivo">
+          <End Role="tbClientes" Type="Self.tbClientes" Multiplicity="0..1" />
+          <End Role="tbClienteDisposiivo" Type="Self.tbClienteDisposiivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClientes">
+              <PropertyRef Name="DniCliente" />
+            </Principal>
+            <Dependent Role="tbClienteDisposiivo">
+              <PropertyRef Name="DniCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errores durante la generación:
+error 6004: Una relación hace referencia a la tabla 'bdJeaNet.dbo.tbTempProd', pero no se encuentra la tabla.
+        <Association Name="fk_codigoLote" />-->
+        <Association Name="fk_compradni">
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="0..1" />
+          <End Role="tbCompras" Type="Self.tbCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="DniEmpleado" />
+            </Principal>
+            <Dependent Role="tbCompras">
+              <PropertyRef Name="DniEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_compraruc">
+          <End Role="tbProveedores" Type="Self.tbProveedores" Multiplicity="0..1" />
+          <End Role="tbCompras" Type="Self.tbCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbProveedores">
+              <PropertyRef Name="Ruc" />
+            </Principal>
+            <Dependent Role="tbCompras">
+              <PropertyRef Name="RucProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DniCli">
+          <End Role="tbClientes" Type="Self.tbClientes" Multiplicity="0..1" />
+          <End Role="tbAlertas" Type="Self.tbAlertas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClientes">
+              <PropertyRef Name="DniCliente" />
+            </Principal>
+            <Dependent Role="tbAlertas">
+              <PropertyRef Name="DniCli" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_idcargo">
+          <End Role="tbTurnos" Type="Self.tbTurnos" Multiplicity="1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTurnos">
+              <PropertyRef Name="idTurno" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="idTurno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_idturno">
+          <End Role="tbTurnos" Type="Self.tbTurnos" Multiplicity="0..1" />
+          <End Role="tbAlertas" Type="Self.tbAlertas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTurnos">
+              <PropertyRef Name="idTurno" />
+            </Principal>
+            <Dependent Role="tbAlertas">
+              <PropertyRef Name="idTurno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_SerieDispositivo">
+          <End Role="tbDispositivos" Type="Self.tbDispositivos" Multiplicity="0..1" />
+          <End Role="tbClienteDisposiivo" Type="Self.tbClienteDisposiivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbDispositivos">
+              <PropertyRef Name="SerieDispositivo" />
+            </Principal>
+            <Dependent Role="tbClienteDisposiivo">
+              <PropertyRef Name="SerieDispositivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbComprobante_DniCliente">
+          <End Role="tbClientes" Type="Self.tbClientes" Multiplicity="1" />
+          <End Role="tbComprobante" Type="Self.tbComprobante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClientes">
+              <PropertyRef Name="DniCliente" />
+            </Principal>
+            <Dependent Role="tbComprobante">
+              <PropertyRef Name="DniCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbComprobante_DniEmpleado">
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
+          <End Role="tbComprobante" Type="Self.tbComprobante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="DniEmpleado" />
+            </Principal>
+            <Dependent Role="tbComprobante">
+              <PropertyRef Name="DniEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbDetalleCompra_CodigoLote">
+          <End Role="tbLotes" Type="Self.tbLotes" Multiplicity="1" />
+          <End Role="tbDetalleCompras" Type="Self.tbDetalleCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbLotes">
+              <PropertyRef Name="CodLote" />
+            </Principal>
+            <Dependent Role="tbDetalleCompras">
+              <PropertyRef Name="CodigoLote" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbDetalleCompra_idComprobante">
+          <End Role="tbCompras" Type="Self.tbCompras" Multiplicity="1" />
+          <End Role="tbDetalleCompras" Type="Self.tbDetalleCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCompras">
+              <PropertyRef Name="Serie" />
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="tbDetalleCompras">
+              <PropertyRef Name="Serie" />
+              <PropertyRef Name="Numero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbDetalleComprobante_CodigoLote">
+          <End Role="tbLotes" Type="Self.tbLotes" Multiplicity="1" />
+          <End Role="tbDetalleComprobante" Type="Self.tbDetalleComprobante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbLotes">
+              <PropertyRef Name="CodLote" />
+            </Principal>
+            <Dependent Role="tbDetalleComprobante">
+              <PropertyRef Name="CodigoLote" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbDetalleComprobante_idComprobante">
+          <End Role="tbComprobante" Type="Self.tbComprobante" Multiplicity="1" />
+          <End Role="tbDetalleComprobante" Type="Self.tbDetalleComprobante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbComprobante">
+              <PropertyRef Name="Serie" />
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="tbDetalleComprobante">
+              <PropertyRef Name="Serie" />
+              <PropertyRef Name="Numero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbDispositivos_Ruc">
+          <End Role="tbProveedores" Type="Self.tbProveedores" Multiplicity="1" />
+          <End Role="tbLotes" Type="Self.tbLotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbProveedores">
+              <PropertyRef Name="Ruc" />
+            </Principal>
+            <Dependent Role="tbLotes">
+              <PropertyRef Name="Ruc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEmpleados_Codigo_Cargo">
+          <End Role="tbCargos" Type="Self.tbCargos" Multiplicity="1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCargos">
+              <PropertyRef Name="Codigo_Cargo" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="Codigo_Cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEstadoDispositivo">
+          <End Role="tbCondicion" Type="Self.tbCondicion" Multiplicity="1" />
+          <End Role="tbDispositivos" Type="Self.tbDispositivos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCondicion">
+              <PropertyRef Name="idCondicion" />
+            </Principal>
+            <Dependent Role="tbDispositivos">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbLotes">
+          <End Role="tbLotes" Type="Self.tbLotes" Multiplicity="1" />
+          <End Role="tbDispositivos" Type="Self.tbDispositivos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbLotes">
+              <PropertyRef Name="CodLote" />
+            </Principal>
+            <Dependent Role="tbDispositivos">
+              <PropertyRef Name="CodLote" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errores durante la generación:
+error 6004: Una relación hace referencia a la tabla 'bdJeaNet.dbo.tbTemp', pero no se encuentra la tabla.
+        <Association Name="FK_tbTemp_tbEmpleados" />-->
+        <EntityContainer Name="bdJeaNetModelStoreContainer">
+          <EntitySet Name="tbAlertas" EntityType="Self.tbAlertas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbAuditoria" EntityType="Self.tbAuditoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCargos" EntityType="Self.tbCargos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbClienteDisposiivo" EntityType="Self.tbClienteDisposiivo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbClientes" EntityType="Self.tbClientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCompras" EntityType="Self.tbCompras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbComprobante" EntityType="Self.tbComprobante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCondicion" EntityType="Self.tbCondicion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbDetalleCompras" EntityType="Self.tbDetalleCompras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbDetalleComprobante" EntityType="Self.tbDetalleComprobante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbDispositivos" EntityType="Self.tbDispositivos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbEmpleados" EntityType="Self.tbEmpleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbKardex" EntityType="Self.tbKardex" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbLotes" EntityType="Self.tbLotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbProveedores" EntityType="Self.tbProveedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbTurnos" EntityType="Self.tbTurnos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbSesiones" EntityType="Self.tbSesiones" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbSesiones].[id] AS [id], 
+    [tbSesiones].[usuario] AS [usuario]
+    FROM [dbo].[tbSesiones] AS [tbSesiones]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="fk_ClienteDispositivo" Association="Self.fk_ClienteDispositivo">
+            <End Role="tbClientes" EntitySet="tbClientes" />
+            <End Role="tbClienteDisposiivo" EntitySet="tbClienteDisposiivo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_compradni" Association="Self.fk_compradni">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbCompras" EntitySet="tbCompras" />
+          </AssociationSet>
+          <AssociationSet Name="fk_compraruc" Association="Self.fk_compraruc">
+            <End Role="tbProveedores" EntitySet="tbProveedores" />
+            <End Role="tbCompras" EntitySet="tbCompras" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DniCli" Association="Self.fk_DniCli">
+            <End Role="tbClientes" EntitySet="tbClientes" />
+            <End Role="tbAlertas" EntitySet="tbAlertas" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_idcargo" Association="Self.Fk_idcargo">
+            <End Role="tbTurnos" EntitySet="tbTurnos" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="fk_idturno" Association="Self.fk_idturno">
+            <End Role="tbTurnos" EntitySet="tbTurnos" />
+            <End Role="tbAlertas" EntitySet="tbAlertas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_SerieDispositivo" Association="Self.fk_SerieDispositivo">
+            <End Role="tbDispositivos" EntitySet="tbDispositivos" />
+            <End Role="tbClienteDisposiivo" EntitySet="tbClienteDisposiivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbComprobante_DniCliente" Association="Self.FK_tbComprobante_DniCliente">
+            <End Role="tbClientes" EntitySet="tbClientes" />
+            <End Role="tbComprobante" EntitySet="tbComprobante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbComprobante_DniEmpleado" Association="Self.FK_tbComprobante_DniEmpleado">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbComprobante" EntitySet="tbComprobante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbDetalleCompra_CodigoLote" Association="Self.FK_tbDetalleCompra_CodigoLote">
+            <End Role="tbLotes" EntitySet="tbLotes" />
+            <End Role="tbDetalleCompras" EntitySet="tbDetalleCompras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbDetalleCompra_idComprobante" Association="Self.FK_tbDetalleCompra_idComprobante">
+            <End Role="tbCompras" EntitySet="tbCompras" />
+            <End Role="tbDetalleCompras" EntitySet="tbDetalleCompras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbDetalleComprobante_CodigoLote" Association="Self.FK_tbDetalleComprobante_CodigoLote">
+            <End Role="tbLotes" EntitySet="tbLotes" />
+            <End Role="tbDetalleComprobante" EntitySet="tbDetalleComprobante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbDetalleComprobante_idComprobante" Association="Self.FK_tbDetalleComprobante_idComprobante">
+            <End Role="tbComprobante" EntitySet="tbComprobante" />
+            <End Role="tbDetalleComprobante" EntitySet="tbDetalleComprobante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbDispositivos_Ruc" Association="Self.FK_tbDispositivos_Ruc">
+            <End Role="tbProveedores" EntitySet="tbProveedores" />
+            <End Role="tbLotes" EntitySet="tbLotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEmpleados_Codigo_Cargo" Association="Self.FK_tbEmpleados_Codigo_Cargo">
+            <End Role="tbCargos" EntitySet="tbCargos" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEstadoDispositivo" Association="Self.FK_tbEstadoDispositivo">
+            <End Role="tbCondicion" EntitySet="tbCondicion" />
+            <End Role="tbDispositivos" EntitySet="tbDispositivos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbLotes" Association="Self.FK_tbLotes">
+            <End Role="tbLotes" EntitySet="tbLotes" />
+            <End Role="tbDispositivos" EntitySet="tbDispositivos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bdJeaNetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbAlertas">
+          <Key>
+            <PropertyRef Name="CodigoAlerta" />
+          </Key>
+          <Property Name="CodigoAlerta" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DniCli" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Latitud" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Longitud" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="Hora" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="idTurno" Type="Int32" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbClientes" Relationship="Self.fk_DniCli" FromRole="tbAlertas" ToRole="tbClientes" />
+          <NavigationProperty Name="tbTurnos" Relationship="Self.fk_idturno" FromRole="tbAlertas" ToRole="tbTurnos" />
+        </EntityType>
+        <EntityType Name="tbAuditoria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DNI_Usuario" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="descripcionAccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="hora" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbCargos">
+          <Key>
+            <PropertyRef Name="Codigo_Cargo" />
+          </Key>
+          <Property Name="Codigo_Cargo" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_tbEmpleados_Codigo_Cargo" FromRole="tbCargos" ToRole="tbEmpleados" />
+        </EntityType>
+        <EntityType Name="tbClienteDisposiivo">
+          <Key>
+            <PropertyRef Name="idClienteDispositivo" />
+          </Key>
+          <Property Name="idClienteDispositivo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DniCliente" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="SerieDispositivo" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbClientes" Relationship="Self.fk_ClienteDispositivo" FromRole="tbClienteDisposiivo" ToRole="tbClientes" />
+          <NavigationProperty Name="tbDispositivos" Relationship="Self.fk_SerieDispositivo" FromRole="tbClienteDisposiivo" ToRole="tbDispositivos" />
+        </EntityType>
+        <EntityType Name="tbClientes">
+          <Key>
+            <PropertyRef Name="DniCliente" />
+          </Key>
+          <Property Name="DniCliente" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbAlertas" Relationship="Self.fk_DniCli" FromRole="tbClientes" ToRole="tbAlertas" />
+          <NavigationProperty Name="tbClienteDisposiivo" Relationship="Self.fk_ClienteDispositivo" FromRole="tbClientes" ToRole="tbClienteDisposiivo" />
+          <NavigationProperty Name="tbComprobante" Relationship="Self.FK_tbComprobante_DniCliente" FromRole="tbClientes" ToRole="tbComprobante" />
+        </EntityType>
+        <EntityType Name="tbCompras">
+          <Key>
+            <PropertyRef Name="Serie" />
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="Serie" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Numero" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="DniEmpleado" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="RucProveedor" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbEmpleados" Relationship="Self.fk_compradni" FromRole="tbCompras" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbProveedores" Relationship="Self.fk_compraruc" FromRole="tbCompras" ToRole="tbProveedores" />
+          <NavigationProperty Name="tbDetalleCompras" Relationship="Self.FK_tbDetalleCompra_idComprobante" FromRole="tbCompras" ToRole="tbDetalleCompras" />
+        </EntityType>
+        <EntityType Name="tbComprobante">
+          <Key>
+            <PropertyRef Name="Serie" />
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="Serie" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Numero" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DniEmpleado" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DniCliente" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Subtotal" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Igv" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbClientes" Relationship="Self.FK_tbComprobante_DniCliente" FromRole="tbComprobante" ToRole="tbClientes" />
+          <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_tbComprobante_DniEmpleado" FromRole="tbComprobante" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbDetalleComprobante" Relationship="Self.FK_tbDetalleComprobante_idComprobante" FromRole="tbComprobante" ToRole="tbDetalleComprobante" />
+        </EntityType>
+        <EntityType Name="tbCondicion">
+          <Key>
+            <PropertyRef Name="idCondicion" />
+          </Key>
+          <Property Name="idCondicion" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbDispositivos" Relationship="Self.FK_tbEstadoDispositivo" FromRole="tbCondicion" ToRole="tbDispositivos" />
+        </EntityType>
+        <EntityType Name="tbDetalleCompras">
+          <Key>
+            <PropertyRef Name="idDetalleComprobante" />
+          </Key>
+          <Property Name="idDetalleComprobante" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Serie" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Numero" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodigoLote" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Importe" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="tbCompras" Relationship="Self.FK_tbDetalleCompra_idComprobante" FromRole="tbDetalleCompras" ToRole="tbCompras" />
+          <NavigationProperty Name="tbLotes" Relationship="Self.FK_tbDetalleCompra_CodigoLote" FromRole="tbDetalleCompras" ToRole="tbLotes" />
+        </EntityType>
+        <EntityType Name="tbDetalleComprobante">
+          <Key>
+            <PropertyRef Name="idDetalleComprobante" />
+          </Key>
+          <Property Name="idDetalleComprobante" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Serie" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Numero" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodigoLote" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Importe" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="tbComprobante" Relationship="Self.FK_tbDetalleComprobante_idComprobante" FromRole="tbDetalleComprobante" ToRole="tbComprobante" />
+          <NavigationProperty Name="tbLotes" Relationship="Self.FK_tbDetalleComprobante_CodigoLote" FromRole="tbDetalleComprobante" ToRole="tbLotes" />
+        </EntityType>
+        <EntityType Name="tbDispositivos">
+          <Key>
+            <PropertyRef Name="SerieDispositivo" />
+          </Key>
+          <Property Name="SerieDispositivo" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodLote" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbClienteDisposiivo" Relationship="Self.fk_SerieDispositivo" FromRole="tbDispositivos" ToRole="tbClienteDisposiivo" />
+          <NavigationProperty Name="tbCondicion" Relationship="Self.FK_tbEstadoDispositivo" FromRole="tbDispositivos" ToRole="tbCondicion" />
+          <NavigationProperty Name="tbLotes" Relationship="Self.FK_tbLotes" FromRole="tbDispositivos" ToRole="tbLotes" />
+        </EntityType>
+        <EntityType Name="tbEmpleados">
+          <Key>
+            <PropertyRef Name="DniEmpleado" />
+          </Key>
+          <Property Name="DniEmpleado" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Codigo_Cargo" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idTurno" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbCargos" Relationship="Self.FK_tbEmpleados_Codigo_Cargo" FromRole="tbEmpleados" ToRole="tbCargos" />
+          <NavigationProperty Name="tbCompras" Relationship="Self.fk_compradni" FromRole="tbEmpleados" ToRole="tbCompras" />
+          <NavigationProperty Name="tbComprobante" Relationship="Self.FK_tbComprobante_DniEmpleado" FromRole="tbEmpleados" ToRole="tbComprobante" />
+          <NavigationProperty Name="tbTurnos" Relationship="Self.Fk_idcargo" FromRole="tbEmpleados" ToRole="tbTurnos" />
+        </EntityType>
+        <EntityType Name="tbKardex">
+          <Key>
+            <PropertyRef Name="idKardex" />
+          </Key>
+          <Property Name="idKardex" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodLote" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DniEmpleado" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="PrecioUnitario" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Hora" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tbLotes">
+          <Key>
+            <PropertyRef Name="CodLote" />
+          </Key>
+          <Property Name="CodLote" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Color" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ruc" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sistema_Operativo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Precio_Unitario" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Forma" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Memoria" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Peso" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="tbDetalleCompras" Relationship="Self.FK_tbDetalleCompra_CodigoLote" FromRole="tbLotes" ToRole="tbDetalleCompras" />
+          <NavigationProperty Name="tbDetalleComprobante" Relationship="Self.FK_tbDetalleComprobante_CodigoLote" FromRole="tbLotes" ToRole="tbDetalleComprobante" />
+          <NavigationProperty Name="tbDispositivos" Relationship="Self.FK_tbLotes" FromRole="tbLotes" ToRole="tbDispositivos" />
+          <NavigationProperty Name="tbProveedores" Relationship="Self.FK_tbDispositivos_Ruc" FromRole="tbLotes" ToRole="tbProveedores" />
+        </EntityType>
+        <EntityType Name="tbProveedores">
+          <Key>
+            <PropertyRef Name="Ruc" />
+          </Key>
+          <Property Name="Ruc" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbCompras" Relationship="Self.fk_compraruc" FromRole="tbProveedores" ToRole="tbCompras" />
+          <NavigationProperty Name="tbLotes" Relationship="Self.FK_tbDispositivos_Ruc" FromRole="tbProveedores" ToRole="tbLotes" />
+        </EntityType>
+        <EntityType Name="tbTurnos">
+          <Key>
+            <PropertyRef Name="idTurno" />
+          </Key>
+          <Property Name="idTurno" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="entrada" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="salida" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="tbAlertas" Relationship="Self.fk_idturno" FromRole="tbTurnos" ToRole="tbAlertas" />
+          <NavigationProperty Name="tbEmpleados" Relationship="Self.Fk_idcargo" FromRole="tbTurnos" ToRole="tbEmpleados" />
+        </EntityType>
+        <EntityType Name="tbSesiones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="fk_DniCli">
+          <End Role="tbClientes" Type="Self.tbClientes" Multiplicity="0..1" />
+          <End Role="tbAlertas" Type="Self.tbAlertas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClientes">
+              <PropertyRef Name="DniCliente" />
+            </Principal>
+            <Dependent Role="tbAlertas">
+              <PropertyRef Name="DniCli" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_idturno">
+          <End Role="tbTurnos" Type="Self.tbTurnos" Multiplicity="0..1" />
+          <End Role="tbAlertas" Type="Self.tbAlertas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTurnos">
+              <PropertyRef Name="idTurno" />
+            </Principal>
+            <Dependent Role="tbAlertas">
+              <PropertyRef Name="idTurno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEmpleados_Codigo_Cargo">
+          <End Role="tbCargos" Type="Self.tbCargos" Multiplicity="1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCargos">
+              <PropertyRef Name="Codigo_Cargo" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="Codigo_Cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ClienteDispositivo">
+          <End Role="tbClientes" Type="Self.tbClientes" Multiplicity="0..1" />
+          <End Role="tbClienteDisposiivo" Type="Self.tbClienteDisposiivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClientes">
+              <PropertyRef Name="DniCliente" />
+            </Principal>
+            <Dependent Role="tbClienteDisposiivo">
+              <PropertyRef Name="DniCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_SerieDispositivo">
+          <End Role="tbDispositivos" Type="Self.tbDispositivos" Multiplicity="0..1" />
+          <End Role="tbClienteDisposiivo" Type="Self.tbClienteDisposiivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbDispositivos">
+              <PropertyRef Name="SerieDispositivo" />
+            </Principal>
+            <Dependent Role="tbClienteDisposiivo">
+              <PropertyRef Name="SerieDispositivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbComprobante_DniCliente">
+          <End Role="tbClientes" Type="Self.tbClientes" Multiplicity="1" />
+          <End Role="tbComprobante" Type="Self.tbComprobante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClientes">
+              <PropertyRef Name="DniCliente" />
+            </Principal>
+            <Dependent Role="tbComprobante">
+              <PropertyRef Name="DniCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_compradni">
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="0..1" />
+          <End Role="tbCompras" Type="Self.tbCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="DniEmpleado" />
+            </Principal>
+            <Dependent Role="tbCompras">
+              <PropertyRef Name="DniEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_compraruc">
+          <End Role="tbProveedores" Type="Self.tbProveedores" Multiplicity="0..1" />
+          <End Role="tbCompras" Type="Self.tbCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbProveedores">
+              <PropertyRef Name="Ruc" />
+            </Principal>
+            <Dependent Role="tbCompras">
+              <PropertyRef Name="RucProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbDetalleCompra_idComprobante">
+          <End Role="tbCompras" Type="Self.tbCompras" Multiplicity="1" />
+          <End Role="tbDetalleCompras" Type="Self.tbDetalleCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCompras">
+              <PropertyRef Name="Serie" />
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="tbDetalleCompras">
+              <PropertyRef Name="Serie" />
+              <PropertyRef Name="Numero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbComprobante_DniEmpleado">
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
+          <End Role="tbComprobante" Type="Self.tbComprobante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="DniEmpleado" />
+            </Principal>
+            <Dependent Role="tbComprobante">
+              <PropertyRef Name="DniEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbDetalleComprobante_idComprobante">
+          <End Role="tbComprobante" Type="Self.tbComprobante" Multiplicity="1" />
+          <End Role="tbDetalleComprobante" Type="Self.tbDetalleComprobante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbComprobante">
+              <PropertyRef Name="Serie" />
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="tbDetalleComprobante">
+              <PropertyRef Name="Serie" />
+              <PropertyRef Name="Numero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEstadoDispositivo">
+          <End Role="tbCondicion" Type="Self.tbCondicion" Multiplicity="1" />
+          <End Role="tbDispositivos" Type="Self.tbDispositivos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCondicion">
+              <PropertyRef Name="idCondicion" />
+            </Principal>
+            <Dependent Role="tbDispositivos">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbDetalleCompra_CodigoLote">
+          <End Role="tbLotes" Type="Self.tbLotes" Multiplicity="1" />
+          <End Role="tbDetalleCompras" Type="Self.tbDetalleCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbLotes">
+              <PropertyRef Name="CodLote" />
+            </Principal>
+            <Dependent Role="tbDetalleCompras">
+              <PropertyRef Name="CodigoLote" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbDetalleComprobante_CodigoLote">
+          <End Role="tbLotes" Type="Self.tbLotes" Multiplicity="1" />
+          <End Role="tbDetalleComprobante" Type="Self.tbDetalleComprobante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbLotes">
+              <PropertyRef Name="CodLote" />
+            </Principal>
+            <Dependent Role="tbDetalleComprobante">
+              <PropertyRef Name="CodigoLote" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbLotes">
+          <End Role="tbLotes" Type="Self.tbLotes" Multiplicity="1" />
+          <End Role="tbDispositivos" Type="Self.tbDispositivos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbLotes">
+              <PropertyRef Name="CodLote" />
+            </Principal>
+            <Dependent Role="tbDispositivos">
+              <PropertyRef Name="CodLote" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_idcargo">
+          <End Role="tbTurnos" Type="Self.tbTurnos" Multiplicity="1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTurnos">
+              <PropertyRef Name="idTurno" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="idTurno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbDispositivos_Ruc">
+          <End Role="tbProveedores" Type="Self.tbProveedores" Multiplicity="1" />
+          <End Role="tbLotes" Type="Self.tbLotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbProveedores">
+              <PropertyRef Name="Ruc" />
+            </Principal>
+            <Dependent Role="tbLotes">
+              <PropertyRef Name="Ruc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bdJeaNetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbAlertas" EntityType="Self.tbAlertas" />
+          <EntitySet Name="tbAuditoria" EntityType="Self.tbAuditoria" />
+          <EntitySet Name="tbCargos" EntityType="Self.tbCargos" />
+          <EntitySet Name="tbClienteDisposiivo" EntityType="Self.tbClienteDisposiivo" />
+          <EntitySet Name="tbClientes" EntityType="Self.tbClientes" />
+          <EntitySet Name="tbCompras" EntityType="Self.tbCompras" />
+          <EntitySet Name="tbComprobante" EntityType="Self.tbComprobante" />
+          <EntitySet Name="tbCondicion" EntityType="Self.tbCondicion" />
+          <EntitySet Name="tbDetalleCompras" EntityType="Self.tbDetalleCompras" />
+          <EntitySet Name="tbDetalleComprobante" EntityType="Self.tbDetalleComprobante" />
+          <EntitySet Name="tbDispositivos" EntityType="Self.tbDispositivos" />
+          <EntitySet Name="tbEmpleados" EntityType="Self.tbEmpleados" />
+          <EntitySet Name="tbKardex" EntityType="Self.tbKardex" />
+          <EntitySet Name="tbLotes" EntityType="Self.tbLotes" />
+          <EntitySet Name="tbProveedores" EntityType="Self.tbProveedores" />
+          <EntitySet Name="tbTurnos" EntityType="Self.tbTurnos" />
+          <EntitySet Name="tbSesiones" EntityType="Self.tbSesiones" />
+          <AssociationSet Name="fk_DniCli" Association="Self.fk_DniCli">
+            <End Role="tbClientes" EntitySet="tbClientes" />
+            <End Role="tbAlertas" EntitySet="tbAlertas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_idturno" Association="Self.fk_idturno">
+            <End Role="tbTurnos" EntitySet="tbTurnos" />
+            <End Role="tbAlertas" EntitySet="tbAlertas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEmpleados_Codigo_Cargo" Association="Self.FK_tbEmpleados_Codigo_Cargo">
+            <End Role="tbCargos" EntitySet="tbCargos" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ClienteDispositivo" Association="Self.fk_ClienteDispositivo">
+            <End Role="tbClientes" EntitySet="tbClientes" />
+            <End Role="tbClienteDisposiivo" EntitySet="tbClienteDisposiivo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_SerieDispositivo" Association="Self.fk_SerieDispositivo">
+            <End Role="tbDispositivos" EntitySet="tbDispositivos" />
+            <End Role="tbClienteDisposiivo" EntitySet="tbClienteDisposiivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbComprobante_DniCliente" Association="Self.FK_tbComprobante_DniCliente">
+            <End Role="tbClientes" EntitySet="tbClientes" />
+            <End Role="tbComprobante" EntitySet="tbComprobante" />
+          </AssociationSet>
+          <AssociationSet Name="fk_compradni" Association="Self.fk_compradni">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbCompras" EntitySet="tbCompras" />
+          </AssociationSet>
+          <AssociationSet Name="fk_compraruc" Association="Self.fk_compraruc">
+            <End Role="tbProveedores" EntitySet="tbProveedores" />
+            <End Role="tbCompras" EntitySet="tbCompras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbDetalleCompra_idComprobante" Association="Self.FK_tbDetalleCompra_idComprobante">
+            <End Role="tbCompras" EntitySet="tbCompras" />
+            <End Role="tbDetalleCompras" EntitySet="tbDetalleCompras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbComprobante_DniEmpleado" Association="Self.FK_tbComprobante_DniEmpleado">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbComprobante" EntitySet="tbComprobante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbDetalleComprobante_idComprobante" Association="Self.FK_tbDetalleComprobante_idComprobante">
+            <End Role="tbComprobante" EntitySet="tbComprobante" />
+            <End Role="tbDetalleComprobante" EntitySet="tbDetalleComprobante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEstadoDispositivo" Association="Self.FK_tbEstadoDispositivo">
+            <End Role="tbCondicion" EntitySet="tbCondicion" />
+            <End Role="tbDispositivos" EntitySet="tbDispositivos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbDetalleCompra_CodigoLote" Association="Self.FK_tbDetalleCompra_CodigoLote">
+            <End Role="tbLotes" EntitySet="tbLotes" />
+            <End Role="tbDetalleCompras" EntitySet="tbDetalleCompras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbDetalleComprobante_CodigoLote" Association="Self.FK_tbDetalleComprobante_CodigoLote">
+            <End Role="tbLotes" EntitySet="tbLotes" />
+            <End Role="tbDetalleComprobante" EntitySet="tbDetalleComprobante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbLotes" Association="Self.FK_tbLotes">
+            <End Role="tbLotes" EntitySet="tbLotes" />
+            <End Role="tbDispositivos" EntitySet="tbDispositivos" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_idcargo" Association="Self.Fk_idcargo">
+            <End Role="tbTurnos" EntitySet="tbTurnos" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbDispositivos_Ruc" Association="Self.FK_tbDispositivos_Ruc">
+            <End Role="tbProveedores" EntitySet="tbProveedores" />
+            <End Role="tbLotes" EntitySet="tbLotes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bdJeaNetModelStoreContainer" CdmEntityContainer="bdJeaNetEntities">
+          <EntitySetMapping Name="tbAlertas">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbAlertas">
+              <MappingFragment StoreEntitySet="tbAlertas">
+                <ScalarProperty Name="CodigoAlerta" ColumnName="CodigoAlerta" />
+                <ScalarProperty Name="DniCli" ColumnName="DniCli" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="idTurno" ColumnName="idTurno" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbAuditoria">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbAuditoria">
+              <MappingFragment StoreEntitySet="tbAuditoria">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="DNI_Usuario" ColumnName="DNI_Usuario" />
+                <ScalarProperty Name="descripcionAccion" ColumnName="descripcionAccion" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbCargos">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbCargos">
+              <MappingFragment StoreEntitySet="tbCargos">
+                <ScalarProperty Name="Codigo_Cargo" ColumnName="Codigo_Cargo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbClienteDisposiivo">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbClienteDisposiivo">
+              <MappingFragment StoreEntitySet="tbClienteDisposiivo">
+                <ScalarProperty Name="idClienteDispositivo" ColumnName="idClienteDispositivo" />
+                <ScalarProperty Name="DniCliente" ColumnName="DniCliente" />
+                <ScalarProperty Name="SerieDispositivo" ColumnName="SerieDispositivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbClientes">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbClientes">
+              <MappingFragment StoreEntitySet="tbClientes">
+                <ScalarProperty Name="DniCliente" ColumnName="DniCliente" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbCompras">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbCompras">
+              <MappingFragment StoreEntitySet="tbCompras">
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="DniEmpleado" ColumnName="DniEmpleado" />
+                <ScalarProperty Name="RucProveedor" ColumnName="RucProveedor" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbComprobante">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbComprobante">
+              <MappingFragment StoreEntitySet="tbComprobante">
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="DniEmpleado" ColumnName="DniEmpleado" />
+                <ScalarProperty Name="DniCliente" ColumnName="DniCliente" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="Igv" ColumnName="Igv" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbCondicion">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbCondicion">
+              <MappingFragment StoreEntitySet="tbCondicion">
+                <ScalarProperty Name="idCondicion" ColumnName="idCondicion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbDetalleCompras">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbDetalleCompras">
+              <MappingFragment StoreEntitySet="tbDetalleCompras">
+                <ScalarProperty Name="idDetalleComprobante" ColumnName="idDetalleComprobante" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="CodigoLote" ColumnName="CodigoLote" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbDetalleComprobante">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbDetalleComprobante">
+              <MappingFragment StoreEntitySet="tbDetalleComprobante">
+                <ScalarProperty Name="idDetalleComprobante" ColumnName="idDetalleComprobante" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="CodigoLote" ColumnName="CodigoLote" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbDispositivos">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbDispositivos">
+              <MappingFragment StoreEntitySet="tbDispositivos">
+                <ScalarProperty Name="SerieDispositivo" ColumnName="SerieDispositivo" />
+                <ScalarProperty Name="CodLote" ColumnName="CodLote" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbEmpleados">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbEmpleados">
+              <MappingFragment StoreEntitySet="tbEmpleados">
+                <ScalarProperty Name="DniEmpleado" ColumnName="DniEmpleado" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Codigo_Cargo" ColumnName="Codigo_Cargo" />
+                <ScalarProperty Name="idTurno" ColumnName="idTurno" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbKardex">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbKardex">
+              <MappingFragment StoreEntitySet="tbKardex">
+                <ScalarProperty Name="idKardex" ColumnName="idKardex" />
+                <ScalarProperty Name="CodLote" ColumnName="CodLote" />
+                <ScalarProperty Name="DniEmpleado" ColumnName="DniEmpleado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbLotes">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbLotes">
+              <MappingFragment StoreEntitySet="tbLotes">
+                <ScalarProperty Name="CodLote" ColumnName="CodLote" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Ruc" ColumnName="Ruc" />
+                <ScalarProperty Name="Sistema_Operativo" ColumnName="Sistema_Operativo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio_Unitario" ColumnName="Precio_Unitario" />
+                <ScalarProperty Name="Forma" ColumnName="Forma" />
+                <ScalarProperty Name="Memoria" ColumnName="Memoria" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbProveedores">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbProveedores">
+              <MappingFragment StoreEntitySet="tbProveedores">
+                <ScalarProperty Name="Ruc" ColumnName="Ruc" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbTurnos">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbTurnos">
+              <MappingFragment StoreEntitySet="tbTurnos">
+                <ScalarProperty Name="idTurno" ColumnName="idTurno" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="entrada" ColumnName="entrada" />
+                <ScalarProperty Name="salida" ColumnName="salida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbSesiones">
+            <EntityTypeMapping TypeName="bdJeaNetModel.tbSesiones">
+              <MappingFragment StoreEntitySet="tbSesiones">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
