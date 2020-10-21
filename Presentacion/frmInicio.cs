@@ -16,7 +16,7 @@ namespace Presentacion {
         public void InicioSistema() {
             timer1.Stop();
             this.Hide();
-            frmZonaDeAcceso form = new frmZonaDeAcceso();
+            frmZonaDeAcceso form = frmZonaDeAcceso.getFormulario();
             form.Show();
         }
 

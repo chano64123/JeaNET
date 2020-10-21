@@ -715,6 +715,7 @@
             this.Opacity = 0.9D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_LoginAdmi_Empleado";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLoginAdmin_FormClosing);
             this.Load += new System.EventHandler(this.frmLoginAdmin_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form_LoginAdmi_Empleado_MouseDown);
             this.panel_LoginAdmiEmpleado.ResumeLayout(false);
