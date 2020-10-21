@@ -12,6 +12,8 @@ namespace Presentacion {
         private Form _objForm;
         public static string ingreso;
         public static DataTable data = new DataTable();
+        ClsNValidacion validar = ClsNValidacion.getValidacion();
+
         public frmAdministrador(DataTable datos) {
             InitializeComponent();
             data = datos;
@@ -102,6 +104,11 @@ namespace Presentacion {
 
         private void BtnCargos_Click(object sender, EventArgs e) {
             MtdAuditoria(data.Rows[0][0].ToString(), "Presiono boton " + btnCargos.Name);
+
+            if (!validar.boton(btnCargos.Enabled)) {
+                return;
+            }
+
             SidePanel.Height = btnCargos.Height;
             SidePanel.Top = btnCargos.Top;
             if (Application.OpenForms.OfType<frmCargos>().Count() < 0) {
@@ -122,6 +129,9 @@ namespace Presentacion {
 
         private void btnEmpleados_Click(object sender, EventArgs e) {
             MtdAuditoria(data.Rows[0][0].ToString(), "Presiono el boton " + btnEmpleados.Name);
+            if (!validar.boton(btnEmpleados.Enabled)) {
+                return;
+            }
             SidePanel.Height = btnEmpleados.Height;
             SidePanel.Top = btnEmpleados.Top;
             if (Application.OpenForms.OfType<frmEmpleados>().Count() < 0) {
@@ -193,6 +203,10 @@ namespace Presentacion {
         private void btnProveedor_Click(object sender, EventArgs e) {
             MtdAuditoria(data.Rows[0][0].ToString(), "Presiono el boton " + btnProveedor.Name);
 
+            if (!validar.boton(btnProveedor.Enabled)) {
+                return;
+            }
+
             SidePanel.Height = btnProveedor.Height;
             SidePanel.Top = btnProveedor.Top;
             if (Application.OpenForms.OfType<frmProveedores>().Count() < 0) {
@@ -212,6 +226,11 @@ namespace Presentacion {
 
         private void btnReportes_Click(object sender, EventArgs e) {
             MtdAuditoria(data.Rows[0][0].ToString(), "Presiono el boton " + btnReportes.Name);
+
+            if (!validar.boton(btnReportes.Enabled)) {
+                return;
+            }
+
             SidePanel.Height = btnReportes.Height;
             SidePanel.Top = btnReportes.Top;
             if (Application.OpenForms.OfType<frmReportes>().Count() < 0) {
@@ -293,6 +312,11 @@ namespace Presentacion {
 
         private void btnCompras_Click(object sender, EventArgs e) {
             MtdAuditoria(data.Rows[0][0].ToString(), "Presiono el boton " + btnCompras.Name);
+
+            if (!validar.boton(btnCompras.Enabled)) {
+                return;
+            }
+
             SidePanel.Height = btnCompras.Height;
             SidePanel.Top = btnCompras.Top;
             if (Application.OpenForms.OfType<frmCompras>().Count() < 0) {
@@ -312,6 +336,11 @@ namespace Presentacion {
 
         private void btnKardex_Click(object sender, EventArgs e) {
             MtdAuditoria(data.Rows[0][0].ToString(), "Presiono el boton " + btnKardex.Name);
+
+            if (!validar.boton(btnKardex.Enabled)) {
+                return;
+            }
+
             SidePanel.Height = btnKardex.Height;
             SidePanel.Top = btnKardex.Top;
             if (Application.OpenForms.OfType<frmKardex>().Count() < 0) {
