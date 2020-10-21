@@ -190,7 +190,7 @@ namespace Presentacion {
 
         private void ZonaDeAccesosTostripMenu_Click(object sender, EventArgs e) {
             this.Hide();
-            frmZonaDeAcceso frm = new frmZonaDeAcceso();
+            frmZonaDeAcceso frm = frmZonaDeAcceso.getFormulario();
             frm.Show();
         }
 

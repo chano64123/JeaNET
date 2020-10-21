@@ -178,6 +178,7 @@
             this.Opacity = 0.95D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ZonaDeAccesos";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmZonaDeAcceso_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictboReloj)).EndInit();

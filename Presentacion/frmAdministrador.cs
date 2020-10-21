@@ -95,7 +95,7 @@ namespace Presentacion {
             ClsNcorreo N = new ClsNcorreo();
             //N.MtdEnviarEmail(E);
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Cerro sesión");
-            frmLoginAdmin f = new frmLoginAdmin();
+            frmLoginAdmin f = frmLoginAdmin.getFormulario();
             this.Close();
             f.Show();
         }

@@ -11,8 +11,22 @@ using System.Windows.Forms;
 namespace Presentacion {
     public partial class frmLoginAdmin : Form {
 
-        public frmLoginAdmin() {
+        private static frmLoginAdmin frm = null;
+
+        private frmLoginAdmin() {
             InitializeComponent();
+        }
+
+        public static frmLoginAdmin getFormulario() {
+            if (frm == null) {
+                frm = new frmLoginAdmin();
+            }
+            return frm;
+        }
+
+        public static frmLoginAdmin closeForm() {
+            frm = null;
+            return frm;
         }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -244,11 +258,9 @@ namespace Presentacion {
 
         private void ZonaDeAccesosTostripMenu_Click(object sender, EventArgs e) {
             MtdAuditoria(txtUsuario.Text, "Clic en zona de acceso");
-            frmZonaDeAcceso frm = new frmZonaDeAcceso();
+            frmZonaDeAcceso frm1 = frmZonaDeAcceso.getFormulario();
             this.Hide();
-            frm.ShowDialog();
-            this.Show();
-
+            frm1.Show();
         }
 
         private void linkpass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
@@ -270,6 +282,10 @@ namespace Presentacion {
             registryKey?.SetValue("LastUsedModalityWasHandwriting", 1, RegistryValueKind.DWord);
 
             Process.Start(@"C:\Program Files\Common Files\Microsoft Shared\ink\TabTip.exe");
+        }
+
+        private void frmLoginAdmin_FormClosing(object sender, FormClosingEventArgs e) {
+            frm = null;
         }
     }
 }

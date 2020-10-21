@@ -715,6 +715,7 @@
             this.Name = "frmLoginSeguridad";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_LoginSeguridadCiudana";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLoginSeguridad_FormClosing);
             this.Load += new System.EventHandler(this.frmLoginSeguridad_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form_LoginSeguridadCiudana_MouseDown);
             this.panel_LoginSeguCiudana.ResumeLayout(false);

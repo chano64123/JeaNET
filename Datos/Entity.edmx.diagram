@@ -8,11 +8,11 @@
         <EntityTypeShape EntityType="bdJeaNetModel.tbAlertas" Width="1.5" PointX="0.5" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="bdJeaNetModel.tbAuditoria" Width="1.5" PointX="12.125" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="bdJeaNetModel.tbCargos" Width="1.5" PointX="5.125" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdJeaNetModel.tbClienteDisposiivo" Width="1.5" PointX="2.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdJeaNetModel.tbClienteDisposiivo" Width="1.5" PointX="3.875" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="bdJeaNetModel.tbClientes" Width="1.5" PointX="2.5" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="bdJeaNetModel.tbCompras" Width="1.5" PointX="5.125" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="bdJeaNetModel.tbComprobante" Width="1.5" PointX="0.5" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdJeaNetModel.tbCondicion" Width="1.5" PointX="10.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdJeaNetModel.tbCondicion" Width="1.5" PointX="9.125" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="bdJeaNetModel.tbDetalleCompras" Width="1.5" PointX="7.875" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="bdJeaNetModel.tbDetalleComprobante" Width="1.5" PointX="4.625" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="bdJeaNetModel.tbDispositivos" Width="1.5" PointX="6.875" PointY="9.75" IsExpanded="true" />
