@@ -1,5 +1,7 @@
-﻿using Entidad;
+﻿using Datos;
+using Entidad;
 using System;
+using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -30,7 +32,7 @@ namespace Negocios {
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add(new SqlParameter("id", SqlDbType.VarChar));
                 command.Parameters.Add(new SqlParameter("des", SqlDbType.VarChar));
-                command.Parameters["id"].Value = e.Idcargo;
+                command.Parameters["id"].Value = e.Codigo_Cargo;
                 command.Parameters["des"].Value = e.Descripcion;
                 command.ExecuteNonQuery();
                 command.Connection = objConexion.Desconectar();
@@ -91,25 +93,44 @@ namespace Negocios {
             return result;
         }
 
-        public bool MtdGuardarCargo(ClsEcargo e) {
-            try {
-                ClsConexionSQL objConexion = new ClsConexionSQL();
-                SqlCommand command = new SqlCommand();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                command.Connection = objConexion.Conectar();
-                command.CommandText = "USP_I_AgregarCargo";
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("id", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("des", SqlDbType.VarChar));
-                command.Parameters["id"].Value = e.Idcargo;
-                command.Parameters["des"].Value = e.Descripcion;
-                command.ExecuteNonQuery();
-                command.Connection = objConexion.Desconectar();
-                return true;
-            } catch (Exception ex) {
-                return false;
-                throw ex;
+        //public bool MtdGuardarCargo(ClsEcargo e) {
+        //    try {
+        //        ClsConexionSQL objConexion = new ClsConexionSQL();
+        //        SqlCommand command = new SqlCommand();
+        //        SqlDataAdapter adapter = new SqlDataAdapter();
+        //        command.Connection = objConexion.Conectar();
+        //        command.CommandText = "USP_I_AgregarCargo";
+        //        command.CommandType = CommandType.StoredProcedure;
+        //        command.Parameters.Add(new SqlParameter("id", SqlDbType.VarChar));
+        //        command.Parameters.Add(new SqlParameter("des", SqlDbType.VarChar));
+        //        command.Parameters["id"].Value = e.Idcargo;
+        //        command.Parameters["des"].Value = e.Descripcion;
+        //        command.ExecuteNonQuery();
+        //        command.Connection = objConexion.Desconectar();
+        //        return true;
+        //    } catch (Exception ex) {
+        //        return false;
+        //        throw ex;
+        //    }
+        //}
+
+
+        ClsDcargo datos = new ClsDcargo();
+
+        public bool agregarCargo(ClsEcargo cargo) {
+            tbCargos tbl = new tbCargos();
+            tbl.Codigo_Cargo = cargo.Codigo_Cargo;
+            tbl.Descripcion = cargo.Descripcion;
+            return datos.agregarCargo(tbl);
+        }
+
+        public ArrayList listarCargos() {
+            ArrayList cargos = new ArrayList();
+            foreach (var item in datos.listarCargos()) {
+                ClsEcargo cargo = ClsEcargo.crear(item.Codigo_Cargo, item.Descripcion);
+                cargos.Add(cargo);
             }
+            return cargos;
         }
     }
 }

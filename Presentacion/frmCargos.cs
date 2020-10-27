@@ -13,7 +13,7 @@ namespace Presentacion {
         private void FormPanelAdmi_Cargos_Load(object sender, EventArgs e) {
             //listar cargos
             ClsNcargo N = new ClsNcargo();
-            dgvCargos.DataSource = N.MtdListarCargos();
+            dgvCargos.DataSource = N.listarCargos();
         }
 
         private void btnNuevoo_Click(object sender, EventArgs e) {
