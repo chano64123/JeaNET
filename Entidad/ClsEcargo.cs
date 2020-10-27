@@ -1,13 +1,24 @@
-﻿namespace Entidad {
+﻿using Datos;
+using System.Collections.Generic;
+
+namespace Entidad {
     public class ClsEcargo {
-        public string Idcargo { get; private set; }
+        public string Codigo_Cargo { get; private set; }
         public string Descripcion { get; private set; }
 
-        public static ClsEcargo crear(string _idCargo, string _descripcion) {
-            return new ClsEcargo() {
-                Idcargo = _idCargo,
+        public static ClsEcargo crear(string _codigo_Cargo, string _descripcion) {
+            return new ClsEcargo(){
+                Codigo_Cargo = _codigo_Cargo,
                 Descripcion = _descripcion
             };
         }
+
+        
+
+
+
+
+
+
     }
 }

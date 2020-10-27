@@ -19,7 +19,7 @@ namespace Presentacion {
         }
 
         private void llenarCamposCargo(ClsEcargo E) {
-            txtCodigo.Text = E.Idcargo;
+            txtCodigo.Text = E.Codigo_Cargo;
             txtDescripcion.Text = E.Descripcion;
             txtCodigo.Enabled = false;
             btnGuardar.Enabled = false;
@@ -62,7 +62,7 @@ namespace Presentacion {
             if (MtdValidarCampos()) {
                 ClsEcargo E = ClsEcargo.crear(txtCodigo.Text, txtDescripcion.Text);
                 ClsNcargo N = new ClsNcargo();
-                if (N.MtdGuardarCargo(E)) {
+                if (N.agregarCargo(E)) {
                     if (MessageBox.Show("Cargo registrado correctamente, ¿Desea continuar en el formulario de registro de cargos?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) {
                         frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Cargo agregado correctamente " + btnGuardar.Name);
                         MtdLimpiar();
