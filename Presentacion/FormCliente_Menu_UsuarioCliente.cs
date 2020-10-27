@@ -30,7 +30,7 @@ namespace Presentacion {
             MessageBox.Show("Datos Guardados correctamente", "JeaNet - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
-        
+
         private void txtDNI_KeyPress(object sender, KeyPressEventArgs e) {
             ClsNValidacion validacion = ClsNValidacion.getValidacion();
             validacion.soloNumero(e);

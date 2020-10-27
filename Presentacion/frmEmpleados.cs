@@ -1,7 +1,6 @@
 ﻿using Entidad;
 using Negocios;
 using System;
-using System.Data;
 using System.Windows.Forms;
 
 namespace Presentacion {
@@ -13,7 +12,7 @@ namespace Presentacion {
 
         private void frmEmpleados_Load(object sender, EventArgs e) {
             ClsNempleado N = new ClsNempleado();
-            dgvEmpleados.DataSource = N.MtdListarEmpleados();
+            dgvEmpleados.DataSource = N.listarEmpleados();
         }
 
         private void dgvEmpleados_CellDoubleClick(object sender, DataGridViewCellEventArgs e) {
@@ -21,20 +20,21 @@ namespace Presentacion {
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "hizo doble click mara modificar empleado");
             ClsNempleado N = new ClsNempleado();
             ClsNcargo Nc = new ClsNcargo();
-            DataTable data = N.MtdBusquedaEmpleado(dgvEmpleados.CurrentRow.Cells[0].Value.ToString());
-            //para cargo
-            foreach (DataRow item in Nc.MtdListarCargos().Rows) {
-                if (data.Rows[0][6].ToString() == item[0].ToString()) {
-                    cargo = item[1].ToString();
-                    break;
+            ClsEempleado E = null;
+            foreach (ClsEempleado item in N.busquedaEmpleado(dgvEmpleados.CurrentRow.Cells[0].Value.ToString())) {
+                foreach (ClsEcargo item1 in Nc.listarCargos()) {
+                    if (item1.Codigo_Cargo.Equals(item.Codigo_Cargo)) {
+                        cargo = item1.Descripcion;
+                        break;
+                    }
                 }
+                string estado = (item.Estado.Equals("1")) ? "Activo" : "Inactivo";
+                E = ClsEempleado.crear(item.DniEmpleado, item.Nombres, item.Apellidos, item.Direccion, item.Correo, item.Telefono, item.idTurno, cargo, estado, item.Usuario, item.Contraseña);
+                break;
             }
-            string turno = (data.Rows[0][7].ToString() == "1") ? "Mañana" : (data.Rows[0][7].ToString() == "2") ? "Tarde" : "Noche";
-            string estado = (data.Rows[0][8].ToString() == "1") ? "Activo" : "Inactivo";
-            ClsEempleado E = ClsEempleado.crear(data.Rows[0][0].ToString(), data.Rows[0][1].ToString(), data.Rows[0][2].ToString(), data.Rows[0][3].ToString(), data.Rows[0][4].ToString(), data.Rows[0][5].ToString(), turno, cargo, estado, data.Rows[0][9].ToString(), data.Rows[0][10].ToString());
             frmRegistroEmpleado f = new frmRegistroEmpleado(E);
             f.ShowDialog();
-            dgvEmpleados.DataSource = N.MtdListarEmpleados();
+            dgvEmpleados.DataSource = N.listarEmpleados();
         }
 
         private void btnNuevo_Click(object sender, EventArgs e) {
@@ -42,17 +42,17 @@ namespace Presentacion {
             frmRegistroEmpleado f = new frmRegistroEmpleado();
             ClsNempleado N = new ClsNempleado();
             f.ShowDialog();
-            dgvEmpleados.DataSource = N.MtdListarEmpleados();
+            dgvEmpleados.DataSource = N.listarEmpleados();
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e) {
             ClsNempleado N = new ClsNempleado();
-            dgvEmpleados.DataSource = N.MtdFiltrarEmpleados(txtBuscar.Text);
+            dgvEmpleados.DataSource = N.filtrarEmpleados(txtBuscar.Text);
         }
 
         private void txtBuscar_Leave(object sender, EventArgs e) {
             ClsNempleado N = new ClsNempleado();
-            dgvEmpleados.DataSource = N.MtdListarEmpleados();
+            dgvEmpleados.DataSource = N.listarEmpleados();
         }
 
         private void TxtBuscar_MouseClick(object sender, MouseEventArgs e) {

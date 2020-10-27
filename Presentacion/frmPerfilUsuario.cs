@@ -16,25 +16,29 @@ namespace Presentacion {
         private void llenarCamposPerfilUsuario(DataTable data) {
             datos = data;
             ClsNempleado N = new ClsNempleado();
-            data = N.MtdBusquedaEmpleado(data.Rows[0][0].ToString());
-            ClsEempleado E = new ClsEempleado();
+            ClsEempleado E = null;
             ClsNcargo Nc = new ClsNcargo();
-            lblDNI.Text = data.Rows[0][0].ToString();
-            lblNombre.Text = data.Rows[0][1].ToString();
-            lblApellido.Text = data.Rows[0][2].ToString();
-            txtDireccion.Text = data.Rows[0][3].ToString();
-            lblCorreo.Text = data.Rows[0][4].ToString();
-            txtCorreo.Text = data.Rows[0][4].ToString();
-            txtTelefono.Text = data.Rows[0][5].ToString();
-            foreach (DataRow item in Nc.MtdListarCargos().Rows) {
-                if (data.Rows[0][6].ToString() == item[0].ToString()) {
-                    lblcargo.Text = item[1].ToString();
-                    break;
+            foreach (ClsEempleado item in N.busquedaEmpleado(data.Rows[0][0].ToString())) {
+                foreach (ClsEcargo item1 in Nc.listarCargos()) {
+                    if (item1.Codigo_Cargo.Equals(item.Codigo_Cargo)) {
+                        lblcargo.Text = item1.Descripcion;
+                        break;
+                    }
                 }
+                string estado = (item.Estado.Equals("1")) ? "Activo" : "Inactivo";
+                E = ClsEempleado.crear(item.DniEmpleado, item.Nombres, item.Apellidos, item.Direccion, item.Correo, item.Telefono, item.idTurno, lblcargo.Text, estado, item.Usuario, item.Contraseña);
+                break;
             }
-            lblturno.Text = (data.Rows[0][7].ToString() == "1") ? "Mañana" : (data.Rows[0][7].ToString() == "2") ? "Tarde" : (data.Rows[0][7].ToString() == "3") ? "Noche" : "";
-            lblUsuario.Text = data.Rows[0][9].ToString();
-            txtUsuario.Text = data.Rows[0][9].ToString();
+            lblDNI.Text = E.DniEmpleado;
+            lblNombre.Text = E.Nombres;
+            lblApellido.Text = E.Apellidos;
+            txtDireccion.Text = E.Direccion;
+            lblCorreo.Text = E.Correo;
+            txtCorreo.Text = E.Correo;
+            txtTelefono.Text = E.Telefono;
+            lblturno.Text = (E.idTurno == 1) ? "Mañana" : (E.idTurno == 2) ? "Tarde" : (E.idTurno == 3) ? "Noche" : "";
+            lblUsuario.Text = E.Usuario;
+            txtUsuario.Text = E.Usuario;
         }
 
         public static bool cambiar = false;
@@ -53,7 +57,7 @@ namespace Presentacion {
             panel1.Visible = false;
         }
 
-        private bool MtdValidarCampos() {
+        private bool validarCampos() {
             ClsNValidacion validacion = ClsNValidacion.getValidacion();
             //validando que campos no esten vacios o null
             bool result = !existenVacios(validacion);
@@ -114,10 +118,10 @@ namespace Presentacion {
 
         private void btnGuardar_Click(object sender, EventArgs e) {
             if (cambiar == true) {
-                if (MtdValidarCampos()) {
-                    ClsEempleado E = ClsEempleado.crear(lblDNI.Text, lblNombre.Text, lblApellido.Text, txtDireccion.Text, txtCorreo.Text, txtTelefono.Text, datos.Rows[0][7].ToString(), datos.Rows[0][6].ToString(), datos.Rows[0][8].ToString(), txtUsuario.Text, txtClaveRepe.Text);
+                if (validarCampos()) {
+                    ClsEempleado E = ClsEempleado.crear(lblDNI.Text, lblNombre.Text, lblApellido.Text, txtDireccion.Text, txtCorreo.Text, txtTelefono.Text, Convert.ToInt32(datos.Rows[0][7]), datos.Rows[0][6].ToString(), datos.Rows[0][8].ToString(), txtUsuario.Text, txtClaveRepe.Text);
                     ClsNempleado N = new ClsNempleado();
-                    if (N.MtdModificarEmpleado(E)) {
+                    if (N.modificarEmpleado(E)) {
                         MessageBox.Show("Datos modificados correctamente", "JeaNet - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Presiono " + btnGuardar.Name + " para modificar perfil " + frmAdministrador.data.Rows[0][0].ToString());
                         lblUsuario.Text = txtUsuario.Text;
@@ -132,10 +136,10 @@ namespace Presentacion {
                     panel1.Visible = false;
                     this.Close();
                 }
-            } else if (MtdValidarCampos()) {
-                ClsEempleado E = ClsEempleado.crear(lblDNI.Text, lblNombre.Text, lblApellido.Text, txtDireccion.Text, txtCorreo.Text, txtTelefono.Text, datos.Rows[0][7].ToString(), datos.Rows[0][6].ToString(), datos.Rows[0][8].ToString(), txtUsuario.Text, txtClaveRepe.Text);
+            } else if (validarCampos()) {
+                ClsEempleado E = ClsEempleado.crear(lblDNI.Text, lblNombre.Text, lblApellido.Text, txtDireccion.Text, txtCorreo.Text, txtTelefono.Text, Convert.ToInt32(datos.Rows[0][7]), datos.Rows[0][6].ToString(), datos.Rows[0][8].ToString(), txtUsuario.Text, txtClaveRepe.Text);
                 ClsNempleado N = new ClsNempleado();
-                if (N.MtdModificarEmpleado(E)) {
+                if (N.modificarEmpleado(E)) {
                     MessageBox.Show("Datos modificados correctamente", "JeaNet - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Presiono " + btnGuardar.Name + " para modificar perfil " + frmAdministrador.data.Rows[0][0].ToString());
                     lblUsuario.Text = txtUsuario.Text;

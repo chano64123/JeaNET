@@ -21,14 +21,14 @@ namespace Presentacion {
         }
 
         private void llenarCamposEmpleado(ClsEempleado E) {
-            txtDni.Text = E.Dni;
+            txtDni.Text = E.DniEmpleado;
             txtNombres.Text = E.Nombres;
             txtApellidos.Text = E.Apellidos;
             txtDireccion.Text = E.Direccion;
             txtCorreo.Text = E.Correo;
             txtTelefono.Text = E.Telefono;
-            cmbCargo.Text = E.Cargo;
-            cmbTurno.Text = E.Turno;
+            cmbCargo.Text = E.Codigo_Cargo;
+            cmbTurno.SelectedIndex = E.idTurno - 1;
             cmbEstado.Text = E.Estado;
             txtUsuario.Text = E.Usuario;
             txtContraseña.Text = E.Contraseña;
@@ -39,9 +39,8 @@ namespace Presentacion {
         DataTable cargos = new DataTable();
         private void MtdCargarCargos() {
             ClsNcargo N = new ClsNcargo();
-            cargos = N.MtdListarCargos();
-            foreach (DataRow item in cargos.Rows) {
-                cmbCargo.Items.Add(item[1]);
+            foreach (ClsEcargo item in N.listarCargos()) {
+                cmbCargo.Items.Add(item.Descripcion);
             }
         }
 
@@ -69,9 +68,9 @@ namespace Presentacion {
         private void btnGuardar_Click(object sender, EventArgs e) {
             accion = 0;
             if (MtdValidarCampos()) {
-                ClsEempleado E = ClsEempleado.crear(txtDni.Text, txtNombres.Text, txtApellidos.Text, txtDireccion.Text, txtCorreo.Text, txtTelefono.Text, lblTurno.Text, lblCargo.Text, lblEstado.Text, txtUsuario.Text, txtContraseña.Text);
+                ClsEempleado E = ClsEempleado.crear(txtDni.Text, txtNombres.Text, txtApellidos.Text, txtDireccion.Text, txtCorreo.Text, txtTelefono.Text, cmbTurno.SelectedIndex + 1, lblCargo.Text, lblEstado.Text, txtUsuario.Text, txtContraseña.Text);
                 ClsNempleado N = new ClsNempleado();
-                if (N.MtdGuardarEmpleado(E)) {
+                if (N.agregarEmpleado(E)) {
                     if (MessageBox.Show("Empleado guardado correctamente, ¿Desea continuar en el formulario de registro de empleados?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) {
                         frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Presiono " + btnGuardar.Name + " para agregar nuevo empleado");
                         MtdLimpiar();
@@ -104,9 +103,9 @@ namespace Presentacion {
         private void btnModificar_Click(object sender, EventArgs e) {
             accion = 1;
             if (MtdValidarCampos()) {
-                ClsEempleado E = ClsEempleado.crear(txtDni.Text, txtNombres.Text, txtApellidos.Text, txtDireccion.Text, txtCorreo.Text, txtTelefono.Text, lblTurno.Text, lblCargo.Text, lblEstado.Text, txtUsuario.Text, txtContraseña.Text);
+                ClsEempleado E = ClsEempleado.crear(txtDni.Text, txtNombres.Text, txtApellidos.Text, txtDireccion.Text, txtCorreo.Text, txtTelefono.Text, cmbTurno.SelectedIndex + 1, lblCargo.Text, lblEstado.Text, txtUsuario.Text, txtContraseña.Text);
                 ClsNempleado N = new ClsNempleado();
-                if (N.MtdModificarEmpleado(E)) {
+                if (N.modificarEmpleado(E)) {
                     if (MessageBox.Show("Empleado modificado correctamente, ¿Desea continuar en el formulario de registro de empleados?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) {
                         frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Presiono " + btnModificar.Name + " para modificar empleado");
                         btnGuardar.Enabled = true;

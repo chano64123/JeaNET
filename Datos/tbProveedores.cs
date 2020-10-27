@@ -21,13 +21,24 @@ namespace Datos
             this.tbLotes = new HashSet<tbLotes>();
         }
     
-        public string Ruc { get; set; }
-        public string Nombre { get; set; }
-        public string Direccion { get; set; }
-        public string Telefono { get; set; }
-        public string Correo { get; set; }
-        public string Estado { get; set; }
-    
+        public string Ruc { get; private set; }
+        public string Nombre { get; private set; }
+        public string Direccion { get; private set; }
+        public string Telefono { get; private set; }
+        public string Correo { get; private set; }
+        public string Estado { get; private set; }
+
+        public static tbProveedores crear(string _ruc, string _nombre, string _direccion, string _telefono, string _correo, string _estado) {
+            return new tbProveedores() {
+                Ruc = _ruc,
+                Nombre = _nombre,
+                Direccion = _direccion,
+                Telefono = _telefono,
+                Correo = _correo,
+                Estado = _estado
+            };
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbCompras> tbCompras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

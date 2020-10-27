@@ -18,9 +18,9 @@ namespace Presentacion {
             Thora.Start();
             Tmin.Start();
             ClsNcargo N = new ClsNcargo();
-            foreach (DataRow item in N.MtdListarCargos().Rows) {
-                if (datos.Rows[0][6].ToString() == item[0].ToString()) {
-                    lblCargo.Text = item[1].ToString();
+            foreach (ClsEcargo item in N.listarCargos()) {
+                if (datos.Rows[0][6].ToString().Equals(item.Codigo_Cargo)) {
+                    lblCargo.Text = item.Descripcion;
                     break;
                 }
             }
@@ -119,7 +119,7 @@ namespace Presentacion {
         public static void MtdAuditoria(string dni, string desc) {
             ClsEauditoria objEauditoria = ClsEauditoria.crear(dni, desc, Convert.ToDateTime(DateTime.Now.ToShortDateString()), DateTime.Now.ToLongTimeString());
             ClsNauditoria objNauditoria = new ClsNauditoria();
-            objNauditoria.MtdAgregarHistorial(objEauditoria);
+            objNauditoria.agregarAuditoria(objEauditoria);
         }
 
         private void btnMapeodeZonas_JeaNet_Click(object sender, EventArgs e) {

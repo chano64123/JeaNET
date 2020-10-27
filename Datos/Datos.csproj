@@ -55,7 +55,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClsDalerta.cs" />
+    <Compile Include="ClsDauditoria.cs" />
     <Compile Include="ClsDcargo.cs" />
+    <Compile Include="ClsDcliente.cs" />
+    <Compile Include="ClsDclienteDispositivo.cs" />
+    <Compile Include="ClsDempleado.cs" />
+    <Compile Include="ClsDproveedor.cs" />
     <Compile Include="Mapeo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

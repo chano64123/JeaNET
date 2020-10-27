@@ -17,7 +17,7 @@ namespace Presentacion {
         }
 
         private void llenarCamposCliente(ClsEcliente E) {
-            txtDni.Text = E.Dni;
+            txtDni.Text = E.DniCliente;
             txtNombres.Text = E.Nombres;
             txtApellidos.Text = E.Apellidos;
             txtCorreo.Text = E.Correo;
@@ -28,10 +28,10 @@ namespace Presentacion {
         }
 
         private void btnModificar_Click(object sender, EventArgs e) {
-            if (MtdValidarCampos()) {
+            if (validarCampos()) {
                 ClsEcliente E = ClsEcliente.crear(txtDni.Text, txtNombres.Text, txtApellidos.Text, txtCorreo.Text, txtTelefono.Text, lblEstado.Text);
                 ClsNcliente N = new ClsNcliente();
-                if (N.MtdModificarCliente(E)) {
+                if (N.modificarCliente(E)) {
                     if (MessageBox.Show("Cliente modificado correctamente, ¿Desea continuar en el formulario de registro de cliente?", "JeaNET - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) {
                         frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Modificó cliente satisfactoriamente " + btnModificar.Name);
                         btnGuardar.Enabled = true;
@@ -49,10 +49,10 @@ namespace Presentacion {
         }
 
         private void btnGuardar_Click(object sender, EventArgs e) {
-            if (MtdValidarCampos()) {
+            if (validarCampos()) {
                 ClsEcliente E = ClsEcliente.crear(txtDni.Text, txtNombres.Text, txtApellidos.Text, txtCorreo.Text, txtTelefono.Text, lblEstado.Text);
                 ClsNcliente N = new ClsNcliente();
-                if (N.MtdGuardarCliente(E)) {
+                if (N.agregarCliente(E)) {
                     if (MessageBox.Show("Cliente registrado correctamente, ¿Desea continuar en el formulario de registro de cliente?", "JeaNET - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) {
                         frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Guardo nuevo cliente satisfactoriamente " + btnGuardar.Name);
                         MtdLimpiar();
@@ -67,7 +67,7 @@ namespace Presentacion {
             }
         }
 
-        private bool MtdValidarCampos() {
+        private bool validarCampos() {
             ClsNValidacion validacion = ClsNValidacion.getValidacion();
             //validando que campos no esten vacios o null
             bool result = existenVacios(validacion);

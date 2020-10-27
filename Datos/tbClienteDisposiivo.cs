@@ -17,7 +17,14 @@ namespace Datos
         public long idClienteDispositivo { get; set; }
         public string DniCliente { get; set; }
         public string SerieDispositivo { get; set; }
-    
+
+        public static tbClienteDisposiivo crear(string dniCliente, string serieDispositivo) {
+            return new tbClienteDisposiivo() {
+                DniCliente = dniCliente,
+                SerieDispositivo = serieDispositivo
+            };
+        }
+
         public virtual tbClientes tbClientes { get; set; }
         public virtual tbDispositivos tbDispositivos { get; set; }
     }
