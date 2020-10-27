@@ -62,15 +62,12 @@ namespace Negocios {
 
         public string MtdObtenerCodigoCargo() {
             string numero = "0";
-            int cant = MtdListarCargos().Rows.Count;
-            if (cant < 10) {
-                cant++;
-                numero = "00" + cant.ToString();
-            } else if (cant < 100) {
-                cant++;
+            int cant = MtdListarCargos().Rows.Count+1;
+            if (cant < 10) {                
+                numero = "00" + cant.ToString();               
+            } else if (cant < 100) {                
                 numero = "0" + cant.ToString();
-            } else if (cant < 1000) {
-                cant++;
+            } else if (cant < 1000) {                
                 numero = cant.ToString();
             }
             return numero;
