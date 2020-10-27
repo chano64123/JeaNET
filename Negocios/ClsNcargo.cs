@@ -119,6 +119,7 @@ namespace Negocios {
             tbl.Codigo_Cargo = cargo.Codigo_Cargo;
             tbl.Descripcion = cargo.Descripcion;
             return datos.agregarCargo(tbl);
+            //ga
         }
 
         public ArrayList listarCargos() {
