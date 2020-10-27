@@ -120,6 +120,7 @@ namespace Negocios {
             tbl.Descripcion = cargo.Descripcion;
             return datos.agregarCargo(tbl);
             //ga
+            //CHANO CTMR
         }
 
         public ArrayList listarCargos() {
