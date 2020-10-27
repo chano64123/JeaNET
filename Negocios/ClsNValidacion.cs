@@ -10,6 +10,7 @@ namespace Negocios {
 
         }
 
+        
         public static ClsNValidacion getValidacion() {
             if (val == null) {
                 val = new ClsNValidacion();
@@ -148,6 +149,13 @@ namespace Negocios {
                 err.SetError(txt, "");
             }
             return existe;
+        }
+
+        public bool boton(bool enabled) {
+            if (!enabled) {
+                MessageBox.Show("No tiene permiso suficiente para esta operación","Jeanet - Informa", MessageBoxButtons.OK,MessageBoxIcon.Information);
+            }
+            return enabled;
         }
 
         public bool contraseñaCorrecta(ErrorProvider err, Label lbl, TextBox txt, string mensaje) {

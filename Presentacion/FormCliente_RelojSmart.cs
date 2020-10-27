@@ -1,5 +1,5 @@
 ﻿using Entidad;
-using Microsoft.Speech.Recognition;
+using System.Speech.Recognition;
 using Negocios;
 using System;
 using System.Device.Location;
