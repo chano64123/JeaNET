@@ -10,18 +10,18 @@ namespace Presentacion {
 
         private void txtBuscar_TextChanged(object sender, EventArgs e) {
             ClsNauditoria N = new ClsNauditoria();
-            dgvAuditoria.DataSource = N.MtdFiltrarAuditoria(txtBuscar.Text);
+            dgvAuditoria.DataSource = N.filtrarAuditoria(txtBuscar.Text);
         }
 
         private void frmAuditoria_Load(object sender, EventArgs e) {
             //cargar auditorias
             ClsNauditoria N = new ClsNauditoria();
-            dgvAuditoria.DataSource = N.MtdListarAuditoria();
+            dgvAuditoria.DataSource = N.listarAuditoria();
         }
 
         private void txtBuscar_Leave(object sender, EventArgs e) {
             ClsNauditoria N = new ClsNauditoria();
-            dgvAuditoria.DataSource = N.MtdListarAuditoria();
+            dgvAuditoria.DataSource = N.listarAuditoria();
         }
 
         private void TxtBuscar_MouseClick(object sender, MouseEventArgs e) {

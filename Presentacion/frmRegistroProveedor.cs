@@ -28,13 +28,12 @@ namespace Presentacion {
         }
 
         private void btnGuardar_Click(object sender, EventArgs e) {
-            if (MtdValidarCampos()) {
+            if (validarCampos()) {
                 ClsEproveedor E = ClsEproveedor.crear(txtRuc.Text, txtNombre.Text, txtDireccion.Text, txtTelefono.Text, txtCorreo.Text, lblEstado.Text);
                 ClsNproveedor N = new ClsNproveedor();
-                if (N.MtdGuardarProveedor(E)) {
+                if (N.agregarProveedor(E)) {
                     if (MessageBox.Show("Proveedor registrado correctamente, ¿Desea continuar en el formulario de registro de proveedores?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) {
                         frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Agregó nuevo proveedor");
-
                         MtdLimpiar();
                         btnModificar.Enabled = false;
                     } else {
@@ -43,7 +42,6 @@ namespace Presentacion {
                 } else {
                     MessageBox.Show("No se pudo registrar el proveedor, intente de nuevo o comuniquese con soporte", "JeaNet - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "No puedo agregar nuevo proveedor");
-
                 }
             }
         }
@@ -59,10 +57,10 @@ namespace Presentacion {
         }
 
         private void btnModificar_Click(object sender, EventArgs e) {
-            if (MtdValidarCampos()) {
+            if (validarCampos()) {
                 ClsEproveedor E = ClsEproveedor.crear(txtRuc.Text, txtNombre.Text, txtDireccion.Text, txtTelefono.Text, txtCorreo.Text, lblEstado.Text);
                 ClsNproveedor N = new ClsNproveedor();
-                if (N.MtdModificarProveedor(E)) {
+                if (N.modificarProveedor(E)) {
                     if (MessageBox.Show("Proveedor modificado correctamente, ¿Desea continuar en el formulario de registro de proveedores?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) {
                         frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Modifico proveedor");
                         btnGuardar.Enabled = true;
@@ -93,11 +91,9 @@ namespace Presentacion {
                         }
                         txtNombre.Text = datos[0].ToString();
                         txtDireccion.Text = datos[1].ToString();
-                        //txtTelefono.Text = datos[2].ToString();
                     }
                 } catch (Exception) {
                     MessageBox.Show("Verifique el RUC.", "JeaNET - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             } else {
                 txtNombre.Clear();
@@ -114,7 +110,7 @@ namespace Presentacion {
             lblEstado.Text = (cmbEstado.SelectedIndex == 0) ? "1" : (cmbEstado.SelectedIndex == 1) ? "0" : "";
         }
 
-        private bool MtdValidarCampos() {
+        private bool validarCampos() {
             ClsNValidacion validacion = ClsNValidacion.getValidacion();
             //validando que campos no esten vacios o null
             bool result = existenVacios(validacion);

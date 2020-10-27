@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidad;
+using System;
 using System.Data;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -10,7 +11,7 @@ namespace Negocios {
 
         }
 
-        
+
         public static ClsNValidacion getValidacion() {
             if (val == null) {
                 val = new ClsNValidacion();
@@ -70,8 +71,8 @@ namespace Negocios {
         public bool existeUsuario(ErrorProvider err, TextBox txt, string mensaje) {
             bool existe = false;
             ClsNempleado N = new ClsNempleado();
-            foreach (DataRow item in N.MtdListarEmpleados().Rows) {
-                if (txt.Text == item[9].ToString()) {
+            foreach (ClsEempleado item in N.listarEmpleados()) {
+                if (txt.Text.Equals(item.Usuario)) {
                     existe = true;
                     break;
                 }
@@ -87,8 +88,8 @@ namespace Negocios {
         public bool existeCliente(ErrorProvider err, TextBox txt, string mensaje) {
             bool existe = false;
             ClsNcliente N = new ClsNcliente();
-            foreach (DataRow item in N.MtdListarClientes().Rows) {
-                if (txt.Text == item[1].ToString() + " " + item[2].ToString() || txt.Text == item[0].ToString()) {
+            foreach (ClsEcliente item in N.listarClientes()) {
+                if (txt.Text == item.Nombres + " " + item.Apellidos || txt.Text == item.DniCliente) {
                     existe = true;
                     break;
                 }
@@ -104,8 +105,8 @@ namespace Negocios {
         public bool existeCargo(ErrorProvider err, TextBox txt, string mensaje) {
             bool existe = false;
             ClsNcargo N = new ClsNcargo();
-            foreach (DataRow item in N.MtdListarCargos().Rows) {
-                if (txt.Text == item[1].ToString()) {
+            foreach (ClsEcargo item in N.listarCargos()) {
+                if (txt.Text.Equals(item.Descripcion)) {
                     existe = true;
                     break;
                 }
@@ -153,7 +154,7 @@ namespace Negocios {
 
         public bool boton(bool enabled) {
             if (!enabled) {
-                MessageBox.Show("No tiene permiso suficiente para esta operación","Jeanet - Informa", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("No tiene permiso suficiente para esta operación", "Jeanet - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             return enabled;
         }
@@ -161,8 +162,8 @@ namespace Negocios {
         public bool contraseñaCorrecta(ErrorProvider err, Label lbl, TextBox txt, string mensaje) {
             bool correcta = false;
             ClsNempleado N = new ClsNempleado();
-            foreach (DataRow item in N.MtdListarEmpleados().Rows) {
-                if (txt.Text == item[10].ToString() && lbl.Text == item[0].ToString()) {
+            foreach (ClsEempleado item in N.listarEmpleados()) {
+                if (txt.Text.Equals(item.Contraseña) && lbl.Text.Equals(item.DniEmpleado)) {
                     correcta = true;
                     break;
                 }

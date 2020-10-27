@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Entidad;
+using System.Data;
 using System.Windows.Forms;
 
 namespace Negocios {
@@ -6,9 +7,9 @@ namespace Negocios {
         public AutoCompleteStringCollection MtdCargarClientes() {
             ClsNcliente N = new ClsNcliente();
             AutoCompleteStringCollection datoauto = new AutoCompleteStringCollection();
-            foreach (DataRow item in N.MtdListarClientes().Rows) {
-                datoauto.Add(item[1].ToString() + " " + item[2].ToString());
-                datoauto.Add(item[0].ToString());
+            foreach (ClsEcliente item in N.listarClientes()) {
+                datoauto.Add(item.Nombres + " " + item.Apellidos);
+                datoauto.Add(item.DniCliente);
             }
             return datoauto;
         }

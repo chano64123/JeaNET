@@ -231,7 +231,7 @@ namespace Presentacion {
         public static void MtdAuditoria(string dni, string desc) {
             ClsEauditoria objEauditoria = ClsEauditoria.crear(dni, desc, Convert.ToDateTime(DateTime.Now.ToShortDateString()), DateTime.Now.ToLongTimeString());
             ClsNauditoria objNauditoria = new ClsNauditoria();
-            objNauditoria.MtdAgregarHistorial(objEauditoria);
+            objNauditoria.agregarAuditoria(objEauditoria);
         }
 
         private bool MtdValidarCampos() {

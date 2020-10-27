@@ -1,7 +1,7 @@
 ﻿using Entidad;
 using Negocios;
 using System;
-using System.Data;
+using System.Collections;
 using System.Windows.Forms;
 
 namespace Presentacion {
@@ -104,13 +104,13 @@ namespace Presentacion {
             }
         }
 
-        DataTable proveedores = new DataTable();
+        ArrayList proveedores = new ArrayList();
         private void MtdCargarProveedores() {
             ClsNproveedor N = new ClsNproveedor();
-            proveedores = N.MtdListarProveedores();
-            foreach (DataRow item in proveedores.Rows) {
-                if (item[5].ToString() == "1") {
-                    cmbProveedor.Items.Add(item[1]);
+            proveedores = N.listarProveedores();
+            foreach (ClsEproveedor item in proveedores) {
+                if (item.Estado == "1") {
+                    cmbProveedor.Items.Add(item.Nombre);
                 }
             }
         }
@@ -173,9 +173,9 @@ namespace Presentacion {
         }
 
         private void cmbProveedor_SelectedIndexChanged(object sender, EventArgs e) {
-            foreach (DataRow item in proveedores.Rows) {
-                if (cmbProveedor.Text == item[1].ToString()) {
-                    lblProveedor.Text = item[0].ToString();
+            foreach (ClsEproveedor item in proveedores) {
+                if (cmbProveedor.Text.Equals(item.Nombre)) {
+                    lblProveedor.Text = item.Ruc;
                     break;
                 }
             }

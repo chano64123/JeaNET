@@ -22,13 +22,24 @@ namespace Datos
             this.tbComprobante = new HashSet<tbComprobante>();
         }
     
-        public string DniCliente { get; set; }
-        public string Nombres { get; set; }
-        public string Apellidos { get; set; }
-        public string Correo { get; set; }
-        public string Telefono { get; set; }
-        public string Estado { get; set; }
-    
+        public string DniCliente { get; private set; }
+        public string Nombres { get; private set; }
+        public string Apellidos { get; private set; }
+        public string Correo { get; private set; }
+        public string Telefono { get; private set; }
+        public string Estado { get; private set; }
+
+        public static tbClientes crear(string _dniCliente, string _nombres, string _apellidos, string _correo, string _telefono, string _estado) {
+            return new tbClientes() {
+                DniCliente = _dniCliente,
+                Nombres = _nombres,
+                Apellidos = _apellidos,
+                Correo = _correo,
+                Telefono = _telefono,
+                Estado = _estado
+            };
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAlertas> tbAlertas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

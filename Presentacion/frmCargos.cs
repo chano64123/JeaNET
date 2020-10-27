@@ -1,7 +1,6 @@
 ﻿using Entidad;
 using Negocios;
 using System;
-using System.Data;
 using System.Windows.Forms;
 
 namespace Presentacion {
@@ -21,27 +20,30 @@ namespace Presentacion {
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Hizo clic para agregar nuevo cargo ");
             ClsNcargo N = new ClsNcargo();
             f.ShowDialog();
-            dgvCargos.DataSource = N.MtdListarCargos();
+            dgvCargos.DataSource = N.listarCargos();
         }
 
         private void dgvCargos_CellDoubleClick(object sender, DataGridViewCellEventArgs e) {
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Hizo doble clic para modificar un cargo");
             ClsNcargo N = new ClsNcargo();
-            DataTable data = N.MtdBusquedaCargo(dgvCargos.CurrentRow.Cells[0].Value.ToString());
-            ClsEcargo E = ClsEcargo.crear(data.Rows[0][0].ToString(), data.Rows[0][1].ToString());
+            ClsEcargo E = null;
+            foreach (ClsEcargo item in N.busquedaCargo(dgvCargos.CurrentRow.Cells[0].Value.ToString())) {
+                E = ClsEcargo.crear(item.Codigo_Cargo, item.Descripcion);
+                break;
+            }
             frmRegistroCargo f = new frmRegistroCargo(E);
             f.ShowDialog();
-            dgvCargos.DataSource = N.MtdListarCargos();
+            dgvCargos.DataSource = N.listarCargos();
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e) {
             ClsNcargo N = new ClsNcargo();
-            dgvCargos.DataSource = N.MtdFiltrarCargos(txtBuscar.Text);
+            dgvCargos.DataSource = N.filtrarCargos(txtBuscar.Text);
         }
 
         private void txtBuscar_Leave(object sender, EventArgs e) {
             ClsNcargo N = new ClsNcargo();
-            dgvCargos.DataSource = N.MtdListarCargos();
+            dgvCargos.DataSource = N.listarCargos();
         }
 
         private void TxtBuscar_MouseClick(object sender, MouseEventArgs e) {
