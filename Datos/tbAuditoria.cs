@@ -19,5 +19,14 @@ namespace Datos
         public string descripcionAccion { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
         public string hora { get; set; }
+
+        public static tbAuditoria crear(string _dNI_Usuario, string _descripcionAccion, DateTime? _fecha, string _hora) {
+            return new tbAuditoria() {
+                DNI_Usuario = _dNI_Usuario,
+                descripcionAccion = _descripcionAccion,
+                fecha = _fecha,
+                hora = _hora
+            };
+        }
     }
 }

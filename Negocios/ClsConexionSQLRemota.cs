@@ -10,7 +10,7 @@ namespace Negocios {
         static String password = "";
         static String servidor = @"localhost"; //(localhost) (host) .;
         static String basedatos = "bdJeaNet";
-        
+
         public SqlConnection Conectar() {
             try {
                 conn = new SqlConnection();

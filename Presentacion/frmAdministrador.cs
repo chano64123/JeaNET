@@ -22,9 +22,9 @@ namespace Presentacion {
             Thora.Start();
             Tmin.Start();
             ClsNcargo N = new ClsNcargo();
-            foreach (DataRow item in N.MtdListarCargos().Rows) {
-                if (datos.Rows[0][6].ToString() == item[0].ToString()) {
-                    lblCargo.Text = item[1].ToString();
+            foreach (ClsEcargo item in N.listarCargos()) {
+                if (datos.Rows[0][6].ToString().Equals(item.Codigo_Cargo)) {
+                    lblCargo.Text = item.Descripcion.ToString();
                     break;
                 }
             }
@@ -88,7 +88,7 @@ namespace Presentacion {
             ClsNlogin Neg = new ClsNlogin();
             Neg.MtdCerrarSesion(data.Rows[0][9].ToString());
             //enviando sms
-            ClsEsms En = ClsEsms.crear("+51" + data.Rows[0][5].ToString(),"El usuario " + data.Rows[0][1].ToString() + " " + data.Rows[0][2].ToString() + " acaba de cerrar sesion a las " + DateTime.Now.ToLongTimeString() + ". \n La sesion estuvo abierta durante: " + Horas + " horas, " + Minutos + " minutos y " + Segundos + " segundos.");
+            ClsEsms En = ClsEsms.crear("+51" + data.Rows[0][5].ToString(), "El usuario " + data.Rows[0][1].ToString() + " " + data.Rows[0][2].ToString() + " acaba de cerrar sesion a las " + DateTime.Now.ToLongTimeString() + ". \n La sesion estuvo abierta durante: " + Horas + " horas, " + Minutos + " minutos y " + Segundos + " segundos.");
             ClsNsms Ne = new ClsNsms();
             //Ne.MtdMandarMensaje(En);
 
@@ -171,7 +171,7 @@ namespace Presentacion {
         public static void MtdAuditoria(string dni, string desc) {
             ClsEauditoria objEauditoria = ClsEauditoria.crear(dni, desc, Convert.ToDateTime(DateTime.Now.ToShortDateString()), DateTime.Now.ToLongTimeString());
             ClsNauditoria objNauditoria = new ClsNauditoria();
-            objNauditoria.MtdAgregarHistorial(objEauditoria);
+            objNauditoria.agregarAuditoria(objEauditoria);
         }
 
         private void FormAdministrador_Load(object sender, EventArgs e) {
@@ -292,7 +292,7 @@ namespace Presentacion {
                 _objForm.Show();
             }
         }
-        
+
         private void btnMapeodeZonas_JeaNet_Click(object sender, EventArgs e) {
             MtdAuditoria(data.Rows[0][0].ToString(), "Presiono el boton " + btnMapeodeZonas_JeaNet.Name);
             if (Application.OpenForms.OfType<frmBaseSeguridad>().Count() < 0) {

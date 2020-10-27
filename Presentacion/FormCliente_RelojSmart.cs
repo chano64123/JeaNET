@@ -1,13 +1,12 @@
 ﻿using Entidad;
-using System.Speech.Recognition;
 using Negocios;
 using System;
 using System.Device.Location;
 using System.Globalization;
 using System.Media;
+using System.Speech.Recognition;
 using System.Speech.Synthesis;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Presentacion {
     public partial class FormCliente_RelojSmart : Form {
@@ -98,7 +97,7 @@ namespace Presentacion {
         public string id;
         public string fecha;
         private CLsNsocket mySocket;
-        
+
         private void tmr1_Tick(object sender, EventArgs e) {
             try {
                 lblSegundos.Text = DateTime.Now.ToString("ss");
@@ -121,7 +120,7 @@ namespace Presentacion {
                 //guardar alerta en basa de datos
                 ClsEalerta E = ClsEalerta.crear(FormCliente_Menu_UsuarioCliente.usuario.Rows[0][0].ToString(), latitud.Replace('.', ','), longitud.Replace('.', ','), Convert.ToDateTime(DateTime.Now.ToShortDateString()), DateTime.Now.ToLongTimeString(), MtdObtenerTurno(), "0");
                 ClsNalerta N = new ClsNalerta();
-                N.MtdAgregarAlerta(E);
+                N.agregarAlerta(E);
                 MessageBox.Show(string.Format("Datos enviados, JeanNET", "JeaNet - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information));
             }
         }

@@ -26,9 +26,9 @@ namespace Presentacion {
             ClsNproveedor Np = new ClsNproveedor();
             DataTable data = N.MtdBusquedaLote(dgvLotes.CurrentRow.Cells[0].Value.ToString());
             //para proveedor
-            foreach (DataRow item in Np.MtdListarProveedores().Rows) {
-                if (data.Rows[0][3].ToString() == item[0].ToString()) {
-                    proveedor = item[1].ToString();
+            foreach (ClsEproveedor item in Np.listarProveedores()) {
+                if (data.Rows[0][3].ToString().Equals(item.Ruc)) {
+                    proveedor = item.Nombre;
                     break;
                 }
             }

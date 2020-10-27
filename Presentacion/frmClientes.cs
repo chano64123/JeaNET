@@ -1,7 +1,6 @@
 ﻿using Entidad;
 using Negocios;
 using System;
-using System.Data;
 using System.Windows.Forms;
 
 namespace Presentacion {
@@ -12,7 +11,7 @@ namespace Presentacion {
 
         private void FormPanelAdmi_ListaCliente_Load(object sender, EventArgs e) {
             ClsNcliente N = new ClsNcliente();
-            dgvClientes.DataSource = N.MtdListarClientes();
+            dgvClientes.DataSource = N.listarClientes();
         }
 
         private void btnNuevo_Click(object sender, EventArgs e) {
@@ -20,28 +19,31 @@ namespace Presentacion {
             frmRegistroCliente f = new frmRegistroCliente();
             ClsNcliente N = new ClsNcliente();
             f.ShowDialog();
-            dgvClientes.DataSource = N.MtdListarClientes();
+            dgvClientes.DataSource = N.listarClientes();
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e) {
             ClsNcliente N = new ClsNcliente();
-            dgvClientes.DataSource = N.MtdFiltrarCliente(txtBuscar.Text);
+            dgvClientes.DataSource = N.filtrarClientes(txtBuscar.Text);
         }
 
         private void txtBuscar_Leave(object sender, EventArgs e) {
             ClsNcliente N = new ClsNcliente();
-            dgvClientes.DataSource = N.MtdListarClientes();
+            dgvClientes.DataSource = N.listarClientes();
         }
 
         private void dgvClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e) {
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Hizo doble clic para modificar cliente ");
             ClsNcliente N = new ClsNcliente();
-            DataTable data = N.MtdBusquedaCliente(dgvClientes.CurrentRow.Cells[0].Value.ToString());
-            string estado = (data.Rows[0][5].ToString() == "1") ? "Activo" : "Inactivo";
-            ClsEcliente E = ClsEcliente.crear(data.Rows[0][0].ToString(), data.Rows[0][1].ToString(), data.Rows[0][2].ToString(), data.Rows[0][3].ToString(), data.Rows[0][4].ToString(), estado);
+            ClsEcliente E = null;
+            foreach (ClsEcliente item in N.busquedaCliente(dgvClientes.CurrentRow.Cells[0].Value.ToString())) {
+                string estado = (item.Estado.Equals("1")) ? "Activo" : "Inactivo";
+                E = ClsEcliente.crear(item.DniCliente, item.Nombres, item.Apellidos, item.Correo, item.Telefono, estado);
+                break;
+            }
             frmRegistroCliente f = new frmRegistroCliente(E);
             f.ShowDialog();
-            dgvClientes.DataSource = N.MtdListarClientes();
+            dgvClientes.DataSource = N.listarClientes();
         }
 
         private void TxtBuscar_MouseClick(object sender, MouseEventArgs e) {

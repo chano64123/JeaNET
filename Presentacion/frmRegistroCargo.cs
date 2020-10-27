@@ -35,10 +35,10 @@ namespace Presentacion {
         }
 
         private void btnModificar_Click(object sender, EventArgs e) {
-            if (MtdValidarCampos()) {
+            if (validarCampos()) {
                 ClsEcargo E = ClsEcargo.crear(txtCodigo.Text, txtDescripcion.Text);
                 ClsNcargo N = new ClsNcargo();
-                if (N.MtdModificarCargo(E)) {
+                if (N.modificarCargo(E)) {
                     if (MessageBox.Show("Cargo modificado correctamente, ¿Desea continuar en el formulario de registro de empleados?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) {
                         frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Cargo modificado correctamente " + btnModificar.Name);
 
@@ -59,7 +59,7 @@ namespace Presentacion {
         }
 
         private void btnGuardar_Click(object sender, EventArgs e) {
-            if (MtdValidarCampos()) {
+            if (validarCampos()) {
                 ClsEcargo E = ClsEcargo.crear(txtCodigo.Text, txtDescripcion.Text);
                 ClsNcargo N = new ClsNcargo();
                 if (N.agregarCargo(E)) {
@@ -79,7 +79,7 @@ namespace Presentacion {
             }
         }
 
-        private bool MtdValidarCampos() {
+        private bool validarCampos() {
             ClsNValidacion validacion = ClsNValidacion.getValidacion();
             //validando que campos no esten vacios o null
             bool result = !existenVacios(validacion);

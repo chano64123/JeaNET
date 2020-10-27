@@ -77,7 +77,7 @@ namespace Presentacion {
                     //listar dispositivos disponibles
                     ClsNdispositivo Ne = new ClsNdispositivo();
                     DataTable Ddisponibles = Ne.MtdListarDisponibles(Ed);
-                    //para agreagar en cliente_dispositivo
+                    //para agregar en cliente_dispositivo
                     ClsNclientedispositivo Neg = new ClsNclientedispositivo();
                     Neg.MtdGuardarClienteDispositivo(E.Cliente, Ed, Ddisponibles);
                     //para guardar kardex
@@ -209,13 +209,13 @@ namespace Presentacion {
 
         private void txtCliente_TextChanged(object sender, EventArgs e) {
             ClsNcliente N = new ClsNcliente();
-            foreach (DataRow item in N.MtdListarClientes().Rows) {
-                if (item[0].ToString() == txtCliente.Text) {
-                    lblCliente.Text = item[1].ToString() + " " + item[2].ToString();
+            foreach (ClsEcliente item in N.listarClientes()) {
+                if (item.DniCliente.Equals(txtCliente.Text)) {
+                    lblCliente.Text = item.Nombres + " " + item.Apellidos;
                     break;
                 } else {
-                    if (item[1].ToString() + " " + item[2].ToString() == txtCliente.Text) {
-                        lblCliente.Text = item[0].ToString();
+                    if (txtCliente.Text.Equals(item.Nombres + " " + item.Apellidos)) {
+                        lblCliente.Text = item.DniCliente;
                         break;
                     } else {
                         lblCliente.Text = "- - -";

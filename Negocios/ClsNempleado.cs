@@ -1,141 +1,46 @@
-﻿using Entidad;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using Datos;
+using Entidad;
+using System.Collections;
 
 namespace Negocios {
     public class ClsNempleado {
-        public Boolean MtdGuardarEmpleado(ClsEempleado e) {
-            try {
-                ClsConexionSQL objConexion = new ClsConexionSQL();
-                SqlCommand command = new SqlCommand();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                command.Connection = objConexion.Conectar();
-                command.CommandText = "USP_I_AgregarEmpleado";
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("d", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("nom", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("ape", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("dir", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("cor", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("tel", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("car", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("tur", SqlDbType.Int));
-                command.Parameters.Add(new SqlParameter("est", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("usu", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("con", SqlDbType.VarChar));
-                command.Parameters["d"].Value = e.Dni;
-                command.Parameters["nom"].Value = e.Nombres;
-                command.Parameters["ape"].Value = e.Apellidos;
-                command.Parameters["dir"].Value = e.Direccion;
-                command.Parameters["cor"].Value = e.Correo;
-                command.Parameters["tel"].Value = e.Telefono;
-                command.Parameters["car"].Value = e.Cargo;
-                command.Parameters["tur"].Value = e.Turno;
-                command.Parameters["est"].Value = e.Estado;
-                command.Parameters["usu"].Value = e.Usuario;
-                command.Parameters["con"].Value = e.Contraseña;
-                command.ExecuteNonQuery();
-                command.Connection = objConexion.Desconectar();
+        ClsDempleado datos = new ClsDempleado();
 
-                return true;
-            } catch (Exception ex) {
-                return false;
-                throw ex;
+        public bool agregarEmpleado(ClsEempleado empleado) {
+            tbEmpleados tbl = tbEmpleados.crear(empleado.DniEmpleado, empleado.Nombres, empleado.Apellidos, empleado.Direccion, empleado.Correo, empleado.Telefono, empleado.Codigo_Cargo, empleado.idTurno, empleado.Estado, empleado.Usuario, empleado.Contraseña);
+            return datos.agregarEmpleado(tbl);
+        }
+
+        public bool modificarEmpleado(ClsEempleado empleado) {
+            tbEmpleados tbl = tbEmpleados.crear(empleado.DniEmpleado, empleado.Nombres, empleado.Apellidos, empleado.Direccion, empleado.Correo, empleado.Telefono, empleado.Codigo_Cargo, empleado.idTurno, empleado.Estado, empleado.Usuario, empleado.Contraseña);
+            return datos.modificarEmpleado(tbl);
+        }
+
+        public ArrayList listarEmpleados() {
+            ArrayList empleados = new ArrayList();
+            foreach (var item in datos.listarEmpleado()) {
+                ClsEempleado empleado = ClsEempleado.crear(item.DniEmpleado, item.Nombres, item.Apellidos, item.Direccion, item.Correo, item.Telefono, item.idTurno, item.Codigo_Cargo, item.Estado, item.Usuario, item.Contraseña);
+                empleados.Add(empleado);
             }
+            return empleados;
         }
 
-        public DataTable MtdBusquedaEmpleado(string dni) {
-            ClsConexionSQL conn = new ClsConexionSQL();
-            DataTable result = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn.Conectar();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "USP_S_BusquedaEmpleado";
-            command.Parameters.Add(new SqlParameter("d", SqlDbType.VarChar));
-            command.Parameters["d"].Value = dni;
-            command.ExecuteNonQuery();
-            adapter.SelectCommand = command;
-            adapter.Fill(result);
-            command.Connection = conn.Desconectar();
-
-            return result;
-        }
-
-        public object MtdFiltrarEmpleados(string filtro) {
-            ClsConexionSQL conn = new ClsConexionSQL();
-            DataTable result = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn.Conectar();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "USP_S_FiltrarEmpleado";
-            command.Parameters.Add(new SqlParameter("fil", SqlDbType.VarChar));
-            command.Parameters["fil"].Value = filtro;
-            command.ExecuteNonQuery();
-            adapter.SelectCommand = command;
-            adapter.Fill(result);
-            command.Connection = conn.Desconectar();
-
-            return result;
-        }
-
-        public DataTable MtdListarEmpleados() {
-            ClsConexionSQL conn = new ClsConexionSQL();
-            DataTable result = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn.Conectar();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "USP_S_ListarEmpleados";
-            command.ExecuteNonQuery();
-            adapter.SelectCommand = command;
-            adapter.Fill(result);
-            command.Connection = conn.Desconectar();
-
-            return result;
-        }
-
-        public bool MtdModificarEmpleado(ClsEempleado e) {
-            try {
-                ClsConexionSQL objConexion = new ClsConexionSQL();
-                SqlCommand command = new SqlCommand();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                command.Connection = objConexion.Conectar();
-                command.CommandText = "USP_U_ModificarEmpleado";
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("d", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("nom", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("ape", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("dir", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("cor", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("tel", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("car", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("tur", SqlDbType.Int));
-                command.Parameters.Add(new SqlParameter("est", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("usu", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("con", SqlDbType.VarChar));
-                command.Parameters["d"].Value = e.Dni;
-                command.Parameters["nom"].Value = e.Nombres;
-                command.Parameters["ape"].Value = e.Apellidos;
-                command.Parameters["dir"].Value = e.Direccion;
-                command.Parameters["cor"].Value = e.Correo;
-                command.Parameters["tel"].Value = e.Telefono;
-                command.Parameters["car"].Value = e.Cargo;
-                command.Parameters["tur"].Value = e.Turno;
-                command.Parameters["est"].Value = e.Estado;
-                command.Parameters["usu"].Value = e.Usuario;
-                command.Parameters["con"].Value = e.Contraseña;
-                command.ExecuteNonQuery();
-                command.Connection = objConexion.Desconectar();
-
-                return true;
-            } catch (Exception ex) {
-
-                return false;
-                throw ex;
+        public ArrayList filtrarEmpleados(string filtro) {
+            ArrayList empleados = new ArrayList();
+            foreach (var item in datos.filtrarEmpleado(filtro)) {
+                ClsEempleado empleado = ClsEempleado.crearFiltro(item.DniEmpleado, item.Nombres, item.Apellidos, item.Direccion, item.Codigo_Cargo, item.Telefono, item.Estado); ;
+                empleados.Add(empleado);
             }
+            return empleados;
+        }
+
+        public ArrayList busquedaEmpleado(string codigoempleado) {
+            ArrayList empleados = new ArrayList();
+            foreach (var item in datos.busquedaEmpleado(codigoempleado)) {
+                ClsEempleado empleado = ClsEempleado.crear(item.DniEmpleado, item.Nombres, item.Apellidos, item.Direccion, item.Correo, item.Telefono, item.idTurno, item.Codigo_Cargo, item.Estado, item.Usuario, item.Contraseña);
+                empleados.Add(empleado);
+            }
+            return empleados;
         }
     }
 }
