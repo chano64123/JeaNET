@@ -12,13 +12,5 @@ namespace Entidad {
                 Descripcion = _descripcion
             };
         }
-
-        
-
-
-
-
-
-
     }
 }
