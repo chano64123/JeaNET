@@ -38,8 +38,8 @@ namespace Presentacion {
                     } else {
                         codigo = txtProducto.Text;
                     }
-                    foreach (DataRow item in N.MtdBusquedaLote(codigo).Rows) {
-                        dgvVenta.Rows.Add(item[0], item[1] + ", color " + item[2], "", item[6]);
+                    foreach (ClsElote item in N.busquedaLote(codigo)) {
+                        dgvVenta.Rows.Add(item.CodLote, item.Nombre + ", color " + item.Color, "", item.Precio_Unitario);
                     }
                     verificar_prod = false;
                     btnAgregar.Enabled = false;
@@ -90,9 +90,9 @@ namespace Presentacion {
                 int cantidad = 0;
                 foreach (DataGridViewRow fila in dgvVenta.Rows) {
                     ClsNlote Neg = new ClsNlote();
-                    foreach (DataRow filas in Neg.MtdListarLotes().Rows) {
-                        if (filas[0].ToString() == fila.Cells[0].Value.ToString()) {
-                            cantidad = Convert.ToInt32(filas[5].ToString());
+                    foreach (ClsElote item in Neg.listarLotes()) {
+                        if (item.CodLote.Equals(fila.Cells[0].Value.ToString())) {
+                            cantidad = Convert.ToInt32(item.Cantidad);
                             break;
                         }
                     }
@@ -164,8 +164,8 @@ namespace Presentacion {
             if (dgvVenta.CurrentRow.Cells[2].Value.ToString() != "") {
                 //validacion de cantidad
                 ClsNlote N = new ClsNlote();
-                foreach (DataRow item in N.MtdBusquedaLote(dgvVenta.CurrentRow.Cells[0].Value.ToString()).Rows) {
-                    if (Convert.ToInt32(item[5]) >= Convert.ToInt32(dgvVenta.CurrentRow.Cells[2].Value)) {
+                foreach (ClsElote item in N.busquedaLote(dgvVenta.CurrentRow.Cells[0].Value.ToString())) {
+                    if (item.Cantidad >= Convert.ToInt32(dgvVenta.CurrentRow.Cells[2].Value) {
                         if (this.dgvVenta.Columns[e.ColumnIndex].Name == "colCantidad") {
                             dgvVenta.CurrentRow.Cells[4].Value = (Convert.ToDouble(dgvVenta.CurrentRow.Cells[2].Value) * Convert.ToDouble(dgvVenta.CurrentRow.Cells[3].Value)).ToString();
                             MtdCalculos();
@@ -174,7 +174,7 @@ namespace Presentacion {
                     } else {
                         dgvVenta.CurrentRow.Cells[2].Value = "0";
                         dgvVenta.CurrentRow.Cells[4].Value = "0";
-                        MessageBox.Show("No hay suficientre stock. Stock actual: " + item[5].ToString(), "JeaNET - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("No hay suficientre stock. Stock actual: " + item.Cantidad.ToString(), "JeaNET - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
@@ -192,13 +192,13 @@ namespace Presentacion {
 
         private void txtProducto_TextChanged(object sender, EventArgs e) {
             ClsNlote N = new ClsNlote();
-            foreach (DataRow item in N.MtdListarLotes().Rows) {
-                if (item[0].ToString() == txtProducto.Text) {
-                    lblProducto.Text = item[1].ToString();
+            foreach (ClsElote item in N.listarLotes()) {
+                if (item.CodLote.Equals(txtProducto.Text)) {
+                    lblProducto.Text = item.Nombre;
                     break;
                 } else {
-                    if (item[1].ToString() == txtProducto.Text) {
-                        lblProducto.Text = item[0].ToString();
+                    if (item.Nombre.Equals(txtProducto.Text)) {
+                        lblProducto.Text = item.CodLote;
                         break;
                     } else {
                         lblProducto.Text = "- - -";
