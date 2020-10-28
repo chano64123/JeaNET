@@ -25,13 +25,13 @@ namespace Presentacion {
         }
 
         private void llenarCamposRegistroLote(ClsElote E) {
-            txtCodigo.Text = E.Codigo;
+            txtCodigo.Text = E.CodLote;
             txtNombre.Text = E.Nombre;
             txtColor.Text = E.Color;
-            cmbProveedor.Text = E.Proveedor;
-            txtSistemaOperativo.Text = E.SistemaOperativo;
+            cmbProveedor.Text = E.Ruc;
+            txtSistemaOperativo.Text = E.Sistema_Operativo;
             txtCantidad.Text = E.Cantidad.ToString();
-            txtPrecio.Text = E.Precio_unitario.ToString();
+            txtPrecio.Text = E.Precio_Unitario.ToString();
             txtForma.Text = E.Forma;
             txtMemoriaInterna.Text = E.Memoria;
             txtPeso.Text = E.Peso.ToString();
@@ -41,9 +41,9 @@ namespace Presentacion {
 
         private void btnGuardar_Click(object sender, EventArgs e) {
             if (MtdValidarCampos()) {
-                ClsElote E = ClsElote.crear(txtCodigo.Text, txtNombre.Text, txtColor.Text, lblProveedor.Text, txtSistemaOperativo.Text, Convert.ToInt32(txtCantidad.Text), Convert.ToDouble(txtPrecio.Text), txtForma.Text, txtMemoriaInterna.Text, Convert.ToDouble(txtPeso.Text));
+                ClsElote E = ClsElote.crear(txtCodigo.Text, txtNombre.Text, txtColor.Text, lblProveedor.Text, txtSistemaOperativo.Text, Convert.ToInt32(txtCantidad.Text), Convert.ToDecimal(txtPrecio.Text), txtForma.Text, txtMemoriaInterna.Text, Convert.ToDecimal(txtPeso.Text));
                 ClsNlote N = new ClsNlote();
-                if (N.MtdAgregarLote(E)) {
+                if (N.agregarLote(E)) {
                     ClsNdispositivo Ne = new ClsNdispositivo();
                     Ne.MtdGuardarDispositivo(E);
                     //para guardar kardex
@@ -82,9 +82,9 @@ namespace Presentacion {
 
         private void btnModificar_Click(object sender, EventArgs e) {
             if (MtdValidarCampos()) {
-                ClsElote E = ClsElote.crear(txtCodigo.Text, txtNombre.Text, txtColor.Text, lblProveedor.Text, txtSistemaOperativo.Text, Convert.ToInt32(txtCantidad.Text), Convert.ToDouble(txtPrecio.Text), txtForma.Text, txtMemoriaInterna.Text, Convert.ToDouble(txtPeso.Text));
+                ClsElote E = ClsElote.crear(txtCodigo.Text, txtNombre.Text, txtColor.Text, lblProveedor.Text, txtSistemaOperativo.Text, Convert.ToInt32(txtCantidad.Text), Convert.ToDecimal(txtPrecio.Text), txtForma.Text, txtMemoriaInterna.Text, Convert.ToDecimal(txtPeso.Text));
                 ClsNlote N = new ClsNlote();
-                if (N.MtdModificarLote(E)) {
+                if (N.modificarLote(E)) {
                     if (MessageBox.Show("Lote modificado correctamente, ¿Desea continuar en el formulario de registro de lotes?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) {
                         //generar codigo
                         ClsNlote Ne = new ClsNlote();

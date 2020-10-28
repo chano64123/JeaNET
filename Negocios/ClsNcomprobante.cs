@@ -255,7 +255,7 @@ namespace Negocios {
             command.Parameters.Add(new SqlParameter("est", SqlDbType.VarChar));
             command.Parameters.Add(new SqlParameter("hor", SqlDbType.VarChar));
             command.Parameters.Add(new SqlParameter("fech", SqlDbType.Date));
-            command.Parameters["lot"].Value = objEKardex.Codlote;
+            command.Parameters["lot"].Value = objEKardex.CodLote;
             command.Parameters["demp"].Value = objEKardex.DniEmpleado;
             command.Parameters["desc"].Value = descripcion;
             command.Parameters["cant"].Value = objEKardex.Cantidad;
