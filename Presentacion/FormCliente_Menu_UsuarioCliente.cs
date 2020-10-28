@@ -1,7 +1,8 @@
-﻿using Microsoft.Win32;
+﻿using Entidad;
+using Microsoft.Win32;
 using Negocios;
 using System;
-using System.Data;
+using System.Collections;
 using System.Diagnostics;
 using System.Windows.Forms;
 
@@ -22,8 +23,8 @@ namespace Presentacion {
             frm.Show();
         }
 
-        public static DataTable usuario = new DataTable();
-        DataTable temp = new DataTable();
+        public static ArrayList usuario = new ArrayList();
+        ArrayList temp = new ArrayList();
 
         private void btnGuardar_Click(object sender, EventArgs e) {
             usuario = temp;
@@ -37,11 +38,13 @@ namespace Presentacion {
         }
 
         private void FormCliente_Menu_UsuarioCliente_Load(object sender, EventArgs e) {
-            if (usuario.Rows.Count == 1) {
-                txtDNI.Text = usuario.Rows[0][0].ToString();
-                txtNombres.Text = usuario.Rows[0][1].ToString();
-                txtApellidos.Text = usuario.Rows[0][2].ToString();
-                txtTelefono.Text = usuario.Rows[0][4].ToString();
+            if (usuario.Count == 1) {
+                foreach (ClsEcliente item in temp) {
+                    txtDNI.Text = item.Nombres;
+                    txtNombres.Text = item.DniCliente;
+                    txtApellidos.Text = item.Apellidos;
+                    txtTelefono.Text = item.Telefono;
+                }
             }
         }
 
@@ -63,11 +66,13 @@ namespace Presentacion {
         private void txtDNI_TextChanged(object sender, EventArgs e) {
             if (txtDNI.Text.Length == 8) {
                 ClsNcliente N = new ClsNcliente();
-                temp = N.MtdBusquedaCliente(txtDNI.Text);
-                if (temp.Rows.Count == 1) {
-                    txtNombres.Text = temp.Rows[0][1].ToString();
-                    txtApellidos.Text = temp.Rows[0][2].ToString();
-                    txtTelefono.Text = temp.Rows[0][4].ToString();
+                temp = N.busquedaCliente(txtDNI.Text);
+                if (temp.Count == 1) {
+                    foreach (ClsEcliente item in temp) {
+                        txtNombres.Text = item.Nombres;
+                        txtApellidos.Text = item.Apellidos;
+                        txtTelefono.Text = item.Telefono;
+                    }
                     FormCliente_RelojSmart.dni = txtDNI.Text;
                 }
             }
