@@ -29,7 +29,7 @@ namespace Presentacion {
         }
 
         private void btnNuevo_Click(object sender, EventArgs e) {
-            if (MtdValidarCampos()) {
+            if (validarCampos()) {
                 try {
                     string codigo = "";
                     ClsNlote N = new ClsNlote();
@@ -65,7 +65,7 @@ namespace Presentacion {
             if (MessageBox.Show("¿Seguro que desea concluir la venta?", "JeaNET - Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                 //para la venta
                 string cliente = (lblCliente.Text.Length == 8) ? lblCliente.Text : txtCliente.Text;
-                ClsEcomprobante E = ClsEcomprobante.crear(lblSerie.Text, lblNumero.Text, lblDNI.Text, DateTime.Now.ToShortDateString(), cliente, lblSubtotal.Text, lblIGV.Text, lblTotal.Text, "1");
+                ClsEcomprobante E = ClsEcomprobante.crear(lblSerie.Text, lblNumero.Text, lblDNI.Text, Convert.ToDateTime(DateTime.Now.ToShortDateString()), cliente, Convert.ToDecimal(lblSubtotal.Text), Convert.ToDecimal(lblIGV.Text), Convert.ToDecimal(lblTotal.Text), "1");
                 ClsNcomprobante N = new ClsNcomprobante();
                 N.MtdGuardarComprobante(E);
 
@@ -79,9 +79,9 @@ namespace Presentacion {
                     DataTable Ddisponibles = Ne.MtdListarDisponibles(Ed);
                     //para agregar en cliente_dispositivo
                     ClsNclientedispositivo Neg = new ClsNclientedispositivo();
-                    Neg.MtdGuardarClienteDispositivo(E.Cliente, Ed, Ddisponibles);
+                    Neg.MtdGuardarClienteDispositivo(E.DniCliente, Ed, Ddisponibles);
                     //para guardar kardex
-                    ClsEkardex objEKardex = ClsEkardex.crear(item.Cells[0].Value.ToString(), lblDNI.Text, "SALIDA", Convert.ToInt32(item.Cells[2].Value), Convert.ToDouble(item.Cells[3].Value), "1", DateTime.Now.ToShortTimeString(), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
+                    ClsEkardex objEKardex = ClsEkardex.crear(item.Cells[0].Value.ToString(), lblDNI.Text, "SALIDA", Convert.ToInt32(item.Cells[2].Value), Convert.ToDecimal(item.Cells[3].Value), "1", DateTime.Now.ToShortTimeString(), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
                     N.MtdAgregarKardex(objEKardex, "SALIDA");
                     //para cambiar el estado de cada dispositivo
                     Ne.MtdDesactivarDispositivos(Ddisponibles, Ed);
@@ -97,7 +97,7 @@ namespace Presentacion {
                         }
                     }
                     ClsElote En = ClsElote.decrementar(fila.Cells[0].Value.ToString(), cantidad - Convert.ToInt32(fila.Cells[2].Value.ToString()));
-                    Neg.MtdDecrementarLote(En);
+                    Neg.decrementarCantidad(En);
                 }
                 MtdReiniciar();
                 MessageBox.Show("Venta registrada con exito", "JeaNET - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -107,7 +107,7 @@ namespace Presentacion {
             }
         }
 
-        private bool MtdValidarCampos() {
+        private bool validarCampos() {
             ClsNValidacion validacion = ClsNValidacion.getValidacion();
             //validando que campos no esten vacios o null
             bool result = !existenVacios(validacion);
@@ -115,7 +115,7 @@ namespace Presentacion {
                 //verificar existencia de cliente o producto
                 result = verificarExistencia(validacion) && result;
                 if (result) {
-                    //cerificar que no este el producto en el DataGridView
+                    //verificar que no este el producto en el DataGridView
                     result = !verificarExistenciaEnDatGrid(validacion) && result;
                 }
             }
@@ -123,7 +123,7 @@ namespace Presentacion {
         }
 
         private bool verificarExistenciaEnDatGrid(ClsNValidacion validacion) {
-            bool result = validacion.existeProductoEnDataGrid(error1, dgvVenta, txtCliente, "El Producto ya se encuentra en la lista");
+            bool result = validacion.existeProductoEnDataGrid(error1, dgvVenta, txtProducto, "El Producto ya se encuentra en la lista",lblProducto);
             return result;
         }
 
@@ -165,7 +165,7 @@ namespace Presentacion {
                 //validacion de cantidad
                 ClsNlote N = new ClsNlote();
                 foreach (ClsElote item in N.busquedaLote(dgvVenta.CurrentRow.Cells[0].Value.ToString())) {
-                    if (item.Cantidad >= Convert.ToInt32(dgvVenta.CurrentRow.Cells[2].Value) {
+                    if (item.Cantidad >= Convert.ToInt32(dgvVenta.CurrentRow.Cells[2].Value)) {
                         if (this.dgvVenta.Columns[e.ColumnIndex].Name == "colCantidad") {
                             dgvVenta.CurrentRow.Cells[4].Value = (Convert.ToDouble(dgvVenta.CurrentRow.Cells[2].Value) * Convert.ToDouble(dgvVenta.CurrentRow.Cells[3].Value)).ToString();
                             MtdCalculos();

@@ -34,9 +34,9 @@ namespace Negocios {
             return empleados;
         }
 
-        public ArrayList busquedaEmpleado(string codigoempleado) {
+        public ArrayList busquedaEmpleado(string codigoEmpleado) {
             ArrayList empleados = new ArrayList();
-            foreach (var item in datos.busquedaEmpleado(codigoempleado)) {
+            foreach (var item in datos.busquedaEmpleado(codigoEmpleado)) {
                 ClsEempleado empleado = ClsEempleado.crear(item.DniEmpleado, item.Nombres, item.Apellidos, item.Direccion, item.Correo, item.Telefono, item.idTurno, item.Codigo_Cargo, item.Estado, item.Usuario, item.Contraseña);
                 empleados.Add(empleado);
             }

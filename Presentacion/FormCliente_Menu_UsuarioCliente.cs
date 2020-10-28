@@ -23,11 +23,16 @@ namespace Presentacion {
             frm.Show();
         }
 
+        public static ClsEcliente cliente;
         public static ArrayList usuario = new ArrayList();
         ArrayList temp = new ArrayList();
 
         private void btnGuardar_Click(object sender, EventArgs e) {
             usuario = temp;
+            foreach (ClsEcliente item in usuario) {
+                cliente = ClsEcliente.crear(item.DniCliente,item.Nombres,item.Apellidos,item.Correo,item.Telefono,item.Estado);
+                break;
+            }
             MessageBox.Show("Datos Guardados correctamente", "JeaNet - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }

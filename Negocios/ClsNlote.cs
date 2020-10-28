@@ -24,20 +24,6 @@ namespace Negocios {
             return numero;
         }
 
-        public void MtdDecrementarLote(ClsElote en) {
-            ClsConexionSQL objConexion = new ClsConexionSQL();
-            SqlCommand objComando = new SqlCommand();
-            objComando.Connection = objConexion.Conectar();
-            objComando.CommandText = "USP_U_DecrementarCantidad";
-            objComando.CommandType = CommandType.StoredProcedure;
-            objComando.Parameters.Add(new SqlParameter("cod", SqlDbType.VarChar));
-            objComando.Parameters.Add(new SqlParameter("can", SqlDbType.Int));
-            objComando.Parameters["cod"].Value = en.CodLote;
-            objComando.Parameters["can"].Value = en.Cantidad;
-            objComando.ExecuteNonQuery();
-            objComando.Connection = objConexion.Desconectar();
-        }
-
         public ArrayList listarLotes() {
             ArrayList lotes = new ArrayList();
             foreach (var item in datos.listarLotes()) {
@@ -63,6 +49,11 @@ namespace Negocios {
                 lotes.Add(lote);
             }
             return lotes;
+        }
+
+        public bool decrementarCantidad(ClsElote lote) {
+            tbLotes tbl = tbLotes.decrementar(lote.CodLote, lote.Cantidad);
+            return datos.decrementarLote(tbl);
         }
 
         public bool modificarLote(ClsElote lote) {

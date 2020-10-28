@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Datos {
     public class ClsDlote {
@@ -40,6 +38,17 @@ namespace Datos {
                 db.SaveChanges();
                 return true;
             } catch (Exception) {
+                return false;
+            }
+        }
+
+        public bool decrementarLote(tbLotes lote) {
+            try {
+                var query = (from e in db.tbLotes where e.CodLote == lote.CodLote select e).FirstOrDefault();
+                query.Cantidad = lote.Cantidad;
+                db.SaveChanges();
+                return true;
+            } catch (Exception e) {
                 return false;
             }
         }

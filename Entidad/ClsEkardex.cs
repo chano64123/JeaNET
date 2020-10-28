@@ -12,9 +12,9 @@ namespace Entidad {
         public string Hora { get; private set; }
         public DateTime? Fecha { get; private set; }
 
-        public static ClsEkardex crear(string _codlote, string _dniEmpleado, string _descripcion, int _cantidad, decimal _precioUnitario, string _estado, string _hora, DateTime _fecha) {
+        public static ClsEkardex crear(string _codLote, string _dniEmpleado, string _descripcion, int? _cantidad, decimal? _precioUnitario, string _estado, string _hora, DateTime? _fecha) {
             return new ClsEkardex() {
-                CodLote = _codlote,
+                CodLote = _codLote,
                 DniEmpleado = _dniEmpleado,
                 Descripcion = _descripcion,
                 Cantidad = _cantidad,
