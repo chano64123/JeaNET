@@ -21,5 +21,10 @@ namespace Datos {
             var query = from e in db.tbAlertas where e.DniCli == dni select e;
             return query.ToList();
         }
+
+        public List<tbAlertas> listarAlerta() {
+            var query = from e in db.tbAlertas select e;
+            return query.ToList();
+        }
     }
 }

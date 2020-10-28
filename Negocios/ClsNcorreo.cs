@@ -15,7 +15,6 @@ namespace Negocios {
                 cliente.DeliveryMethod = SmtpDeliveryMethod.Network;
                 cliente.UseDefaultCredentials = true;
                 cliente.Credentials = new NetworkCredential("pruebaprogra2@gmail.com", "Sistemas.123");
-
                 MailMessage msg = new MailMessage();
                 msg.To.Add(esendEmail.Destinatario);
                 msg.Subject = esendEmail.Asunto;

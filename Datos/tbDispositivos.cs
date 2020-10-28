@@ -23,7 +23,15 @@ namespace Datos
         public string SerieDispositivo { get; set; }
         public string CodLote { get; set; }
         public string Estado { get; set; }
-    
+
+        public static tbDispositivos crear(string _serieDispositivo, string _codLote, string _estado) {
+            return new tbDispositivos() {
+                SerieDispositivo = _serieDispositivo,
+                CodLote = _codLote,
+                Estado = _estado
+            };
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbClienteDisposiivo> tbClienteDisposiivo { get; set; }
         public virtual tbCondicion tbCondicion { get; set; }

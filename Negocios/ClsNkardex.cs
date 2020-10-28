@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Data;
-using System.Data.SqlClient;
 using Datos;
 using System;
 using Entidad;

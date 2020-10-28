@@ -1,4 +1,6 @@
-﻿namespace Entidad {
+﻿using System;
+
+namespace Entidad {
     public class ClsElote {
         public string CodLote { get; private set; }
         public string Nombre { get; private set; }

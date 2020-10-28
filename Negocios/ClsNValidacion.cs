@@ -136,10 +136,10 @@ namespace Negocios {
             return existe;
         }
 
-        public bool existeProductoEnDataGrid(ErrorProvider err, DataGridView dgv, TextBox txt, string mensaje) {
+        public bool existeProductoEnDataGrid(ErrorProvider err, DataGridView dgv, TextBox txt, string mensaje, Label lbl) {
             bool existe = false;
             foreach (DataGridViewRow fila in dgv.Rows) {
-                if (txt.Text == fila.Cells[0].Value.ToString()) {
+                if (txt.Text.Equals(fila.Cells[0].Value.ToString()) || lbl.Text.Equals(fila.Cells[0].Value.ToString())) {
                     existe = true;
                     break;
                 }

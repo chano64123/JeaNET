@@ -27,7 +27,7 @@ namespace Datos
         public string Color { get; private set; }
         public string Ruc { get; private set; }
         public string Sistema_Operativo { get; private set; }
-        public int Cantidad { get; private set; }
+        public int Cantidad { get; set; }
         public decimal Precio_Unitario { get; private set; }
         public string Forma { get; private set; }
         public string Memoria { get; private set; }
@@ -45,6 +45,17 @@ namespace Datos
                 Forma = _forma,
                 Memoria = _memoria,
                 Peso = _peso
+            };
+        }
+
+        internal static tbLotes decrementarCantidad(int cantidad) {
+            throw new NotImplementedException();
+        }
+
+        public static tbLotes decrementar(string _codigo, int _cantidad) {
+            return new tbLotes() {
+                CodLote = _codigo,
+                Cantidad = _cantidad
             };
         }
 

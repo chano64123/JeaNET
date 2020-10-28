@@ -10,7 +10,6 @@
 namespace Datos
 {
     using System;
-    using System.Collections.Generic;
     
     public partial class tbKardex
     {
@@ -37,7 +36,6 @@ namespace Datos
                 Hora = _hora,
                 Fecha = _fecha
             };
-
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using GMap.NET;
+﻿using Entidad;
+using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
@@ -18,7 +19,6 @@ namespace Presentacion {
         //Coordenadas AugustoBleguia
         double LatitudAlbarracin = -18.005837;
         double LongiTudAlbarracin = -70.225521;
-        public static DataTable alertas = new DataTable();
 
         public frmBaseSeguridad() {
             InitializeComponent();
@@ -34,18 +34,17 @@ namespace Presentacion {
             gMapContrLeguia.Zoom = 16;
             gMapContrLeguia.AutoScroll = true;
             ClsNIncidencias N = new ClsNIncidencias();
-            alertas = N.MtdListarIncidencias();
             //MARCADOR
-            foreach (DataRow fila in alertas.Rows) {
+            foreach (ClsEalerta fila in N.listarIncidencias()) {
                 markerOverlay = new GMapOverlay("Marcador");
-                string latitud = (fila[0].ToString());
-                string longitud = (fila[1].ToString());
+                string latitud = fila.Latitud;
+                string longitud = fila.Latitud;
                 marker = new GMarkerGoogle(new PointLatLng(Convert.ToDouble(latitud), Convert.ToDouble(longitud)), GMarkerGoogleType.blue);
                 markerOverlay.Markers.Add(marker);//Agregamos al mapa
                 //agregamos un tooltip de texto a los marcadores
                 marker.ToolTipMode = MarkerTooltipMode.Always;
-                DateTime fecha = Convert.ToDateTime(fila[2].ToString());
-                marker.ToolTipText = string.Format(fila[4].ToString() + " - " + fila[3].ToString() + " - " + fecha.ToShortDateString() + "\n" + fila[5].ToString());
+                DateTime fecha = (DateTime)fila.Fecha;
+                marker.ToolTipText = string.Format(fila.DniCli + " - " + fila.Hora + " - " + fecha.ToShortDateString() + "\n" + "Nombre del Usario");
                 //Ahora agregamos el mapa y el marcador al map control
                 gMapContrLeguia.Overlays.Add(markerOverlay);
                 CreateCircle(Convert.ToDouble(latitud), Convert.ToDouble(longitud), 100.899431);

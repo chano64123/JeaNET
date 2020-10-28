@@ -28,10 +28,10 @@ namespace Negocios {
                 command.Parameters.Add(new SqlParameter("lot", SqlDbType.VarChar));
                 command.Parameters.Add(new SqlParameter("est", SqlDbType.VarChar));
                 for (int i = 1; i <= en.Cantidad; i++) {
-                    ClsEdispositivo En = ClsEdispositivo.crear(MtdCalcularSerieDispositivo(en.Codigo, i), en.Codigo, "1");
+                    ClsEdispositivo En = ClsEdispositivo.crear(MtdCalcularSerieDispositivo(en.CodLote, i), en.CodLote, "1");
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters["lotser"].Value = En.Serie;
-                    command.Parameters["lot"].Value = En.Lote;
+                    command.Parameters["lotser"].Value = En.SerieDispositivo;
+                    command.Parameters["lot"].Value = En.CodLote;
                     command.Parameters["est"].Value = En.Estado;
                     command.ExecuteNonQuery();
                 }
@@ -53,7 +53,7 @@ namespace Negocios {
             command.CommandType = CommandType.StoredProcedure;
             command.CommandText = "USP_S_ListarDispositivosDisponibles";
             command.Parameters.Add(new SqlParameter("lot", SqlDbType.VarChar));
-            command.Parameters["lot"].Value = ed.Codigo;
+            command.Parameters["lot"].Value = ed.CodigoLote;
             command.ExecuteNonQuery();
             adapter.SelectCommand = command;
             adapter.Fill(result);
@@ -83,10 +83,6 @@ namespace Negocios {
                 return false;
                 throw ex;
             }
-        }
-
-        public void MtdGuardarDetalleDispositivo() {
-            throw new NotImplementedException();
         }
     }
 }

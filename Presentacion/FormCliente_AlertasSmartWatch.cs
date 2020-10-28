@@ -20,9 +20,9 @@ namespace Presentacion {
         }
 
         private void FormCliente_AlertasSmartWatch_Load(object sender, EventArgs e) {
-            if (FormCliente_Menu_UsuarioCliente.usuario.Rows.Count == 1) {
+            if (FormCliente_Menu_UsuarioCliente.usuario.Count == 1) {
                 ClsNalerta N = new ClsNalerta();
-                dgvMisAlertas.DataSource = N.listarAlertas(FormCliente_Menu_UsuarioCliente.usuario.Rows[0][0].ToString());
+                dgvMisAlertas.DataSource = N.listarAlertas(FormCliente_Menu_UsuarioCliente.cliente.DniCliente);
             }
         }
     }
