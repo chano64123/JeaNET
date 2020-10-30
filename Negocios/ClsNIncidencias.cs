@@ -1,22 +1,21 @@
-﻿using System.Data;
+﻿using System.Collections;
+using Datos;
+using System;
+using Entidad;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Negocios {
     public class ClsNIncidencias {
+        ClsDalerta datos = new ClsDalerta();
 
-        public DataTable MtdListarIncidencias() {
-            ClsConexionSQLRemota conn = new ClsConexionSQLRemota();
-            DataTable result = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn.Conectar();
-            command.CommandText = "USP_S_ListarAlerta";
-            command.CommandType = CommandType.StoredProcedure;
-            command.ExecuteNonQuery();
-            adapter.SelectCommand = command;
-            adapter.Fill(result);
-            command.Connection = conn.Desconectar();
-            return result;
+        public ArrayList listarIncidencias() {
+            ArrayList empleados = new ArrayList();
+            foreach (var item in datos.listarAlerta()) {
+                ClsEalerta empleado = ClsEalerta.crear(item.DniCli, item.Latitud, item.Longitud, (DateTime)item.Fecha, item.Hora, (int)item.idTurno, item.estado);
+                empleados.Add(empleado);
+            }
+            return empleados;
         }
     }
 }

@@ -21,18 +21,44 @@ namespace Datos
             this.tbDetalleComprobante = new HashSet<tbDetalleComprobante>();
             this.tbDispositivos = new HashSet<tbDispositivos>();
         }
-    
-        public string CodLote { get; set; }
-        public string Nombre { get; set; }
-        public string Color { get; set; }
-        public string Ruc { get; set; }
-        public string Sistema_Operativo { get; set; }
+
+        public string CodLote { get; private set; }
+        public string Nombre { get; private set; }
+        public string Color { get; private set; }
+        public string Ruc { get; private set; }
+        public string Sistema_Operativo { get; private set; }
         public int Cantidad { get; set; }
-        public decimal Precio_Unitario { get; set; }
-        public string Forma { get; set; }
-        public string Memoria { get; set; }
-        public decimal Peso { get; set; }
-    
+        public decimal Precio_Unitario { get; private set; }
+        public string Forma { get; private set; }
+        public string Memoria { get; private set; }
+        public decimal Peso { get; private set; }
+
+        public static tbLotes crear(string _codLote, string _nombre, string _color, string _ruc, string _sistema_Operativo, int _cantidad, decimal _precio_Unitario, string _forma, string _memoria, decimal _peso) {
+            return new tbLotes() {
+                CodLote = _codLote,
+                Nombre = _nombre,
+                Color = _color,
+                Ruc = _ruc,
+                Sistema_Operativo = _sistema_Operativo,
+                Cantidad = _cantidad,
+                Precio_Unitario = _precio_Unitario,
+                Forma = _forma,
+                Memoria = _memoria,
+                Peso = _peso
+            };
+        }
+
+        internal static tbLotes decrementarCantidad(int cantidad) {
+            throw new NotImplementedException();
+        }
+
+        public static tbLotes decrementar(string _codigo, int _cantidad) {
+            return new tbLotes() {
+                CodLote = _codigo,
+                Cantidad = _cantidad
+            };
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDetalleCompras> tbDetalleCompras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

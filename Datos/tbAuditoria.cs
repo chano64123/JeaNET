@@ -14,11 +14,11 @@ namespace Datos
     
     public partial class tbAuditoria
     {
-        public long id { get; set; }
-        public string DNI_Usuario { get; set; }
-        public string descripcionAccion { get; set; }
-        public Nullable<System.DateTime> fecha { get; set; }
-        public string hora { get; set; }
+        public long id { get; private set; }
+        public string DNI_Usuario { get; private set; }
+        public string descripcionAccion { get; private set; }
+        public Nullable<System.DateTime> fecha { get; private set; }
+        public string hora { get; private set; }
 
         public static tbAuditoria crear(string _dNI_Usuario, string _descripcionAccion, DateTime? _fecha, string _hora) {
             return new tbAuditoria() {

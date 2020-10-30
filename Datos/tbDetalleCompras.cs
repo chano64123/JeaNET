@@ -14,15 +14,27 @@ namespace Datos
     
     public partial class tbDetalleCompras
     {
-        public long idDetalleComprobante { get; set; }
-        public string Serie { get; set; }
-        public string Numero { get; set; }
-        public string CodigoLote { get; set; }
-        public string Descripcion { get; set; }
-        public int Cantidad { get; set; }
-        public decimal Precio { get; set; }
-        public decimal Importe { get; set; }
-    
+        public long idDetalleComprobante { get; private set; }
+        public string Serie { get; private set; }
+        public string Numero { get; private set; }
+        public string CodigoLote { get; private set; }
+        public string Descripcion { get; private set; }
+        public int Cantidad { get; private set; }
+        public decimal Precio { get; private set; }
+        public decimal Importe { get; private set; }
+
+        public static tbDetalleCompras crear(string _serie, string _numero, string _codigoLote, string _descripcion, int _cantidad, decimal _precio, decimal _importe) {
+            return new tbDetalleCompras() {
+                Serie = _serie,
+                Numero = _numero,
+                CodigoLote = _codigoLote,
+                Descripcion = _descripcion,
+                Cantidad = _cantidad,
+                Precio = _precio,
+                Importe = _importe
+            };
+        }
+
         public virtual tbCompras tbCompras { get; set; }
         public virtual tbLotes tbLotes { get; set; }
     }

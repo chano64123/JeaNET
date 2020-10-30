@@ -189,10 +189,10 @@ namespace Negocios {
                 command.Parameters.Add(new SqlParameter("imp", SqlDbType.Decimal));
                 command.Parameters["ser"].Value = ed.Serie;
                 command.Parameters["num"].Value = ed.Numero;
-                command.Parameters["cod"].Value = ed.Codigo;
+                command.Parameters["cod"].Value = ed.CodigoLote;
                 command.Parameters["des"].Value = ed.Descripcion;
                 command.Parameters["can"].Value = ed.Cantidad;
-                command.Parameters["pre"].Value = ed.Precio_unitario;
+                command.Parameters["pre"].Value = ed.Precio;
                 command.Parameters["imp"].Value = ed.Importe;
                 command.ExecuteNonQuery();
                 command.Connection = objConexion.Desconectar();
@@ -224,8 +224,8 @@ namespace Negocios {
                 command.Parameters["ser"].Value = e.Serie;
                 command.Parameters["num"].Value = e.Numero;
                 command.Parameters["fec"].Value = e.Fecha;
-                command.Parameters["demp"].Value = e.Empleado;
-                command.Parameters["dcli"].Value = e.Cliente;
+                command.Parameters["demp"].Value = e.DniEmpleado;
+                command.Parameters["dcli"].Value = e.DniCliente;
                 command.Parameters["sub"].Value = e.Subtotal;
                 command.Parameters["igv"].Value = e.Igv;
                 command.Parameters["tot"].Value = e.Total;
@@ -255,7 +255,7 @@ namespace Negocios {
             command.Parameters.Add(new SqlParameter("est", SqlDbType.VarChar));
             command.Parameters.Add(new SqlParameter("hor", SqlDbType.VarChar));
             command.Parameters.Add(new SqlParameter("fech", SqlDbType.Date));
-            command.Parameters["lot"].Value = objEKardex.Codlote;
+            command.Parameters["lot"].Value = objEKardex.CodLote;
             command.Parameters["demp"].Value = objEKardex.DniEmpleado;
             command.Parameters["desc"].Value = descripcion;
             command.Parameters["cant"].Value = objEKardex.Cantidad;

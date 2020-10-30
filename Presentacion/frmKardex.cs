@@ -11,9 +11,8 @@ namespace Presentacion {
 
         private void frmKardex_Load(object sender, EventArgs e) {
             ClsNkardex N = new ClsNkardex();
-            DataTable kardex = N.MtdListarTablaKardex();
             dgvVenta.DataSource = null;
-            dgvVenta.DataSource = kardex;
+            dgvVenta.DataSource = N.listarKardex();
         }
 
         private void btnCerrar_Click(object sender, EventArgs e) {

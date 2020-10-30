@@ -1,7 +1,6 @@
 ﻿using Entidad;
 using Negocios;
 using System;
-using System.Data;
 using System.Windows.Forms;
 
 namespace Presentacion {
@@ -16,7 +15,7 @@ namespace Presentacion {
             frmRegistroLote f = new frmRegistroLote();
             ClsNlote N = new ClsNlote();
             f.ShowDialog();
-            dgvLotes.DataSource = N.MtdListarLotes();
+            dgvLotes.DataSource = N.listarLotes();
         }
 
         private void dgvDispositivos_CellDoubleClick(object sender, DataGridViewCellEventArgs e) {
@@ -24,33 +23,36 @@ namespace Presentacion {
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Hizo doble clic para modificar dispositivo ");
             ClsNlote N = new ClsNlote();
             ClsNproveedor Np = new ClsNproveedor();
-            DataTable data = N.MtdBusquedaLote(dgvLotes.CurrentRow.Cells[0].Value.ToString());
-            //para proveedor
-            foreach (ClsEproveedor item in Np.listarProveedores()) {
-                if (data.Rows[0][3].ToString().Equals(item.Ruc)) {
-                    proveedor = item.Nombre;
-                    break;
+            ClsElote E = null;
+            foreach (ClsElote item in N.busquedaLote(dgvLotes.CurrentRow.Cells[0].Value.ToString())) {
+                foreach (ClsEproveedor item1 in Np.listarProveedores()) {
+                    if (item.Ruc.Equals(item1.Ruc)) {
+                        proveedor = item1.Nombre;
+                        break;
+                    }
                 }
+                E = ClsElote.crear(item.CodLote, item.Nombre, item.Color, proveedor, item.Sistema_Operativo, item.Cantidad, item.Precio_Unitario, item.Forma, item.Memoria, item.Peso);
+                break;
             }
-            ClsElote E = ClsElote.crear(data.Rows[0][0].ToString(), data.Rows[0][1].ToString(), data.Rows[0][2].ToString(), proveedor, data.Rows[0][4].ToString(), Convert.ToInt32(data.Rows[0][5].ToString()), Convert.ToDouble(data.Rows[0][6].ToString()), data.Rows[0][7].ToString(), data.Rows[0][8].ToString(), Convert.ToDouble(data.Rows[0][9].ToString()));
+            //para proveedor
             frmRegistroLote f = new frmRegistroLote(E);
             f.ShowDialog();
-            dgvLotes.DataSource = N.MtdListarLotes();
+            dgvLotes.DataSource = N.listarLotes();
         }
 
         private void frmDispositivos_Load(object sender, EventArgs e) {
             ClsNlote N = new ClsNlote();
-            dgvLotes.DataSource = N.MtdListarLotes();
+            dgvLotes.DataSource = N.listarLotes();
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e) {
             ClsNlote N = new ClsNlote();
-            dgvLotes.DataSource = N.MtdFiltrarLotes(txtBuscar.Text);
+            dgvLotes.DataSource = N.filtrarLotes(txtBuscar.Text);
         }
 
         private void txtBuscar_Leave(object sender, EventArgs e) {
             ClsNlote N = new ClsNlote();
-            dgvLotes.DataSource = N.MtdListarLotes();
+            dgvLotes.DataSource = N.listarLotes();
         }
 
         private void TxtBuscar_MouseClick(object sender, MouseEventArgs e) {

@@ -17,9 +17,9 @@ namespace Negocios {
         public AutoCompleteStringCollection MtdCargarProductos() {
             ClsNlote N = new ClsNlote();
             AutoCompleteStringCollection datoauto = new AutoCompleteStringCollection();
-            foreach (DataRow item in N.MtdListarLotes().Rows) {
-                datoauto.Add(item[0].ToString());
-                datoauto.Add(item[1].ToString());
+            foreach (ClsElote item in N.listarLotes()) {
+                datoauto.Add(item.CodLote);
+                datoauto.Add(item.Nombre);
             }
             return datoauto;
         }

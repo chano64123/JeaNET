@@ -122,8 +122,8 @@ namespace Negocios {
         public bool existeProducto(ErrorProvider err, TextBox txt, string mensaje) {
             bool existe = false;
             ClsNlote N = new ClsNlote();
-            foreach (DataRow item in N.MtdListarLotes().Rows) {
-                if (txt.Text == item[1].ToString() || txt.Text == item[0].ToString()) {
+            foreach (ClsElote item in N.listarLotes()) {
+                if (txt.Text.Equals(item.Nombre) || txt.Text.Equals(item.CodLote)) {
                     existe = true;
                     break;
                 }
@@ -136,10 +136,10 @@ namespace Negocios {
             return existe;
         }
 
-        public bool existeProductoEnDataGrid(ErrorProvider err, DataGridView dgv, TextBox txt, string mensaje) {
+        public bool existeProductoEnDataGrid(ErrorProvider err, DataGridView dgv, TextBox txt, string mensaje, Label lbl) {
             bool existe = false;
             foreach (DataGridViewRow fila in dgv.Rows) {
-                if (txt.Text == fila.Cells[0].Value.ToString()) {
+                if (txt.Text.Equals(fila.Cells[0].Value.ToString()) || lbl.Text.Equals(fila.Cells[0].Value.ToString())) {
                     existe = true;
                     break;
                 }
