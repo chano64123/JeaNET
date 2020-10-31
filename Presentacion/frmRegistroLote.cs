@@ -45,7 +45,7 @@ namespace Presentacion {
                 ClsNlote N = new ClsNlote();
                 if (N.agregarLote(E)) {
                     ClsNdispositivo Ne = new ClsNdispositivo();
-                    Ne.MtdGuardarDispositivo(E);
+                    Ne.agregarDispositivos(E);
                     //para guardar kardex
                     ClsEkardex objEKardex = ClsEkardex.crear(txtCodigo.Text, frmAdministrador.data.Rows[0][0].ToString(), "ENTRADA", Convert.ToInt32(txtCantidad.Text), Convert.ToDecimal(txtPrecio.Text), "1", DateTime.Now.ToShortTimeString(), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
                     ClsNcomprobante objN = new ClsNcomprobante();

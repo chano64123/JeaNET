@@ -1,10 +1,14 @@
 ﻿using Entidad;
+using Datos;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Collections;
 
 namespace Negocios {
     public class ClsNdispositivo {
+        ClsDdispositivo datos = new ClsDdispositivo();
+
         public string MtdCalcularSerieDispositivo(string codigo, int i) {
             if (i.ToString().Length == 1) {
                 return codigo + "-" + "000" + i.ToString();
@@ -17,72 +21,42 @@ namespace Negocios {
             }
         }
 
-        public bool MtdGuardarDispositivo(ClsElote en) {
-            try {
-                ClsConexionSQL objConexion = new ClsConexionSQL();
-                SqlCommand command = new SqlCommand();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                command.Connection = objConexion.Conectar();
-                command.CommandText = "USP_I_AgregarDispositivo";
-                command.Parameters.Add(new SqlParameter("lotser", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("lot", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("est", SqlDbType.VarChar));
-                for (int i = 1; i <= en.Cantidad; i++) {
-                    ClsEdispositivo En = ClsEdispositivo.crear(MtdCalcularSerieDispositivo(en.CodLote, i), en.CodLote, "1");
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters["lotser"].Value = En.SerieDispositivo;
-                    command.Parameters["lot"].Value = En.CodLote;
-                    command.Parameters["est"].Value = En.Estado;
-                    command.ExecuteNonQuery();
-                }
-                command.Connection = objConexion.Desconectar();
-
-                return true;
-            } catch (Exception ex) {
-                return false;
-                throw ex;
+        public ArrayList listarDispositivos() {
+            ArrayList dispositivos = new ArrayList();
+            foreach (var item in datos.listarDispositivos()) {
+                ClsEdispositivo dispositivo = ClsEdispositivo.crear(item.SerieDispositivo,item.CodLote,item.Estado);
+                dispositivos.Add(dispositivo);
             }
+            return dispositivos;
         }
-
-        public DataTable MtdListarDisponibles(ClsEdetallecomprobante ed) {
-            ClsConexionSQL conn = new ClsConexionSQL();
-            DataTable result = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn.Conectar();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "USP_S_ListarDispositivosDisponibles";
-            command.Parameters.Add(new SqlParameter("lot", SqlDbType.VarChar));
-            command.Parameters["lot"].Value = ed.CodigoLote;
-            command.ExecuteNonQuery();
-            adapter.SelectCommand = command;
-            adapter.Fill(result);
-            command.Connection = conn.Desconectar();
+   
+        public ArrayList listarDispositivosDisponibles(string filtro) {
+            ArrayList dispositivos = new ArrayList();
+            foreach (var item in datos.listarDispositivosDisponibles(filtro)) {
+                ClsEdispositivo empleado = ClsEdispositivo.crear(item.SerieDispositivo, item.CodLote, item.Estado);
+                dispositivos.Add(empleado);
+            }
+            return dispositivos;
+        }
+       
+        public bool agregarDispositivos(ClsElote en) {
+            bool result = true;
+            for (int i = 0; i < en.Cantidad; i++) {
+                ClsEdispositivo dispositivo = ClsEdispositivo.crear(MtdCalcularSerieDispositivo(en.CodLote, i), en.CodLote, "1");
+                tbDispositivos tbl = tbDispositivos.crear(dispositivo.SerieDispositivo,dispositivo.CodLote,dispositivo.Estado);                
+                result = datos.agregarDispositivo(tbl) && result;
+            }
             return result;
         }
 
-        public bool MtdDesactivarDispositivos(DataTable ddisponibles, ClsEdetallecomprobante ed) {
-            try {
-                ClsConexionSQL objConexion = new ClsConexionSQL();
-                SqlCommand command = new SqlCommand();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                command.Connection = objConexion.Conectar();
-                command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = "USP_U_ModificarEstadoDispositivo";
-                command.Parameters.Add(new SqlParameter("lotser", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("est", SqlDbType.VarChar));
-                for (int i = 0; i < ed.Cantidad; i++) {
-                    command.Parameters["lotser"].Value = ddisponibles.Rows[i][0].ToString();
-                    command.Parameters["est"].Value = "0";
-                    command.ExecuteNonQuery();
-                }
-                command.Connection = objConexion.Desconectar();
-
-                return true;
-            } catch (Exception ex) {
-                return false;
-                throw ex;
+        public bool desactivarDispositivos(ClsEdetallecomprobante detalleComprobante, DataTable disponibles) {
+            bool result = true;
+            for (int i = 0; i < detalleComprobante.Cantidad; i++) {
+                ClsEdispositivo dispositivo = ClsEdispositivo.crear(disponibles.Rows[i][0].ToString(), disponibles.Rows[i][1].ToString(), "0");
+                tbDispositivos tbl = tbDispositivos.crear(dispositivo.SerieDispositivo, dispositivo.CodLote, dispositivo.Estado);
+                result = datos.modificarEstado(tbl) && result;
             }
+            return result;
         }
     }
 }

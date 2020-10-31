@@ -12,6 +12,7 @@ namespace Presentacion {
             lblEmpleado.Text = data.Rows[0][1] + " " + data.Rows[0][2];
             lblDNI.Text = data.Rows[0][0].ToString();
         }
+
         public static bool verificar_prod = true;
         private void FormPanelAdmi_Boleta_Load(object sender, EventArgs e) {
             //MUCHAS COSAS VAN ACA
@@ -77,7 +78,14 @@ namespace Presentacion {
                     N.agregarDetalleComprobante(Ed);
                     //listar dispositivos disponibles
                     ClsNdispositivo Ne = new ClsNdispositivo();
-                    DataTable Ddisponibles = Ne.MtdListarDisponibles(Ed);
+                    ArrayList disponibles = Ne.listarDispositivosDisponibles(Ed.CodigoLote);
+                    DataTable Ddisponibles = new DataTable();
+                    Ddisponibles.Columns.Add("SerieDispositivo");
+                    Ddisponibles.Columns.Add("CodLote");
+                    Ddisponibles.Columns.Add("Estado");
+                    foreach(ClsEdispositivo dispositivo in disponibles) {
+                        Ddisponibles.Rows.Add(dispositivo.SerieDispositivo, dispositivo.CodLote, dispositivo.Estado);
+                    }
                     //para agregar en cliente_dispositivo
                     ClsNclientedispositivo Neg = new ClsNclientedispositivo();
                     Neg.agregarClienteDispositivo(E.DniCliente, Ed, Ddisponibles);
@@ -86,8 +94,9 @@ namespace Presentacion {
                     ClsEkardex objEKardex = ClsEkardex.crear(item.Cells[0].Value.ToString(), lblDNI.Text, "SALIDA", Convert.ToInt32(item.Cells[2].Value), Convert.ToDecimal(item.Cells[3].Value), "1", DateTime.Now.ToShortTimeString(), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
                     Nk.agregarKardex(objEKardex);
                     //para cambiar el estado de cada dispositivo
-                    Ne.MtdDesactivarDispositivos(Ddisponibles, Ed);
+                    Ne.desactivarDispositivos(Ed, Ddisponibles);
                 }
+
                 //para el decremento
                 int cantidad = 0;
                 foreach (DataGridViewRow fila in dgvVenta.Rows) {
