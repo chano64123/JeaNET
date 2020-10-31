@@ -22,13 +22,13 @@ namespace Datos
     
         public string idCondicion { get; set; }
         public string Descripcion { get; set; }
+
         public static tbCondicion crear(string _idCondicion, string _descripcion) {
             return new tbCondicion() {
                 idCondicion = _idCondicion,
                 Descripcion = _descripcion
             };
         }
-
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDispositivos> tbDispositivos { get; set; }

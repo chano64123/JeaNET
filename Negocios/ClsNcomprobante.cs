@@ -2,8 +2,6 @@
 using Entidad;
 using System;
 using System.Collections;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace Negocios {
     public class ClsNcomprobante {
@@ -50,9 +48,8 @@ namespace Negocios {
         public object listarDetallesComprobante(ClsEdetallecomprobante detalleComprobante) {
 
             ArrayList detalleComprobantes = new ArrayList();
-            foreach (var item in datos.listarDetalleComprobantes(detalleComprobante.Serie,detalleComprobante.Numero))
-            {
-                ClsEdetallecomprobante _DetalleComprobante = ClsEdetallecomprobante.crear(item.Serie,item.Numero,item.CodigoLote,item.Descripcion,item.Cantidad,item.Precio,item.Importe);
+            foreach (var item in datos.listarDetalleComprobantes(detalleComprobante.Serie, detalleComprobante.Numero)) {
+                ClsEdetallecomprobante _DetalleComprobante = ClsEdetallecomprobante.crear(item.Serie, item.Numero, item.CodigoLote, item.Descripcion, item.Cantidad, item.Precio, item.Importe);
                 detalleComprobantes.Add(_DetalleComprobante);
             }
             return detalleComprobantes;
@@ -60,8 +57,7 @@ namespace Negocios {
 
         public object filtrarComprobantes(string filtro) {
             ArrayList comprobantes = new ArrayList();
-            foreach (var item in datos.filtrarComprobantes(filtro))
-            {
+            foreach (var item in datos.filtrarComprobantes(filtro)) {
                 ClsEcomprobante comprobante = ClsEcomprobante.crear(item.Serie, item.Numero, item.DniEmpleado, item.Fecha, item.DniCliente, item.Subtotal, item.Igv, item.Total, item.Estado);
                 comprobantes.Add(comprobante);
             }
@@ -88,8 +84,7 @@ namespace Negocios {
         public ArrayList listarComprobantes() {
 
             ArrayList comprobantes = new ArrayList();
-            foreach (var item in datos.listarComprobantes())
-            {
+            foreach (var item in datos.listarComprobantes()) {
                 ClsEcomprobante comprobante = ClsEcomprobante.crear(item.Serie, item.Numero, item.DniEmpleado, item.Fecha, item.DniCliente, item.Subtotal, item.Igv, item.Total, item.Estado);
                 comprobantes.Add(comprobante);
             }
@@ -164,9 +159,9 @@ namespace Negocios {
             return datos.agregarComprobante(tbl);
         }
 
-        
 
-        
+
+
 
 
     }

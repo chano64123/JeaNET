@@ -1,14 +1,13 @@
 ﻿using Datos;
 using System.Data;
-using System.Data.SqlClient;
 
 namespace Negocios {
     public class ClsNreportes {
 
-        ClsDreporte datos = new ClsDreporte();     
+        ClsDreporte datos = new ClsDreporte();
 
         public DataTable listarIncidencias() {
-            DataTable dt = datos.listarIncidencias();            
+            DataTable dt = datos.listarIncidencias();
             return dt;
         }
 

@@ -1,9 +1,6 @@
-﻿using Entidad;
-using System;
+﻿using Datos;
+using Entidad;
 using System.Collections;
-using System.Data;
-using Datos;
-using System.Data.SqlClient;
 
 namespace Negocios {
     public class ClsNlote {

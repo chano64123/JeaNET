@@ -27,6 +27,7 @@ namespace Datos
         public string RucProveedor { get; set; }
         public Nullable<decimal> Total { get; set; }
         public string Estado { get; set; }
+
         public static tbCompras crear(string _serie, string _numero, DateTime? _fecha, string _dniEmpleado, string _rucProveedor, decimal? _total, string _estado) {
             return new tbCompras() {
                 Serie = _serie,

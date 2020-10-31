@@ -4,24 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3cc7c36c2e704ce89b15bcc62415504b" Name="Diagram1">
-        <EntityTypeShape EntityType="bdJeaNetModel.tbAlertas" Width="1.5" PointX="2.5" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdJeaNetModel.tbAuditoria" Width="1.5" PointX="13.375" PointY="4" IsExpanded="true" />
+      <Diagram DiagramId="3cc7c36c2e704ce89b15bcc62415504b" Name="Diagram1" ZoomLevel="70">
+        <EntityTypeShape EntityType="bdJeaNetModel.tbAlertas" Width="1.5" PointX="2.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdJeaNetModel.tbAuditoria" Width="1.5" PointX="9.375" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="bdJeaNetModel.tbCargos" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdJeaNetModel.tbClienteDisposiivo" Width="1.5" PointX="11.25" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdJeaNetModel.tbClientes" Width="1.5" PointX="11.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdJeaNetModel.tbClienteDisposiivo" Width="1.5" PointX="5.375" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdJeaNetModel.tbClientes" Width="1.5" PointX="2.625" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="bdJeaNetModel.tbCompras" Width="1.5" PointX="4.625" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdJeaNetModel.tbComprobante" Width="1.5" PointX="11.25" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdJeaNetModel.tbCondicion" Width="1.5" PointX="9.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdJeaNetModel.tbComprobante" Width="1.5" PointX="0.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdJeaNetModel.tbCondicion" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="bdJeaNetModel.tbDetalleCompras" Width="1.5" PointX="6.875" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdJeaNetModel.tbDetalleComprobante" Width="1.5" PointX="6.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdJeaNetModel.tbDispositivos" Width="1.5" PointX="9.375" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdJeaNetModel.tbEmpleados" Width="1.5" PointX="2.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdJeaNetModel.tbKardex" Width="1.5" PointX="13.375" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdJeaNetModel.tbLotes" Width="1.5" PointX="7" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdJeaNetModel.tbProveedores" Width="1.5" PointX="4.625" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdJeaNetModel.tbTurnos" Width="1.5" PointX="2.625" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdJeaNetModel.tbSesiones" Width="1.5" PointX="11.375" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdJeaNetModel.tbDetalleComprobante" Width="1.5" PointX="0.5" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdJeaNetModel.tbDispositivos" Width="1.5" PointX="5.375" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdJeaNetModel.tbEmpleados" Width="1.5" PointX="0.5" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdJeaNetModel.tbKardex" Width="1.5" PointX="9.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdJeaNetModel.tbLotes" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdJeaNetModel.tbProveedores" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdJeaNetModel.tbTurnos" Width="1.5" PointX="2.875" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdJeaNetModel.tbSesiones" Width="1.5" PointX="9.375" PointY="6" IsExpanded="true" />
         <AssociationConnector Association="bdJeaNetModel.fk_DniCli" ManuallyRouted="false" />
         <AssociationConnector Association="bdJeaNetModel.fk_idturno" ManuallyRouted="false" />
         <AssociationConnector Association="bdJeaNetModel.FK_tbEmpleados_Codigo_Cargo" ManuallyRouted="false" />

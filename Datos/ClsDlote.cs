@@ -48,7 +48,7 @@ namespace Datos {
                 query.Cantidad = lote.Cantidad;
                 db.SaveChanges();
                 return true;
-            } catch (Exception e) {
+            } catch (Exception) {
                 return false;
             }
         }

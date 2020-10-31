@@ -32,6 +32,7 @@ namespace Datos
         public string Estado { get; set; }
         public string Usuario { get; set; }
         public string Contraseña { get; set; }
+
         public static tbEmpleados crear(string _dniEmpleado, string _nombres, string _apellidos, string _direccion, string _correo, string _telefono, string _codigo_Cargo, int _idTurno, string _estado, string _usuario, string _contraseña) {
             return new tbEmpleados() {
                 DniEmpleado = _dniEmpleado,

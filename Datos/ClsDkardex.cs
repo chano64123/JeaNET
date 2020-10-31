@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Datos {
     public class ClsDkardex {
         bdJeaNetEntities db = new bdJeaNetEntities();
 
-        public bool agregarKardex(tbKardex kardex)
-        {
-            try
-            {
+        public bool agregarKardex(tbKardex kardex) {
+            try {
                 db.tbKardex.Add(kardex);
                 db.SaveChanges();
                 return true;
-            }
-            catch (Exception)
-            {
+            } catch (Exception) {
                 return false;
             }
         }

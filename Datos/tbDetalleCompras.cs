@@ -22,13 +22,19 @@ namespace Datos
         public int Cantidad { get; set; }
         public decimal Precio { get; set; }
         public decimal Importe { get; set; }
-        public static tbDispositivos crear(string _serieDispositivo, string _codLote, string _estado) {
-            return new tbDispositivos() {
-                SerieDispositivo = _serieDispositivo,
-                CodLote = _codLote,
-                Estado = _estado
+
+        public static tbDetalleCompras crear(string _serie, string _numero, string _codigoLote, string _descripcion, int _cantidad, decimal _precio, decimal _importe) {
+            return new tbDetalleCompras() {
+                Serie = _serie,
+                Numero = _numero,
+                CodigoLote = _codigoLote,
+                Descripcion = _descripcion,
+                Cantidad = _cantidad,
+                Precio = _precio,
+                Importe = _importe
             };
         }
+
         public virtual tbCompras tbCompras { get; set; }
         public virtual tbLotes tbLotes { get; set; }
     }

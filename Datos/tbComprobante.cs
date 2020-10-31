@@ -29,17 +29,16 @@ namespace Datos
         public decimal Igv { get; set; }
         public decimal Total { get; set; }
         public string Estado { get; set; }
-        public static tbComprobante crear(string _serie, string _numero, DateTime _fecha, string _dniEmpleado, string _dniCliente, decimal _subtotal, decimal _igv, decimal _total, string _estado) {
-            return new tbComprobante() {
+
+        public static tbDetalleComprobante crear(string _serie, string _numero, string _codigoLote, string _descripcion, int _cantidad, decimal _precio, decimal _importe) {
+            return new tbDetalleComprobante() {
                 Serie = _serie,
                 Numero = _numero,
-                Fecha = _fecha,
-                DniEmpleado = _dniEmpleado,
-                DniCliente = _dniCliente,
-                Subtotal = _subtotal,
-                Igv = _igv,
-                Total = _total,
-                Estado = _estado,
+                CodigoLote = _codigoLote,
+                Descripcion = _descripcion,
+                Cantidad = _cantidad,
+                Precio = _precio,
+                Importe = _importe
             };
         }
 
