@@ -48,6 +48,13 @@ namespace Datos
             };
         }
 
+        public static tbLotes decrementar(string _codLote, int _cantidad) {
+            return new tbLotes() {
+                CodLote = _codLote,
+                Cantidad = _cantidad
+            };
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDetalleCompras> tbDetalleCompras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -20,25 +20,27 @@ namespace Datos
             this.tbDetalleComprobante = new HashSet<tbDetalleComprobante>();
         }
     
-        public string Serie { get; set; }
-        public string Numero { get; set; }
-        public System.DateTime Fecha { get; set; }
-        public string DniEmpleado { get; set; }
-        public string DniCliente { get; set; }
-        public decimal Subtotal { get; set; }
-        public decimal Igv { get; set; }
-        public decimal Total { get; set; }
-        public string Estado { get; set; }
+        public string Serie { get; private set; }
+        public string Numero { get; private set; }
+        public System.DateTime Fecha { get; private set; }
+        public string DniEmpleado { get; private set; }
+        public string DniCliente { get; private set; }
+        public decimal Subtotal { get; private set; }
+        public decimal Igv { get; private set; }
+        public decimal Total { get; private set; }
+        public string Estado { get; private set; }
 
-        public static tbDetalleComprobante crear(string _serie, string _numero, string _codigoLote, string _descripcion, int _cantidad, decimal _precio, decimal _importe) {
-            return new tbDetalleComprobante() {
+        public static tbComprobante crear(string _serie, string _numero, DateTime _fecha, string _dniEmpleado, string _dniCliente, decimal _subtotal, decimal _igv, decimal _total, string _estado) {
+            return new tbComprobante() {
                 Serie = _serie,
                 Numero = _numero,
-                CodigoLote = _codigoLote,
-                Descripcion = _descripcion,
-                Cantidad = _cantidad,
-                Precio = _precio,
-                Importe = _importe
+                Fecha = _fecha,
+                DniEmpleado = _dniEmpleado,
+                DniCliente = _dniCliente,
+                Subtotal = _subtotal,
+                Igv = _igv,
+                Total = _total,
+                Estado = _estado,
             };
         }
 

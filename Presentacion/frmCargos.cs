@@ -29,7 +29,6 @@ namespace Presentacion {
             ClsEcargo E = null;
             foreach (ClsEcargo item in N.busquedaCargo(dgvCargos.CurrentRow.Cells[0].Value.ToString())) {
                 E = ClsEcargo.crear(item.Codigo_Cargo, item.Descripcion);
-                break;
             }
             frmRegistroCargo f = new frmRegistroCargo(E);
             f.ShowDialog();

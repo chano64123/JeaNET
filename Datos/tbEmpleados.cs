@@ -21,17 +21,17 @@ namespace Datos
             this.tbComprobante = new HashSet<tbComprobante>();
         }
     
-        public string DniEmpleado { get; set; }
-        public string Nombres { get; set; }
-        public string Apellidos { get; set; }
-        public string Direccion { get; set; }
-        public string Correo { get; set; }
-        public string Telefono { get; set; }
-        public string Codigo_Cargo { get; set; }
-        public int idTurno { get; set; }
-        public string Estado { get; set; }
-        public string Usuario { get; set; }
-        public string Contraseña { get; set; }
+        public string DniEmpleado { get; private set; }
+        public string Nombres { get; private set; }
+        public string Apellidos { get; private set; }
+        public string Direccion { get; private set; }
+        public string Correo { get; private set; }
+        public string Telefono { get; private set; }
+        public string Codigo_Cargo { get; private set; }
+        public int idTurno { get; private set; }
+        public string Estado { get; private set; }
+        public string Usuario { get; private set; }
+        public string Contraseña { get; private set; }
 
         public static tbEmpleados crear(string _dniEmpleado, string _nombres, string _apellidos, string _direccion, string _correo, string _telefono, string _codigo_Cargo, int _idTurno, string _estado, string _usuario, string _contraseña) {
             return new tbEmpleados() {

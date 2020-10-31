@@ -19,8 +19,8 @@ namespace Datos
             this.tbEmpleados = new HashSet<tbEmpleados>();
         }
     
-        public string Codigo_Cargo { get; set; }
-        public string Descripcion { get; set; }
+        public string Codigo_Cargo { get; private set; }
+        public string Descripcion { get; private set; }
 
         public static tbCargos crear(string _codigo_Cargo, string _descripcion) {
             return new tbCargos() {

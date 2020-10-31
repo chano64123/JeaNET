@@ -20,13 +20,13 @@ namespace Datos
             this.tbDetalleCompras = new HashSet<tbDetalleCompras>();
         }
     
-        public string Serie { get; set; }
-        public string Numero { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
-        public string DniEmpleado { get; set; }
-        public string RucProveedor { get; set; }
-        public Nullable<decimal> Total { get; set; }
-        public string Estado { get; set; }
+        public string Serie { get; private set; }
+        public string Numero { get; private set; }
+        public Nullable<System.DateTime> Fecha { get; private set; }
+        public string DniEmpleado { get; private set; }
+        public string RucProveedor { get; private set; }
+        public Nullable<decimal> Total { get; private set; }
+        public string Estado { get; private set; }
 
         public static tbCompras crear(string _serie, string _numero, DateTime? _fecha, string _dniEmpleado, string _rucProveedor, decimal? _total, string _estado) {
             return new tbCompras() {
