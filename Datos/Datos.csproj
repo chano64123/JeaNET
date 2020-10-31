@@ -60,6 +60,7 @@
     <Compile Include="ClsDcargo.cs" />
     <Compile Include="ClsDcliente.cs" />
     <Compile Include="ClsDclienteDispositivo.cs" />
+    <Compile Include="ClsDcomprobante.cs" />
     <Compile Include="ClsDempleado.cs" />
     <Compile Include="ClsDkardex.cs" />
     <Compile Include="ClsDlote.cs" />

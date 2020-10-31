@@ -18,7 +18,7 @@ namespace Presentacion {
         private void frmVerVentas_Load(object sender, EventArgs e) {
             //listar comprobantes
             ClsNcomprobante N = new ClsNcomprobante();
-            dgvComprobantes.DataSource = N.MtdListarComprobantes();
+            dgvComprobantes.DataSource = N.listarComprobantes();
         }
 
         private void dgvComprobantes_CellDoubleClick(object sender, DataGridViewCellEventArgs e) {
@@ -26,7 +26,7 @@ namespace Presentacion {
             //listar detalle comprobante
             ClsNcomprobante N = new ClsNcomprobante();
             ClsEdetallecomprobante E = ClsEdetallecomprobante.listar(dgvComprobantes.CurrentRow.Cells[0].Value.ToString(), dgvComprobantes.CurrentRow.Cells[1].Value.ToString());
-            dgvDetalleComprobante.DataSource = N.MtdListarDetallesComprobante(E);
+            dgvDetalleComprobante.DataSource = N.listarDetallesComprobante(E);
         }
 
         private void dgvComprobantes_Click(object sender, EventArgs e) {
@@ -37,12 +37,12 @@ namespace Presentacion {
 
         private void txtBuscar_TextChanged(object sender, EventArgs e) {
             ClsNcomprobante N = new ClsNcomprobante();
-            dgvComprobantes.DataSource = N.MtdFiltrarComprobantes(txtBuscar.Text);
+            dgvComprobantes.DataSource = N.filtrarComprobantes(txtBuscar.Text);
         }
 
         private void txtBuscar_Leave(object sender, EventArgs e) {
             ClsNcomprobante N = new ClsNcomprobante();
-            dgvComprobantes.DataSource = N.MtdListarComprobantes();
+            dgvComprobantes.DataSource = N.listarComprobantes();
         }
 
         private void TxtBuscar_MouseClick(object sender, MouseEventArgs e) {
