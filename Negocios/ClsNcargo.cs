@@ -1,12 +1,18 @@
 ﻿using Datos;
 using Entidad;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Negocios {
     public class ClsNcargo {
+        ClsDcargo datos = new ClsDcargo();
+
         public string MtdObtenerCodigoCargo() {
             string numero = "0";
-            int cant = listarCargos().Count + 1;
+            int cant = listarCargos().Count+1;
             if (cant < 10) {
                 numero = "00" + cant.ToString();
             } else if (cant < 100) {
@@ -17,21 +23,23 @@ namespace Negocios {
             return numero;
         }
 
-        ClsDcargo datos = new ClsDcargo();
-
         public bool agregarCargo(ClsEcargo cargo) {
-            tbCargos tbl = tbCargos.crear(cargo.Codigo_Cargo, cargo.Descripcion);
+            tbCargos tbl = tbCargos.crear(cargo.Codigo_Cargo,cargo.Descripcion);
             return datos.agregarCargo(tbl);
-        }
-
-        public bool modificarCargo(ClsEcargo cargo) {
-            tbCargos tbl = tbCargos.crear(cargo.Codigo_Cargo, cargo.Descripcion);
-            return datos.modificarCargo(tbl);
         }
 
         public ArrayList listarCargos() {
             ArrayList cargos = new ArrayList();
             foreach (var item in datos.listarCargos()) {
+                ClsEcargo cargo = ClsEcargo.crear(item.Codigo_Cargo, item.Descripcion);
+                cargos.Add(cargo);
+            }
+            return cargos;
+        }
+
+        public ArrayList busquedaCargo(string codigoCargo) {
+            ArrayList cargos = new ArrayList();
+            foreach (var item in datos.busquedaCargo(codigoCargo)) {
                 ClsEcargo cargo = ClsEcargo.crear(item.Codigo_Cargo, item.Descripcion);
                 cargos.Add(cargo);
             }
@@ -47,13 +55,9 @@ namespace Negocios {
             return cargos;
         }
 
-        public ArrayList busquedaCargo(string codigoCargo) {
-            ArrayList cargos = new ArrayList();
-            foreach (var item in datos.busquedaCargo(codigoCargo)) {
-                ClsEcargo cargo = ClsEcargo.crear(item.Codigo_Cargo, item.Descripcion);
-                cargos.Add(cargo);
-            }
-            return cargos;
+        public bool modificarCargo(ClsEcargo cargo) {
+            tbCargos tbl = tbCargos.crear(cargo.Codigo_Cargo, cargo.Descripcion);
+            return datos.modificarCargo(tbl);
         }
     }
 }

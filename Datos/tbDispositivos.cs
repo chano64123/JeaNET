@@ -20,9 +20,9 @@ namespace Datos
             this.tbClienteDisposiivo = new HashSet<tbClienteDisposiivo>();
         }
     
-        public string SerieDispositivo { get; set; }
-        public string CodLote { get; set; }
-        public string Estado { get; set; }
+        public string SerieDispositivo { get; private set; }
+        public string CodLote { get; private set; }
+        public string Estado { get; private set; }
 
         public static tbDispositivos crear(string _serieDispositivo, string _codLote, string _estado) {
             return new tbDispositivos() {

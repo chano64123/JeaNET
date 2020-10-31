@@ -14,8 +14,8 @@ namespace Datos
     
     public partial class tbSesiones
     {
-        public long id { get; set; }
-        public string usuario { get; set; }
+        public long id { get; private set; }
+        public string usuario { get; private set; }
 
         public static tbSesiones crear(string _usuario) {
             return new tbSesiones() {
