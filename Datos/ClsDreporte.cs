@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Datos {
     public class ClsDreporte {
-        bdJeaNetEntities db = new bdJeaNetEntities();
+        readonly bdJeaNetEntities db = new bdJeaNetEntities();
 
         public DataTable listarProductosSemestre() {
             DataTable dt = new DataTable();
@@ -44,6 +44,7 @@ namespace Datos {
             }
             return dt;
         }
+
         public DataTable listarProductosMes() {
             DataTable dt = new DataTable();
             dt.Columns.Add("Producto");
@@ -66,6 +67,7 @@ namespace Datos {
             }
             return dt;
         }
+
         public DataTable listarProductosSemanal() {
             DataTable dt = new DataTable();
             dt.Columns.Add("Producto");
@@ -108,6 +110,7 @@ namespace Datos {
             }
             return dt;
         }
+
         public DataTable listarEmpleadoVentaTrimestre() {
             DataTable dt = new DataTable();
             dt.Columns.Add("Empleado");

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Presentacion {
     public partial class FormSeguridadCiudana : Form {
-        DataTable data = new DataTable();
+        DataTable data;
         public static string ingreso;
         private Form _objForm;
         public FormSeguridadCiudana(DataTable datos) {

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Datos {
     public class ClsDcliente {
-        bdJeaNetEntities db = new bdJeaNetEntities();
+        readonly bdJeaNetEntities db = new bdJeaNetEntities();
 
         public bool agregarCliente(tbClientes cliente) {
             try {

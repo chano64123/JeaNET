@@ -1,12 +1,10 @@
 ﻿using Datos;
 using Entidad;
-using System;
 using System.Data;
-using System.Data.SqlClient;
 
 namespace Negocios {
     public class ClsNclientedispositivo {
-        ClsDclienteDispositivo datos = new ClsDclienteDispositivo();
+        readonly ClsDclienteDispositivo datos = new ClsDclienteDispositivo();
 
         public bool agregarClienteDispositivo(string dni, ClsEdetallecomprobante detalleComprobante, DataTable disponibles) {
             bool result = true;

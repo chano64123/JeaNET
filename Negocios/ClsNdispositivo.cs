@@ -19,9 +19,8 @@ namespace Negocios {
 
         public bool MtdGuardarDispositivo(ClsElote en) {
             try {
-                ClsConexionSQL objConexion = new ClsConexionSQL();
+                ClsConexionSql objConexion = new ClsConexionSql();
                 SqlCommand command = new SqlCommand();
-                SqlDataAdapter adapter = new SqlDataAdapter();
                 command.Connection = objConexion.Conectar();
                 command.CommandText = "USP_I_AgregarDispositivo";
                 command.Parameters.Add(new SqlParameter("lotser", SqlDbType.VarChar));
@@ -36,16 +35,14 @@ namespace Negocios {
                     command.ExecuteNonQuery();
                 }
                 command.Connection = objConexion.Desconectar();
-
                 return true;
-            } catch (Exception ex) {
+            } catch (Exception) {
                 return false;
-                throw ex;
             }
         }
 
         public DataTable MtdListarDisponibles(ClsEdetallecomprobante ed) {
-            ClsConexionSQL conn = new ClsConexionSQL();
+            ClsConexionSql conn = new ClsConexionSql();
             DataTable result = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
             SqlCommand command = new SqlCommand();
@@ -63,9 +60,8 @@ namespace Negocios {
 
         public bool MtdDesactivarDispositivos(DataTable ddisponibles, ClsEdetallecomprobante ed) {
             try {
-                ClsConexionSQL objConexion = new ClsConexionSQL();
+                ClsConexionSql objConexion = new ClsConexionSql();
                 SqlCommand command = new SqlCommand();
-                SqlDataAdapter adapter = new SqlDataAdapter();
                 command.Connection = objConexion.Conectar();
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "USP_U_ModificarEstadoDispositivo";
@@ -77,11 +73,9 @@ namespace Negocios {
                     command.ExecuteNonQuery();
                 }
                 command.Connection = objConexion.Desconectar();
-
                 return true;
-            } catch (Exception ex) {
+            } catch (Exception) {
                 return false;
-                throw ex;
             }
         }
     }

@@ -10,7 +10,10 @@ namespace Presentacion {
         }
 
         private void FormPanelAdmi_Cargos_Load(object sender, EventArgs e) {
-            //listar cargos
+            listarCargos();
+        }
+
+        private void listarCargos() {
             ClsNcargo N = new ClsNcargo();
             dgvCargos.DataSource = N.listarCargos();
         }
@@ -41,8 +44,7 @@ namespace Presentacion {
         }
 
         private void txtBuscar_Leave(object sender, EventArgs e) {
-            ClsNcargo N = new ClsNcargo();
-            dgvCargos.DataSource = N.listarCargos();
+            listarCargos();
         }
 
         private void TxtBuscar_MouseClick(object sender, MouseEventArgs e) {

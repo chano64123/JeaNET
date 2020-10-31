@@ -4,7 +4,7 @@ using System.Data;
 namespace Negocios {
     public class ClsNreportes {
 
-        ClsDreporte datos = new ClsDreporte();
+        readonly ClsDreporte datos = new ClsDreporte();
 
         public DataTable listarIncidencias() {
             DataTable dt = datos.listarIncidencias();

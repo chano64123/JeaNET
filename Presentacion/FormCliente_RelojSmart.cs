@@ -62,7 +62,6 @@ namespace Presentacion {
             if (FormCliente_Menu_UsuarioCliente.usuario.Count == 1) {
                 string frase = e.Result.Text;
                 if (frase.Equals("Activar Protocolo")) {
-                    //respuesta.SpeakAsync("Activando protocolo");
                     try {
                         Enlinea = new SoundPlayer(Application.StartupPath + @"\Sonido\Activado.wav");
                         Enlinea.Play();
@@ -91,11 +90,11 @@ namespace Presentacion {
             }
         }
 
-        public string[] listaPalabras = { "Activar Protocolo", "Desactivar Protocolo" };
-        public string latitud;
-        public string longitud;
-        public string id;
-        public string fecha;
+        private string[] listaPalabras = { "Activar Protocolo", "Desactivar Protocolo" };
+        private string latitud;
+        private string longitud;
+        private string id;
+        private string fecha;
         private CLsNsocket mySocket;
 
         private void tmr1_Tick(object sender, EventArgs e) {
@@ -112,7 +111,6 @@ namespace Presentacion {
         private void watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e) {
             if (a == 0) {
                 a++;
-                //MessageBox.Show(string.Format("Latitud: {0}, Longitud: {1}", e.Position.Location.Latitude, e.Position.Location.Longitude, MessageBoxButtons.OK, MessageBoxIcon.Information));
                 latitud = e.Position.Location.Latitude.ToString();
                 longitud = e.Position.Location.Longitude.ToString();
                 CLsNsocket so = new CLsNsocket();
@@ -121,7 +119,7 @@ namespace Presentacion {
                 ClsEalerta E = ClsEalerta.crear(FormCliente_Menu_UsuarioCliente.cliente.DniCliente, latitud.Replace('.', ','), longitud.Replace('.', ','), Convert.ToDateTime(DateTime.Now.ToShortDateString()), DateTime.Now.ToLongTimeString(), MtdObtenerTurno(), "0");
                 ClsNalerta N = new ClsNalerta();
                 N.agregarAlerta(E);
-                MessageBox.Show(string.Format("Datos enviados, JeanNET", "JeaNet - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information));
+                MessageBox.Show("Datos enviados, JeanNET", "JeaNet - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -140,7 +138,7 @@ namespace Presentacion {
 
         int a = 0;
         public void btm_AlertaGps2_Click(object sender, EventArgs e) {
-            if (band == true && FormCliente_Menu_UsuarioCliente.usuario.Count == 1) {
+            if (band && FormCliente_Menu_UsuarioCliente.usuario.Count == 1) {
                 a = 0;
                 cont = 11;
                 timerRegresiva.Stop();

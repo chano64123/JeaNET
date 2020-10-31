@@ -11,7 +11,7 @@ namespace Presentacion {
     public partial class frmAdministrador : Form {
         private Form _objForm;
         public static string ingreso;
-        public static DataTable data = new DataTable();
+        public static DataTable data;
         ClsNValidacion validar = ClsNValidacion.getValidacion();
 
         public frmAdministrador(DataTable datos) {

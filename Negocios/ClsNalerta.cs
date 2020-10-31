@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace Negocios {
     public class ClsNalerta {
-        ClsDalerta datos = new ClsDalerta();
+        readonly ClsDalerta datos = new ClsDalerta();
 
         public bool agregarAlerta(ClsEalerta alerta) {
             tbAlertas tbl = tbAlertas.crear(alerta.DniCli, alerta.Latitud, alerta.Longitud, alerta.Fecha, alerta.Hora, alerta.idTurno, alerta.estado);

@@ -5,8 +5,7 @@ using System.Linq;
 
 namespace Datos {
     public class ClsDcargo {
-
-        bdJeaNetEntities db = new bdJeaNetEntities();
+        readonly bdJeaNetEntities db = new bdJeaNetEntities();
 
         public bool agregarCargo(tbCargos cargo) {
             try {

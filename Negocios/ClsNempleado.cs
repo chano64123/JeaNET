@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace Negocios {
     public class ClsNempleado {
-        ClsDempleado datos = new ClsDempleado();
+        readonly ClsDempleado datos = new ClsDempleado();
 
         public bool agregarEmpleado(ClsEempleado empleado) {
             tbEmpleados tbl = tbEmpleados.crear(empleado.DniEmpleado, empleado.Nombres, empleado.Apellidos, empleado.Direccion, empleado.Correo, empleado.Telefono, empleado.Codigo_Cargo, empleado.idTurno, empleado.Estado, empleado.Usuario, empleado.Contraseña);
@@ -28,7 +28,7 @@ namespace Negocios {
         public ArrayList filtrarEmpleados(string filtro) {
             ArrayList empleados = new ArrayList();
             foreach (var item in datos.filtrarEmpleado(filtro)) {
-                ClsEempleado empleado = ClsEempleado.crearFiltro(item.DniEmpleado, item.Nombres, item.Apellidos, item.Direccion, item.Codigo_Cargo, item.Telefono, item.Estado); ;
+                ClsEempleado empleado = ClsEempleado.crearFiltro(item.DniEmpleado, item.Nombres, item.Apellidos, item.Direccion, item.Codigo_Cargo, item.Telefono, item.Estado);
                 empleados.Add(empleado);
             }
             return empleados;

@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace Negocios {
     public class ClsNproveedor {
-        ClsDproveedor datos = new ClsDproveedor();
+        readonly ClsDproveedor datos = new ClsDproveedor();
 
         public bool agregarProveedor(ClsEproveedor proveedor) {
             tbProveedores tbl = tbProveedores.crear(proveedor.Ruc, proveedor.Nombre, proveedor.Direccion, proveedor.Telefono, proveedor.Correo, proveedor.Estado);
@@ -26,12 +26,12 @@ namespace Negocios {
         }
 
         public ArrayList filtrarProveedores(string filtro) {
-            ArrayList proveedors = new ArrayList();
+            ArrayList proveedores = new ArrayList();
             foreach (var item in datos.filtrarProveedor(filtro)) {
-                ClsEproveedor proveedor = ClsEproveedor.crear(item.Ruc, item.Nombre, item.Direccion, item.Telefono, item.Correo, item.Estado); ;
-                proveedors.Add(proveedor);
+                ClsEproveedor proveedor = ClsEproveedor.crear(item.Ruc, item.Nombre, item.Direccion, item.Telefono, item.Correo, item.Estado);
+                proveedores.Add(proveedor);
             }
-            return proveedors;
+            return proveedores;
         }
 
         public ArrayList busquedaProveedor(string codigoProveedor) {

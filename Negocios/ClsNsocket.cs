@@ -2,7 +2,7 @@
 
 namespace Negocios {
     public class CLsNsocket {
-        private Socket mySocket;
+        readonly private Socket mySocket;
         public CLsNsocket() {
             mySocket = IO.Socket("http://76524e8f3cfa.ngrok.io/");
             mySocket.Connect();
