@@ -21,10 +21,10 @@ namespace Datos
             this.tbEmpleados = new HashSet<tbEmpleados>();
         }
     
-        public int idTurno { get; set; }
-        public string descripcion { get; set; }
-        public System.TimeSpan entrada { get; set; }
-        public System.TimeSpan salida { get; set; }
+        public int idTurno { get; private set; }
+        public string descripcion { get; private set; }
+        public System.TimeSpan entrada { get; private set; }
+        public System.TimeSpan salida { get; private set; }
 
         public static tbTurnos crear(string _descripcion, TimeSpan _entrada, TimeSpan _salida) {
             return new tbTurnos() {

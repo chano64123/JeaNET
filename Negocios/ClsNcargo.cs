@@ -2,67 +2,17 @@
 using Entidad;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace Negocios {
     public class ClsNcargo {
-        public DataTable MtdListarCargos() {
-            ClsConexionSQL conn = new ClsConexionSQL();
-            DataTable result = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn.Conectar();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "USP_S_ListarCargos";
-            command.ExecuteNonQuery();
-            adapter.SelectCommand = command;
-            adapter.Fill(result);
-            command.Connection = conn.Desconectar();
-            return result;
-        }
-
-        public bool MtdModificarCargo(ClsEcargo e) {
-            try {
-                ClsConexionSQL objConexion = new ClsConexionSQL();
-                SqlCommand command = new SqlCommand();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                command.Connection = objConexion.Conectar();
-                command.CommandText = "USP_U_ModificarCargo";
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("id", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("des", SqlDbType.VarChar));
-                command.Parameters["id"].Value = e.Codigo_Cargo;
-                command.Parameters["des"].Value = e.Descripcion;
-                command.ExecuteNonQuery();
-                command.Connection = objConexion.Desconectar();
-                return true;
-            } catch (Exception ex) {
-                return false;
-                throw ex;
-            }
-        }
-
-        public DataTable MtdBusquedaCargo(string cargo) {
-            ClsConexionSQL conn = new ClsConexionSQL();
-            DataTable result = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn.Conectar();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "USP_S_BusquedaCargo";
-            command.Parameters.Add(new SqlParameter("id", SqlDbType.VarChar));
-            command.Parameters["id"].Value = cargo;
-            command.ExecuteNonQuery();
-            adapter.SelectCommand = command;
-            adapter.Fill(result);
-            command.Connection = conn.Desconectar();
-            return result;
-        }
+        ClsDcargo datos = new ClsDcargo();
 
         public string MtdObtenerCodigoCargo() {
             string numero = "0";
-            int cant = MtdListarCargos().Rows.Count+1;
+            int cant = listarCargos().Count+1;
             if (cant < 10) {
                 numero = "00" + cant.ToString();
             } else if (cant < 100) {
@@ -73,51 +23,8 @@ namespace Negocios {
             return numero;
         }
 
-        public object MtdFiltrarCargos(string filtro) {
-            ClsConexionSQL conn = new ClsConexionSQL();
-            DataTable result = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn.Conectar();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "USP_S_FiltrarCargo";
-            command.Parameters.Add(new SqlParameter("fil", SqlDbType.VarChar));
-            command.Parameters["fil"].Value = filtro;
-            command.ExecuteNonQuery();
-            adapter.SelectCommand = command;
-            adapter.Fill(result);
-            command.Connection = conn.Desconectar();
-            return result;
-        }
-
-        //public bool MtdGuardarCargo(ClsEcargo e) {
-        //    try {
-        //        ClsConexionSQL objConexion = new ClsConexionSQL();
-        //        SqlCommand command = new SqlCommand();
-        //        SqlDataAdapter adapter = new SqlDataAdapter();
-        //        command.Connection = objConexion.Conectar();
-        //        command.CommandText = "USP_I_AgregarCargo";
-        //        command.CommandType = CommandType.StoredProcedure;
-        //        command.Parameters.Add(new SqlParameter("id", SqlDbType.VarChar));
-        //        command.Parameters.Add(new SqlParameter("des", SqlDbType.VarChar));
-        //        command.Parameters["id"].Value = e.Idcargo;
-        //        command.Parameters["des"].Value = e.Descripcion;
-        //        command.ExecuteNonQuery();
-        //        command.Connection = objConexion.Desconectar();
-        //        return true;
-        //    } catch (Exception ex) {
-        //        return false;
-        //        throw ex;
-        //    }
-        //}
-
-
-        ClsDcargo datos = new ClsDcargo();
-
         public bool agregarCargo(ClsEcargo cargo) {
-            tbCargos tbl = new tbCargos();
-            tbl.Codigo_Cargo = cargo.Codigo_Cargo;
-            tbl.Descripcion = cargo.Descripcion;
+            tbCargos tbl = tbCargos.crear(cargo.Codigo_Cargo,cargo.Descripcion);
             return datos.agregarCargo(tbl);
         }
 
@@ -128,6 +35,29 @@ namespace Negocios {
                 cargos.Add(cargo);
             }
             return cargos;
+        }
+
+        public ArrayList busquedaCargo(string codigoCargo) {
+            ArrayList cargos = new ArrayList();
+            foreach (var item in datos.busquedaCargo(codigoCargo)) {
+                ClsEcargo cargo = ClsEcargo.crear(item.Codigo_Cargo, item.Descripcion);
+                cargos.Add(cargo);
+            }
+            return cargos;
+        }
+
+        public ArrayList filtrarCargos(string filtro) {
+            ArrayList cargos = new ArrayList();
+            foreach (var item in datos.filtrarCargos(filtro)) {
+                ClsEcargo cargo = ClsEcargo.crear(item.Codigo_Cargo, item.Descripcion);
+                cargos.Add(cargo);
+            }
+            return cargos;
+        }
+
+        public bool modificarCargo(ClsEcargo cargo) {
+            tbCargos tbl = tbCargos.crear(cargo.Codigo_Cargo, cargo.Descripcion);
+            return datos.modificarCargo(tbl);
         }
     }
 }
