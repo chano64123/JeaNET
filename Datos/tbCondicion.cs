@@ -20,9 +20,8 @@ namespace Datos
             this.tbDispositivos = new HashSet<tbDispositivos>();
         }
     
-        public string idCondicion { get; private set; }
-        public string Descripcion { get; private set; }
-
+        public string idCondicion { get; set; }
+        public string Descripcion { get; set; }
         public static tbCondicion crear(string _idCondicion, string _descripcion) {
             return new tbCondicion() {
                 idCondicion = _idCondicion,

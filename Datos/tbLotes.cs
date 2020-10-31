@@ -21,17 +21,17 @@ namespace Datos
             this.tbDetalleComprobante = new HashSet<tbDetalleComprobante>();
             this.tbDispositivos = new HashSet<tbDispositivos>();
         }
-
-        public string CodLote { get; private set; }
-        public string Nombre { get; private set; }
-        public string Color { get; private set; }
-        public string Ruc { get; private set; }
-        public string Sistema_Operativo { get; private set; }
+    
+        public string CodLote { get; set; }
+        public string Nombre { get; set; }
+        public string Color { get; set; }
+        public string Ruc { get; set; }
+        public string Sistema_Operativo { get; set; }
         public int Cantidad { get; set; }
-        public decimal Precio_Unitario { get; private set; }
-        public string Forma { get; private set; }
-        public string Memoria { get; private set; }
-        public decimal Peso { get; private set; }
+        public decimal Precio_Unitario { get; set; }
+        public string Forma { get; set; }
+        public string Memoria { get; set; }
+        public decimal Peso { get; set; }
 
         public static tbLotes crear(string _codLote, string _nombre, string _color, string _ruc, string _sistema_Operativo, int _cantidad, decimal _precio_Unitario, string _forma, string _memoria, decimal _peso) {
             return new tbLotes() {

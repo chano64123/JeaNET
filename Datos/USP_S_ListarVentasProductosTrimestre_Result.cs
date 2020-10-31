@@ -10,16 +10,14 @@
 namespace Datos
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class tbSesiones
+    public partial class USP_S_ListarVentasProductosTrimestre_Result
     {
-        public long id { get; set; }
-        public string usuario { get; set; }
-        public static tbSesiones crear(string _usuario) {
-            return new tbSesiones() {
-                usuario = _usuario
-            };
-        }
+        public string Producto { get; set; }
+        public Nullable<long> Primer_Trimestre { get; set; }
+        public Nullable<long> Segundo_Trimestre { get; set; }
+        public Nullable<long> Tercer_Trimestre { get; set; }
+        public Nullable<long> Cuarto_Trimestre { get; set; }
+        public Nullable<long> Total { get; set; }
     }
 }

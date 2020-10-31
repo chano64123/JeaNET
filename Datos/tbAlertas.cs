@@ -14,15 +14,14 @@ namespace Datos
     
     public partial class tbAlertas
     {
-        public long CodigoAlerta { get; private set; }
-        public string DniCli { get; private set; }
-        public string Latitud { get; private set; }
-        public string Longitud { get; private set; }
-        public Nullable<System.DateTime> Fecha { get; private set; }
-        public string Hora { get; private set; }
-        public Nullable<int> idTurno { get; private set; }
-        public string estado { get; private set; }
-
+        public long CodigoAlerta { get; set; }
+        public string DniCli { get; set; }
+        public string Latitud { get; set; }
+        public string Longitud { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
+        public string Hora { get; set; }
+        public Nullable<int> idTurno { get; set; }
+        public string estado { get; set; }
         public static tbAlertas crear(string _dniCli, string _latitud, string _longitud, DateTime? _fecha, string _hora, int? _idTurno, string _estado) {
             return new tbAlertas() {
                 DniCli = _dniCli,
@@ -34,7 +33,6 @@ namespace Datos
                 estado = _estado
             };
         }
-
         public virtual tbClientes tbClientes { get; set; }
         public virtual tbTurnos tbTurnos { get; set; }
     }
