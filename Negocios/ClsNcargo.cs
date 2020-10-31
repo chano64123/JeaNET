@@ -2,13 +2,10 @@
 using Entidad;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace Negocios {
     public class ClsNcargo {
-        ClsDcargo datos = new ClsDcargo();
+        readonly ClsDcargo datos = new ClsDcargo();
 
         public string MtdObtenerCodigoCargo() {
             string numero = "0";

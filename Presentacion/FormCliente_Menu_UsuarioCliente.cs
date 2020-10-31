@@ -11,10 +11,9 @@ namespace Presentacion {
         public FormCliente_Menu_UsuarioCliente() {
             InitializeComponent();
         }
-        public static string dni;
+        readonly public static string dni;
         private void btnCerrar_Click(object sender, EventArgs e) {
             this.Hide();
-            FormCliente_RelojSmart frm = new FormCliente_RelojSmart();
         }
 
         private void btnSalirLogin_Click(object sender, EventArgs e) {
@@ -31,7 +30,6 @@ namespace Presentacion {
             usuario = temp;
             foreach (ClsEcliente item in usuario) {
                 cliente = ClsEcliente.crear(item.DniCliente, item.Nombres, item.Apellidos, item.Correo, item.Telefono, item.Estado);
-                break;
             }
             MessageBox.Show("Datos Guardados correctamente", "JeaNet - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

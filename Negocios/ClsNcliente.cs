@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace Negocios {
     public class ClsNcliente {
-        ClsDcliente datos = new ClsDcliente();
+        readonly ClsDcliente datos = new ClsDcliente();
 
         public bool agregarCliente(ClsEcliente cliente) {
             tbClientes tbl = tbClientes.crear(cliente.DniCliente, cliente.Nombres, cliente.Apellidos, cliente.Correo, cliente.Telefono, cliente.Estado);

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Datos {
     public class ClsDlote {
-        bdJeaNetEntities db = new bdJeaNetEntities();
+        readonly bdJeaNetEntities db = new bdJeaNetEntities();
 
         public List<tbLotes> listarLotes() {
             var query = from e in db.tbLotes select e;

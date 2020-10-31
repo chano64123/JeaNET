@@ -25,7 +25,7 @@ namespace Negocios {
                         ver = true;
                     }
                 }
-                if (ver == true) {
+                if (ver) {
                     temp[j] = x;
                     j++;
                 }
@@ -35,9 +35,8 @@ namespace Negocios {
 
         public bool MtdCambiarContraseña(string clave, string dni) {
             try {
-                ClsConexionSQLRemota objConexion = new ClsConexionSQLRemota();
+                ClsConexionSqlRemota objConexion = new ClsConexionSqlRemota();
                 SqlCommand command = new SqlCommand();
-                SqlDataAdapter adapter = new SqlDataAdapter();
                 command.Connection = objConexion.Conectar();
                 command.CommandText = "USP_U_CambiarClave";
                 command.CommandType = CommandType.StoredProcedure;
@@ -47,17 +46,15 @@ namespace Negocios {
                 command.Parameters["cla"].Value = clave;
                 command.ExecuteNonQuery();
                 command.Connection = objConexion.Desconectar();
-
                 return true;
-            } catch (Exception ex) {
+            } catch (Exception) {
                 return false;
-                throw ex;
             }
         }
 
         public DataTable MtdVerificarExistencia(string texto) {
             DataTable empleado = new DataTable();
-            ClsConexionSQLRemota objConexion = new ClsConexionSQLRemota();
+            ClsConexionSqlRemota objConexion = new ClsConexionSqlRemota();
             SqlCommand objComando = new SqlCommand();
             SqlDataAdapter adapter = new SqlDataAdapter();
             objComando.Connection = objConexion.Conectar();
@@ -70,7 +67,6 @@ namespace Negocios {
             adapter.SelectCommand = objComando;
             adapter.Fill(empleado);
             objComando.Connection = objConexion.Desconectar();
-
             return empleado;
         }
 
@@ -81,28 +77,25 @@ namespace Negocios {
 
         public DataTable MtdValidarLogin(ClsElogin e) {
             DataTable empleado = new DataTable();
-            ClsConexionSQLRemota objConexion = new ClsConexionSQLRemota();
+            ClsConexionSqlRemota objConexion = new ClsConexionSqlRemota();
             SqlCommand objComando = new SqlCommand();
             SqlDataAdapter adapter = new SqlDataAdapter();
             objComando.Connection = objConexion.Conectar();
             objComando.CommandText = "USP_S_ValidarLogin";
             objComando.CommandType = CommandType.StoredProcedure;
             objComando.Parameters.Add(new SqlParameter("usu", SqlDbType.VarChar));
-            //objComando.Parameters.Add(new SqlParameter("cla", SqlDbType.VarChar));
             objComando.Parameters["usu"].Value = e.Usuario;
-            //objComando.Parameters["cla"].Value = e.Clave;
             objComando.Connection = objConexion.Conectar();
             objComando.ExecuteNonQuery();
             adapter.SelectCommand = objComando;
             adapter.Fill(empleado);
             objComando.Connection = objConexion.Desconectar();
-
             return empleado;
         }
 
         public DataTable MtdBuscarSesion(string usuario) {
             DataTable empleado = new DataTable();
-            ClsConexionSQLRemota objConexion = new ClsConexionSQLRemota();
+            ClsConexionSqlRemota objConexion = new ClsConexionSqlRemota();
             SqlCommand objComando = new SqlCommand();
             SqlDataAdapter adapter = new SqlDataAdapter();
             objComando.Connection = objConexion.Conectar();
@@ -115,30 +108,25 @@ namespace Negocios {
             adapter.SelectCommand = objComando;
             adapter.Fill(empleado);
             objComando.Connection = objConexion.Desconectar();
-
             return empleado;
         }
 
         public void MtdCerrarSesion(string usuario) {
-            ClsConexionSQLRemota objConexion = new ClsConexionSQLRemota();
+            ClsConexionSqlRemota objConexion = new ClsConexionSqlRemota();
             SqlCommand objComando = new SqlCommand();
-            SqlDataAdapter adapter = new SqlDataAdapter();
             objComando.Connection = objConexion.Conectar();
             objComando.CommandText = "USP_D_EliminarSesion";
             objComando.CommandType = CommandType.StoredProcedure;
             objComando.Parameters.Add(new SqlParameter("usu", SqlDbType.VarChar));
             objComando.Parameters["usu"].Value = usuario;
-
             objComando.ExecuteNonQuery();
             objComando.Connection = objConexion.Desconectar();
-
         }
 
         public bool MtdGuardarSesion(string usuario) {
             try {
-                ClsConexionSQLRemota objConexion = new ClsConexionSQLRemota();
+                ClsConexionSqlRemota objConexion = new ClsConexionSqlRemota();
                 SqlCommand command = new SqlCommand();
-                SqlDataAdapter adapter = new SqlDataAdapter();
                 command.Connection = objConexion.Conectar();
                 command.CommandText = "USP_I_AgregarSesion";
                 command.CommandType = CommandType.StoredProcedure;
@@ -146,20 +134,18 @@ namespace Negocios {
                 command.Parameters["usu"].Value = usuario;
                 command.ExecuteNonQuery();
                 command.Connection = objConexion.Desconectar();
-
                 return true;
-            } catch (Exception ex) {
+            } catch (Exception) {
                 return false;
-                throw ex;
             }
         }
 
         public int MtdVerificarCuenta(DataTable data, ClsElogin e, int solicita) {
             int hora = Convert.ToInt32(DateTime.Now.ToString("HHmmss"));
             int result = 0;
-            if (data.Rows[0][10].ToString() == e.Clave) {
-                if (data.Rows[0][8].ToString() == "1") {
-                    if (data.Rows[0][6].ToString() == "001" || data.Rows[0][6].ToString() == "002" || solicita == 0) {
+            if (data.Rows[0][10].ToString().Equals(e.Clave)) {
+                if (data.Rows[0][8].ToString().Equals("1")) {
+                    if (data.Rows[0][6].ToString().Equals("001") || data.Rows[0][6].ToString().Equals("002") || solicita == 0) {
                         bool verif = false;
                         switch (Convert.ToInt32(data.Rows[0][7])) {
                             case 1:

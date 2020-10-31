@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace Negocios {
     public class ClsNIncidencias {
-        ClsDalerta datos = new ClsDalerta();
+        readonly ClsDalerta datos = new ClsDalerta();
 
         public ArrayList listarIncidencias() {
             ArrayList empleados = new ArrayList();

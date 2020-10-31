@@ -39,7 +39,6 @@ namespace Presentacion {
             foreach (ClsEcliente item in N.busquedaCliente(dgvClientes.CurrentRow.Cells[0].Value.ToString())) {
                 string estado = (item.Estado.Equals("1")) ? "Activo" : "Inactivo";
                 E = ClsEcliente.crear(item.DniCliente, item.Nombres, item.Apellidos, item.Correo, item.Telefono, estado);
-                break;
             }
             frmRegistroCliente f = new frmRegistroCliente(E);
             f.ShowDialog();

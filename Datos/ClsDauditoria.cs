@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Datos {
     public class ClsDauditoria {
-        bdJeaNetEntities db = new bdJeaNetEntities();
+        readonly bdJeaNetEntities db = new bdJeaNetEntities();
 
         public bool agregarAuditoria(tbAuditoria auditoria) {
             try {
@@ -22,7 +22,7 @@ namespace Datos {
         }
 
         public List<tbAuditoria> filtrarAuditoria(string filtro) {
-            var query = from e in db.tbAuditoria where e.descripcionAccion.Contains(filtro) || e.descripcionAccion.Contains(filtro) || e.fecha.ToString().Contains(filtro) || e.hora.Contains(filtro) select e;
+            var query = from e in db.tbAuditoria where e.DNI_Usuario.Contains(filtro) || e.descripcionAccion.Contains(filtro) || e.fecha.ToString().Contains(filtro) || e.hora.Contains(filtro) select e;
             return query.ToList();
         }
     }

@@ -11,6 +11,10 @@ namespace Presentacion {
         }
 
         private void frmEmpleados_Load(object sender, EventArgs e) {
+            listarEmpleado();
+        }
+
+        private void listarEmpleado() {
             ClsNempleado N = new ClsNempleado();
             dgvEmpleados.DataSource = N.listarEmpleados();
         }
@@ -30,7 +34,6 @@ namespace Presentacion {
                 }
                 string estado = (item.Estado.Equals("1")) ? "Activo" : "Inactivo";
                 E = ClsEempleado.crear(item.DniEmpleado, item.Nombres, item.Apellidos, item.Direccion, item.Correo, item.Telefono, item.idTurno, cargo, estado, item.Usuario, item.Contraseña);
-                break;
             }
             frmRegistroEmpleado f = new frmRegistroEmpleado(E);
             f.ShowDialog();
@@ -51,8 +54,7 @@ namespace Presentacion {
         }
 
         private void txtBuscar_Leave(object sender, EventArgs e) {
-            ClsNempleado N = new ClsNempleado();
-            dgvEmpleados.DataSource = N.listarEmpleados();
+            listarEmpleado();
         }
 
         private void TxtBuscar_MouseClick(object sender, MouseEventArgs e) {

@@ -27,18 +27,19 @@ namespace Presentacion {
                 }
                 string estado = (item.Estado.Equals("1")) ? "Activo" : "Inactivo";
                 E = ClsEempleado.crear(item.DniEmpleado, item.Nombres, item.Apellidos, item.Direccion, item.Correo, item.Telefono, item.idTurno, lblcargo.Text, estado, item.Usuario, item.Contraseña);
-                break;
             }
-            lblDNI.Text = E.DniEmpleado;
-            lblNombre.Text = E.Nombres;
-            lblApellido.Text = E.Apellidos;
-            txtDireccion.Text = E.Direccion;
-            lblCorreo.Text = E.Correo;
-            txtCorreo.Text = E.Correo;
-            txtTelefono.Text = E.Telefono;
-            lblturno.Text = (E.idTurno == 1) ? "Mañana" : (E.idTurno == 2) ? "Tarde" : (E.idTurno == 3) ? "Noche" : "";
-            lblUsuario.Text = E.Usuario;
-            txtUsuario.Text = E.Usuario;
+            if (E != null) {
+                lblDNI.Text = E.DniEmpleado;
+                lblNombre.Text = E.Nombres;
+                lblApellido.Text = E.Apellidos;
+                txtDireccion.Text = E.Direccion;
+                lblCorreo.Text = E.Correo;
+                txtCorreo.Text = E.Correo;
+                txtTelefono.Text = E.Telefono;
+                lblturno.Text = (E.idTurno == 1) ? "Mañana" : (E.idTurno == 2) ? "Tarde" : (E.idTurno == 3) ? "Noche" : "";
+                lblUsuario.Text = E.Usuario;
+                txtUsuario.Text = E.Usuario;
+            }
         }
 
         public static bool cambiar = false;

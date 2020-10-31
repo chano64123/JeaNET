@@ -32,7 +32,6 @@ namespace Presentacion {
                     }
                 }
                 E = ClsElote.crear(item.CodLote, item.Nombre, item.Color, proveedor, item.Sistema_Operativo, item.Cantidad, item.Precio_Unitario, item.Forma, item.Memoria, item.Peso);
-                break;
             }
             //para proveedor
             frmRegistroLote f = new frmRegistroLote(E);
