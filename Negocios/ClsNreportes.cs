@@ -1,96 +1,56 @@
-﻿using System.Data;
+﻿using Datos;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Negocios {
     public class ClsNreportes {
-        public DataTable MtdListarReportesSemanaleS() {
-            ClsConexionSQL conn = new ClsConexionSQL();
-            DataTable result = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn.Conectar();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "USP_S_ListarProductosVendidosSemana";
-            command.ExecuteNonQuery();
-            adapter.SelectCommand = command;
-            adapter.Fill(result);
-            command.Connection = conn.Desconectar();
-            return result;
+
+        ClsDreporte datos = new ClsDreporte();     
+
+        public DataTable listarIncidencias() {
+            DataTable dt = datos.listarIncidencias();            
+            return dt;
         }
 
-        public DataTable MtdListarReportesMensual() {
-            ClsConexionSQL conn = new ClsConexionSQL();
-            DataTable result = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn.Conectar();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "USP_S_ListarPRoductosVendidosMes";
-            command.ExecuteNonQuery();
-            adapter.SelectCommand = command;
-            adapter.Fill(result);
-            command.Connection = conn.Desconectar();
-            return result;
+        public DataTable listarProductosSemestre() {
+            DataTable dtProductos = datos.listarProductosSemestre();
+            return dtProductos;
         }
-
-        public DataTable MtdListarReportesSemestrales() {
-            ClsConexionSQL conn = new ClsConexionSQL();
-            DataTable result = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn.Conectar();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "USP_S_ListarProductosSemestre";
-            command.ExecuteNonQuery();
-            adapter.SelectCommand = command;
-            adapter.Fill(result);
-            command.Connection = conn.Desconectar();
-            return result;
+        public DataTable listarProductosMensual() {
+            DataTable dtProductos = datos.listarProductosMes();
+            return dtProductos;
         }
-
-        public DataTable MtdListarReportesAnual() {
-            ClsConexionSQL conn = new ClsConexionSQL();
-            DataTable result = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn.Conectar();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "USP_S_ListarProductosVendidosAnual";
-            command.ExecuteNonQuery();
-            adapter.SelectCommand = command;
-            adapter.Fill(result);
-            command.Connection = conn.Desconectar();
-            return result;
+        public DataTable listarProductosAnual() {
+            DataTable dtProductos = datos.listarProductosAnual();
+            return dtProductos;
         }
-
-        public DataTable MtdListarReportesTrimestre() {
-            ClsConexionSQL conn = new ClsConexionSQL();
-            DataTable result = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn.Conectar();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "USP_S_ListarVentasProductosTrimestre";
-            command.ExecuteNonQuery();
-            adapter.SelectCommand = command;
-            adapter.Fill(result);
-            command.Connection = conn.Desconectar();
-            return result;
+        public DataTable listarProductosSemanal() {
+            DataTable dtProductos = datos.listarProductosSemanal();
+            return dtProductos;
         }
-
-        public DataTable MTdListarIncidencias() {
-            ClsConexionSQL conn = new ClsConexionSQL();
-            DataTable result = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn.Conectar();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "USP_S_ListarIncidencias";
-            command.ExecuteNonQuery();
-            adapter.SelectCommand = command;
-            adapter.Fill(result);
-            command.Connection = conn.Desconectar();
-            return result;
+        public DataTable listarProductosTrimestre() {
+            DataTable dtProductos = datos.listarProductosTrimestre();
+            return dtProductos;
+        }
+        public DataTable listarEmpleadosVentasSemanal() {
+            DataTable dtProductos = datos.listarEmpleadoVentaDia();
+            return dtProductos;
+        }
+        public DataTable listarEmpleadosVentasAnual() {
+            DataTable dtProductos = datos.listarEmpleadoVentaAnual();
+            return dtProductos;
+        }
+        public DataTable listarEmpleadosVentasTrimestral() {
+            DataTable dtProductos = datos.listarEmpleadoVentaTrimestre();
+            return dtProductos;
+        }
+        public DataTable listarEmpleadosVentasSemestral() {
+            DataTable dtProductos = datos.listarEmpleadoVentaSemestre();
+            return dtProductos;
+        }
+        public DataTable listarEmpleadosVentasMensual() {
+            DataTable dtProductos = datos.listarEmpleadoVentaMensual();
+            return dtProductos;
         }
     }
 }

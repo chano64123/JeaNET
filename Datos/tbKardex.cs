@@ -10,21 +10,19 @@
 namespace Datos
 {
     using System;
+    using System.Collections.Generic;
     
     public partial class tbKardex
     {
-        public long idKardex { get; private set; }
-        public string CodLote { get; private set; }
-        public string DniEmpleado { get; private set; }
-        public string Descripcion { get; private set; }
-        public Nullable<int> Cantidad { get; private set; }
-        public Nullable<decimal> PrecioUnitario { get; private set; }
-        public string Estado { get; private set; }
-        public string Hora { get; private set; }
-        public Nullable<System.DateTime> Fecha { get; private set; }
-
-
-
+        public long idKardex { get; set; }
+        public string CodLote { get; set; }
+        public string DniEmpleado { get; set; }
+        public string Descripcion { get; set; }
+        public Nullable<int> Cantidad { get; set; }
+        public Nullable<decimal> PrecioUnitario { get; set; }
+        public string Estado { get; set; }
+        public string Hora { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
         public static tbKardex crear(string _codLote, string _dniEmpleado, string _descripcion, int? _cantidad, decimal? _precioUnitario, string _estado, string _hora, DateTime? _fecha) {
             return new tbKardex() {
                 CodLote = _codLote,

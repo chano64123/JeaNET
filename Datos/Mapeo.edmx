@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="bdJeaNetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="bdJeaNetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbAlertas">
           <Key>
             <PropertyRef Name="CodigoAlerta" />
@@ -188,20 +188,6 @@ advertencia 6002: La tabla o vista 'bdJeaNet.dbo.tbSesiones' no tiene definida n
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="usuario" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'bdJeaNet.dbo.tbTemp' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="tbTemp">
-          <Property Name="dni" Type="varchar" MaxLength="8" />
-          <Property Name="dia" Type="int" />
-          <Property Name="valor" Type="decimal" Precision="10" Scale="2" />
-        </EntityType>-->
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'bdJeaNet.dbo.tbTempProd' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="tbTempProd">
-          <Property Name="CodigoLote" Type="varchar" MaxLength="4" />
-          <Property Name="dia" Type="int" />
-          <Property Name="valor" Type="bigint" />
-        </EntityType>-->
         <EntityType Name="tbTurnos">
           <Key>
             <PropertyRef Name="idTurno" />
@@ -223,9 +209,6 @@ advertencia 6013: La tabla o vista 'bdJeaNet.dbo.tbTempProd' no tiene definida u
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errores durante la generación:
-error 6004: Una relación hace referencia a la tabla 'bdJeaNet.dbo.tbTempProd', pero no se encuentra la tabla.
-        <Association Name="fk_codigoLote" />-->
         <Association Name="fk_compradni">
           <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="0..1" />
           <End Role="tbCompras" Type="Self.tbCompras" Multiplicity="*" />
@@ -422,9 +405,17 @@ error 6004: Una relación hace referencia a la tabla 'bdJeaNet.dbo.tbTempProd', 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errores durante la generación:
-error 6004: Una relación hace referencia a la tabla 'bdJeaNet.dbo.tbTemp', pero no se encuentra la tabla.
-        <Association Name="FK_tbTemp_tbEmpleados" />-->
+        <Function Name="USP_S_ListarIncidencias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_S_ListarProductosSemestre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_S_ListarProductosVendidosAnual" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_S_ListarPRoductosVendidosMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_S_ListarProductosVendidosSemana" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_S_ListarVentaDeEmpleadosPorSemestre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_S_ListarVentaDeEmpleadosPorTrimestre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_S_ListarVentasEmpleadoAnual" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_S_ListarVentasMensualesPorEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_S_ListarVentasPorDiaEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_S_ListarVentasProductosTrimestre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="bdJeaNetModelStoreContainer">
           <EntitySet Name="tbAlertas" EntityType="Self.tbAlertas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbAuditoria" EntityType="Self.tbAuditoria" Schema="dbo" store:Type="Tables" />
@@ -517,8 +508,7 @@ error 6004: Una relación hace referencia a la tabla 'bdJeaNet.dbo.tbTemp', pero
             <End Role="tbDispositivos" EntitySet="tbDispositivos" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="bdJeaNetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1040,7 +1030,115 @@ error 6004: Una relación hace referencia a la tabla 'bdJeaNet.dbo.tbTemp', pero
             <End Role="tbProveedores" EntitySet="tbProveedores" />
             <End Role="tbLotes" EntitySet="tbLotes" />
           </AssociationSet>
+          <FunctionImport Name="USP_S_ListarProductosSemestre" ReturnType="Collection(bdJeaNetModel.USP_S_ListarProductosSemestre_Result)" />
+          <FunctionImport Name="USP_S_ListarProductosVendidosAnual" ReturnType="Collection(bdJeaNetModel.USP_S_ListarProductosVendidosAnual_Result)" />
+          <FunctionImport Name="USP_S_ListarPRoductosVendidosMes" ReturnType="Collection(bdJeaNetModel.USP_S_ListarPRoductosVendidosMes_Result)" />
+          <FunctionImport Name="USP_S_ListarProductosVendidosSemana" ReturnType="Collection(bdJeaNetModel.USP_S_ListarProductosVendidosSemana_Result)" />
+          <FunctionImport Name="USP_S_ListarVentaDeEmpleadosPorSemestre" ReturnType="Collection(bdJeaNetModel.USP_S_ListarVentaDeEmpleadosPorSemestre_Result)" />
+          <FunctionImport Name="USP_S_ListarVentaDeEmpleadosPorTrimestre" ReturnType="Collection(bdJeaNetModel.USP_S_ListarVentaDeEmpleadosPorTrimestre_Result)" />
+          <FunctionImport Name="USP_S_ListarVentasEmpleadoAnual" ReturnType="Collection(bdJeaNetModel.USP_S_ListarVentasEmpleadoAnual_Result)" />
+          <FunctionImport Name="USP_S_ListarVentasMensualesPorEmpleado" ReturnType="Collection(bdJeaNetModel.USP_S_ListarVentasMensualesPorEmpleado_Result)" />
+          <FunctionImport Name="USP_S_ListarVentasPorDiaEmpleado" ReturnType="Collection(bdJeaNetModel.USP_S_ListarVentasPorDiaEmpleado_Result)" />
+          <FunctionImport Name="USP_S_ListarVentasProductosTrimestre" ReturnType="Collection(bdJeaNetModel.USP_S_ListarVentasProductosTrimestre_Result)" />
+          <FunctionImport Name="USP_S_ListarIncidencias" ReturnType="Collection(bdJeaNetModel.USP_S_ListarIncidencias_Result)" />
         </EntityContainer>
+        <ComplexType Name="USP_S_ListarProductosSemestre_Result">
+          <Property Type="String" Name="Producto" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="Primer_Semestre" Nullable="true" />
+          <Property Type="Int64" Name="Segundo_Semestre" Nullable="true" />
+          <Property Type="Int64" Name="Total" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="USP_S_ListarProductosVendidosAnual_Result">
+          <Property Type="String" Name="Producto" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Año" Nullable="true" />
+          <Property Type="Int64" Name="Total" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="USP_S_ListarPRoductosVendidosMes_Result">
+          <Property Type="String" Name="Producto" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="Enero" Nullable="true" />
+          <Property Type="Int64" Name="Febrero" Nullable="true" />
+          <Property Type="Int64" Name="Marzo" Nullable="true" />
+          <Property Type="Int64" Name="Abril" Nullable="true" />
+          <Property Type="Int64" Name="Mayo" Nullable="true" />
+          <Property Type="Int64" Name="Junio" Nullable="true" />
+          <Property Type="Int64" Name="Julio" Nullable="true" />
+          <Property Type="Int64" Name="Agosto" Nullable="true" />
+          <Property Type="Int64" Name="Septiembre" Nullable="true" />
+          <Property Type="Int64" Name="Octubre" Nullable="true" />
+          <Property Type="Int64" Name="Noviembre" Nullable="true" />
+          <Property Type="Int64" Name="Diciembre" Nullable="true" />
+          <Property Type="Int64" Name="Total" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="USP_S_ListarProductosVendidosSemana_Result">
+          <Property Type="String" Name="Producto" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="Lunes" Nullable="true" />
+          <Property Type="Int64" Name="Martes" Nullable="true" />
+          <Property Type="Int64" Name="Miercoles" Nullable="true" />
+          <Property Type="Int64" Name="Jueves" Nullable="true" />
+          <Property Type="Int64" Name="Viernes" Nullable="true" />
+          <Property Type="Int64" Name="Sabado" Nullable="true" />
+          <Property Type="Int64" Name="Domingo" Nullable="true" />
+          <Property Type="Int64" Name="Total" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="USP_S_ListarVentaDeEmpleadosPorSemestre_Result">
+          <Property Type="String" Name="Empleado" Nullable="false" MaxLength="101" />
+          <Property Type="Decimal" Name="Primer_Semestre" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Segundo_Semestre" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="USP_S_ListarVentaDeEmpleadosPorTrimestre_Result">
+          <Property Type="String" Name="Empleado" Nullable="false" MaxLength="101" />
+          <Property Type="Decimal" Name="Primer_Trimestre" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Segundo_Trimestre" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Tercer_Trimestre" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Cuarto_Trimestre" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="USP_S_ListarVentasEmpleadoAnual_Result">
+          <Property Type="String" Name="Empleado" Nullable="false" MaxLength="101" />
+          <Property Type="Int32" Name="Año" Nullable="true" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="USP_S_ListarVentasMensualesPorEmpleado_Result">
+          <Property Type="String" Name="Empleado" Nullable="false" MaxLength="101" />
+          <Property Type="Decimal" Name="Enero" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Febrero" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Marzo" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Abril" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Mayo" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Junio" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Julio" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Agosto" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Septiembre" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Octubre" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Noviembre" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Diciembre" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="USP_S_ListarVentasPorDiaEmpleado_Result">
+          <Property Type="String" Name="Empleado" Nullable="false" MaxLength="101" />
+          <Property Type="Decimal" Name="Lunes" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Martes" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Miercoles" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Jueves" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Viernes" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Sabado" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Domingo" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="USP_S_ListarVentasProductosTrimestre_Result">
+          <Property Type="String" Name="Producto" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="Primer_Trimestre" Nullable="true" />
+          <Property Type="Int64" Name="Segundo_Trimestre" Nullable="true" />
+          <Property Type="Int64" Name="Tercer_Trimestre" Nullable="true" />
+          <Property Type="Int64" Name="Cuarto_Trimestre" Nullable="true" />
+          <Property Type="Int64" Name="Total" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="USP_S_ListarIncidencias_Result">
+          <Property Type="Int32" Name="Mañana" Nullable="true" />
+          <Property Type="Int32" Name="Tarde" Nullable="true" />
+          <Property Type="Int32" Name="Noche" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1252,6 +1350,147 @@ error 6004: Una relación hace referencia a la tabla 'bdJeaNet.dbo.tbTemp', pero
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="USP_S_ListarProductosSemestre" FunctionName="bdJeaNetModel.Store.USP_S_ListarProductosSemestre">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdJeaNetModel.USP_S_ListarProductosSemestre_Result">
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Primer_Semestre" ColumnName="Primer Semestre" />
+                <ScalarProperty Name="Segundo_Semestre" ColumnName="Segundo Semestre" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_S_ListarProductosVendidosAnual" FunctionName="bdJeaNetModel.Store.USP_S_ListarProductosVendidosAnual">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdJeaNetModel.USP_S_ListarProductosVendidosAnual_Result">
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Año" ColumnName="Año" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_S_ListarPRoductosVendidosMes" FunctionName="bdJeaNetModel.Store.USP_S_ListarPRoductosVendidosMes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdJeaNetModel.USP_S_ListarPRoductosVendidosMes_Result">
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Enero" ColumnName="Enero" />
+                <ScalarProperty Name="Febrero" ColumnName="Febrero" />
+                <ScalarProperty Name="Marzo" ColumnName="Marzo" />
+                <ScalarProperty Name="Abril" ColumnName="Abril" />
+                <ScalarProperty Name="Mayo" ColumnName="Mayo" />
+                <ScalarProperty Name="Junio" ColumnName="Junio" />
+                <ScalarProperty Name="Julio" ColumnName="Julio" />
+                <ScalarProperty Name="Agosto" ColumnName="Agosto" />
+                <ScalarProperty Name="Septiembre" ColumnName="Septiembre" />
+                <ScalarProperty Name="Octubre" ColumnName="Octubre" />
+                <ScalarProperty Name="Noviembre" ColumnName="Noviembre" />
+                <ScalarProperty Name="Diciembre" ColumnName="Diciembre" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_S_ListarProductosVendidosSemana" FunctionName="bdJeaNetModel.Store.USP_S_ListarProductosVendidosSemana">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdJeaNetModel.USP_S_ListarProductosVendidosSemana_Result">
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Lunes" ColumnName="Lunes" />
+                <ScalarProperty Name="Martes" ColumnName="Martes" />
+                <ScalarProperty Name="Miercoles" ColumnName="Miercoles" />
+                <ScalarProperty Name="Jueves" ColumnName="Jueves" />
+                <ScalarProperty Name="Viernes" ColumnName="Viernes" />
+                <ScalarProperty Name="Sabado" ColumnName="Sabado" />
+                <ScalarProperty Name="Domingo" ColumnName="Domingo" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_S_ListarVentaDeEmpleadosPorSemestre" FunctionName="bdJeaNetModel.Store.USP_S_ListarVentaDeEmpleadosPorSemestre">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdJeaNetModel.USP_S_ListarVentaDeEmpleadosPorSemestre_Result">
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="Primer_Semestre" ColumnName="Primer Semestre" />
+                <ScalarProperty Name="Segundo_Semestre" ColumnName="Segundo Semestre" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_S_ListarVentaDeEmpleadosPorTrimestre" FunctionName="bdJeaNetModel.Store.USP_S_ListarVentaDeEmpleadosPorTrimestre">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdJeaNetModel.USP_S_ListarVentaDeEmpleadosPorTrimestre_Result">
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="Primer_Trimestre" ColumnName="Primer Trimestre" />
+                <ScalarProperty Name="Segundo_Trimestre" ColumnName="Segundo Trimestre" />
+                <ScalarProperty Name="Tercer_Trimestre" ColumnName="Tercer Trimestre" />
+                <ScalarProperty Name="Cuarto_Trimestre" ColumnName="Cuarto Trimestre" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_S_ListarVentasEmpleadoAnual" FunctionName="bdJeaNetModel.Store.USP_S_ListarVentasEmpleadoAnual">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdJeaNetModel.USP_S_ListarVentasEmpleadoAnual_Result">
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="Año" ColumnName="Año" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_S_ListarVentasMensualesPorEmpleado" FunctionName="bdJeaNetModel.Store.USP_S_ListarVentasMensualesPorEmpleado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdJeaNetModel.USP_S_ListarVentasMensualesPorEmpleado_Result">
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="Enero" ColumnName="Enero" />
+                <ScalarProperty Name="Febrero" ColumnName="Febrero" />
+                <ScalarProperty Name="Marzo" ColumnName="Marzo" />
+                <ScalarProperty Name="Abril" ColumnName="Abril" />
+                <ScalarProperty Name="Mayo" ColumnName="Mayo" />
+                <ScalarProperty Name="Junio" ColumnName="Junio" />
+                <ScalarProperty Name="Julio" ColumnName="Julio" />
+                <ScalarProperty Name="Agosto" ColumnName="Agosto" />
+                <ScalarProperty Name="Septiembre" ColumnName="Septiembre" />
+                <ScalarProperty Name="Octubre" ColumnName="Octubre" />
+                <ScalarProperty Name="Noviembre" ColumnName="Noviembre" />
+                <ScalarProperty Name="Diciembre" ColumnName="Diciembre" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_S_ListarVentasPorDiaEmpleado" FunctionName="bdJeaNetModel.Store.USP_S_ListarVentasPorDiaEmpleado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdJeaNetModel.USP_S_ListarVentasPorDiaEmpleado_Result">
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="Lunes" ColumnName="Lunes" />
+                <ScalarProperty Name="Martes" ColumnName="Martes" />
+                <ScalarProperty Name="Miercoles" ColumnName="Miercoles" />
+                <ScalarProperty Name="Jueves" ColumnName="Jueves" />
+                <ScalarProperty Name="Viernes" ColumnName="Viernes" />
+                <ScalarProperty Name="Sabado" ColumnName="Sabado" />
+                <ScalarProperty Name="Domingo" ColumnName="Domingo" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_S_ListarVentasProductosTrimestre" FunctionName="bdJeaNetModel.Store.USP_S_ListarVentasProductosTrimestre">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdJeaNetModel.USP_S_ListarVentasProductosTrimestre_Result">
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Primer_Trimestre" ColumnName="Primer Trimestre" />
+                <ScalarProperty Name="Segundo_Trimestre" ColumnName="Segundo Trimestre" />
+                <ScalarProperty Name="Tercer_Trimestre" ColumnName="Tercer Trimestre" />
+                <ScalarProperty Name="Cuarto_Trimestre" ColumnName="Cuarto Trimestre" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_S_ListarIncidencias" FunctionName="bdJeaNetModel.Store.USP_S_ListarIncidencias">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdJeaNetModel.USP_S_ListarIncidencias_Result">
+                <ScalarProperty Name="Mañana" ColumnName="Mañana" />
+                <ScalarProperty Name="Tarde" ColumnName="Tarde" />
+                <ScalarProperty Name="Noche" ColumnName="Noche" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -14,10 +14,9 @@ namespace Datos
     
     public partial class tbClienteDisposiivo
     {
-        public long idClienteDispositivo { get; private set; }
-        public string DniCliente { get; private set; }
-        public string SerieDispositivo { get; private set; }
-
+        public long idClienteDispositivo { get; set; }
+        public string DniCliente { get; set; }
+        public string SerieDispositivo { get; set; }
         public static tbClienteDisposiivo crear(string dniCliente, string serieDispositivo) {
             return new tbClienteDisposiivo() {
                 DniCliente = dniCliente,

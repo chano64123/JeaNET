@@ -96,7 +96,6 @@
     <Compile Include="ClsNlote.cs" />
     <Compile Include="ClsNproveedor.cs" />
     <Compile Include="ClsNreportes.cs" />
-    <Compile Include="ClsNreportesIngresos.cs" />
     <Compile Include="ClsNsms.cs" />
     <Compile Include="ClsNsocket.cs" />
     <Compile Include="ClsNValidacion.cs" />

@@ -10,16 +10,12 @@
 namespace Datos
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class tbSesiones
+    public partial class USP_S_ListarVentaDeEmpleadosPorSemestre_Result
     {
-        public long id { get; set; }
-        public string usuario { get; set; }
-        public static tbSesiones crear(string _usuario) {
-            return new tbSesiones() {
-                usuario = _usuario
-            };
-        }
+        public string Empleado { get; set; }
+        public Nullable<decimal> Primer_Semestre { get; set; }
+        public Nullable<decimal> Segundo_Semestre { get; set; }
+        public Nullable<decimal> Total { get; set; }
     }
 }
