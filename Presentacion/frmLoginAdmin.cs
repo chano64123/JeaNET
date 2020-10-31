@@ -24,11 +24,6 @@ namespace Presentacion {
             return frm;
         }
 
-        public static frmLoginAdmin closeForm() {
-            frm = null;
-            return frm;
-        }
-
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]

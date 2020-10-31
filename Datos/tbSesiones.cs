@@ -16,6 +16,7 @@ namespace Datos
     {
         public long id { get; set; }
         public string usuario { get; set; }
+
         public static tbSesiones crear(string _usuario) {
             return new tbSesiones() {
                 usuario = _usuario

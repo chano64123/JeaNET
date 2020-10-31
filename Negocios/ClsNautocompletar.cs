@@ -1,5 +1,4 @@
 ﻿using Entidad;
-using System.Data;
 using System.Windows.Forms;
 
 namespace Negocios {

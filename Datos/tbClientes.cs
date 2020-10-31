@@ -28,6 +28,7 @@ namespace Datos
         public string Correo { get; set; }
         public string Telefono { get; set; }
         public string Estado { get; set; }
+
         public static tbClientes crear(string _dniCliente, string _nombres, string _apellidos, string _correo, string _telefono, string _estado) {
             return new tbClientes() {
                 DniCliente = _dniCliente,

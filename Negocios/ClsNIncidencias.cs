@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using Datos;
-using System;
+﻿using Datos;
 using Entidad;
-using System.Data;
-using System.Data.SqlClient;
+using System;
+using System.Collections;
 
 namespace Negocios {
     public class ClsNIncidencias {

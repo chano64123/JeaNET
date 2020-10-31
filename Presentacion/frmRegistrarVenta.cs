@@ -5,19 +5,15 @@ using System.Collections;
 using System.Data;
 using System.Windows.Forms;
 
-namespace Presentacion
-{
-    public partial class frmRegistrarVenta : Form
-    {
-        public frmRegistrarVenta(DataTable data)
-        {
+namespace Presentacion {
+    public partial class frmRegistrarVenta : Form {
+        public frmRegistrarVenta(DataTable data) {
             InitializeComponent();
             lblEmpleado.Text = data.Rows[0][1] + " " + data.Rows[0][2];
             lblDNI.Text = data.Rows[0][0].ToString();
         }
         public static bool verificar_prod = true;
-        private void FormPanelAdmi_Boleta_Load(object sender, EventArgs e)
-        {
+        private void FormPanelAdmi_Boleta_Load(object sender, EventArgs e) {
             //MUCHAS COSAS VAN ACA
             ClsNcomprobante N = new ClsNcomprobante();
             ArrayList comprobantes = N.listarComprobantes();
@@ -33,56 +29,41 @@ namespace Presentacion
             txtProducto.AutoCompleteCustomSource = objAuto.MtdCargarProductos();
         }
 
-        private void btnNuevo_Click(object sender, EventArgs e)
-        {
-            if (validarCampos())
-            {
-                try
-                {
+        private void btnNuevo_Click(object sender, EventArgs e) {
+            if (validarCampos()) {
+                try {
                     string codigo = "";
                     ClsNlote N = new ClsNlote();
-                    if (lblProducto.Text.Length == 4)
-                    {
+                    if (lblProducto.Text.Length == 4) {
                         codigo = lblProducto.Text;
-                    }
-                    else
-                    {
+                    } else {
                         codigo = txtProducto.Text;
                     }
-                    foreach (ClsElote item in N.busquedaLote(codigo))
-                    {
+                    foreach (ClsElote item in N.busquedaLote(codigo)) {
                         dgvVenta.Rows.Add(item.CodLote, item.Nombre + ", color " + item.Color, "", item.Precio_Unitario);
                     }
                     verificar_prod = false;
                     btnAgregar.Enabled = false;
                     txtCliente.Enabled = false;
                     frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Agrego producto " + codigo);
-                }
-                catch
-                {
+                } catch {
                     MessageBox.Show("Cantidad no valida, solo ingrese numeros", "JeaNET - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "No pudo agregar producto " + lblProducto.Text);
                 }
             }
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("¿Seguro que desea cancelar la venta?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
-            {
+        private void btnCerrar_Click(object sender, EventArgs e) {
+            if (MessageBox.Show("¿Seguro que desea cancelar la venta?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes) {
                 frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Salio del formulario registrar venta");
                 this.Close();
-            }
-            else
-            {
+            } else {
                 frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Continuo en formulario registrar venta");
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("¿Seguro que desea concluir la venta?", "JeaNET - Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
+        private void pictureBox1_Click(object sender, EventArgs e) {
+            if (MessageBox.Show("¿Seguro que desea concluir la venta?", "JeaNET - Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                 //para la venta
                 string cliente = (lblCliente.Text.Length == 8) ? lblCliente.Text : txtCliente.Text;
                 ClsEcomprobante E = ClsEcomprobante.crear(lblSerie.Text, lblNumero.Text, lblDNI.Text, Convert.ToDateTime(DateTime.Now.ToShortDateString()), cliente, Convert.ToDecimal(lblSubtotal.Text), Convert.ToDecimal(lblIGV.Text), Convert.ToDecimal(lblTotal.Text), "1");
@@ -90,8 +71,7 @@ namespace Presentacion
                 N.agregarComprobante(E);
 
                 //para el detalle
-                foreach (DataGridViewRow item in dgvVenta.Rows)
-                {
+                foreach (DataGridViewRow item in dgvVenta.Rows) {
                     //para guardar detalle
                     ClsEdetallecomprobante Ed = ClsEdetallecomprobante.crear(lblSerie.Text, lblNumero.Text, item.Cells[0].Value.ToString(), item.Cells[1].Value.ToString(), Convert.ToInt32(item.Cells[2].Value), Convert.ToDecimal(item.Cells[3].Value), Convert.ToDecimal(item.Cells[4].Value));
                     N.agregarDetalleComprobante(Ed);
@@ -100,7 +80,7 @@ namespace Presentacion
                     DataTable Ddisponibles = Ne.MtdListarDisponibles(Ed);
                     //para agregar en cliente_dispositivo
                     ClsNclientedispositivo Neg = new ClsNclientedispositivo();
-                    Neg.MtdGuardarClienteDispositivo(E.DniCliente, Ed, Ddisponibles);
+                    Neg.agregarClienteDispositivo(E.DniCliente, Ed, Ddisponibles);
                     //para guardar kardex
                     ClsNkardex Nk = new ClsNkardex();
                     ClsEkardex objEKardex = ClsEkardex.crear(item.Cells[0].Value.ToString(), lblDNI.Text, "SALIDA", Convert.ToInt32(item.Cells[2].Value), Convert.ToDecimal(item.Cells[3].Value), "1", DateTime.Now.ToShortTimeString(), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
@@ -110,13 +90,10 @@ namespace Presentacion
                 }
                 //para el decremento
                 int cantidad = 0;
-                foreach (DataGridViewRow fila in dgvVenta.Rows)
-                {
+                foreach (DataGridViewRow fila in dgvVenta.Rows) {
                     ClsNlote Neg = new ClsNlote();
-                    foreach (ClsElote item in Neg.listarLotes())
-                    {
-                        if (item.CodLote.Equals(fila.Cells[0].Value.ToString()))
-                        {
+                    foreach (ClsElote item in Neg.listarLotes()) {
+                        if (item.CodLote.Equals(fila.Cells[0].Value.ToString())) {
                             cantidad = Convert.ToInt32(item.Cantidad);
                             break;
                         }
@@ -127,24 +104,19 @@ namespace Presentacion
                 MtdReiniciar();
                 MessageBox.Show("Venta registrada con exito", "JeaNET - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Realizo una venta");
-            }
-            else
-            {
+            } else {
                 frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "No pudo realizar una venta");
             }
         }
 
-        private bool validarCampos()
-        {
+        private bool validarCampos() {
             ClsNValidacion validacion = ClsNValidacion.getValidacion();
             //validando que campos no esten vacios o null
             bool result = !existenVacios(validacion);
-            if (result)
-            {
+            if (result) {
                 //verificar existencia de cliente o producto
                 result = verificarExistencia(validacion) && result;
-                if (result)
-                {
+                if (result) {
                     //verificar que no este el producto en el DataGridView
                     result = !verificarExistenciaEnDatGrid(validacion) && result;
                 }
@@ -152,28 +124,24 @@ namespace Presentacion
             return result;
         }
 
-        private bool verificarExistenciaEnDatGrid(ClsNValidacion validacion)
-        {
+        private bool verificarExistenciaEnDatGrid(ClsNValidacion validacion) {
             bool result = validacion.existeProductoEnDataGrid(error1, dgvVenta, txtProducto, "El Producto ya se encuentra en la lista", lblProducto);
             return result;
         }
 
-        private bool verificarExistencia(ClsNValidacion validacion)
-        {
+        private bool verificarExistencia(ClsNValidacion validacion) {
             bool result = validacion.existeCliente(error1, txtCliente, "El Cliente no Existe");
             result = validacion.existeProducto(error1, txtProducto, "El Producto no Existe") && result;
             return result;
         }
 
-        private bool existenVacios(ClsNValidacion validacion)
-        {
+        private bool existenVacios(ClsNValidacion validacion) {
             bool result = validacion.estaVacioONull(error1, txtCliente, "Tiene que ingresar Cliente");
             result = validacion.estaVacioONull(error1, txtProducto, "Tiene que ingresar un Producto") || result;
             return result;
         }
 
-        private void MtdReiniciar()
-        {
+        private void MtdReiniciar() {
             ClsNcomprobante Ne = new ClsNcomprobante();
             ArrayList comprobantes = Ne.listarComprobantes();
             lblSerie.Text = Ne.MtdCalcularSerie(comprobantes.Count);
@@ -189,31 +157,23 @@ namespace Presentacion
             lblSubtotal.Text = "0";
         }
 
-        private void lblTotal_TextChanged(object sender, EventArgs e)
-        {
+        private void lblTotal_TextChanged(object sender, EventArgs e) {
             ClsNcomprobante N = new ClsNcomprobante();
             lblMonto.Text = N.MtdConvertirALetras(lblTotal.Text);
         }
 
-        private void dgvVenta_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgvVenta.CurrentRow.Cells[2].Value.ToString() != "")
-            {
+        private void dgvVenta_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
+            if (dgvVenta.CurrentRow.Cells[2].Value.ToString() != "") {
                 //validacion de cantidad
                 ClsNlote N = new ClsNlote();
-                foreach (ClsElote item in N.busquedaLote(dgvVenta.CurrentRow.Cells[0].Value.ToString()))
-                {
-                    if (item.Cantidad >= Convert.ToInt32(dgvVenta.CurrentRow.Cells[2].Value))
-                    {
-                        if (this.dgvVenta.Columns[e.ColumnIndex].Name == "colCantidad")
-                        {
+                foreach (ClsElote item in N.busquedaLote(dgvVenta.CurrentRow.Cells[0].Value.ToString())) {
+                    if (item.Cantidad >= Convert.ToInt32(dgvVenta.CurrentRow.Cells[2].Value)) {
+                        if (this.dgvVenta.Columns[e.ColumnIndex].Name == "colCantidad") {
                             dgvVenta.CurrentRow.Cells[4].Value = (Convert.ToDouble(dgvVenta.CurrentRow.Cells[2].Value) * Convert.ToDouble(dgvVenta.CurrentRow.Cells[3].Value)).ToString();
                             MtdCalculos();
                             btnAgregar.Enabled = true;
                         }
-                    }
-                    else
-                    {
+                    } else {
                         dgvVenta.CurrentRow.Cells[2].Value = "0";
                         dgvVenta.CurrentRow.Cells[4].Value = "0";
                         MessageBox.Show("No hay suficientre stock. Stock actual: " + item.Cantidad.ToString(), "JeaNET - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -222,11 +182,9 @@ namespace Presentacion
             }
         }
 
-        private void MtdCalculos()
-        {
+        private void MtdCalculos() {
             double acumulador = 0;
-            foreach (DataGridViewRow fila in dgvVenta.Rows)
-            {
+            foreach (DataGridViewRow fila in dgvVenta.Rows) {
                 acumulador += Convert.ToDouble(fila.Cells[4].Value.ToString());
             }
             lblSubtotal.Text = acumulador.ToString();
@@ -234,66 +192,47 @@ namespace Presentacion
             lblTotal.Text = (acumulador + (acumulador * 0.18)).ToString();
         }
 
-        private void txtProducto_TextChanged(object sender, EventArgs e)
-        {
+        private void txtProducto_TextChanged(object sender, EventArgs e) {
             ClsNlote N = new ClsNlote();
-            foreach (ClsElote item in N.listarLotes())
-            {
-                if (item.CodLote.Equals(txtProducto.Text))
-                {
+            foreach (ClsElote item in N.listarLotes()) {
+                if (item.CodLote.Equals(txtProducto.Text)) {
                     lblProducto.Text = item.Nombre;
                     break;
-                }
-                else
-                {
-                    if (item.Nombre.Equals(txtProducto.Text))
-                    {
+                } else {
+                    if (item.Nombre.Equals(txtProducto.Text)) {
                         lblProducto.Text = item.CodLote;
                         break;
-                    }
-                    else
-                    {
+                    } else {
                         lblProducto.Text = "- - -";
                     }
                 }
             }
         }
 
-        private void txtCliente_TextChanged(object sender, EventArgs e)
-        {
+        private void txtCliente_TextChanged(object sender, EventArgs e) {
             ClsNcliente N = new ClsNcliente();
-            foreach (ClsEcliente item in N.listarClientes())
-            {
-                if (item.DniCliente.Equals(txtCliente.Text))
-                {
+            foreach (ClsEcliente item in N.listarClientes()) {
+                if (item.DniCliente.Equals(txtCliente.Text)) {
                     lblCliente.Text = item.Nombres + " " + item.Apellidos;
                     break;
-                }
-                else
-                {
-                    if (txtCliente.Text.Equals(item.Nombres + " " + item.Apellidos))
-                    {
+                } else {
+                    if (txtCliente.Text.Equals(item.Nombres + " " + item.Apellidos)) {
                         lblCliente.Text = item.DniCliente;
                         break;
-                    }
-                    else
-                    {
+                    } else {
                         lblCliente.Text = "- - -";
                     }
                 }
             }
         }
 
-        private void dgvVenta_KeyPress(object sender, KeyPressEventArgs e)
-        {
+        private void dgvVenta_KeyPress(object sender, KeyPressEventArgs e) {
             ClsNValidacion validacion = ClsNValidacion.getValidacion();
             validacion.soloNumero(e);
         }
 
-        private void btnQuitar_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("¿Seguro que desea Quitar?", "JeaNET - Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
+        private void btnQuitar_Click(object sender, EventArgs e) {
+            if (MessageBox.Show("¿Seguro que desea Quitar?", "JeaNET - Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                 dgvVenta.Rows.RemoveAt(dgvVenta.CurrentRow.Index);
                 MtdCalculos();
                 ClsNcomprobante N = new ClsNcomprobante();
@@ -303,13 +242,11 @@ namespace Presentacion
             }
         }
 
-        private void TxtCliente_MouseClick(object sender, MouseEventArgs e)
-        {
+        private void TxtCliente_MouseClick(object sender, MouseEventArgs e) {
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Hizo Clic en " + txtCliente.Text + "para agregar cliente a la venta");
         }
 
-        private void TxtProducto_Click(object sender, EventArgs e)
-        {
+        private void TxtProducto_Click(object sender, EventArgs e) {
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Hizo Clic en " + txtProducto.Name + "para agregar producto al detalle");
         }
     }

@@ -10,7 +10,6 @@
 namespace Datos
 {
     using System;
-    using System.Collections.Generic;
     
     public partial class tbAlertas
     {
@@ -22,6 +21,7 @@ namespace Datos
         public string Hora { get; set; }
         public Nullable<int> idTurno { get; set; }
         public string estado { get; set; }
+
         public static tbAlertas crear(string _dniCli, string _latitud, string _longitud, DateTime? _fecha, string _hora, int? _idTurno, string _estado) {
             return new tbAlertas() {
                 DniCli = _dniCli,
@@ -33,6 +33,7 @@ namespace Datos
                 estado = _estado
             };
         }
+
         public virtual tbClientes tbClientes { get; set; }
         public virtual tbTurnos tbTurnos { get; set; }
     }
