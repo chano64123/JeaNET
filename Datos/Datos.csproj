@@ -60,10 +60,12 @@
     <Compile Include="ClsDcargo.cs" />
     <Compile Include="ClsDcliente.cs" />
     <Compile Include="ClsDclienteDispositivo.cs" />
+    <Compile Include="ClsDcomprobante.cs" />
     <Compile Include="ClsDempleado.cs" />
     <Compile Include="ClsDkardex.cs" />
     <Compile Include="ClsDlote.cs" />
     <Compile Include="ClsDproveedor.cs" />
+    <Compile Include="ClsDreporte.cs" />
     <Compile Include="Mapeo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -130,6 +132,39 @@
       <DependentUpon>Mapeo.tt</DependentUpon>
     </Compile>
     <Compile Include="tbTurnos.cs">
+      <DependentUpon>Mapeo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USP_S_ListarIncidencias_Result.cs">
+      <DependentUpon>Mapeo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USP_S_ListarProductosSemestre_Result.cs">
+      <DependentUpon>Mapeo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USP_S_ListarProductosVendidosAnual_Result.cs">
+      <DependentUpon>Mapeo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USP_S_ListarPRoductosVendidosMes_Result.cs">
+      <DependentUpon>Mapeo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USP_S_ListarProductosVendidosSemana_Result.cs">
+      <DependentUpon>Mapeo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USP_S_ListarVentaDeEmpleadosPorSemestre_Result.cs">
+      <DependentUpon>Mapeo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USP_S_ListarVentaDeEmpleadosPorTrimestre_Result.cs">
+      <DependentUpon>Mapeo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USP_S_ListarVentasEmpleadoAnual_Result.cs">
+      <DependentUpon>Mapeo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USP_S_ListarVentasMensualesPorEmpleado_Result.cs">
+      <DependentUpon>Mapeo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USP_S_ListarVentasPorDiaEmpleado_Result.cs">
+      <DependentUpon>Mapeo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USP_S_ListarVentasProductosTrimestre_Result.cs">
       <DependentUpon>Mapeo.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">

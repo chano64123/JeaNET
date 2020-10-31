@@ -21,11 +21,10 @@ namespace Datos
             this.tbEmpleados = new HashSet<tbEmpleados>();
         }
     
-        public int idTurno { get; private set; }
-        public string descripcion { get; private set; }
-        public System.TimeSpan entrada { get; private set; }
-        public System.TimeSpan salida { get; private set; }
-
+        public int idTurno { get; set; }
+        public string descripcion { get; set; }
+        public System.TimeSpan entrada { get; set; }
+        public System.TimeSpan salida { get; set; }
         public static tbTurnos crear(string _descripcion, TimeSpan _entrada, TimeSpan _salida) {
             return new tbTurnos() {
                 descripcion = _descripcion,
@@ -33,7 +32,6 @@ namespace Datos
                 salida = _salida
             };
         }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAlertas> tbAlertas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

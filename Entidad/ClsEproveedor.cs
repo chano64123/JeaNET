@@ -1,4 +1,6 @@
-﻿namespace Entidad {
+﻿using System;
+
+namespace Entidad {
     public class ClsEproveedor {
         public string Ruc { get; private set; }
         public string Nombre { get; private set; }

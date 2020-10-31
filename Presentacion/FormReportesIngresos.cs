@@ -85,10 +85,10 @@ namespace Presentacion {
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
             DataTable reportes = new DataTable();
-            ClsNreportesIngresos N = new ClsNreportesIngresos();
+            ClsNreportes N = new ClsNreportes();
             if (comboBox1.SelectedIndex == 0) {
                 reportes.Clear();
-                reportes = N.MtdListarReportesSemanaleS();
+                reportes = N.listarEmpleadosVentasSemanal();
                 dgvVenta.DataSource = null;
                 dgvVenta.DataSource = reportes;
                 mtdGrafica2(reportes, 0, 8);
@@ -97,7 +97,7 @@ namespace Presentacion {
                 mtdGrafica(puntos, reportes, 7);
             } else if (comboBox1.SelectedIndex == 1) {
                 reportes.Clear();
-                reportes = N.MtdListarReportesMensual();
+                reportes = N.listarEmpleadosVentasMensual();
                 dgvVenta.DataSource = null;
                 dgvVenta.DataSource = reportes;
                 mtdGrafica2(reportes, 0, 13);
@@ -106,7 +106,7 @@ namespace Presentacion {
                 mtdGrafica(puntos, reportes, 12);
             } else if (comboBox1.SelectedIndex == 2) {
                 reportes.Clear();
-                reportes = N.MtdListarReportesTrimestre();
+                reportes = N.listarEmpleadosVentasTrimestral();
                 dgvVenta.DataSource = null;
                 dgvVenta.DataSource = reportes;
                 mtdGrafica2(reportes, 0, 5);
@@ -115,7 +115,7 @@ namespace Presentacion {
                 mtdGrafica(puntos, reportes, 4);
             } else if (comboBox1.SelectedIndex == 3) {
                 reportes.Clear();
-                reportes = N.MtdListarReportesSemestrales();
+                reportes = N.listarEmpleadosVentasSemestral();
                 dgvVenta.DataSource = null;
                 dgvVenta.DataSource = reportes;
                 mtdGrafica2(reportes, 0, 3);

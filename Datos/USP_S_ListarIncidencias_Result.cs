@@ -10,16 +10,11 @@
 namespace Datos
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class tbSesiones
+    public partial class USP_S_ListarIncidencias_Result
     {
-        public long id { get; set; }
-        public string usuario { get; set; }
-        public static tbSesiones crear(string _usuario) {
-            return new tbSesiones() {
-                usuario = _usuario
-            };
-        }
+        public Nullable<int> Mañana { get; set; }
+        public Nullable<int> Tarde { get; set; }
+        public Nullable<int> Noche { get; set; }
     }
 }

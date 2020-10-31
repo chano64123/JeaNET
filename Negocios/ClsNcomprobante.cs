@@ -1,5 +1,7 @@
-﻿using Entidad;
+﻿using Datos;
+using Entidad;
 using System;
+using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -44,43 +46,26 @@ namespace Negocios {
             }
         }
 
-        public object MtdListarDetallesComprobante(ClsEdetallecomprobante e) {
-            DataTable data = new DataTable();
-            ClsConexionSQL objConexion = new ClsConexionSQL();
-            SqlCommand objComando = new SqlCommand();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            objComando.Connection = objConexion.Conectar();
-            objComando.CommandText = "USP_S_ListarDetallesComprobante";
-            objComando.CommandType = CommandType.StoredProcedure;
-            objComando.Parameters.Add(new SqlParameter("ser", SqlDbType.VarChar));
-            objComando.Parameters.Add(new SqlParameter("num", SqlDbType.VarChar));
-            objComando.Parameters["ser"].Value = e.Serie;
-            objComando.Parameters["num"].Value = e.Numero;
-            objComando.Connection = objConexion.Conectar();
-            objComando.ExecuteNonQuery();
-            adapter.SelectCommand = objComando;
-            adapter.Fill(data);
-            objComando.Connection = objConexion.Desconectar();
+        ClsDcomprobante datos = new ClsDcomprobante();
+        public object listarDetallesComprobante(ClsEdetallecomprobante detalleComprobante) {
 
-            return data;
+            ArrayList detalleComprobantes = new ArrayList();
+            foreach (var item in datos.listarDetalleComprobantes(detalleComprobante.Serie,detalleComprobante.Numero))
+            {
+                ClsEdetallecomprobante _DetalleComprobante = ClsEdetallecomprobante.crear(item.Serie,item.Numero,item.CodigoLote,item.Descripcion,item.Cantidad,item.Precio,item.Importe);
+                detalleComprobantes.Add(_DetalleComprobante);
+            }
+            return detalleComprobantes;
         }
 
-        public object MtdFiltrarComprobantes(string filtro) {
-            ClsConexionSQL conn = new ClsConexionSQL();
-            DataTable result = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn.Conectar();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "USP_S_FiltrarComprobante";
-            command.Parameters.Add(new SqlParameter("fil", SqlDbType.VarChar));
-            command.Parameters["fil"].Value = filtro;
-            command.ExecuteNonQuery();
-            adapter.SelectCommand = command;
-            adapter.Fill(result);
-            command.Connection = conn.Desconectar();
-
-            return result;
+        public object filtrarComprobantes(string filtro) {
+            ArrayList comprobantes = new ArrayList();
+            foreach (var item in datos.filtrarComprobantes(filtro))
+            {
+                ClsEcomprobante comprobante = ClsEcomprobante.crear(item.Serie, item.Numero, item.DniEmpleado, item.Fecha, item.DniCliente, item.Subtotal, item.Igv, item.Total, item.Estado);
+                comprobantes.Add(comprobante);
+            }
+            return comprobantes;
         }
 
         public string MtdCalcularNumero(int cantidad) {
@@ -100,20 +85,15 @@ namespace Negocios {
             }
         }
 
-        public DataTable MtdListarComprobantes() {
-            ClsConexionSQL conn = new ClsConexionSQL();
-            DataTable result = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn.Conectar();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "USP_S_ListarComprobantes";
-            command.ExecuteNonQuery();
-            adapter.SelectCommand = command;
-            adapter.Fill(result);
-            command.Connection = conn.Desconectar();
+        public ArrayList listarComprobantes() {
 
-            return result;
+            ArrayList comprobantes = new ArrayList();
+            foreach (var item in datos.listarComprobantes())
+            {
+                ClsEcomprobante comprobante = ClsEcomprobante.crear(item.Serie, item.Numero, item.DniEmpleado, item.Fecha, item.DniCliente, item.Subtotal, item.Igv, item.Total, item.Estado);
+                comprobantes.Add(comprobante);
+            }
+            return comprobantes;
         }
 
         private string toText(double value) {
@@ -172,100 +152,22 @@ namespace Negocios {
             return Num2Text;
         }
 
-        public Boolean MtdGuardarDetalleComprobante(ClsEdetallecomprobante ed) {
-            try {
-                ClsConexionSQL objConexion = new ClsConexionSQL();
-                SqlCommand command = new SqlCommand();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                command.Connection = objConexion.Conectar();
-                command.CommandText = "USP_I_AgregarDetalleComprobante";
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("ser", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("num", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("cod", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("des", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("can", SqlDbType.Int));
-                command.Parameters.Add(new SqlParameter("pre", SqlDbType.Decimal));
-                command.Parameters.Add(new SqlParameter("imp", SqlDbType.Decimal));
-                command.Parameters["ser"].Value = ed.Serie;
-                command.Parameters["num"].Value = ed.Numero;
-                command.Parameters["cod"].Value = ed.CodigoLote;
-                command.Parameters["des"].Value = ed.Descripcion;
-                command.Parameters["can"].Value = ed.Cantidad;
-                command.Parameters["pre"].Value = ed.Precio;
-                command.Parameters["imp"].Value = ed.Importe;
-                command.ExecuteNonQuery();
-                command.Connection = objConexion.Desconectar();
+        public Boolean agregarDetalleComprobante(ClsEdetallecomprobante detalleComprobante) {
 
-                return true;
-            } catch (Exception ex) {
-                return false;
-                throw ex;
-            }
+            tbDetalleComprobante tbl = tbDetalleComprobante.crear(detalleComprobante.Serie, detalleComprobante.Numero, detalleComprobante.CodigoLote, detalleComprobante.Descripcion, detalleComprobante.Cantidad, detalleComprobante.Precio, detalleComprobante.Importe);
+            return datos.agregarDetalleComprobante(tbl);
         }
 
-        public Boolean MtdGuardarComprobante(ClsEcomprobante e) {
-            try {
-                ClsConexionSQL objConexion = new ClsConexionSQL();
-                SqlCommand command = new SqlCommand();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                command.Connection = objConexion.Conectar();
-                command.CommandText = "USP_I_AgregarComprobante";
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("ser", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("num", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("fec", SqlDbType.Date));
-                command.Parameters.Add(new SqlParameter("demp", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("dcli", SqlDbType.VarChar));
-                command.Parameters.Add(new SqlParameter("sub", SqlDbType.Decimal));
-                command.Parameters.Add(new SqlParameter("igv", SqlDbType.Decimal));
-                command.Parameters.Add(new SqlParameter("tot", SqlDbType.Decimal));
-                command.Parameters.Add(new SqlParameter("est", SqlDbType.VarChar));
-                command.Parameters["ser"].Value = e.Serie;
-                command.Parameters["num"].Value = e.Numero;
-                command.Parameters["fec"].Value = e.Fecha;
-                command.Parameters["demp"].Value = e.DniEmpleado;
-                command.Parameters["dcli"].Value = e.DniCliente;
-                command.Parameters["sub"].Value = e.Subtotal;
-                command.Parameters["igv"].Value = e.Igv;
-                command.Parameters["tot"].Value = e.Total;
-                command.Parameters["est"].Value = e.Estado;
-                command.ExecuteNonQuery();
-                command.Connection = objConexion.Desconectar();
+        public Boolean agregarComprobante(ClsEcomprobante comprobante) {
 
-                return true;
-            } catch (Exception ex) {
-                return false;
-                throw ex;
-            }
+            tbComprobante tbl = tbComprobante.crear(comprobante.Serie, comprobante.Numero, comprobante.Fecha, comprobante.DniEmpleado, comprobante.DniCliente, comprobante.Subtotal, comprobante.Igv, comprobante.Total, comprobante.Estado);
+            return datos.agregarComprobante(tbl);
         }
 
-        public void MtdAgregarKardex(ClsEkardex objEKardex, string descripcion) {
-            ClsConexionSQL objConexion = new ClsConexionSQL();
-            SqlCommand command = new SqlCommand();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            command.Connection = objConexion.Conectar();
-            command.CommandText = "USP_I_AgregarKardex";
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.Add(new SqlParameter("lot", SqlDbType.VarChar));
-            command.Parameters.Add(new SqlParameter("demp", SqlDbType.VarChar));
-            command.Parameters.Add(new SqlParameter("desc", SqlDbType.VarChar));
-            command.Parameters.Add(new SqlParameter("cant", SqlDbType.Int));
-            command.Parameters.Add(new SqlParameter("prec", SqlDbType.Decimal));
-            command.Parameters.Add(new SqlParameter("est", SqlDbType.VarChar));
-            command.Parameters.Add(new SqlParameter("hor", SqlDbType.VarChar));
-            command.Parameters.Add(new SqlParameter("fech", SqlDbType.Date));
-            command.Parameters["lot"].Value = objEKardex.CodLote;
-            command.Parameters["demp"].Value = objEKardex.DniEmpleado;
-            command.Parameters["desc"].Value = descripcion;
-            command.Parameters["cant"].Value = objEKardex.Cantidad;
-            command.Parameters["prec"].Value = objEKardex.PrecioUnitario;
-            command.Parameters["est"].Value = objEKardex.Estado;
-            command.Parameters["hor"].Value = objEKardex.Hora;
-            command.Parameters["fech"].Value = objEKardex.Fecha;
-            command.ExecuteNonQuery();
-            command.Connection = objConexion.Desconectar();
-        }
+        
+
+        
+
 
     }
 }

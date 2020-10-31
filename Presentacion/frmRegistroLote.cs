@@ -49,7 +49,8 @@ namespace Presentacion {
                     //para guardar kardex
                     ClsEkardex objEKardex = ClsEkardex.crear(txtCodigo.Text, frmAdministrador.data.Rows[0][0].ToString(), "ENTRADA", Convert.ToInt32(txtCantidad.Text), Convert.ToDecimal(txtPrecio.Text), "1", DateTime.Now.ToShortTimeString(), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
                     ClsNcomprobante objN = new ClsNcomprobante();
-                    objN.MtdAgregarKardex(objEKardex, "ENTRADA");
+                    ClsNkardex nK = new ClsNkardex();
+                    nK.agregarKardex(objEKardex);
 
                     if (MessageBox.Show("Lote registrado correctamente, ¿Desea registrar otro lote?", "JeaNet - Informa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                         frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Lote agregado satisfactoriamente " + btnGuardar.Name);
