@@ -29,7 +29,6 @@ namespace Datos
                 Estado = _estado
             };
         }
-
         public virtual tbComprobante tbComprobante { get; set; }
         public virtual tbLotes tbLotes { get; set; }
     }

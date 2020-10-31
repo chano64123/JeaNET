@@ -12,7 +12,7 @@ namespace Presentacion {
 
         private void FormReportesIncidencias_Load(object sender, EventArgs e) {
             ClsNreportes N = new ClsNreportes();
-            DataTable reportes = N.MTdListarIncidencias();
+            DataTable reportes = N.listarIncidencias();
             dgvVenta.DataSource = reportes;
             mtdGrafica2();
             float[] puntos = mtdPintar();

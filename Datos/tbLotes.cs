@@ -32,7 +32,6 @@ namespace Datos
         public string Forma { get; set; }
         public string Memoria { get; set; }
         public decimal Peso { get; set; }
-
         public static tbLotes crear(string _codLote, string _nombre, string _color, string _ruc, string _sistema_Operativo, int _cantidad, decimal _precio_Unitario, string _forma, string _memoria, decimal _peso) {
             return new tbLotes() {
                 CodLote = _codLote,

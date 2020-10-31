@@ -133,6 +133,9 @@
     <Compile Include="tbTurnos.cs">
       <DependentUpon>Mapeo.tt</DependentUpon>
     </Compile>
+    <Compile Include="USP_S_ListarIncidencias_Result.cs">
+      <DependentUpon>Mapeo.tt</DependentUpon>
+    </Compile>
     <Compile Include="USP_S_ListarProductosSemestre_Result.cs">
       <DependentUpon>Mapeo.tt</DependentUpon>
     </Compile>

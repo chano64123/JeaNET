@@ -22,6 +22,7 @@ namespace Datos
     
         public string Codigo_Cargo { get; set; }
         public string Descripcion { get; set; }
+
         public static tbCargos crear(string _codigo_Cargo, string _descripcion) {
             return new tbCargos() {
                 Codigo_Cargo = _codigo_Cargo,

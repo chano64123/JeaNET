@@ -94,5 +94,10 @@ namespace Datos
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_S_ListarVentasProductosTrimestre_Result>("USP_S_ListarVentasProductosTrimestre");
         }
+    
+        public virtual ObjectResult<USP_S_ListarIncidencias_Result> USP_S_ListarIncidencias()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<USP_S_ListarIncidencias_Result>("USP_S_ListarIncidencias");
+        }
     }
 }

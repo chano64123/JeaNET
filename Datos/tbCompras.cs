@@ -39,7 +39,6 @@ namespace Datos
             };
         }
 
-
         public virtual tbEmpleados tbEmpleados { get; set; }
         public virtual tbProveedores tbProveedores { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

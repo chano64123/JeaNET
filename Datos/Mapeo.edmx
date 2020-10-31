@@ -405,6 +405,7 @@ advertencia 6002: La tabla o vista 'bdJeaNet.dbo.tbSesiones' no tiene definida n
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="USP_S_ListarIncidencias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="USP_S_ListarProductosSemestre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="USP_S_ListarProductosVendidosAnual" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="USP_S_ListarPRoductosVendidosMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -1039,6 +1040,7 @@ advertencia 6002: La tabla o vista 'bdJeaNet.dbo.tbSesiones' no tiene definida n
           <FunctionImport Name="USP_S_ListarVentasMensualesPorEmpleado" ReturnType="Collection(bdJeaNetModel.USP_S_ListarVentasMensualesPorEmpleado_Result)" />
           <FunctionImport Name="USP_S_ListarVentasPorDiaEmpleado" ReturnType="Collection(bdJeaNetModel.USP_S_ListarVentasPorDiaEmpleado_Result)" />
           <FunctionImport Name="USP_S_ListarVentasProductosTrimestre" ReturnType="Collection(bdJeaNetModel.USP_S_ListarVentasProductosTrimestre_Result)" />
+          <FunctionImport Name="USP_S_ListarIncidencias" ReturnType="Collection(bdJeaNetModel.USP_S_ListarIncidencias_Result)" />
         </EntityContainer>
         <ComplexType Name="USP_S_ListarProductosSemestre_Result">
           <Property Type="String" Name="Producto" Nullable="false" MaxLength="50" />
@@ -1131,6 +1133,11 @@ advertencia 6002: La tabla o vista 'bdJeaNet.dbo.tbSesiones' no tiene definida n
           <Property Type="Int64" Name="Tercer_Trimestre" Nullable="true" />
           <Property Type="Int64" Name="Cuarto_Trimestre" Nullable="true" />
           <Property Type="Int64" Name="Total" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="USP_S_ListarIncidencias_Result">
+          <Property Type="Int32" Name="Mañana" Nullable="true" />
+          <Property Type="Int32" Name="Tarde" Nullable="true" />
+          <Property Type="Int32" Name="Noche" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1472,6 +1479,15 @@ advertencia 6002: La tabla o vista 'bdJeaNet.dbo.tbSesiones' no tiene definida n
                 <ScalarProperty Name="Tercer_Trimestre" ColumnName="Tercer Trimestre" />
                 <ScalarProperty Name="Cuarto_Trimestre" ColumnName="Cuarto Trimestre" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_S_ListarIncidencias" FunctionName="bdJeaNetModel.Store.USP_S_ListarIncidencias">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdJeaNetModel.USP_S_ListarIncidencias_Result">
+                <ScalarProperty Name="Mañana" ColumnName="Mañana" />
+                <ScalarProperty Name="Tarde" ColumnName="Tarde" />
+                <ScalarProperty Name="Noche" ColumnName="Noche" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

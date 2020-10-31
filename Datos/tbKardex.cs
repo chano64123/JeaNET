@@ -23,7 +23,6 @@ namespace Datos
         public string Estado { get; set; }
         public string Hora { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
-
         public static tbKardex crear(string _codLote, string _dniEmpleado, string _descripcion, int? _cantidad, decimal? _precioUnitario, string _estado, string _hora, DateTime? _fecha) {
             return new tbKardex() {
                 CodLote = _codLote,
