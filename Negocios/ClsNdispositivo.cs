@@ -21,14 +21,15 @@ namespace Negocios {
             }
         }
 
+
         public ArrayList listarDispositivos() {
             ArrayList dispositivos = new ArrayList();
             foreach (var item in datos.listarDispositivos()) {
                 ClsEdispositivo dispositivo = ClsEdispositivo.crear(item.SerieDispositivo,item.CodLote,item.Estado);
                 dispositivos.Add(dispositivo);
-            }
             return dispositivos;
         }
+
    
         public ArrayList listarDispositivosDisponibles(string filtro) {
             ArrayList dispositivos = new ArrayList();
@@ -55,6 +56,7 @@ namespace Negocios {
                 ClsEdispositivo dispositivo = ClsEdispositivo.crear(disponibles.Rows[i][0].ToString(), disponibles.Rows[i][1].ToString(), "0");
                 tbDispositivos tbl = tbDispositivos.crear(dispositivo.SerieDispositivo, dispositivo.CodLote, dispositivo.Estado);
                 result = datos.modificarEstado(tbl) && result;
+      
             }
             return result;
         }

@@ -10,7 +10,6 @@ namespace Presentacion {
 
         private void btnCerrar_Click(object sender, EventArgs e) {
             this.Hide();
-            FormCliente_RelojSmart frm = new FormCliente_RelojSmart();
         }
 
         private void btn_ImageMenuUsuario_Click(object sender, EventArgs e) {

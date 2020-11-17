@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Datos {
     public class ClsDcomprobante {
-        bdJeaNetEntities db = new bdJeaNetEntities();
+        readonly bdJeaNetEntities db = new bdJeaNetEntities();
 
         public bool agregarComprobante(tbComprobante comprobante) {
             try {

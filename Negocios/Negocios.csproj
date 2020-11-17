@@ -77,8 +77,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClsConexionSQL.cs" />
-    <Compile Include="ClsConexionSQLRemota.cs" />
+    <Compile Include="ClsConexionSql.cs" />
+    <Compile Include="ClsConexionSqlRemota.cs" />
     <Compile Include="ClsNalerta.cs" />
     <Compile Include="ClsNauditoria.cs" />
     <Compile Include="ClsNautocompletar.cs" />

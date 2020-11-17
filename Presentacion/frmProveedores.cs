@@ -26,7 +26,6 @@ namespace Presentacion {
             foreach (ClsEproveedor item in N.busquedaProveedor(dgvProveedores.CurrentRow.Cells[0].Value.ToString())) {
                 string estado = (item.Estado == "1") ? "Activo" : "Inactivo";
                 E = ClsEproveedor.crear(item.Ruc, item.Nombre, item.Direccion, item.Telefono, item.Correo, item.Estado);
-                break;
             }
             frmRegistroProveedor f = new frmRegistroProveedor(E);
             f.ShowDialog();

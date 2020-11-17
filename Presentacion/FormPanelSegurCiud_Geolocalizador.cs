@@ -100,10 +100,7 @@ namespace Presentacion {
         }
 
         private void btnEliminarGeo_Click(object sender, EventArgs e) {
-            try {
-                DgvGeoDatos.Rows.RemoveAt(filaSeleccionada);
-            } catch {
-            }
+            DgvGeoDatos.Rows.RemoveAt(filaSeleccionada);
         }
 
         private void btnSatelite_Click(object sender, EventArgs e) {
@@ -141,11 +138,11 @@ namespace Presentacion {
                 //MARKER
                 GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.blue);
                 // crear superposición
-                GMapOverlay markers = new GMapOverlay("Markers");
+                GMapOverlay markers1 = new GMapOverlay("Markers");
                 //añadir todas las marcas disponibles a esa superposición
-                markers.Markers.Add(marker);
+                markers1.Markers.Add(marker);
                 // cubrir mapa con superposición
-                gMapControlJeanette.Overlays.Add(markers);
+                gMapControlJeanette.Overlays.Add(markers1);
                 //MARCADOR
                 markerOverlay = new GMapOverlay("Marcador");
                 marker = new GMarkerGoogle(new PointLatLng(lat, longit), GMarkerGoogleType.blue);

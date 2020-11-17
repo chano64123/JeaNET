@@ -44,7 +44,7 @@ namespace Negocios {
             }
         }
 
-        ClsDcomprobante datos = new ClsDcomprobante();
+        readonly ClsDcomprobante datos = new ClsDcomprobante();
         public object listarDetallesComprobante(ClsEdetallecomprobante detalleComprobante) {
 
             ArrayList detalleComprobantes = new ArrayList();

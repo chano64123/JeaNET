@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace Negocios {
     public class ClsNauditoria {
-        ClsDauditoria datos = new ClsDauditoria();
+        readonly ClsDauditoria datos = new ClsDauditoria();
 
         public bool agregarAuditoria(ClsEauditoria auditoria) {
             tbAuditoria tbl = tbAuditoria.crear(auditoria.DNI_Usuario, auditoria.descripcionAccion, (DateTime)auditoria.fecha, auditoria.hora);

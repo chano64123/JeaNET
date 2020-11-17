@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Datos {
     public class ClsDkardex {
-        bdJeaNetEntities db = new bdJeaNetEntities();
+        readonly bdJeaNetEntities db = new bdJeaNetEntities();
 
         public bool agregarKardex(tbKardex kardex) {
             try {

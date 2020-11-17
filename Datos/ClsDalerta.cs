@@ -4,8 +4,7 @@ using System.Linq;
 
 namespace Datos {
     public class ClsDalerta {
-
-        bdJeaNetEntities db = new bdJeaNetEntities();
+        readonly bdJeaNetEntities db = new bdJeaNetEntities();
 
         public bool agregarAlerta(tbAlertas alerta) {
             try {

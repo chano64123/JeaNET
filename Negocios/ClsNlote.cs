@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace Negocios {
     public class ClsNlote {
-        ClsDlote datos = new ClsDlote();
+        readonly ClsDlote datos = new ClsDlote();
         public string MtdGeneraraCodigo() {
             string numero = "0";
             int cant = listarLotes().Count;
