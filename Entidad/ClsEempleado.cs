@@ -1,4 +1,7 @@
-﻿namespace Entidad {
+﻿using MongoDB.Bson.Serialization.Attributes;
+
+namespace Entidad {
+    [BsonIgnoreExtraElements]
     public class ClsEempleado {
         public string DniEmpleado { get; private set; }
         public string Nombres { get; private set; }

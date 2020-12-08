@@ -25,8 +25,9 @@ namespace Negocios {
         public ArrayList listarDispositivos() {
             ArrayList dispositivos = new ArrayList();
             foreach (var item in datos.listarDispositivos()) {
-                ClsEdispositivo dispositivo = ClsEdispositivo.crear(item.SerieDispositivo,item.CodLote,item.Estado);
-                dispositivos.Add(dispositivo);
+                ClsEdispositivo dispositivo = ClsEdispositivo.crear(item.SerieDispositivo, item.CodLote, item.Estado);
+                dispositivos.Add(dispositivo);                
+            }
             return dispositivos;
         }
 
