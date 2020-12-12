@@ -41,5 +41,33 @@ namespace Datos {
             var query = from e in db.tbEmpleados where e.DniEmpleado == dni select e;
             return query.ToList();
         }
+
+        public List<tbEmpleados> verificarExistencia(string texto) {
+            var query = from e in db.tbEmpleados where e.Usuario == texto ||  e.Correo==texto select e;
+            return query.ToList();
+        }
+
+        public List<tbEmpleados> buscarPorUsuario(string usuario) {
+            var query = from e in db.tbEmpleados where e.Usuario == usuario select e;
+            return query.ToList();
+        }
+
+        public List<tbEmpleados> buscarEmpleadoByDNI(string dni) {
+            var query = from e in db.tbEmpleados where e.DniEmpleado == dni select e;           
+            return query.ToList();
+        }
+
+        public bool modificarContraseña(string clave,string dni) {
+            try {
+                tbEmpleados empleado = buscarEmpleadoByDNI(dni)[0];
+                empleado.Contraseña = clave;
+                db.Entry(empleado).State = EntityState.Modified;
+                
+                db.SaveChanges();
+                return true;
+            } catch (Exception) {
+                return false;
+            }
+        }        
     }
 }

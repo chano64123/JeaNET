@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Collections;
+using System.Threading.Tasks;
 
 namespace Presentacion {
     public partial class frmLoginAdmin : Form {
@@ -168,11 +169,11 @@ namespace Presentacion {
             btn9.Text = numeros[9].ToString();
         }
 
-        private void btnIngresar_Click(object sender, EventArgs e) {
+        private async void btnIngresar_ClickAsync(object sender, EventArgs e) {
             if (MtdValidarCampos()) {
                 ClsElogin E = ClsElogin.crear(txtUsuario.Text, txtClave.Text);
                 ClsNlogin N = new ClsNlogin();
-                DataTable dt = N.validarLogin(txtUsuario.Text);             
+                DataTable dt = N.ValidarLogin(txtUsuario.Text);             
 
                 if (dt.Rows.Count == 1) {
                     switch (N.MtdVerificarCuenta(dt, E, 1)) {
@@ -203,17 +204,16 @@ namespace Presentacion {
                             //sms
                             ClsEsms Es = ClsEsms.crear("+51" + dt.Rows[0][5].ToString(), "El usuario " + dt.Rows[0][1].ToString() + " " + dt.Rows[0][2].ToString() + " acaba de iniciar sesion a las " + DateTime.Now.ToLongTimeString() + ".");
                             ClsNsms Ns = new ClsNsms();
-                            //Ns.MtdMandarMensaje(Es);
+                            Ns.MtdMandarMensaje(Es);
                             //correo
-                            ClsEcorreo Ec = ClsEcorreo.crear(dt.Rows[0][4].ToString(), "INICIO DE SESION", "Usted acaba de iniciar sesion a las " + DateTime.Now.ToLongTimeString() + ".");
-                            ClsNcorreo Nc = new ClsNcorreo();
-                            //Nc.MtdEnviarEmail(Ec);
+                           
+                           
+                            
                             //agregar sesion
                             N.MtdGuardarSesion(dt.Rows[0][9].ToString());
                             //bienvenida
                             MessageBox.Show("Bienvenido " + dt.Rows[0][1] + " " + dt.Rows[0][2] + ".", "JeaNET - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            MtdAuditoria(dt.Rows[0][0].ToString(), "Ingreso al sistema");
-                           
+                            MtdAuditoria(dt.Rows[0][0].ToString(), "Ingreso al sistema");                           
                            
                             frmAdministrador f = new frmAdministrador(dt);
                             this.Hide();
@@ -225,6 +225,8 @@ namespace Presentacion {
                 }
             }
         }
+
+       
 
         public static void MtdAuditoria(string dni, string desc) {
             ClsEauditoria objEauditoria = ClsEauditoria.crear(dni, desc, Convert.ToDateTime(DateTime.Now.ToShortDateString()), DateTime.Now.ToLongTimeString());

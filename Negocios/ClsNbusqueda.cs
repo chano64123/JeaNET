@@ -6,7 +6,7 @@ namespace Negocios {
     public class ClsNbusqueda {
         public ArrayList MtdBuscarReniec(string dni) {
             ArrayList temp = new ArrayList();
-            var client = new RestClient("https://dniruc.apisperu.com/api/v1/dni/" + dni + "?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InByb21vMjAxNjc0QGdtYWlsLmNvbSJ9.SDxqQGi2nMScGlxP_EP6TXOo-mwksYzZgA4y-GvB5oc");
+            var client = new RestClient("https://dniruc.apisperu.com/api/v1/dni/" + dni + "?token="+Properties.Resources.reniecApiToken);
             var request = new RestRequest(Method.GET);
             IRestResponse<ClsEpersona> response = client.Execute<ClsEpersona>(request);
             if (response.Data.Nombres is not null) {
@@ -21,7 +21,7 @@ namespace Negocios {
 
         public ArrayList MtdBuscarSunat(string ruc) {
             ArrayList temp = new ArrayList();
-            var client = new RestClient("https://dniruc.apisperu.com/api/v1/ruc/" + ruc + "?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InByb21vMjAxNjc0QGdtYWlsLmNvbSJ9.SDxqQGi2nMScGlxP_EP6TXOo-mwksYzZgA4y-GvB5oc");
+            var client = new RestClient("https://dniruc.apisperu.com/api/v1/ruc/" + ruc + "?token=" + Properties.Resources.reniecApiToken);
             var request = new RestRequest(Method.GET);
             IRestResponse<ClsEempresa> response = client.Execute<ClsEempresa>(request);
             if (response.Data.RazonSocial is not null) {

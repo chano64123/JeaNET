@@ -40,6 +40,12 @@ namespace Presentacion {
             }
             SidePanel.Height = BtnClientes.Height;
             SidePanel.Top = BtnClientes.Top;
+
+
+        }
+
+        private async System.Threading.Tasks.Task enviarCorreoAsync(ClsEcorreo Ec, ClsNcorreo Nc) {
+            await Nc.MtdEnviarEmail(Ec);
         }
 
         private void BtnClientes_Click(object sender, EventArgs e) {
@@ -174,7 +180,7 @@ namespace Presentacion {
             objNauditoria.agregarAuditoria(objEauditoria);
         }
 
-        private void FormAdministrador_Load(object sender, EventArgs e) {
+        private async void FormAdministrador_Load(object sender, EventArgs e) {
             MtdAuditoria(data.Rows[0][0].ToString(), "Abrio formulario Administrador");
             SidePanel.Height = BtnClientes.Height;
             SidePanel.Top = BtnClientes.Top;
@@ -191,6 +197,14 @@ namespace Presentacion {
                 panelContenedor.Controls.Add(_objForm);
                 _objForm.Show();
             }
+
+
+            ClsEcorreo Ec = ClsEcorreo.crear(data.Rows[0][4].ToString(), "INICIO DE SESION", "Usted acaba de iniciar sesion a las " + DateTime.Now.ToLongTimeString() + ".");
+            ClsNcorreo Nc = new ClsNcorreo();
+
+
+            await enviarCorreoAsync(Ec, Nc);
+
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -368,6 +382,10 @@ namespace Presentacion {
             registryKey?.SetValue("KeyboardLayoutPreference", 0, RegistryValueKind.DWord);
             registryKey?.SetValue("LastUsedModalityWasHandwriting", 1, RegistryValueKind.DWord);
             Process.Start(@"C:\Program Files\Common Files\Microsoft Shared\ink\TabTip.exe");
+        }
+
+        private void panelContenedor_Paint(object sender, PaintEventArgs e) {
+
         }
     }
 }
