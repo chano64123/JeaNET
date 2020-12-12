@@ -7,6 +7,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Collections;
+using System.Threading.Tasks;
 
 namespace Presentacion {
     public partial class frmLoginAdmin : Form {
@@ -167,13 +169,14 @@ namespace Presentacion {
             btn9.Text = numeros[9].ToString();
         }
 
-        private void btnIngresar_Click(object sender, EventArgs e) {
+        private async void btnIngresar_ClickAsync(object sender, EventArgs e) {
             if (MtdValidarCampos()) {
                 ClsElogin E = ClsElogin.crear(txtUsuario.Text, txtClave.Text);
                 ClsNlogin N = new ClsNlogin();
-                DataTable data = N.MtdValidarLogin(E);
-                if (data.Rows.Count == 1) {
-                    switch (N.MtdVerificarCuenta(data, E, 1)) {
+                DataTable dt = N.ValidarLogin(txtUsuario.Text);             
+
+                if (dt.Rows.Count == 1) {
+                    switch (N.MtdVerificarCuenta(dt, E, 1)) {
                         case 0:
                             MessageBox.Show("Error desconocido, comuniquese con soporte.", "JeaNET - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
@@ -199,20 +202,20 @@ namespace Presentacion {
                             break;
                         case 6:
                             //sms
-                            ClsEsms Es = ClsEsms.crear("+51" + data.Rows[0][5].ToString(), "El usuario " + data.Rows[0][1].ToString() + " " + data.Rows[0][2].ToString() + " acaba de iniciar sesion a las " + DateTime.Now.ToLongTimeString() + ".");
+                            ClsEsms Es = ClsEsms.crear("+51" + dt.Rows[0][5].ToString(), "El usuario " + dt.Rows[0][1].ToString() + " " + dt.Rows[0][2].ToString() + " acaba de iniciar sesion a las " + DateTime.Now.ToLongTimeString() + ".");
                             ClsNsms Ns = new ClsNsms();
-                            //Ns.MtdMandarMensaje(Es);
+                            Ns.MtdMandarMensaje(Es);
                             //correo
-                            ClsEcorreo Ec = ClsEcorreo.crear(data.Rows[0][4].ToString(), "INICIO DE SESION", "Usted acaba de iniciar sesion a las " + DateTime.Now.ToLongTimeString() + ".");
-                            ClsNcorreo Nc = new ClsNcorreo();
-                            //Nc.MtdEnviarEmail(Ec);
+                           
+                           
+                            
                             //agregar sesion
-                            N.MtdGuardarSesion(data.Rows[0][9].ToString());
+                            N.MtdGuardarSesion(dt.Rows[0][9].ToString());
                             //bienvenida
-                            MessageBox.Show("Bienvenido " + data.Rows[0][1] + " " + data.Rows[0][2] + ".", "JeaNET - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            MtdAuditoria(data.Rows[0][0].ToString(), "Ingreso al sistema");
-
-                            frmAdministrador f = new frmAdministrador(data);
+                            MessageBox.Show("Bienvenido " + dt.Rows[0][1] + " " + dt.Rows[0][2] + ".", "JeaNET - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MtdAuditoria(dt.Rows[0][0].ToString(), "Ingreso al sistema");                           
+                           
+                            frmAdministrador f = new frmAdministrador(dt);
                             this.Hide();
                             f.Show();
                             break;
@@ -222,6 +225,8 @@ namespace Presentacion {
                 }
             }
         }
+
+       
 
         public static void MtdAuditoria(string dni, string desc) {
             ClsEauditoria objEauditoria = ClsEauditoria.crear(dni, desc, Convert.ToDateTime(DateTime.Now.ToShortDateString()), DateTime.Now.ToLongTimeString());

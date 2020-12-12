@@ -1,13 +1,11 @@
 ﻿using Entidad;
 using Datos;
-using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Collections;
 
 namespace Negocios {
     public class ClsNdispositivo {
-        ClsDdispositivo datos = new ClsDdispositivo();
+        readonly ClsDdispositivo datos = new ClsDdispositivo();
 
         public string MtdCalcularSerieDispositivo(string codigo, int i) {
             if (i.ToString().Length == 1) {
@@ -25,8 +23,9 @@ namespace Negocios {
         public ArrayList listarDispositivos() {
             ArrayList dispositivos = new ArrayList();
             foreach (var item in datos.listarDispositivos()) {
-                ClsEdispositivo dispositivo = ClsEdispositivo.crear(item.SerieDispositivo,item.CodLote,item.Estado);
-                dispositivos.Add(dispositivo);
+                ClsEdispositivo dispositivo = ClsEdispositivo.crear(item.SerieDispositivo, item.CodLote, item.Estado);
+                dispositivos.Add(dispositivo);                
+            }
             return dispositivos;
         }
 

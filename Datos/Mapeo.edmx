@@ -433,12 +433,7 @@ advertencia 6002: La tabla o vista 'bdJeaNet.dbo.tbSesiones' no tiene definida n
           <EntitySet Name="tbLotes" EntityType="Self.tbLotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbProveedores" EntityType="Self.tbProveedores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbTurnos" EntityType="Self.tbTurnos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tbSesiones" EntityType="Self.tbSesiones" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [tbSesiones].[id] AS [id], 
-    [tbSesiones].[usuario] AS [usuario]
-    FROM [dbo].[tbSesiones] AS [tbSesiones]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="tbSesiones" EntityType="Self.tbSesiones" store:Type="Tables" Schema="dbo"/>
           <AssociationSet Name="fk_ClienteDispositivo" Association="Self.fk_ClienteDispositivo">
             <End Role="tbClientes" EntitySet="tbClientes" />
             <End Role="tbClienteDisposiivo" EntitySet="tbClienteDisposiivo" />

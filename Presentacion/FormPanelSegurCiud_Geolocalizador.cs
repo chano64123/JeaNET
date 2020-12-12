@@ -136,7 +136,7 @@ namespace Presentacion {
                 gMapControlJeanette.AutoScroll = true;
                 PointLatLng point = new PointLatLng(lat, longit);
                 //MARKER
-                GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.blue);
+                GMapMarker gMapMarker = new GMarkerGoogle(point, GMarkerGoogleType.blue);
                 // crear superposición
                 GMapOverlay markers1 = new GMapOverlay("Markers");
                 //añadir todas las marcas disponibles a esa superposición

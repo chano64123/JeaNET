@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+  <ProjectName>Pruebas</ProjectName>
+  <ProjectLanguage>C#</ProjectLanguage>
+  <ProjectType>Test</ProjectType>
+  <ProjectGuid>4b8eca69-41a5-478c-967b-d62808339739</ProjectGuid>
+  <FullPath>F:\UPT\VII CICLO\Z JEANET\Sistema\Pruebas\Pruebas.csproj</FullPath>
+  <IsExcluded>false</IsExcluded>
+  <AnalysisResults>
+    <AnalysisResult Id="FilesToAnalyze" Location="F:\UPT\VII CICLO\Z JEANET\Sistema\.sonarqube\out\4\FilesToAnalyze.txt" />
+  </AnalysisResults>
+  <AnalysisSettings>
+    <Property Name="sonar.cs.roslyn.reportFilePath">F:\UPT\VII CICLO\Z JEANET\Sistema\Pruebas\bin\Debug\Pruebas.dll.RoslynCA.json|F:\UPT\VII CICLO\Z JEANET\Sistema\Pruebas\bin\Debug\Pruebas.dll.RoslynCA.json</Property>
+    <Property Name="sonar.cs.analyzer.projectOutPath">F:\UPT\VII CICLO\Z JEANET\Sistema\.sonarqube\out\4</Property>
+  </AnalysisSettings>
+  <Configuration>Debug</Configuration>
+  <Platform>AnyCPU</Platform>
+</ProjectInfo>
