@@ -2,10 +2,6 @@
 using Negocios;
 using System;
 using System.Device.Location;
-using System.Globalization;
-using System.Media;
-using System.Speech.Recognition;
-using System.Speech.Synthesis;
 using System.Windows.Forms;
 
 namespace Presentacion {
@@ -15,86 +11,13 @@ namespace Presentacion {
 
         public FormCliente_RelojSmart() {
             InitializeComponent();
-            Inicio();
             this.TTmensaje.SetToolTip(this.btnAlerta, "Alertas");
             this.TTmensaje.SetToolTip(this.btn_Configuraciones, "Configuraciones");
             this.TTmensaje.SetToolTip(this.btnNotificaciones, "Notificaciones");
         }
 
-        SoundPlayer Enlinea;
-        SoundPlayer Siempre;
-        static CultureInfo ci = new CultureInfo("es-ES");
-        static SpeechRecognitionEngine reconocedor;
-        SpeechSynthesizer respuesta = new SpeechSynthesizer();
-        public void Gramatica() {
-            try {
-                reconocedor = new SpeechRecognitionEngine(ci);
-            } catch (Exception ex) {
-                MessageBox.Show("Error al integrar el idioma elegido: " + ex.Message);
-            }
-            var gramaticaa = new Choices();
-            gramaticaa.Add(listaPalabras);
-            var globalizacion = new GrammarBuilder();
-            globalizacion.Append(gramaticaa);
-            try {
-                var gra = new Grammar(globalizacion);
-                try {
-                    reconocedor.RequestRecognizerUpdate();
-                    reconocedor.LoadGrammarAsync(gra);
-                    reconocedor.SpeechRecognized += Sre_Reconocimiento;
-                    reconocedor.SetInputToDefaultAudioDevice();
-                    respuesta.SetOutputToDefaultAudioDevice();
-                    reconocedor.RecognizeAsync(RecognizeMode.Multiple);
-                } catch (Exception ex) {
-                    MessageBox.Show("Error al crear el reconocedor: " + ex.Message);
-                }
-            } catch (Exception ex) {
-                MessageBox.Show("Error al crear la gramática del lenguaje: " + ex.Message);
-            }
-        }
-
-        public void Inicio() {
-            respuesta.Volume = 100;
-            respuesta.Rate = 2;
-            Gramatica();
-        }
-        void Sre_Reconocimiento(object sender, SpeechRecognizedEventArgs e) {
-            if (FormCliente_Menu_UsuarioCliente.usuario.Count == 1) {
-                string frase = e.Result.Text;
-                if (frase.Equals("Activar Protocolo")) {
-                    try {
-                        Enlinea = new SoundPlayer(Application.StartupPath + @"\Sonido\Activado.wav");
-                        Enlinea.Play();
-                        a = 0;
-                        cont = 11;
-                        timerRegresiva.Stop();
-                        label2.Enabled = false;
-                        label1.Enabled = false;
-                        GeoCoordinateWatcher watcher = new GeoCoordinateWatcher();
-                        watcher.PositionChanged += watcher_PositionChanged;
-                        watcher.Start();
-                        band = false;
-                    } catch (Exception ex) {
-                        MessageBox.Show("Error: " + ex);
-                    }
-                }
-
-                if (frase.Equals("Desactivar Protocolo")) {
-                    try {
-                        Siempre = new SoundPlayer(Application.StartupPath + @"\Sonido\Desactivado.wav");
-                        Siempre.Play();
-                    } catch (Exception ex) {
-                        MessageBox.Show("Error: " + ex);
-                    }
-                }
-            }
-        }
-
-        private string[] listaPalabras = { "Activar Protocolo", "Desactivar Protocolo" };
         private string latitud;
         private string longitud;
-        private string id;
-        private string fecha;
         private CLsNsocket mySocket;
 
         private void tmr1_Tick(object sender, EventArgs e) {

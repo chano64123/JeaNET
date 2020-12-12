@@ -1,11 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Windows.Forms;
 using Negocios;
-using NUnit.Framework;
-using Xunit;
-using TheoryAttribute = NUnit.Framework.TheoryAttribute;
-using Assert = NUnit.Framework.Assert;
-using System;
 using System.Data;
 
 namespace Pruebas {

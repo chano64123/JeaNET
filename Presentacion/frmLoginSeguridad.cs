@@ -259,14 +259,6 @@ namespace Presentacion {
             f.Show();
         }
 
-        private void TxtUsuario_TextChanged(object sender, EventArgs e) {
-
-        }
-
-        private void TxtUsuario_ChangeUICues(object sender, UICuesEventArgs e) {
-
-        }
-
         private void TxtUsuario_MouseClick(object sender, MouseEventArgs e) {
             foreach (Process proceso in Process.GetProcesses()) {
                 if (proceso.ProcessName == "TabTip") {

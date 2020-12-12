@@ -15,7 +15,6 @@ namespace Presentacion {
         public frmRegistroCargo(ClsEcargo E) {
             InitializeComponent();
             llenarCamposCargo(E);
-
         }
 
         private void llenarCamposCargo(ClsEcargo E) {
@@ -23,9 +22,6 @@ namespace Presentacion {
             txtDescripcion.Text = E.Descripcion;
             txtCodigo.Enabled = false;
             btnGuardar.Enabled = false;
-        }
-
-        private void frmRegistroCargo_Load(object sender, EventArgs e) {
         }
 
         private void MtdObtenerCodigoCargo() {
