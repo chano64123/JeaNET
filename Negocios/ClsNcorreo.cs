@@ -29,12 +29,12 @@ namespace Negocios {
                     try {
                         cliente.Send(msg);
                     } catch(SmtpException e) {
-                        MessageBox.Show(e.Message.ToString());
+                        //MessageBox.Show(e.Message.ToString());
                     }
                     
                 });
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
         }
     }

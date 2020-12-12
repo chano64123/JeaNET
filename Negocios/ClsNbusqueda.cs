@@ -6,7 +6,7 @@ namespace Negocios {
     public class ClsNbusqueda {
         public ArrayList MtdBuscarReniec(string dni) {
             ArrayList temp = new ArrayList();
-            var client = new RestClient(Properties.Resources.linkReniec + dni + "?token="+Properties.Resources.reniecApiToken);
+            var client = new RestClient(Properties.Resources.linkReniecDNI + dni + "?token="+Properties.Resources.reniecApiToken);
             var request = new RestRequest(Method.GET);
             IRestResponse<ClsEpersona> response = client.Execute<ClsEpersona>(request);
             if (response.Data.Nombres is not null) {
@@ -21,7 +21,7 @@ namespace Negocios {
 
         public ArrayList MtdBuscarSunat(string ruc) {
             ArrayList temp = new ArrayList();
-            var client = new RestClient(Properties.Resources.linkReniec + ruc + "?token=" + Properties.Resources.reniecApiToken);
+            var client = new RestClient(Properties.Resources.linkReniecRUC + ruc + "?token=" + Properties.Resources.reniecApiToken);
             var request = new RestRequest(Method.GET);
             IRestResponse<ClsEempresa> response = client.Execute<ClsEempresa>(request);
             if (response.Data.RazonSocial is not null) {

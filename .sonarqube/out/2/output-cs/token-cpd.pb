@@ -583,7 +583,7 @@ DniCliente" ,
 ; 
 } 	
 } 
-} ³&
+} À&
 :F:\UPT\VII CICLO\Z JEANET\Sistema\Negocios\ClsNbusqueda.cs
 	namespace 	
 Negocios
@@ -621,22 +621,23 @@ RestClient		 '
 Properties		( 2
 .		2 3
 	Resources		3 <
-.		< =
+.		< =
+linkReniecDNI		= J
++		K L
+dni		M P
++		Q R
+$str		S \
++		\ ]
 
-linkReniec		= G
-+		H I
-dni		J M
-+		N O
-$str		P Y
-+		Y Z
-
-Properties		Z d
-.		d e
-	Resources		e n
-.		n o
-reniecApiToken		o }
-)		} ~
-;		~ 
+Properties		] g
+.		g h
+	Resources		h q
+.		q r
+reniecApiToken			r €
+)
+		€ 
+;
+		 ‚
 var
 
  
@@ -785,23 +786,23 @@ RestClient '
 Properties( 2
 .2 3
 	Resources3 <
-.< =
+.< =
+linkReniecRUC= J
++K L
+rucM P
++Q R
+$strS \
++] ^
 
-linkReniec= G
-+H I
-rucJ M
-+N O
-$strP Y
-+Z [
-
-Properties\ f
-.f g
-	Resourcesg p
-.p q
-reniecApiTokenq 
-)	 €
+Properties_ i
+.i j
+	Resourcesj s
+.s t
+reniecApiToken	t ‚
+)
+‚ ƒ
 ;
-€ 
+ƒ „
 var 
 request 
 = 

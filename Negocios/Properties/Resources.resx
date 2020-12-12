@@ -121,12 +121,15 @@
     <value>AC9702e0e033e490df7099b298d68f106d</value>
   </data>
   <data name="authToken" xml:space="preserve">
-    <value>280d661504de1e39dd9b04b6aa59b838</value>
+    <value>d7618c1261cff4cb2fc5079d8073d2c7</value>
   </data>
   <data name="email" xml:space="preserve">
     <value>pruebaprogra2@gmail.com</value>
   </data>
-  <data name="linkReniec" xml:space="preserve">
+  <data name="linkReniecDNI" xml:space="preserve">
+    <value>https://dniruc.apisperu.com/api/v1/dni/</value>
+  </data>
+  <data name="linkReniecRUC" xml:space="preserve">
     <value>https://dniruc.apisperu.com/api/v1/ruc/</value>
   </data>
   <data name="linkSocket" xml:space="preserve">

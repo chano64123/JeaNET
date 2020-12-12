@@ -70,7 +70,7 @@ namespace Negocios.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a 280d661504de1e39dd9b04b6aa59b838.
+        ///   Busca una cadena traducida similar a d7618c1261cff4cb2fc5079d8073d2c7.
         /// </summary>
         internal static string authToken {
             get {
@@ -88,11 +88,20 @@ namespace Negocios.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a https://dniruc.apisperu.com/api/v1/dni/.
+        /// </summary>
+        internal static string linkReniecDNI {
+            get {
+                return ResourceManager.GetString("linkReniecDNI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a https://dniruc.apisperu.com/api/v1/ruc/.
         /// </summary>
-        internal static string linkReniec {
+        internal static string linkReniecRUC {
             get {
-                return ResourceManager.GetString("linkReniec", resourceCulture);
+                return ResourceManager.GetString("linkReniecRUC", resourceCulture);
             }
         }
         

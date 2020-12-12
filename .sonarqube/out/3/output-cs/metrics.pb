@@ -18,12 +18,13 @@ FF:\UPT\VII CICLO\Z JEANET\Sistema\Presentacion\FormReportesIngresos.csZ 8j
  !"#$%&'()*+,-./01234589<=>EFGJNOPQRYZ[\]^_abcdefghjklmnopqstuvwxyz|Å¡
 RF:\UPT\VII CICLO\Z JEANET\Sistema\Presentacion\FormReportesProductosMasVendidos.cs[ 8j!*3<rÄ	
  "#$%&'()+,-./012456789:;=>?@BCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijkmnoqrstuvxyz{|}~ÄÇÉÑÖÜxÇW
- "#$%&'()+,-./012456789:;=EFGHJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijmnqrsz{|Éø
-FF:\UPT\VII CICLO\Z JEANET\Sistema\Presentacion\FormSeguridadCiudana.csH 8jKNRurî	
- !"#$%&'()*+,-.012345679:;<=>?@ACDEGHIJLMOPQSTUVWYZ[\]^_`acdefhijklnopqstvwxy{|}~ÅÇÉÑÖÜáàâäãåçéèêëíxÇM !"$%')+,123467:<>?DHIJMOQSUV]^_`deijkptwx|~ÇÉÑÜáâãçé‚
+ "#$%&'()+,-./012456789:;=EFGHJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijmnqrsz{|É∏
+FF:\UPT\VII CICLO\Z JEANET\Sistema\Presentacion\FormSeguridadCiudana.csG 
+8jHKOrrè	
+ !"#$%&'()*+,-.012345679:;<=>?@ADEFGIJLMNPQRSTVWXYZ[\]^`abcefghiklmnpqstuvxyz{|~ÄÅÇÉÑÖÜáàâäãåçéèxÇK !"$%')+,123467:<>?EFGJLNPRSZ[\]abfghmqtuy{ÄÅÉÑÜàäã‚
 BF:\UPT\VII CICLO\Z JEANET\Sistema\Presentacion\frmAdministrador.cs√ 8;j]`er∫
  !"#$%&'()*-/013456789:;<=>?@ABCDFGHIJKLMNOPQRSTUVWYZ[\^_abcfghijklmoprstvwxyz{|}~ÄÅÉÑÖÜàâäãåçéèêëíìîïñóòôöõúûü†°¢£§•¶ß®©™´¨≠ÆØ±≤≥¥µ∑∏π∫ªºΩæø¿¡¬√ƒ≈∆« ÀŒ–“”‘’÷◊Ÿ⁄‹›ﬁ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÙıˆ¯˘˙˚¸˝˛ˇÄÅÇÉÑÖÜáâäãåçéèêëìîïñòôöõúûü†°¢§•ß®©™´¨≠ÆØ∞±≤≥¥∂∑∏π∫ªºΩæø¿¡¬√ƒ≈«» ÀÃŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬂ‡‚„‰ÊÁËÈÍÎÏÌÓÔÒÚÛÙı˜¯˘˙˚¸˝˛ˇÄÅÇÉx=ÇÕ !"#$%&')*045678:;=?ABGHIJKMNPRTUZ[\_acfhijklprsvwxy{|~ÄÉÑâäãçéèêíìïóôöü†°¢£•¶®™¨≠≤¥∏π∫ªºæø¡√≈∆ Œ”’÷⁄‹›‡·‚„ÂÊËÍÏÌÚÙı¯˘˙˚˝˛ÄÇÑÖçéèêîïôöõü°•ß®™´≠Ø±≤∑∏πªºæ¿¬√» ÀŒœ–—”‘÷ÿ⁄€‡‚„ÊÁËÈÎÏÓÚÛ¯˘˙˝˛ˇÄn
->F:\UPT\VII CICLO\Z JEANET\Sistema\Presentacion\frmAuditoria.cs 8jr	 ÇŸ
+>F:\UPT\VII CICLO\Z JEANET\Sistema\Presentacion\frmAuditoria.cs 8r	 !"ÇŸ
 BF:\UPT\VII CICLO\Z JEANET\Sistema\Presentacion\frmBaseSeguridad.cs. 8
 j$*+/4rS	
  !"#%&'()*,-.0123678:<=?ADEGHIJKMNPQSUVWYZ\]^_abcdghkmnopqxÇ) !"%&'()*,-.01<=ADJKMNPQSUVWY]^bchnà
