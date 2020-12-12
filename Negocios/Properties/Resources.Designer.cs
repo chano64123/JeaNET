@@ -88,6 +88,24 @@ namespace Negocios.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a https://dniruc.apisperu.com/api/v1/ruc/.
+        /// </summary>
+        internal static string linkReniec {
+            get {
+                return ResourceManager.GetString("linkReniec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a http://76524e8f3cfa.ngrok.io/.
+        /// </summary>
+        internal static string linkSocket {
+            get {
+                return ResourceManager.GetString("linkSocket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Sistemas.123.
         /// </summary>
         internal static string password {

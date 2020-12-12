@@ -1,10 +1,7 @@
 ﻿using Entidad;
 using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Collections;
-using System.Linq;
-using MongoDB.Driver;
 using Datos;
 
 namespace Negocios {
@@ -91,37 +88,6 @@ namespace Negocios {
 
             return dt;
         }
-
-        //public DataTable validarLogin(string usuario) {
-        //    MongoHelper.ConnectToMongoServices();
-        //    MongoHelper.empleado_collection = MongoHelper.database.GetCollection<Entidad.ClsEempleado>("empleados");
-        //    ArrayList tmp = new ArrayList();
-        //    var filter = Builders<ClsEempleado>.Filter;
-        //    var filterDefinition = filter.And(
-        //        filter.Lte("Usuario", usuario));
-        //    var result = MongoHelper.empleado_collection.Find(filterDefinition).Limit(1).ToList();
-
-
-        //    DataTable dt = new DataTable();
-        //    dt.Columns.Add("DniEmpleado");
-        //    dt.Columns.Add("Nombres");
-        //    dt.Columns.Add("Apellidos");
-        //    dt.Columns.Add("Direccion");
-        //    dt.Columns.Add("Correo");
-        //    dt.Columns.Add("Telefono");
-        //    dt.Columns.Add("Codigo_Cargo");
-        //    dt.Columns.Add("idTurno");
-        //    dt.Columns.Add("Estado");
-        //    dt.Columns.Add("Usuario");
-        //    dt.Columns.Add("Contraseña");
-
-        //    foreach (ClsEempleado item in result) {
-        //        dt.Rows.Add(item.DniEmpleado, item.Nombres, item.Apellidos, item.Direccion,
-        //            item.Correo, item.Telefono, item.Codigo_Cargo, item.idTurno, item.Estado, item.Usuario, item.Contraseña);
-        //    }
-
-        //    return dt;
-        //}
 
         public DataTable buscarSesion(string usuario) {
             DataTable dt = obSesion.buscarSesion(usuario);

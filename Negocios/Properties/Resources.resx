@@ -126,6 +126,12 @@
   <data name="email" xml:space="preserve">
     <value>pruebaprogra2@gmail.com</value>
   </data>
+  <data name="linkReniec" xml:space="preserve">
+    <value>https://dniruc.apisperu.com/api/v1/ruc/</value>
+  </data>
+  <data name="linkSocket" xml:space="preserve">
+    <value>http://76524e8f3cfa.ngrok.io/</value>
+  </data>
   <data name="password" xml:space="preserve">
     <value>Sistemas.123</value>
   </data>

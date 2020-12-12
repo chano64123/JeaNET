@@ -69,7 +69,6 @@
     <Compile Include="ClsDproveedor.cs" />
     <Compile Include="ClsDreporte.cs" />
     <Compile Include="ClsDsesiones.cs" />
-    <Compile Include="ClsEempleado.cs" />
     <Compile Include="Mapeo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

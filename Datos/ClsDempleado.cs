@@ -52,14 +52,9 @@ namespace Datos {
             return query.ToList();
         }
 
-        public List<tbEmpleados> buscarEmpleadoByDNI(string dni) {
-            var query = from e in db.tbEmpleados where e.DniEmpleado == dni select e;           
-            return query.ToList();
-        }
-
         public bool modificarContraseña(string clave,string dni) {
             try {
-                tbEmpleados empleado = buscarEmpleadoByDNI(dni)[0];
+                tbEmpleados empleado = busquedaEmpleado(dni)[0];
                 empleado.Contraseña = clave;
                 db.Entry(empleado).State = EntityState.Modified;
                 

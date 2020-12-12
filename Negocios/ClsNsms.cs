@@ -1,6 +1,4 @@
 ﻿using Entidad;
-using System.Reflection;
-using System.Resources;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 
@@ -14,7 +12,7 @@ namespace Negocios {
             string twilioPhone = Properties.Resources.twilioPhone.ToString();
             
             TwilioClient.Init(accountSid, authToken);
-            var message = MessageResource.Create(
+            MessageResource.Create(
                 body: objEM.Mensaje,
                 from: new Twilio.Types.PhoneNumber(twilioPhone),
                 to: new Twilio.Types.PhoneNumber("+51920347514")
