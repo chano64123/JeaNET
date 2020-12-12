@@ -223,7 +223,6 @@ namespace Negocios {
             }
         }
 
-
         public void soloTexto(KeyPressEventArgs e) {
             if (char.IsLetter(e.KeyChar)) {
                 e.Handled = false;
