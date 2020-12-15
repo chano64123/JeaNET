@@ -3,6 +3,7 @@ using System;
 using System.Data;
 using System.Collections;
 using Datos;
+using MongoDB.Driver;
 
 namespace Negocios {
     public class ClsNlogin {
@@ -66,9 +67,19 @@ namespace Negocios {
         public string MtdGenerarNuevaClave() {
             Random rnd = new Random();
             return rnd.Next(100000, 1000000).ToString();
-        }     
+        }
 
-        public DataTable ValidarLogin(string usuario) {
+        public DataTable validarLogin(string usuario) {
+            MongoHelper.ConnectToMongoServices();
+            MongoHelper.empleado_collection = MongoHelper.database.GetCollection<Entidad.ClsEempleado>("empleados");
+            ArrayList tmp = new ArrayList();
+            var filter = Builders<ClsEempleado>.Filter;
+            var filterDefinition = filter.And(
+                filter.Lte("Usuario", usuario));
+            
+            var result = MongoHelper.empleado_collection.Find(x => x.Usuario == usuario).Limit(1).ToList();
+
+
             DataTable dt = new DataTable();
             dt.Columns.Add("DniEmpleado");
             dt.Columns.Add("Nombres");
@@ -81,13 +92,16 @@ namespace Negocios {
             dt.Columns.Add("Estado");
             dt.Columns.Add("Usuario");
             dt.Columns.Add("Contraseña");
-            foreach(var item in obEmpleado.buscarPorUsuario(usuario)) {
-                dt.Rows.Add(item.DniEmpleado, item.Nombres, item.Apellidos, item.Direccion,
-                  item.Correo, item.Telefono, item.Codigo_Cargo, item.idTurno, item.Estado, item.Usuario, item.Contraseña);
+
+            foreach (ClsEempleado item in result) {
+                dt.Rows .Add(item.DniEmpleado, item.Nombres, item.Apellidos, item.Direccion,
+                    item.Correo, item.Telefono, item.Codigo_Cargo, item.idTurno, item.Estado, item.Usuario, item.Contraseña);
             }
 
             return dt;
         }
+
+
 
         public DataTable buscarSesion(string usuario) {
             DataTable dt = obSesion.buscarSesion(usuario);

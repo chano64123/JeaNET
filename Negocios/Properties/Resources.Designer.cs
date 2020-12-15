@@ -61,7 +61,7 @@ namespace Negocios.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a AC9702e0e033e490df7099b298d68f106d.
+        ///   Busca una cadena traducida similar a AC76ca801c98415e33077d54efdc84a452.
         /// </summary>
         internal static string accountSid {
             get {
@@ -70,7 +70,7 @@ namespace Negocios.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a d7618c1261cff4cb2fc5079d8073d2c7.
+        ///   Busca una cadena traducida similar a 1a7ab12a65c2fbdc79af030505d78158.
         /// </summary>
         internal static string authToken {
             get {
@@ -115,6 +115,15 @@ namespace Negocios.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a mongodb+srv://mean_user:C2lJICERLuPwsisG@cluster0.gx6au.mongodb.net/dbjeanet?retryWrites=true&amp;w=majority.
+        /// </summary>
+        internal static string mongoKey {
+            get {
+                return ResourceManager.GetString("mongoKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Sistemas.123.
         /// </summary>
         internal static string password {
@@ -133,7 +142,7 @@ namespace Negocios.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a +13344022778.
+        ///   Busca una cadena traducida similar a +14232056903.
         /// </summary>
         internal static string twilioPhone {
             get {

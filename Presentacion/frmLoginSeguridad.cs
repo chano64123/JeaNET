@@ -179,7 +179,7 @@ namespace Presentacion {
             if (MtdValidarCampos()) {
                 ClsElogin E = ClsElogin.crear(txtUsuario.Text, txtClave.Text);
                 ClsNlogin N = new ClsNlogin();
-                DataTable data = N.ValidarLogin(E.Usuario);
+                DataTable data = N.validarLogin(E.Usuario);
                 if (data.Rows.Count == 1) {
                     switch (N.MtdVerificarCuenta(data, E, 0)) {
                         case 0:

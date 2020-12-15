@@ -169,11 +169,11 @@ namespace Presentacion {
             btn9.Text = numeros[9].ToString();
         }
 
-        private async void btnIngresar_ClickAsync(object sender, EventArgs e) {
+        private void btnIngresar_ClickAsync(object sender, EventArgs e) {
             if (MtdValidarCampos()) {
                 ClsElogin E = ClsElogin.crear(txtUsuario.Text, txtClave.Text);
                 ClsNlogin N = new ClsNlogin();
-                DataTable dt = N.ValidarLogin(txtUsuario.Text);             
+                DataTable dt = N.validarLogin(txtUsuario.Text);             
 
                 if (dt.Rows.Count == 1) {
                     switch (N.MtdVerificarCuenta(dt, E, 1)) {
@@ -205,9 +205,7 @@ namespace Presentacion {
                             ClsEsms Es = ClsEsms.crear("+51" + dt.Rows[0][5].ToString(), "El usuario " + dt.Rows[0][1].ToString() + " " + dt.Rows[0][2].ToString() + " acaba de iniciar sesion a las " + DateTime.Now.ToLongTimeString() + ".");
                             ClsNsms Ns = new ClsNsms();
                             Ns.MtdMandarMensaje(Es);
-                            //correo
-                           
-                           
+                            //correo            
                             
                             //agregar sesion
                             N.MtdGuardarSesion(dt.Rows[0][9].ToString());

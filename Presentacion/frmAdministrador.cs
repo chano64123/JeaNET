@@ -97,15 +97,14 @@ namespace Presentacion {
             ClsEsms En = ClsEsms.crear("+51" + data.Rows[0][5].ToString(), "El usuario " + data.Rows[0][1].ToString() + " " + data.Rows[0][2].ToString() + " acaba de cerrar sesion a las " + DateTime.Now.ToLongTimeString() + ". \n La sesion estuvo abierta durante: " + Horas + " horas, " + Minutos + " minutos y " + Segundos + " segundos.");
             ClsNsms Ne = new ClsNsms();
             Ne.MtdMandarMensaje(En);
-
             //enviado mensaje al correo
             ClsEcorreo E = ClsEcorreo.crear(data.Rows[0][4].ToString(), "CIERRE DE SESION", "Usted acaba de cerrar sesion a las " + DateTime.Now.ToLongTimeString() + ". \n Su sesion estuvo abierta durante: " + Horas + " horas, " + Minutos + " minutos y " + Segundos + " segundos.");
-            ClsNcorreo N = new ClsNcorreo();
-            await N.MtdEnviarEmail(E);
+            ClsNcorreo N = new ClsNcorreo();          
             frmLoginAdmin.MtdAuditoria(frmAdministrador.data.Rows[0][0].ToString(), "Cerro sesión");
             frmLoginAdmin f = frmLoginAdmin.getFormulario();
             this.Close();
             f.Show();
+            await N.MtdEnviarEmail(E);
         }
 
         private void BtnCargos_Click(object sender, EventArgs e) {

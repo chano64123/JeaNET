@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="accountSid" xml:space="preserve">
-    <value>AC9702e0e033e490df7099b298d68f106d</value>
+    <value>AC76ca801c98415e33077d54efdc84a452</value>
   </data>
   <data name="authToken" xml:space="preserve">
-    <value>d7618c1261cff4cb2fc5079d8073d2c7</value>
+    <value>1a7ab12a65c2fbdc79af030505d78158</value>
   </data>
   <data name="email" xml:space="preserve">
     <value>pruebaprogra2@gmail.com</value>
@@ -135,6 +135,9 @@
   <data name="linkSocket" xml:space="preserve">
     <value>http://76524e8f3cfa.ngrok.io/</value>
   </data>
+  <data name="mongoKey" xml:space="preserve">
+    <value>mongodb+srv://mean_user:C2lJICERLuPwsisG@cluster0.gx6au.mongodb.net/dbjeanet?retryWrites=true&amp;w=majority</value>
+  </data>
   <data name="password" xml:space="preserve">
     <value>Sistemas.123</value>
   </data>
@@ -142,6 +145,6 @@
     <value>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InByb21vMjAxNjc0QGdtYWlsLmNvbSJ9.SDxqQGi2nMScGlxP_EP6TXOo-mwksYzZgA4y-GvB5oc</value>
   </data>
   <data name="twilioPhone" xml:space="preserve">
-    <value>+13344022778</value>
+    <value>+14232056903</value>
   </data>
 </root>

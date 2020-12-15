@@ -160,6 +160,7 @@
     <Compile Include="ClsNsms.cs" />
     <Compile Include="ClsNsocket.cs" />
     <Compile Include="ClsNValidacion.cs" />
+    <Compile Include="MongoHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
