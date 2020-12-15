@@ -179,7 +179,7 @@ namespace Presentacion {
             if (MtdValidarCampos()) {
                 ClsElogin E = ClsElogin.crear(txtUsuario.Text, txtClave.Text);
                 ClsNlogin N = new ClsNlogin();
-                DataTable data = N.MtdValidarLogin(E);
+                DataTable data = N.validarLogin(E.Usuario);
                 if (data.Rows.Count == 1) {
                     switch (N.MtdVerificarCuenta(data, E, 0)) {
                         case 0:
@@ -257,14 +257,6 @@ namespace Presentacion {
             frmLoginAdmin.MtdAuditoria(txtUsuario.Text, "Clic en recuparar contraseña");
             frmRecuperarContraseña f = new frmRecuperarContraseña();
             f.Show();
-        }
-
-        private void TxtUsuario_TextChanged(object sender, EventArgs e) {
-
-        }
-
-        private void TxtUsuario_ChangeUICues(object sender, UICuesEventArgs e) {
-
         }
 
         private void TxtUsuario_MouseClick(object sender, MouseEventArgs e) {

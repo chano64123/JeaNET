@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace Presentacion {
     public partial class FormSeguridadCiudana : Form {
         DataTable data;
-        public static string ingreso;
+        private string ingreso;
         private Form _objForm;
         public FormSeguridadCiudana(DataTable datos) {
             InitializeComponent();
@@ -64,7 +64,8 @@ namespace Presentacion {
             }
         }
 
-        private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e) {
+
+        private async void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e) {
             Tsec.Stop();
             Tmin.Stop();
             Thora.Stop();
@@ -74,11 +75,11 @@ namespace Presentacion {
             //enviando sms
             ClsEsms En = ClsEsms.crear("+51" + data.Rows[0][5].ToString(), "El usuario " + data.Rows[0][1].ToString() + " " + data.Rows[0][2].ToString() + " acaba de cerrar sesion a las " + DateTime.Now.ToLongTimeString() + ". \n La sesion estuvo abierta durante: " + Horas + " horas, " + Minutos + " minutos y " + Segundos + " segundos.");
             ClsNsms Ne = new ClsNsms();
-            //Ne.MtdMandarMensaje(En);
+            Ne.MtdMandarMensaje(En);
             //enviado mensaje al correo
             ClsEcorreo E = ClsEcorreo.crear(data.Rows[0][4].ToString(), "CIERRE DE SESION", "Usted acaba de cerrar sesion a las " + DateTime.Now.ToLongTimeString() + ". \n Su sesion estuvo abierta durante: " + Horas + " horas, " + Minutos + " minutos y " + Segundos + " segundos.");
             ClsNcorreo N = new ClsNcorreo();
-            //N.MtdEnviarEmail(E);
+            await N.MtdEnviarEmail(E);
             this.Close();
         }
 

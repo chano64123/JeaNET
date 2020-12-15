@@ -238,7 +238,6 @@
             this.Name = "frmRegistroCargo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmRegistroCargo";
-            this.Load += new System.EventHandler(this.frmRegistroCargo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.btnGuardar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnModificar)).EndInit();
             this.panel1.ResumeLayout(false);

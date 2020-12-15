@@ -13,7 +13,7 @@ namespace Presentacion {
             lblDNI.Text = data.Rows[0][0].ToString();
         }
 
-        public static bool verificar_prod = true;
+        public bool verificar_prod = true;
         private void FormPanelAdmi_Boleta_Load(object sender, EventArgs e) {
             //MUCHAS COSAS VAN ACA
             ClsNcomprobante N = new ClsNcomprobante();

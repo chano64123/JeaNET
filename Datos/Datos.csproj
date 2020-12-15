@@ -68,6 +68,7 @@
     <Compile Include="ClsDlote.cs" />
     <Compile Include="ClsDproveedor.cs" />
     <Compile Include="ClsDreporte.cs" />
+    <Compile Include="ClsDsesiones.cs" />
     <Compile Include="Mapeo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

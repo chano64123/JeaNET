@@ -1,13 +1,11 @@
 ﻿using Entidad;
 using Datos;
-using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Collections;
 
 namespace Negocios {
     public class ClsNdispositivo {
-        ClsDdispositivo datos = new ClsDdispositivo();
+        readonly ClsDdispositivo datos = new ClsDdispositivo();
 
         public string MtdCalcularSerieDispositivo(string codigo, int i) {
             if (i.ToString().Length == 1) {

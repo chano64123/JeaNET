@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Presentacion {
     public partial class frmPerfilUsuario : Form {
-        public static DataTable datos = new DataTable();
+        public DataTable datos = new DataTable();
         public frmPerfilUsuario(DataTable data) {
             InitializeComponent();
             llenarCamposPerfilUsuario(data);
@@ -42,7 +42,7 @@ namespace Presentacion {
             }
         }
 
-        public static bool cambiar = false;
+        public bool cambiar = false;
         private void linkeditarContraseña_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             cambiar = true;
             lblContraseñanueva.Visible = true;

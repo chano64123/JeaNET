@@ -2,6 +2,7 @@
 using Negocios;
 using System;
 using System.Data;
+using System.Collections;
 using System.Windows.Forms;
 
 namespace Presentacion {
@@ -17,16 +18,16 @@ namespace Presentacion {
         private void btnIngresar_Click(object sender, EventArgs e) {
             if (MtdValidarCampos()) {
                 ClsNlogin N = new ClsNlogin();
-                DataTable data = N.MtdVerificarExistencia(txtRecuperacion.Text);
-                if (data.Rows.Count == 1) {
+                ArrayList data = N.verificarExistencia(txtRecuperacion.Text);
+                if (data.Count == 1) {
                     string nc = N.MtdGenerarNuevaClave();
-                    if (N.MtdCambiarContraseña(nc, data.Rows[0][0].ToString())) {
+                    if (N.cambiarContrasenia(nc, data[0].ToString())) {
                         //sms
-                        ClsEsms Es = ClsEsms.crear("+51" + data.Rows[0][5].ToString(), "El usuario " + data.Rows[0][1].ToString() + " " + data.Rows[0][2].ToString() + " acaba pedir cambio de contraseña a las " + DateTime.Now.ToLongTimeString() + ".");
+                        ClsEsms Es = ClsEsms.crear("+51" + data[5].ToString(), "El usuario " + data[1].ToString() + " " + data[2].ToString() + " acaba pedir cambio de contraseña a las " + DateTime.Now.ToLongTimeString() + ".");
                         ClsNsms Ns = new ClsNsms();
                         Ns.MtdMandarMensaje(Es);
                         //correo
-                        ClsEcorreo Ec = ClsEcorreo.crear(data.Rows[0][4].ToString(), "CAMBIO DE CONTRASEÑA", "Su nueva contraseña para acceder al sistenma es: " + nc);
+                        ClsEcorreo Ec = ClsEcorreo.crear(data[4].ToString(), "CAMBIO DE CONTRASEÑA", "Su nueva contraseña para acceder al sistenma es: " + nc);
                         ClsNcorreo Nc = new ClsNcorreo();
                         Nc.MtdEnviarEmail(Ec);
                         MessageBox.Show("Revise su correo electronico con el que se le registro", "JeaNET - Informa", MessageBoxButtons.OK, MessageBoxIcon.Information);

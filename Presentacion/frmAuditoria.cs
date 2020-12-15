@@ -14,14 +14,16 @@ namespace Presentacion {
         }
 
         private void frmAuditoria_Load(object sender, EventArgs e) {
-            //cargar auditorias
+            cargarAuditoria();
+        }
+
+        private void cargarAuditoria() {
             ClsNauditoria N = new ClsNauditoria();
             dgvAuditoria.DataSource = N.listarAuditoria();
         }
 
         private void txtBuscar_Leave(object sender, EventArgs e) {
-            ClsNauditoria N = new ClsNauditoria();
-            dgvAuditoria.DataSource = N.listarAuditoria();
+            cargarAuditoria();
         }
 
         private void TxtBuscar_MouseClick(object sender, MouseEventArgs e) {
